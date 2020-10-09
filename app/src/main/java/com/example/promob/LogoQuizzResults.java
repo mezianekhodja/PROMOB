@@ -8,12 +8,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 //si jamais on veut finir comme ca
 public class LogoQuizzResults extends AppCompatActivity {
 
     Button btn_suivant;
+    TextView textviewa;
     int score;
 
     @Override
@@ -21,7 +23,21 @@ public class LogoQuizzResults extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logo_quizz_results);
         score = getIntent().getExtras().getInt("score");
-        Toast.makeText(this,String.valueOf(score),Toast.LENGTH_LONG).show();
+
+        textviewa = (TextView) findViewById(R.id.textViewresultattest);
+        textviewa.setText(Integer.toString(score));
+
+        textviewa = (TextView) findViewById(R.id.textViewcommentairetest);
+        if(score<5){
+            textviewa.setText("Vous pouvez mieux faire c'est certain !");
+        }
+        else if(score<8){
+            textviewa.setText("Plutôt pas mal! Continuez l'entrainement");
+        }
+        else{
+            textviewa.setText("Vous êtes digne d'entrainer les plus grands! Bravo");
+        }
+
         btn_suivant = (Button) findViewById(R.id.buttonsvteasyres);
         btn_suivant.setOnClickListener(new View.OnClickListener() {
             @Override
