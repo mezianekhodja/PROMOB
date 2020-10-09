@@ -14,11 +14,23 @@
         tools:layout_editor_absoluteY="1dp"
         tools:ignore="MissingConstraints">
 
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            app:srcCompat="@drawable/bleudecor" />
+
         <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Logo Quizz" />
+            android:text="Logo Quizz v1.0" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="480dp"
+            app:srcCompat="@drawable/logologoquizz" />
 
         <Button
             android:id="@+id/button_logoquizz_easy"
@@ -37,5 +49,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="HARD" />
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            app:srcCompat="@drawable/bleudecor" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
