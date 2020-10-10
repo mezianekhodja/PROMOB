@@ -9,7 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LogoQuizzMedium5"></activity>
+        <activity android:name=".LogoQuizzMedium10"></activity>
+        <activity android:name=".LogoQuizzMedium9" />
+        <activity android:name=".LogoQuizzMedium8" />
+        <activity android:name=".LogoQuizzMedium7" />
+        <activity android:name=".LogoQuizzMedium6" />
+        <activity android:name=".LogoQuizzMedium5" />
         <activity android:name=".LogoQuizzMedium4" />
         <activity android:name=".LogoQuizzMedium3" />
         <activity android:name=".LogoQuizzMedium2" />

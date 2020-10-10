@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LogoQuizzMedium4">
-
+    tools:context=".LogoQuizzMedium9">
     <LinearLayout
         android:layout_width="409dp"
         android:layout_height="729dp"
@@ -18,13 +17,13 @@
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Question 4" />
+            android:text="Question 9" />
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="227dp"
-            app:srcCompat="@drawable/seville" />
+            app:srcCompat="@drawable/sainte" />
 
         <TextView
             android:id="@+id/textView4"
@@ -33,36 +32,36 @@
             android:text="Choisir le club" />
 
         <RadioGroup
-            android:id="@+id/radioLQM4"
+            android:id="@+id/radioLQM9"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <RadioButton
-                android:id="@+id/radioButtonLQM4a"
+                android:id="@+id/radioButtonLQM9a"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sampodria" />
+                android:text="Nantes" />
 
             <RadioButton
-                android:id="@+id/radioButtonLQM4b"
+                android:id="@+id/radioButtonLQM9b"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Strasbourg" />
+                android:text="Saint-Étienne" />
 
             <RadioButton
-                android:id="@+id/radioButtonLQM4c"
+                android:id="@+id/radioButtonLQM9c"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Saint Etienne" />
+                android:text="Angers" />
 
             <RadioButton
-                android:id="@+id/radioButtonLQM4d"
+                android:id="@+id/radioButtonLQM9d"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Seville" />
+                android:text="Tours" />
 
             <Button
-                android:id="@+id/buttonLQM4svt"
+                android:id="@+id/buttonLQM9svt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="suivant"
@@ -70,5 +69,4 @@
                 android:textStyle="bold"/>
         </RadioGroup>
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

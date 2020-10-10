@@ -36,13 +36,17 @@
             android:id="@+id/button_logoquizz_easy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Easy" />
+            android:text="Easy"
+            android:background="@color/colorLogoQuizz"
+            android:textStyle="bold"/>
 
         <Button
             android:id="@+id/button_logoquizz_medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="MEDIUM" />
+            android:text="MEDIUM"
+            android:background="@color/colorLogoQuizz"
+            android:textStyle="bold"/>
 
         <Button
             android:id="@+id/button_logoquizz_hard"

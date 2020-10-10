@@ -36,8 +36,8 @@
             android:id="@+id/button_logoquizz"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorLogoQuizz"
             android:text="Logo Quizz"
+            android:background="@color/colorLogoQuizz"
             android:textStyle="bold"/>
 
         <TextView

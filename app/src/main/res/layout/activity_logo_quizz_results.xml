@@ -35,6 +35,8 @@
             android:id="@+id/buttonsvteasyres"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Retour acceuil" />
+            android:text="Retour acceuil"
+            android:background="@color/colorLogoQuizz"
+            android:textStyle="bold"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

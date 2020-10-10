@@ -65,7 +65,9 @@
                 android:id="@+id/buttonLQE3svt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="suivant" />
+                android:text="suivant"
+                android:background="@color/colorLogoQuizz"
+                android:textStyle="bold"/>
         </RadioGroup>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
