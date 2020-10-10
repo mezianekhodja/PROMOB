@@ -8,38 +8,36 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
-public class LogoQuizzEasy10 extends AppCompatActivity {
+public class LogoQuizzMedium1 extends AppCompatActivity {
 
     Button btn_suivant;
     RadioGroup rg;
     RadioButton rb;
-    int score;
+    int score=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_logo_quizz_easy10);
-        btn_suivant = (Button) findViewById(R.id.buttonLQE10svt);
-        rg = (RadioGroup) findViewById(R.id.radioLQE10);
+        setContentView(R.layout.activity_logo_quizz_medium1);
+        btn_suivant = (Button) findViewById(R.id.buttonLQM1svt);
+        rg = (RadioGroup) findViewById(R.id.radioLQM1);
         btn_suivant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openLogoQuizzResults();
+                openLogoQuizzMedium2();
             }
         });
     }
-    public void openLogoQuizzResults() {
+    public void openLogoQuizzMedium2() {
         int id=rg.getCheckedRadioButtonId();
         rb = (RadioButton) findViewById(id);
-        score = getIntent().getExtras().getInt("score");
-        if(rb.getText().toString().equals("Bayern")){
+        if(rb.getText().toString().equals("Lorient")){
             score=score+1;
         }
-        Intent intent = new Intent(this, LogoQuizzResults.class);
+        Intent intent = new Intent(this, LogoQuizzMedium2.class);
         intent.putExtra("score",score);
         startActivity(intent);
-       // Toast.makeText(this,String.valueOf(score),Toast.LENGTH_LONG).show();
+        // Toast.makeText(this,String.valueOf(score),Toast.LENGTH_LONG).show();
     }
 }

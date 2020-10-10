@@ -25,19 +25,19 @@ public class LogoQuizzEasy1 extends AppCompatActivity  {
         btn_suivant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openLogoQuizzResults();
+                openLogoQuizzEasy2();
             }
         });
     }
-    public void openLogoQuizzResults() {
+    public void openLogoQuizzEasy2() {
         int id=rg.getCheckedRadioButtonId();
         rb = (RadioButton) findViewById(id);
         if(rb.getText().toString().equals("Arsenal")){
             score=score+1;
         }
-        //Intent intent = new Intent(this, LogoQuizzResults.class);
-        //i.putExtra("score",score);
-        //startActivity(intent);
-        Toast.makeText(this,String.valueOf(score),Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, LogoQuizzEasy2.class);
+        intent.putExtra("score",score);
+        startActivity(intent);
+        //Toast.makeText(this,String.valueOf(score),Toast.LENGTH_LONG).show();
     }
 }

@@ -37,9 +37,9 @@ public class LogoQuizzEasy2 extends AppCompatActivity {
         if(rb.getText().toString().equals("Juventus")){
             score=score+1;
         }
-        //Intent intent = new Intent(this, LogoQuizzEasy2.class);
-        //intent.putExtra("score",score);
-        //startActivity(intent);
-        Toast.makeText(this,String.valueOf(score),Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, LogoQuizzEasy3.class);
+        intent.putExtra("score",score);
+        startActivity(intent);
+        //Toast.makeText(this,String.valueOf(score),Toast.LENGTH_LONG).show();
     }
 }
