@@ -17,6 +17,8 @@
 
         <TextView
             android:id="@+id/textView7"
+            android:textStyle="bold"
+            android:textColor="@color/noir"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/questionjeux"
@@ -26,17 +28,20 @@
 
         <ImageView
             android:id="@+id/logoVM"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
             android:layout_marginTop="50dp"
+            android:src="@drawable/logoVM"
             android:gravity="center"/>
 
         <TextView
             android:id="@+id/textView8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:padding="2dp"
+            android:layout_marginTop="70dp"
             android:gravity="center"
+            android:textSize="13dp"
             android:text="Trouvez les noms de 10 clubs de football à l'aide de leurs logos" />
 
         <Button
@@ -44,33 +49,38 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Logo Quizz"
-            android:background="@color/colorLogoQuizz"
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/textView9"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="15dp"
+            android:textSize="13dp"
+            android:gravity="center"
+            android:padding="2dp"
             android:text="Prochainement" />
 
         <Button
             android:id="@+id/buttongame2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:text="Jeu n°2" />
 
         <TextView
-            android:id="@+id/textView10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:padding="2dp"
+            android:textSize="13dp"
             android:text="Prochainement" />
 
         <Button
             android:id="@+id/buttongame3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:text="Jeu n°3" />
 
 
@@ -79,8 +89,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/games_by_mez_and_vince"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="90dp"
             android:textSize="20dp"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Version 0.1"
+            android:layout_marginTop="5dp"
+            android:textSize="15dp"
             android:gravity="center"/>
 
     </LinearLayout>
