@@ -9,19 +9,19 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-public class LogoQuizzMedium10 extends AppCompatActivity {
+public class LogoQuizzEasy extends AppCompatActivity {
 
     Button btn_suivant;
     RadioGroup rg;
     RadioButton rb;
-    int score;
+    int score=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_logo_quizz_medium10);
-        btn_suivant = (Button) findViewById(R.id.buttonLQM10svt);
-        rg = (RadioGroup) findViewById(R.id.radioLQM10);
+        setContentView(R.layout.activity_logo_quizz_easy);
+        btn_suivant = (Button) findViewById(R.id.buttonLQEsvt);
+        rg = (RadioGroup) findViewById(R.id.radioLQE);
         btn_suivant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -32,8 +32,7 @@ public class LogoQuizzMedium10 extends AppCompatActivity {
     public void openLogoQuizzResults() {
         int id=rg.getCheckedRadioButtonId();
         rb = (RadioButton) findViewById(id);
-        score = getIntent().getExtras().getInt("score");
-        if(rb.getText().toString().equals("Roma")){
+        if(rb.getText().toString().equals("Arsenal")){
             score=score+1;
         }
         Intent intent = new Intent(this, LogoQuizzResults.class);

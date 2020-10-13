@@ -4,65 +4,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LogoQuizzMedium4">
+    tools:context=".LogoQuizzEasy"
+    android:background="@drawable/background">
 
     <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="729dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp"
         tools:ignore="MissingConstraints">
 
         <TextView
-            android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Question 4" />
+            android:text="Question 1" />
 
         <ImageView
-            android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="227dp"
-            app:srcCompat="@drawable/seville" />
+            app:srcCompat="@drawable/arsenal" />
 
         <TextView
-            android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Choisir le club" />
 
         <RadioGroup
-            android:id="@+id/radioLQM4"
+            android:id="@+id/radioLQE"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <RadioButton
-                android:id="@+id/radioButtonLQM4a"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sampodria" />
+                android:text="Liverpool" />
 
             <RadioButton
-                android:id="@+id/radioButtonLQM4b"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Strasbourg" />
+                android:text="Dortmund" />
 
             <RadioButton
-                android:id="@+id/radioButtonLQM4c"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Saint Etienne" />
+                android:text="Arsenal" />
 
             <RadioButton
-                android:id="@+id/radioButtonLQM4d"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Seville" />
+                android:text="Manchester United" />
 
             <Button
-                android:id="@+id/buttonLQM4svt"
+                android:id="@+id/buttonLQEsvt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="suivant"
@@ -70,5 +64,4 @@
                 android:textStyle="bold"/>
         </RadioGroup>
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

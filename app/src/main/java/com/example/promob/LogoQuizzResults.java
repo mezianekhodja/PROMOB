@@ -38,7 +38,7 @@ public class LogoQuizzResults extends AppCompatActivity {
             textviewa.setText("Vous êtes digne d'entrainer les plus grands! Bravo");
         }
 
-        btn_suivant = (Button) findViewById(R.id.buttonsvteasyres);
+        btn_suivant = (Button) findViewById(R.id.buttonsvtres);
         btn_suivant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

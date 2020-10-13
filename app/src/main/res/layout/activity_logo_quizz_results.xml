@@ -13,9 +13,10 @@
         android:orientation="vertical"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        android:background="@drawable/background">
 
-        <TextView
+    <TextView
             android:id="@+id/textView5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -32,11 +33,10 @@
             android:layout_height="wrap_content" />
 
         <Button
-            android:id="@+id/buttonsvteasyres"
+            android:id="@+id/buttonsvtres"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Retour acceuil"
-            android:background="@color/colorLogoQuizz"
             android:textStyle="bold"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

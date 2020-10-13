@@ -33,11 +33,11 @@ public class HomeLogoQuizz extends AppCompatActivity {
     }
 
     public void openLogoQuizzEasy1() {
-        Intent intent = new Intent(this, LogoQuizzEasy1.class);
+        Intent intent = new Intent(this, LogoQuizzEasy.class);
         startActivity(intent);
     }
     public void openLogoQuizzMedium1() {
-        Intent intent = new Intent(this, LogoQuizzMedium1.class);
+        Intent intent = new Intent(this, LogoQuizzMedium.class);
         startActivity(intent);
     }
 }
