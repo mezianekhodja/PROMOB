@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "297619776591",
+    "firebase_url": "https://promob-109de.firebaseio.com",
+    "project_id": "promob-109de",
+    "storage_bucket": "promob-109de.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:297619776591:android:56bc2e37aa0e0d7808763a",
+        "android_client_info": {
+          "package_name": "com.example.promob"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "297619776591-od4smd23d0n5e2ig4aicojrmfpe1n4uj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqYyxgCpgpn4DoubRZFp3p6T6x2oMW59s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "297619776591-od4smd23d0n5e2ig4aicojrmfpe1n4uj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,5 +1,6 @@
 package com.example.promob;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,11 +11,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
 public class Registration extends AppCompatActivity {
 
     private EditText userName, userMail, userPassword;
     private Button regButton;
     private TextView userLogin;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,11 +29,28 @@ public class Registration extends AppCompatActivity {
         setContentView(R.layout.activity_registration);
         setUpUIViews();
 
+        firebaseAuth = FirebaseAuth.getInstance();
+
         regButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (validate()){
-                    openPage();
+                    String user_email =userMail.getText().toString().trim();
+                    String user_password =userPassword.getText().toString().trim();
+                    firebaseAuth.createUserWithEmailAndPassword(user_email,user_password).addOnCompleteListener(new OnCompleteListener<AuthResult>(){
+
+                                                                                                                    @Override
+                                                                                                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                                                                                                        if(task.isSuccessful()){
+                                                                                                                        Toast.makeText(Registration.this, "Registration Successful",Toast.LENGTH_SHORT).show();
+                                                                                                                        openPage();
+                                                                                                                        }
+                                                                                                                        else {
+                                                                                                                            Toast.makeText(Registration.this, "Registration Failed",Toast.LENGTH_SHORT).show();
+                                                                                                                        }
+                                                                                                                    }
+                                                                                                                });
+                    //openPage();
                 }
             }
         });
