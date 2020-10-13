@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context=".Home">
 
     <LinearLayout
@@ -15,21 +16,27 @@
         tools:ignore="MissingConstraints">
 
         <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Games by Mez and Vince" />
-
-        <TextView
             android:id="@+id/textView7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sélectionnez un jeu :" />
+            android:text="@string/questionjeux"
+            android:gravity="center"
+            android:textSize="25dp"
+            android:layout_marginTop="30dp"/>
+
+        <ImageView
+            android:id="@+id/logoVM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:gravity="center"/>
 
         <TextView
             android:id="@+id/textView8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
             android:text="Trouvez les noms de 10 clubs de football à l'aide de leurs logos" />
 
         <Button
@@ -44,6 +51,7 @@
             android:id="@+id/textView9"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
             android:text="Prochainement" />
 
         <Button
@@ -56,6 +64,7 @@
             android:id="@+id/textView10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
             android:text="Prochainement" />
 
         <Button
@@ -63,5 +72,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Jeu n°3" />
+
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/games_by_mez_and_vince"
+            android:layout_marginTop="30dp"
+            android:textSize="20dp"
+            android:gravity="center"/>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
