@@ -10,41 +10,25 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity  {
-    private EditText name;
-    private EditText password;
-    private TextView info;
-    private Button login;
-    private int counter = 5;
+    private Button connexion,invite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        name = (EditText) findViewById(R.id.editTextTextPersonName);
-        password = (EditText) findViewById(R.id.editTextTextPassword);
-        info = (TextView)findViewById(R.id.info);
-        login = (Button)findViewById(R.id.buttonlog);
+        connexion = (Button)findViewById(R.id.btn_P1_connexion);
+        invite = (Button)findViewById(R.id.btn_P1_invite);
 
-        login.setOnClickListener(new View.OnClickListener() {
+        connexion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validate(name.getText().toString(),password.getText().toString());
+                openConnexion();
             }
         });
     }
-
-    private void validate(String username, String password){
-        if((username.equals("Admin"))&&(password.equals("mdp"))){
-            Intent intent = new Intent(this, Home.class);
-            startActivity(intent);
-        }
-        else{
-        counter--;
-        info.setText("nombre d'essais restants = "+String.valueOf(counter));
-        }
-        if(counter == 0){
-           login.setEnabled(false);
-        }
+    public void openConnexion() {
+        Intent intent = new Intent(this, Connexion.class);
+        startActivity(intent);
     }
 }

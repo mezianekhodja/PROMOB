@@ -4,27 +4,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/background">
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp"
         tools:ignore="MissingConstraints">
 
         <TextView
-            android:id="@+id/textView12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Bienvenue sur notre application" />
+            android:text="Bienvenue sur notre application !"
+            android:gravity="center"
+            android:layout_marginBottom="10dp"
+            android:textSize="30dp"
+            android:textColor="#FFFFFF"/>
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            app:srcCompat="@drawable/logoVM"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Possibilité d'affronter vos amis dans des parties acharnées et d'enregistrer votre progression"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp" />
+        <Button
+            android:id="@+id/btn_P1_connexion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/logoVM" />
+            android:text="Se connecter / Créer un compte" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pas de sauvegarde des scores et pas de multijoueur"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp" />
+
+        <Button
+            android:id="@+id/btn_P1_invite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Jouer en tant qu'invité"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="VMgames 2020, by Mez and Vince v1.0" />
     </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
