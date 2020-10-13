@@ -6,46 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
     <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="729dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp"
         tools:ignore="MissingConstraints">
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/textView12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Connexion" />
+            android:text="Bienvenue sur notre application" />
 
-        <EditText
-            android:id="@+id/editTextTextPersonName"
+        <ImageView
+            android:id="@+id/imageView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="username"
-            android:inputType="textPersonName" />
-
-        <EditText
-            android:id="@+id/editTextTextPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="password"
-            android:inputType="textPassword" />
-
-        <TextView
-            android:id="@+id/info"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Nombre de tests restants = 5" />
-
-        <Button
-            android:id="@+id/buttonlog"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="GO" />
+            app:srcCompat="@drawable/logoVM" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
