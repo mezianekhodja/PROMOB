@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">PROMOB</string>
-    <string name="questionjeux">A quel jeux voulez-vous jouer ?</string>
+    <string name="questionjeux">A quel jeu voulez-vous jouer ?</string>
     <string name="games_by_mez_and_vince">Games by Mez and Vince</string>
 </resources>

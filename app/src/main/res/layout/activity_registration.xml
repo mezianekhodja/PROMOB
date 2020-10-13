@@ -4,21 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Connexion">
+    tools:context=".Registration"
+    android:background="@drawable/background">
+
     <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="729dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp"
-        tools:ignore="MissingConstraints"
-        android:background="@drawable/background">
-
+        tools:ignore="MissingConstraints">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Connexion"
+            android:text="Inscription"
             android:gravity="center"/>
 
         <ImageView
@@ -29,38 +29,39 @@
             android:gravity="center"/>
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/editTextRegusername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="username"
+            android:hint="pseudo"
             android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/editTextTextPassword"
+            android:id="@+id/editTextRegmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="adresse mail"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/editTextRegPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="password"
             android:inputType="textPassword" />
 
-        <TextView
-            android:id="@+id/info"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Nombre de tests restants = 5" />
-
         <Button
-            android:id="@+id/buttonlog"
+            android:id="@+id/buttonReginscription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="GO" />
+            android:text="S'inscrire"/>
 
         <TextView
-            android:id="@+id/textViewregistration"
+            android:id="@+id/textViewRegconnexion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="créer mon compte" />
-
+            android:text="déja membre?" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

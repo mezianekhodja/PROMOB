@@ -13,7 +13,7 @@ public class Connexion extends AppCompatActivity {
 
     private EditText name;
     private EditText password;
-    private TextView info;
+    private TextView info,registration;
     private Button login;
     private int counter = 5;
 
@@ -25,12 +25,19 @@ public class Connexion extends AppCompatActivity {
         name = (EditText) findViewById(R.id.editTextTextPersonName);
         password = (EditText) findViewById(R.id.editTextTextPassword);
         info = (TextView)findViewById(R.id.info);
+        registration = (TextView)findViewById(R.id.textViewregistration);
         login = (Button)findViewById(R.id.buttonlog);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 validate(name.getText().toString(),password.getText().toString());
+            }
+        });
+        registration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openReg();
             }
         });
     }
@@ -47,5 +54,9 @@ public class Connexion extends AppCompatActivity {
         if(counter == 0){
             login.setEnabled(false);
         }
+    }
+    private void openReg(){
+        Intent intent = new Intent(this, Registration.class);
+        startActivity(intent);
     }
 }
