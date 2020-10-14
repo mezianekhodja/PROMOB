@@ -1,13 +1,22 @@
 package com.example.promob;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Connexion extends AppCompatActivity {
 
@@ -16,6 +25,8 @@ public class Connexion extends AppCompatActivity {
     private TextView info,registration;
     private Button login;
     private int counter = 5;
+    private FirebaseAuth firebaseAuth;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +38,15 @@ public class Connexion extends AppCompatActivity {
         info = (TextView)findViewById(R.id.info);
         registration = (TextView)findViewById(R.id.textViewregistration);
         login = (Button)findViewById(R.id.buttonlog);
+        firebaseAuth = FirebaseAuth.getInstance();
+        progressDialog = new ProgressDialog(this);
+
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+
+        if (user != null){
+            finish();
+            openHome();
+        }
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,20 +63,36 @@ public class Connexion extends AppCompatActivity {
     }
 
     private void validate(String username, String password){
-        if((username.equals("Admin"))&&(password.equals("mdp"))){
-            Intent intent = new Intent(this, Home.class);
-            startActivity(intent);
-        }
-        else{
-            counter--;
-            info.setText("nombre d'essais restants = "+String.valueOf(counter));
-        }
-        if(counter == 0){
-            login.setEnabled(false);
-        }
+
+        progressDialog.setMessage("Essai de connexion");
+        progressDialog.show();
+
+        firebaseAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()){
+                    progressDialog.dismiss();
+                    Toast.makeText(Connexion.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                    openHome();
+                }
+                else{
+                    Toast.makeText(Connexion.this, "Login Failed", Toast.LENGTH_SHORT).show();
+                    counter--;
+                    info.setText("Number of attemps remaining = "+counter);
+                    progressDialog.dismiss();
+                }
+                if(counter==0){
+                    login.setEnabled(false);
+                }
+            }
+        });
     }
     private void openReg(){
         Intent intent = new Intent(this, Registration.class);
+        startActivity(intent);
+    }
+    private void openHome(){
+        Intent intent = new Intent(this, Home.class);
         startActivity(intent);
     }
 }
