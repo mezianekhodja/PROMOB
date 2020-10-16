@@ -9,7 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Registration"></activity>
+        <activity android:name=".SplashScreenActivity">
+            <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter></activity>
+        <activity android:name=".Registration" />
         <activity android:name=".LogoQuizzMedium" />
         <activity android:name=".LogoQuizzEasy" />
         <activity android:name=".Connexion" />
@@ -17,11 +23,6 @@
         <activity android:name=".LogoQuizzResults" />
         <activity android:name=".HomeLogoQuizz" />
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
