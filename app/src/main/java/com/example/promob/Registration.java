@@ -15,13 +15,17 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Registration extends AppCompatActivity {
 
-    private EditText userName, userMail, userPassword;
+    private EditText userName, userMail, userPassword, userPhone;
     private Button regButton;
     private TextView userLogin;
     private FirebaseAuth firebaseAuth;
+    String name, phone, password, mail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,15 +46,14 @@ public class Registration extends AppCompatActivity {
                                                                                                                     @Override
                                                                                                                     public void onComplete(@NonNull Task<AuthResult> task) {
                                                                                                                         if(task.isSuccessful()){
-                                                                                                                        Toast.makeText(Registration.this, "Registration Successful",Toast.LENGTH_SHORT).show();
-                                                                                                                        openPage();
+                                                                                                                            sendEmailVerification();
+
                                                                                                                         }
                                                                                                                         else {
                                                                                                                             Toast.makeText(Registration.this, "Registration Failed",Toast.LENGTH_SHORT).show();
                                                                                                                         }
                                                                                                                     }
                                                                                                                 });
-                    //openPage();
                 }
             }
         });
@@ -70,13 +73,15 @@ public class Registration extends AppCompatActivity {
         userPassword= (EditText)findViewById(R.id.editTextRegPassword);
         regButton= (Button)findViewById(R.id.buttonReginscription);
         userLogin= (TextView)findViewById(R.id.textViewRegconnexion);
+        userPhone = (EditText)findViewById(R.id.editTextPhone);
     }
     private Boolean validate(){
         Boolean result = false;
-        String name = userName.getText().toString();
-        String mail = userMail.getText().toString();
-        String password = userPassword.getText().toString();
-        if((!name.isEmpty()) &&(!mail.isEmpty())&&(!password.isEmpty())){
+        name = userName.getText().toString();
+        mail = userMail.getText().toString();
+        password = userPassword.getText().toString();
+        phone = userPhone.getText().toString();
+        if((!name.isEmpty()) &&(!mail.isEmpty())&&(!password.isEmpty())&&(!phone.isEmpty())){
             result=true;
         }
         else{
@@ -87,9 +92,41 @@ public class Registration extends AppCompatActivity {
     private void openPage(){
         Intent intent = new Intent(this, Home.class);
         startActivity(intent);
+        Registration.this.finish();
     }
     private void openMainPage(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        Registration.this.finish();
+    }
+    private void openCoPage(){
+        Intent intent = new Intent(this, Connexion.class);
+        startActivity(intent);
+        Registration.this.finish();
+    }
+    private void sendEmailVerification(){
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        if (firebaseUser != null){
+            firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful()){
+                        sendUserdata();
+                        Toast.makeText(Registration.this, "Successfully register",Toast.LENGTH_SHORT).show();
+                        firebaseAuth.signOut();
+                        openCoPage();
+                    }
+                    else{
+                        Toast.makeText(Registration.this, "Failed registration",Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+    }
+    private void sendUserdata(){
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = firebaseDatabase.getReference(firebaseAuth.getUid());
+        UserProfile userProfile = new UserProfile(name, mail, phone);
+        myRef.setValue(userProfile);
     }
 }

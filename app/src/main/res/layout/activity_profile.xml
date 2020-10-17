@@ -4,21 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Registration"
+    tools:context=".Profile"
     android:background="@drawable/background">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="346dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Inscription"
+            android:text="Mon Profil"
             android:gravity="center"/>
 
         <ImageView
@@ -26,49 +26,39 @@
             android:layout_height="150dp"
             android:layout_marginTop="50dp"
             android:src="@drawable/logo"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:layout_marginBottom="40dp"/>
 
-        <EditText
-            android:id="@+id/editTextRegusername"
+        <ImageView
+            android:id="@+id/imageViewProfilePic"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="pseudo"
-            android:inputType="textPersonName" />
-
-        <EditText
-            android:id="@+id/editTextRegmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="adresse mail"
-            android:inputType="textPersonName" />
-
-        <EditText
-            android:id="@+id/editTextRegPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="password"
-            android:inputType="textPassword" />
-        <EditText
-            android:id="@+id/editTextPhone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="phone"
-            android:hint="phone number"/>
-
-        <Button
-            android:id="@+id/buttonReginscription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="S'inscrire"/>
+            android:layout_height="wrap_content"/>
 
         <TextView
-            android:id="@+id/textViewRegconnexion"
+            android:id="@+id/tvProfilename"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="déja membre?" />
+            android:text="Name : ???" />
+
+        <TextView
+            android:id="@+id/tvProfilemail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mail : ???" />
+
+        <TextView
+            android:id="@+id/tvProfilephone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Phone : ???" />
+
+        <Button
+            android:id="@+id/buttonUpdateProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Update (prochainement)" />
+
+
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

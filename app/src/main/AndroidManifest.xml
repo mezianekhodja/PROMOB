@@ -9,12 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Profile"></activity>
+        <activity android:name=".PasswordActivity" />
         <activity android:name=".SplashScreenActivity">
             <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".Registration" />
         <activity android:name=".LogoQuizzMedium" />
         <activity android:name=".LogoQuizzEasy" />
@@ -22,8 +25,7 @@
         <activity android:name=".Home" />
         <activity android:name=".LogoQuizzResults" />
         <activity android:name=".HomeLogoQuizz" />
-        <activity android:name=".MainActivity">
-        </activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

@@ -54,6 +54,6 @@ public class SplashScreenActivity extends AppCompatActivity {
                 }
             }
         };
-        t.schedule(tt,0,30);
+        t.schedule(tt,0,10*SLEEP_TIMER);
     }
 }

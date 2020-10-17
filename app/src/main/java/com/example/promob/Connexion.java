@@ -22,7 +22,7 @@ public class Connexion extends AppCompatActivity {
 
     private EditText name;
     private EditText password;
-    private TextView info,registration;
+    private TextView info,registration,passwordForgot;
     private Button login;
     private int counter = 5;
     private FirebaseAuth firebaseAuth;
@@ -37,6 +37,7 @@ public class Connexion extends AppCompatActivity {
         password = (EditText) findViewById(R.id.editTextTextPassword);
         info = (TextView)findViewById(R.id.info);
         registration = (TextView)findViewById(R.id.textViewregistration);
+        passwordForgot = (Button)findViewById(R.id.forgotPassword) ;
         login = (Button)findViewById(R.id.buttonlog);
         firebaseAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(this);
@@ -60,6 +61,12 @@ public class Connexion extends AppCompatActivity {
                 openReg();
             }
         });
+        passwordForgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openPF();
+            }
+        });
     }
 
     private void validate(String username, String password){
@@ -72,8 +79,7 @@ public class Connexion extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
                     progressDialog.dismiss();
-                    Toast.makeText(Connexion.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                    openHome();
+                    checkEmailVerification();
                 }
                 else{
                     Toast.makeText(Connexion.this, "Login Failed", Toast.LENGTH_SHORT).show();
@@ -90,9 +96,27 @@ public class Connexion extends AppCompatActivity {
     private void openReg(){
         Intent intent = new Intent(this, Registration.class);
         startActivity(intent);
+        Connexion.this.finish();
     }
     private void openHome(){
         Intent intent = new Intent(this, Home.class);
         startActivity(intent);
+        Connexion.this.finish();
+    }
+    private void openPF(){
+        Intent intent = new Intent(this, PasswordActivity.class);
+        startActivity(intent);
+        Connexion.this.finish();
+    }
+    private void checkEmailVerification(){
+        FirebaseUser firebaseUser = firebaseAuth.getInstance().getCurrentUser();
+        Boolean emailflag = firebaseUser.isEmailVerified();
+        if (emailflag){
+            openHome();
+        }
+        else{
+            Toast.makeText(this, "verify your email",Toast.LENGTH_SHORT).show();
+            firebaseAuth.signOut();
+        }
     }
 }

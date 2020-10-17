@@ -34,14 +34,15 @@ public class Home extends AppCompatActivity {
     public void openHomeLogoQuizz() {
         Intent intent = new Intent(this, HomeLogoQuizz.class);
         startActivity(intent);
+        Home.this.finish();
     }
     public void openActivityConnexion() {
         Intent intent = new Intent(this, Connexion.class);
         startActivity(intent);
+        Home.this.finish();
     }
     private void Logout() {
         firebaseAuth.signOut();
-        finish();
         openActivityConnexion();
     }
     @Override
@@ -49,12 +50,19 @@ public class Home extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu,menu);
         return true;
     }
-
+    public void openProfil() {
+        Intent intent = new Intent(this, Profile.class);
+        startActivity(intent);
+        Home.this.finish();
+    }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
             case R.id.logoutMenu:{
                 Logout();
+            }
+            case R.id.profileMenu:{
+                openProfil();
             }
         }
         return super.onOptionsItemSelected(item);

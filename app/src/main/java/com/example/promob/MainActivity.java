@@ -30,5 +30,6 @@ public class MainActivity extends AppCompatActivity  {
     public void openConnexion() {
         Intent intent = new Intent(this, Connexion.class);
         startActivity(intent);
+        MainActivity.this.finish();
     }
 }
