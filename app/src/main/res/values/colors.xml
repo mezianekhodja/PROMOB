@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorAccent">#FFFFFF</color>
     <color name="colorLogoQuizz">#0042E1</color>
     <color name="background"> #7a9eff</color>
     <color name="backgroundBouton"> #7a9eF0</color>
