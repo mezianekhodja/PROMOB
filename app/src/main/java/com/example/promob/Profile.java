@@ -33,12 +33,35 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        button = findViewById(R.id.buttonUpdateProfile);
 
         profilPic = (ImageView) findViewById(R.id.imageViewProfilePic);
         profileName = (TextView)findViewById((R.id.tvProfilename));
         profileMail = (TextView)findViewById((R.id.tvProfilemail));
         profilePhone = (TextView)findViewById((R.id.tvProfilephone));
+
+        button = findViewById(R.id.buttonchangemdp);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openUpdatePassword();
+            }
+        });
+
+        button = findViewById(R.id.buttonUpdateProfile);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openUpdateProfile();
+            }
+        });
+
+        button = findViewById(R.id.buttonchangemail);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openUpdateMail();
+            }
+        });
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -69,6 +92,21 @@ public class Profile extends AppCompatActivity {
     private void Logout() {
         firebaseAuth.signOut();
         openActivityConnexion();
+    }
+    public void openUpdateProfile() {
+        Intent intent = new Intent(this, UpdateProfile.class);
+        startActivity(intent);
+        Profile.this.finish();
+    }
+    public void openUpdateMail() {
+        Intent intent = new Intent(this, UpdateMail.class);
+        startActivity(intent);
+        Profile.this.finish();
+    }
+    public void openUpdatePassword() {
+        Intent intent = new Intent(this, UpdatePassword.class);
+        startActivity(intent);
+        Profile.this.finish();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

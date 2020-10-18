@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Profile"></activity>
+        <activity android:name=".UpdateProfile"></activity>
+        <activity android:name=".UpdatePassword" />
+        <activity android:name=".UpdateMail" />
+        <activity android:name=".Profile" />
         <activity android:name=".PasswordActivity" />
         <activity android:name=".SplashScreenActivity">
             <intent-filter>
