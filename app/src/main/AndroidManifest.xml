@@ -11,7 +11,6 @@
         android:theme="@style/AppTheme">
         <activity android:name=".UpdateProfile"></activity>
         <activity android:name=".UpdatePassword" />
-        <activity android:name=".UpdateMail" />
         <activity android:name=".Profile" />
         <activity android:name=".PasswordActivity" />
         <activity android:name=".SplashScreenActivity">

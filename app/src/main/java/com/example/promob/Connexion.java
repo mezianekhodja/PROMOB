@@ -22,8 +22,8 @@ public class Connexion extends AppCompatActivity {
 
     private EditText name;
     private EditText password;
-    private TextView info,registration,passwordForgot;
-    private Button login;
+    private TextView info,registration;
+    private Button login, passwordForgot;
     private int counter = 5;
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;

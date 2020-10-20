@@ -55,14 +55,6 @@ public class Profile extends AppCompatActivity {
             }
         });
 
-        button = findViewById(R.id.buttonchangemail);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openUpdateMail();
-            }
-        });
-
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
 
@@ -98,11 +90,7 @@ public class Profile extends AppCompatActivity {
         startActivity(intent);
         Profile.this.finish();
     }
-    public void openUpdateMail() {
-        Intent intent = new Intent(this, UpdateMail.class);
-        startActivity(intent);
-        Profile.this.finish();
-    }
+
     public void openUpdatePassword() {
         Intent intent = new Intent(this, UpdatePassword.class);
         startActivity(intent);
