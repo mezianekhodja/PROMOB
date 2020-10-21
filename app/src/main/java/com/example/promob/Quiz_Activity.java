@@ -1,5 +1,6 @@
 package com.example.promob;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -36,17 +37,17 @@ public class Quiz_Activity extends AppCompatActivity {
     private ColorStateList textColorDefaultRb;
     private int questionCounter;
     private int questionCountTotal;
-    private Question currentQuestion;
+    private QuizQuestion currentQuestion;
     private int score;
     private boolean answered;
-    private List<Question> questionList;
+    private List<QuizQuestion> questionList;
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.quizz_activity);
+        setContentView(R.layout.activity_quiz);
 
         ImageView = findViewById(R.id.logo);
         textViewQuestion = findViewById(R.id.question);
@@ -63,7 +64,7 @@ public class Quiz_Activity extends AppCompatActivity {
 
         textColorDefaultRb = rb1.getTextColors();
 
-        QuizzDb dbHelper = new QuizzDb(this);
+        Quiz_bdd dbHelper = new Quiz_bdd(this);
         questionList = dbHelper.getAllQuestion();
         questionCountTotal = 5;
         Collections.shuffle(questionList);
@@ -78,7 +79,7 @@ public class Quiz_Activity extends AppCompatActivity {
                         checkAnswer();
                     }
                     else {
-                        Toast.makeText(quizz_easy.this, "Please select an answer", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Quiz_Activity.this, "Please select an answer", Toast.LENGTH_SHORT).show();
                     }
                 }
                 else{
@@ -164,7 +165,9 @@ public class Quiz_Activity extends AppCompatActivity {
     }
 
     private void finishQuizz(){
-        finish();
+        Intent intent = new Intent(this, LogoQuizzResults.class);
+        intent.putExtra("score",score);
+        startActivity(intent);
     }
 }
 

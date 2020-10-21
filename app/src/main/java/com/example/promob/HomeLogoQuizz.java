@@ -41,7 +41,7 @@ public class HomeLogoQuizz extends AppCompatActivity {
     }
 
     public void openLogoQuizzEasy1() {
-        Intent intent = new Intent(this, Quizz_easy.class);
+        Intent intent = new Intent(this, Quiz_Activity.class);
         startActivity(intent);
         HomeLogoQuizz.this.finish();
     }

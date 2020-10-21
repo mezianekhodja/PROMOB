@@ -2,4 +2,6 @@
     <string name="app_name">PROMOB</string>
     <string name="questionjeux">A quel jeu voulez-vous jouer ?</string>
     <string name="games_by_mez_and_vince">Games by Mez and Vince</string>
+    <string name="commencer_quizz">Commencer le quizz</string>
+    <string name="confirmer">Confirmer</string>
 </resources>
