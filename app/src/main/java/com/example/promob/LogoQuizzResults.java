@@ -34,10 +34,10 @@ public class LogoQuizzResults extends AppCompatActivity {
         textviewa.setText(Integer.toString(score));
 
         textviewa = (TextView) findViewById(R.id.textViewcommentairetest);
-        if(score<5){
+        if(score<2){
             textviewa.setText("Vous pouvez mieux faire c'est certain !");
         }
-        else if(score<8){
+        else if(score<5){
             textviewa.setText("Plutôt pas mal! Continuez l'entrainement");
         }
         else{

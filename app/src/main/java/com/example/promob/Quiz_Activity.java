@@ -99,6 +99,7 @@ public class Quiz_Activity extends AppCompatActivity {
 
         if(questionCounter < questionCountTotal){
             currentQuestion = questionList.get((questionCounter));
+            //PASSER L'IMAGE EN INT
             String mDrawableName = currentQuestion.getImage();
             int resID = getResources().getIdentifier(mDrawableName , "drawable", getPackageName());
             ImageView.setImageResource(resID);
