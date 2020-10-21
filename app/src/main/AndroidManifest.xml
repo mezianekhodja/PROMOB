@@ -22,13 +22,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".Registration" />
-        <activity android:name=".LogoQuizzMedium" />
-        <activity android:name=".LogoQuizzEasy" />
         <activity android:name=".Connexion" />
         <activity android:name=".Home" />
         <activity android:name=".LogoQuizzResults" />
         <activity android:name=".HomeLogoQuizz" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".Quiz_Activity" />
+        <activity android:name=".Quiz_bdd" />
+        <activity android:name=".Quiz_Contract" />
+        <activity android:name=".QuizQuestion" />
     </application>
 
 </manifest>

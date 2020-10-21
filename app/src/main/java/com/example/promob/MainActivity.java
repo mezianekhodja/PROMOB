@@ -26,10 +26,23 @@ public class MainActivity extends AppCompatActivity  {
                 openConnexion();
             }
         });
+        invite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openInvite();
+            }
+        });
     }
     public void openConnexion() {
         Intent intent = new Intent(this, Connexion.class);
         startActivity(intent);
         MainActivity.this.finish();
     }
+
+    public void openInvite() {
+        Intent intent = new Intent(this, Home.class);
+        startActivity(intent);
+        MainActivity.this.finish();
+    }
+
 }
