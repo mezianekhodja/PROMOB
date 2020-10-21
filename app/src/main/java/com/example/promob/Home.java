@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Home extends AppCompatActivity {
 
-    Button btn_logoquizz;
+    Button btn_logoquizz,btn_pendu;
     private FirebaseAuth firebaseAuth;
 
     @Override
@@ -29,10 +29,22 @@ public class Home extends AppCompatActivity {
                 openHomeLogoQuizz();
             }
         });
+        btn_pendu = (Button) findViewById(R.id.buttongamependu);
+        btn_pendu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openPendu();
+            }
+        });
     }
 
     public void openHomeLogoQuizz() {
         Intent intent = new Intent(this, HomeLogoQuizz.class);
+        startActivity(intent);
+        Home.this.finish();
+    }
+    public void openPendu() {
+        Intent intent = new Intent(this, Pendu.class);
         startActivity(intent);
         Home.this.finish();
     }
