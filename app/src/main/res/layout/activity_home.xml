@@ -57,14 +57,14 @@
             android:textSize="13dp"
             android:gravity="center"
             android:padding="2dp"
-            android:text="Prochainement" />
+            android:text="Jeu du pendu (en création)" />
 
         <Button
-            android:id="@+id/buttongame2"
+            android:id="@+id/buttongamependu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:text="Jeu n°2" />
+            android:text="Pendu" />
 
         <TextView
             android:layout_width="match_parent"
