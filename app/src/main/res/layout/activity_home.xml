@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="2dp"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="30dp"
             android:gravity="center"
             android:textSize="13dp"
             android:text="Trouvez les noms de 10 clubs de football à l'aide de leurs logos" />
@@ -88,7 +88,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/games_by_mez_and_vince"
-            android:layout_marginTop="90dp"
+            android:layout_marginTop="20dp"
             android:textSize="20dp"
             android:gravity="center"/>
 

@@ -15,9 +15,7 @@ public class Quiz_bdd extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME ="bdd.db";
     private static final int DATABASE_VERSION =2;
-
     private SQLiteDatabase db;
-
 
     public Quiz_bdd(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -26,7 +24,7 @@ public class Quiz_bdd extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         this.db = db;
-
+        //Creation de la table
         final String SQL_CREATE_QUESTION_TABLE = "CREATE TABLE " + QuestionTable.TABLE_NAME
                 + " ( " + QuestionTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 QuestionTable.COLONNE_QUESTION + " TEXT, " +
@@ -37,7 +35,10 @@ public class Quiz_bdd extends SQLiteOpenHelper {
                 QuestionTable.COLONNE_OPTION4 + " TEXT, " +
                 QuestionTable.COLONNE_NUMERO_REPONSE + " INTEGER" + ")";
 
+        //Ecxectuer notre String en SQL
         db.execSQL(SQL_CREATE_QUESTION_TABLE);
+
+
         fillQuestionTable();
     }
 
@@ -79,9 +80,11 @@ public class Quiz_bdd extends SQLiteOpenHelper {
         cv.put(QuestionTable.COLONNE_OPTION3, question.getOption3());
         cv.put(QuestionTable.COLONNE_OPTION4, question.getOption4());
         cv.put(QuestionTable.COLONNE_NUMERO_REPONSE, question.getNumeroReponse());
+        //Inserer les valeurs dans la bdd
         db.insert(QuestionTable.TABLE_NAME, null, cv);
     }
 
+    //recuperer les données de la table
     public List<QuizQuestion> getAllQuestion(){
         List<QuizQuestion> questionList = new ArrayList<>();
         db = getReadableDatabase();
