@@ -3,23 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/logoutMenu"
-        android:icon="@drawable/logo"
         android:orderInCategory="100"
         app:showAsAction="never"
         android:title="Déconnexion">
     </item>
     <item
         android:id="@+id/profileMenu"
-        android:icon="@drawable/logo"
         android:orderInCategory="200"
         app:showAsAction="never"
         android:title="Profil">
     </item>
     <item
-        android:id="@+id/homeMenu"
+        android:id="@+id/acceuilMenu"
         android:icon="@drawable/logo"
         android:orderInCategory="300"
-        app:showAsAction="never"
-        android:title="Home">
+        app:showAsAction="always"
+        android:title="Acceuil">
     </item>
 </menu>

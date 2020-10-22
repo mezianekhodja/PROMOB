@@ -54,11 +54,7 @@ public class PasswordActivity extends AppCompatActivity {
             }
         });
     }
-    private void openHome(){
-        Intent intent = new Intent(this, Home.class);
-        startActivity(intent);
-        PasswordActivity.this.finish();
-    }
+
     public void openActivityConnexion() {
         Intent intent = new Intent(this, Connexion.class);
         startActivity(intent);
@@ -80,17 +76,25 @@ public class PasswordActivity extends AppCompatActivity {
         PasswordActivity.this.finish();
     }
 
+    public void openAcceuil(){
+        Intent intent = new Intent(this, Home.class);
+        startActivity(intent);
+        PasswordActivity.this.finish();
+    }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
             case R.id.logoutMenu:{
                 Logout();
-            }
-            case R.id.homeMenu:{
-                openHome();
+                break;
             }
             case R.id.profileMenu:{
                 openProfil();
+                break;
+            }
+            case R.id.acceuilMenu:{
+                openAcceuil();
+                break;
             }
         }
         return super.onOptionsItemSelected(item);

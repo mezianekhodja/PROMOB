@@ -87,7 +87,8 @@ public class HomeLogoQuizz extends AppCompatActivity {
         startActivity(intent);
         HomeLogoQuizz.this.finish();
     }
-    public void openHome() {
+
+    public void openAcceuil(){
         Intent intent = new Intent(this, Home.class);
         startActivity(intent);
         HomeLogoQuizz.this.finish();
@@ -97,12 +98,15 @@ public class HomeLogoQuizz extends AppCompatActivity {
         switch(item.getItemId()){
             case R.id.logoutMenu:{
                 Logout();
-            }
-            case R.id.homeMenu:{
-                openHome();
+                break;
             }
             case R.id.profileMenu:{
                 openProfil();
+                break;
+            }
+            case R.id.acceuilMenu:{
+                openAcceuil();
+                break;
             }
         }
         return super.onOptionsItemSelected(item);
