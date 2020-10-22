@@ -25,6 +25,12 @@
             android:layout_height="325dp"
             app:srcCompat="@drawable/logologoquizz" />
 
+        <TextView
+            android:id="@+id/LogoQuizzHighscoreEasy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Highscore : 0"/>
+
         <Button
             android:id="@+id/button_logoquizz_easy"
             android:layout_width="match_parent"
@@ -33,12 +39,26 @@
             android:textStyle="bold"
             android:layout_marginBottom="5dp"/>
 
+        <TextView
+            android:id="@+id/LogoQuizzHighscoreMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Highscore : 0"/>
+
         <Button
             android:id="@+id/button_logoquizz_medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="MEDIUM"
             android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/LogoQuizzHighscoreHard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Highscore : 0"/>
 
         <Button
             android:id="@+id/button_logoquizz_hard"
@@ -48,6 +68,7 @@
 
         <TextView
             android:layout_width="match_parent"
+            android:gravity="center"
             android:layout_height="wrap_content"
             android:text="By Meziane and Vincent" />
     </LinearLayout>

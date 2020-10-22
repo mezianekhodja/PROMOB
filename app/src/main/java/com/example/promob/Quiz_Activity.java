@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,8 +17,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class Quiz_Activity extends AppCompatActivity {
+
+    public static final String EXTRA_SCORE = "extraScore";
+    private static final long COUNTDOWN_IN_MILLIS = 15000;
+
     //textView
     private TextView textViewQuestion;
     private TextView textViewScore;
@@ -34,15 +40,18 @@ public class Quiz_Activity extends AppCompatActivity {
 
     //Reste
     private Button buttonConfirmeNext;
-    private ColorStateList textColorDefaultRb;
+    private ColorStateList textColorDefaultRb;//Couleur RadioBouton
+    private ColorStateList textColorDefaultCb;//Couleur Timer
+
+    private CountDownTimer counterDownTimer;
+    private long timeLeftInMillis;
+
     private int questionCounter;
     private int questionCountTotal;
     private QuizQuestion currentQuestion;
     private int score;
     private boolean answered;
     private List<QuizQuestion> questionList;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,10 +72,11 @@ public class Quiz_Activity extends AppCompatActivity {
         buttonConfirmeNext = findViewById(R.id.confirmer);
 
         textColorDefaultRb = rb1.getTextColors();
+        textColorDefaultCb = textViewTimer.getTextColors();
 
         Quiz_bdd dbHelper = new Quiz_bdd(this);
         questionList = dbHelper.getAllQuestion();
-        questionCountTotal = 5;
+        questionCountTotal = 5; //Seulement 5 questions
         Collections.shuffle(questionList);
 
         showNextQuestion();
@@ -113,14 +123,51 @@ public class Quiz_Activity extends AppCompatActivity {
             textViewQuestionCount.setText("Question: " + questionCounter + "/" + questionCountTotal);
             answered = false;
             buttonConfirmeNext.setText("confirm");
+
+            timeLeftInMillis = COUNTDOWN_IN_MILLIS;
+            startCountDown();
         }
         else{
             finishQuizz();
         }
     }
 
+    private void startCountDown() {
+        counterDownTimer = new CountDownTimer(timeLeftInMillis,1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timeLeftInMillis = millisUntilFinished;
+                updateCountdownText();
+            }
+
+            @Override
+            public void onFinish() {
+                timeLeftInMillis= 0;
+                updateCountdownText();
+                checkAnswer();
+            }
+        }.start();
+    }
+
+    private void updateCountdownText(){
+        int minutes = (int) (timeLeftInMillis/1000)/60;
+        int seconds = (int) (timeLeftInMillis/1000)%60;
+
+        String timeFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+
+        textViewTimer.setText(timeFormatted);
+        if(timeLeftInMillis<5000){
+            textViewTimer.setTextColor(Color.RED);
+        }
+        else{
+            textViewTimer.setTextColor(textColorDefaultCb);
+        }
+
+    }
+
     private void checkAnswer(){
         answered = true;
+        counterDownTimer.cancel();
         RadioButton rbSelected = findViewById(rbGroup.getCheckedRadioButtonId());
         int answerNb = rbGroup.indexOfChild(rbSelected) + 1;
 
@@ -166,9 +213,18 @@ public class Quiz_Activity extends AppCompatActivity {
     }
 
     private void finishQuizz(){
-        Intent intent = new Intent(this, LogoQuizzResults.class);
-        intent.putExtra("score",score);
-        startActivity(intent);
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra(EXTRA_SCORE, score);
+        setResult(RESULT_OK, resultIntent);
+        finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(counterDownTimer!=null){
+            counterDownTimer.cancel();
+        }
     }
 }
 
