@@ -3,9 +3,9 @@ package com.example.promob;
 import android.provider.BaseColumns;
 
 //Class pour stocker des constantes que l'on va utiliser pour les opérations sql
-public final class Quiz_Contract {
+public final class LogoQuizz_Contract {
 
-    private Quiz_Contract() {}
+    private LogoQuizz_Contract() {}
 
     //BaseColomns est une interface qui donne deux autres constantes (ID et COUNT)
     public static class QuestionTable implements BaseColumns {
@@ -21,6 +21,7 @@ public final class Quiz_Contract {
         public static final String COLONNE_OPTION3 = "option3";
         public static final String COLONNE_OPTION4 = "option4";
         public static final String COLONNE_NUMERO_REPONSE = "numero_reponse";
+        public static final String COLONNE_DIFFICULTY = "difficulty";
 
     }
 }

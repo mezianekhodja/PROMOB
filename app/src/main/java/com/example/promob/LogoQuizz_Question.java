@@ -2,7 +2,12 @@ package com.example.promob;
 
 //Class mere pour les questions
 //Pont entre notre bdd et l'application
-public class QuizQuestion {
+public class LogoQuizz_Question {
+
+    public static final String DIFFICULTY_EASY = "Easy";
+    public static final String DIFFICULTY_MEDIUM = "Medium";
+    public static final String DIFFICULTY_HARD = "Hard";
+
 
     //Attributs
     private String question;
@@ -12,12 +17,13 @@ public class QuizQuestion {
     private String option3;
     private String option4;
     private int numeroReponse;
+    private String difficulty;
 
     //Constructeur vide
-    public QuizQuestion(){}
+    public LogoQuizz_Question(){}
 
     //Constructeur
-    public QuizQuestion(String image, String option1, String option2, String option3, String option4, int numeroReponse) {
+    public LogoQuizz_Question(String image, String option1, String option2, String option3, String option4, int numeroReponse, String difficulty) {
         this.question = "Quel est ce club ?"; //Cette question est fixe
         this.image = image;
         this.option1 = option1;
@@ -25,6 +31,7 @@ public class QuizQuestion {
         this.option3 = option3;
         this.option4 = option4;
         this.numeroReponse = numeroReponse;
+        this.difficulty = difficulty;
     }
 
     //GETTERS ET SETTERS
@@ -71,6 +78,14 @@ public class QuizQuestion {
         this.option3 = option3;
     }
 
+    public String getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
+    }
+
     public String getOption4() {
         return option4;
     }
@@ -85,5 +100,13 @@ public class QuizQuestion {
 
     public void setNumeroReponse(int numeroReponse) {
         this.numeroReponse = numeroReponse;
+    }
+
+    public static String[] getAllDifficultyLevels(){
+        return new String[]{
+                DIFFICULTY_EASY,
+                DIFFICULTY_MEDIUM,
+                DIFFICULTY_HARD
+        };
     }
 }

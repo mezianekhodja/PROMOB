@@ -39,7 +39,7 @@ public class Home extends AppCompatActivity {
     }
 
     public void openHomeLogoQuizz() {
-        Intent intent = new Intent(this, HomeLogoQuizz.class);
+        Intent intent = new Intent(this, LogoQuizz_Accueil.class);
         startActivity(intent);
         Home.this.finish();
     }
