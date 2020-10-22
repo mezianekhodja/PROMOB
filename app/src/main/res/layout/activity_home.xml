@@ -57,7 +57,7 @@
             android:textSize="13dp"
             android:gravity="center"
             android:padding="2dp"
-            android:text="Jeu du pendu (en création)" />
+            android:text="Retrouvez votre âme d'enfant dans ce jeu. Revisité pour ne traiter qu'autour du domaine de l'ingénieur" />
 
         <Button
             android:id="@+id/buttongamependu"
