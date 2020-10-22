@@ -67,11 +67,19 @@ public class Home extends AppCompatActivity {
         startActivity(intent);
         Home.this.finish();
     }
+    public void openHome() {
+        finish();
+        Intent intent = new Intent(this, Home.class);
+        startActivity(intent);
+    }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
             case R.id.logoutMenu:{
                 Logout();
+            }
+            case R.id.homeMenu:{
+                openHome();
             }
             case R.id.profileMenu:{
                 openProfil();

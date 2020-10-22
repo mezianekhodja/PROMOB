@@ -79,11 +79,15 @@ public class PasswordActivity extends AppCompatActivity {
         startActivity(intent);
         PasswordActivity.this.finish();
     }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
             case R.id.logoutMenu:{
                 Logout();
+            }
+            case R.id.homeMenu:{
+                openHome();
             }
             case R.id.profileMenu:{
                 openProfil();
