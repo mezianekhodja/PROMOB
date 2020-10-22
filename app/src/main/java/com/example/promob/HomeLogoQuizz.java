@@ -49,13 +49,6 @@ public class HomeLogoQuizz extends AppCompatActivity {
             }
         });
 
-        btn_logoquizz = (Button) findViewById(R.id.button_logoquizz_medium);
-        btn_logoquizz.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openLogoQuizzMedium1();
-            }
-        });
 
         firebaseAuth = FirebaseAuth.getInstance();
     }
@@ -63,10 +56,6 @@ public class HomeLogoQuizz extends AppCompatActivity {
     public void openLogoQuizzEasy1() {
         Intent intent = new Intent(this, Quiz_Activity.class);
         startActivityForResult(intent, REQUEST_CODE_QUIZ); //Avoir un resultat d'une autre activité
-    }
-    public void openLogoQuizzMedium1() {
-        Intent intent = new Intent(this, LogoQuizzMedium.class);
-        startActivity(intent);
     }
     public void openActivityConnexion() {
         Intent intent = new Intent(this, Connexion.class);

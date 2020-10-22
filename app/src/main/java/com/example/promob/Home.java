@@ -44,7 +44,7 @@ public class Home extends AppCompatActivity {
         Home.this.finish();
     }
     public void openPendu() {
-        Intent intent = new Intent(this, Pendu.class);
+        Intent intent = new Intent(this, HomePendu.class);
         startActivity(intent);
         Home.this.finish();
     }

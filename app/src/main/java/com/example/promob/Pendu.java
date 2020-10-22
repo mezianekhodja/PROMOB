@@ -34,7 +34,9 @@ public class Pendu extends AppCompatActivity {
     private int error;
     private List<Character> listOfLetters = new ArrayList<Character>();
     private boolean win;
-    private List<String> listOfWords = new ArrayList<String>();
+    private List<String> listOfWords1 = new ArrayList<String>();
+    private List<String> listOfWords2 = new ArrayList<String>();
+    private List<String> listOfWords3 = new ArrayList<String>();
 
     private FirebaseAuth firebaseAuth;
 
@@ -165,47 +167,82 @@ public class Pendu extends AppCompatActivity {
             builder.create().show();
         }
         public String generateWord() {
-        int random = (int) Math.floor(Math.random()*listOfWords.size());
-        return listOfWords.get(random).trim();
+        int level = getIntent().getExtras().getInt("level");
+
+        if (level == 1){
+            int random = (int) Math.floor(Math.random()*listOfWords1.size());
+            return listOfWords1.get(random).trim();
+        }
+        else if (level == 2){
+                int random = (int) Math.floor(Math.random()*listOfWords2.size());
+                return listOfWords2.get(random).trim();
+        }
+            int random = (int) Math.floor(Math.random()*listOfWords3.size());
+            return listOfWords3.get(random).trim();
          }
 
         public void setListOfWords(){
-            listOfWords.add("ingenieur");
-            listOfWords.add("domotique");
-            listOfWords.add("informatique");
-            listOfWords.add("electronique");
-            listOfWords.add("signal");
-            listOfWords.add("modulation");
-            listOfWords.add("donnee");
-            listOfWords.add("communication");
-            listOfWords.add("ordinateur");
-            listOfWords.add("demodulation");
-            listOfWords.add("canal");
-            listOfWords.add("spectre");
-            listOfWords.add("abaque");
-            listOfWords.add("developpeur");
-            listOfWords.add("developpement");
-            listOfWords.add("informaticien");
-            listOfWords.add("methodologie");
-            listOfWords.add("agile");
-            listOfWords.add("documentation");
-            listOfWords.add("processeur");
-            listOfWords.add("microcontroleur");
-            listOfWords.add("instruction");
-            listOfWords.add("embarque");
-            listOfWords.add("commande");
-            listOfWords.add("reseau");
-            listOfWords.add("routeur");
-            listOfWords.add("smartphone");
-            listOfWords.add("internet");
-            listOfWords.add("filtre");
-            listOfWords.add("diagramme");
-            listOfWords.add("hacker");
-            listOfWords.add("cybersecurite");
-            listOfWords.add("crypyographie");
-            listOfWords.add("activite");
-            listOfWords.add("android");
-            listOfWords.add("telecommunication");
+            listOfWords1.add("ingenieur");
+            listOfWords1.add("signal");
+            listOfWords1.add("donnee");
+            listOfWords1.add("reseau");
+            listOfWords1.add("internet");
+            listOfWords1.add("hacker");
+            listOfWords1.add("ordinateur");
+            listOfWords1.add("android");
+            listOfWords1.add("iot");
+            listOfWords1.add("ip");
+            listOfWords1.add("mail");
+            listOfWords1.add("bug");
+            listOfWords1.add("souris");
+            listOfWords1.add("clavier");
+            listOfWords1.add("apple");
+            listOfWords1.add("bit");
+            listOfWords1.add("menu");
+            listOfWords1.add("page");
+            listOfWords1.add("pixel");
+            listOfWords1.add("url");
+
+            listOfWords2.add("logiciel");
+            listOfWords2.add("cookie");
+            listOfWords2.add("canal");
+            listOfWords2.add("spectre");
+            listOfWords2.add("informatique");
+            listOfWords2.add("electronique");
+            listOfWords2.add("modulation");
+            listOfWords2.add("communication");
+            listOfWords2.add("developpeur");
+            listOfWords2.add("developpement");
+            listOfWords2.add("informaticien");
+            listOfWords2.add("methodologie");
+            listOfWords2.add("agile");
+            listOfWords2.add("documentation");
+            listOfWords2.add("processeur");
+            listOfWords2.add("routeur");
+            listOfWords2.add("smartphone");
+            listOfWords2.add("filtre");
+            listOfWords2.add("diagramme");
+            listOfWords2.add("instruction");
+            listOfWords2.add("embarque");
+            listOfWords2.add("commande");
+            listOfWords2.add("activite");
+            listOfWords2.add("telecommunication");
+            listOfWords2.add("systeme");
+            listOfWords2.add("octet");
+            listOfWords2.add("antivirus");
+
+            listOfWords3.add("troyan");
+            listOfWords3.add("domotique");
+            listOfWords3.add("demodulation");
+            listOfWords3.add("abaque");
+            listOfWords3.add("microcontroleur");
+            listOfWords3.add("cybersecurite");
+            listOfWords3.add("cyberphysique");
+            listOfWords3.add("cryptographie");
+            listOfWords3.add("architecture");
+            listOfWords3.add("hexadecimal");
+            listOfWords3.add("nyquist");
+            listOfWords3.add("webmaster");
         }
     public void openActivityConnexion() {
         Intent intent = new Intent(this, Connexion.class);
