@@ -9,10 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -55,7 +52,7 @@ public class LogoQuizzResults extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
     }
     public void openHomeLogoQuizz() {
-        Intent intent = new Intent(this, HomeLogoQuizz.class);
+        Intent intent = new Intent(this, LogoQuizz_Accueil.class);
         startActivity(intent);
         LogoQuizzResults.this.finish();
     }

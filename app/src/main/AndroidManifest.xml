@@ -26,12 +26,12 @@
         <activity android:name=".Connexion" />
         <activity android:name=".Home" />
         <activity android:name=".LogoQuizzResults" />
-        <activity android:name=".HomeLogoQuizz" />
+        <activity android:name=".LogoQuizz_Accueil" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".Quiz_Activity" />
-        <activity android:name=".Quiz_bdd" />
-        <activity android:name=".Quiz_Contract" />
-        <activity android:name=".QuizQuestion" />
+        <activity android:name=".LogoQuizz_Activity" />
+        <activity android:name=".LogoQuizz_bdd" />
+        <activity android:name=".LogoQuizz_Contract" />
+        <activity android:name=".LogoQuizz_Question" />
     </application>
 
 </manifest>

@@ -49,6 +49,13 @@ public class HomeLogoQuizz extends AppCompatActivity {
             }
         });
 
+        btn_logoquizz = (Button) findViewById(R.id.button_logoquizz_medium);
+        btn_logoquizz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openLogoQuizzMedium1();
+            }
+        });
 
         firebaseAuth = FirebaseAuth.getInstance();
     }
@@ -56,6 +63,10 @@ public class HomeLogoQuizz extends AppCompatActivity {
     public void openLogoQuizzEasy1() {
         Intent intent = new Intent(this, Quiz_Activity.class);
         startActivityForResult(intent, REQUEST_CODE_QUIZ); //Avoir un resultat d'une autre activité
+    }
+    public void openLogoQuizzMedium1() {
+        Intent intent = new Intent(this, LogoQuizzMedium.class);
+        startActivity(intent);
     }
     public void openActivityConnexion() {
         Intent intent = new Intent(this, Connexion.class);
@@ -76,26 +87,14 @@ public class HomeLogoQuizz extends AppCompatActivity {
         startActivity(intent);
         HomeLogoQuizz.this.finish();
     }
-
-    public void openAcceuil(){
-        Intent intent = new Intent(this, Home.class);
-        startActivity(intent);
-        HomeLogoQuizz.this.finish();
-    }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
             case R.id.logoutMenu:{
                 Logout();
-                break;
             }
             case R.id.profileMenu:{
                 openProfil();
-                break;
-            }
-            case R.id.acceuilMenu:{
-                openAcceuil();
-                break;
             }
         }
         return super.onOptionsItemSelected(item);
