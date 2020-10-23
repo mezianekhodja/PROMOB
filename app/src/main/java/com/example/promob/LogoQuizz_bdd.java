@@ -102,6 +102,30 @@ public class LogoQuizz_bdd extends SQLiteOpenHelper {
         addQuestion(qM11);
         LogoQuizz_Question qM12 = new LogoQuizz_Question("logoquizz_sociedad","Saragosse", "Empoli", "Sociedad", "Boavista", 3 ,LogoQuizz_Question.DIFFICULTY_MEDIUM);
         addQuestion(qM12);
+        LogoQuizz_Question qM13 = new LogoQuizz_Question("logoquizz_moscou","Moscou", "Saint-Petersbourg", "Volgograd", "Kiev", 1 ,LogoQuizz_Question.DIFFICULTY_MEDIUM);
+        addQuestion(qM13);
+        LogoQuizz_Question qM14 = new LogoQuizz_Question("logoquizz_moscou","Cologne", "Saint-Petersbourg", "Moscou", "Kiev", 3 ,LogoQuizz_Question.DIFFICULTY_MEDIUM);
+        addQuestion(qM14);
+        LogoQuizz_Question qM15 = new LogoQuizz_Question("logoquizz_moscou","Spartak", "Saint-Petersbourg", "Volgograd", "Moscou", 4 ,LogoQuizz_Question.DIFFICULTY_MEDIUM);
+        addQuestion(qM15);
+        LogoQuizz_Question qM16 = new LogoQuizz_Question("logoquizz_montpellier","Monaco", "Montpellier", "Marseille", "Toulouse", 2 ,LogoQuizz_Question.DIFFICULTY_MEDIUM);
+        addQuestion(qM16);
+        LogoQuizz_Question qM17 = new LogoQuizz_Question("logoquizz_montpellier","Monaco", "Nimes", "Montpellier", "Toulouse", 3 ,LogoQuizz_Question.DIFFICULTY_MEDIUM);
+        addQuestion(qM17);
+        LogoQuizz_Question qM18 = new LogoQuizz_Question("logoquizz_montpellier","Monaco", "Saint-Étienne", "Marseille", "Montpellier", 4 ,LogoQuizz_Question.DIFFICULTY_MEDIUM);
+        addQuestion(qM18);
+        LogoQuizz_Question qM19 = new LogoQuizz_Question("logoquizz_betis","Betis", "Seville", "Braga", "Benevento", 1 ,LogoQuizz_Question.DIFFICULTY_MEDIUM);
+        addQuestion(qM19);
+        LogoQuizz_Question qM20 = new LogoQuizz_Question("logoquizz_betis","Grenade", "Seville", "Betis", "Benevento", 3 ,LogoQuizz_Question.DIFFICULTY_MEDIUM);
+        addQuestion(qM20);
+        LogoQuizz_Question qM21 = new LogoQuizz_Question("logoquizz_betis","Ibiza", "Bologne", "Braga", "Betis", 4 ,LogoQuizz_Question.DIFFICULTY_MEDIUM);
+        addQuestion(qM21);
+        LogoQuizz_Question qM22 = new LogoQuizz_Question("logoquizz_villareal","Villareal", "Vigo", "Valladolid", "Betis", 1 ,LogoQuizz_Question.DIFFICULTY_MEDIUM);
+        addQuestion(qM22);
+        LogoQuizz_Question qM23 = new LogoQuizz_Question("logoquizz_villareal","Valence", "Vigo", "Valladolid", "Villareal", 4 ,LogoQuizz_Question.DIFFICULTY_MEDIUM);
+        addQuestion(qM23);
+        LogoQuizz_Question qM24 = new LogoQuizz_Question("logoquizz_villareal","Valence", "Villareal", "Valladolid", "Grenade", 2 ,LogoQuizz_Question.DIFFICULTY_MEDIUM);
+        addQuestion(qM24);
 
 
         //HARD
@@ -129,6 +153,12 @@ public class LogoQuizz_bdd extends SQLiteOpenHelper {
         addQuestion(qH11);
         LogoQuizz_Question qH12 = new LogoQuizz_Question("logoquizz_cluj","Clinceni", "Cologne", "Cracovia", "Cluj", 4 ,LogoQuizz_Question.DIFFICULTY_HARD);
         addQuestion(qH12);
+        LogoQuizz_Question qH13 = new LogoQuizz_Question("logoquizz_hanovre","Schalke", "Wolverhampton", "Wolfsburg", "Hanovre", 4 ,LogoQuizz_Question.DIFFICULTY_HARD);
+        addQuestion(qH13);
+        LogoQuizz_Question qH14 = new LogoQuizz_Question("logoquizz_hanovre","Schalke", "Hanovre", "Hoffenheim", "Fribourg", 2 ,LogoQuizz_Question.DIFFICULTY_HARD);
+        addQuestion(qH14);
+        LogoQuizz_Question qH15 = new LogoQuizz_Question("logoquizz_hanovre","Hanovre", "Werder", "Wolfsburg", "Stuttgart", 1 ,LogoQuizz_Question.DIFFICULTY_HARD);
+        addQuestion(qH15);
     }
 
     private void addQuestion(LogoQuizz_Question question){
