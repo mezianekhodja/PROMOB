@@ -50,7 +50,7 @@ public class LogoQuizz_bdd extends SQLiteOpenHelper {
     }
 
     private void fillQuestionTable(){
-        LogoQuizz_Question q1 = new LogoQuizz_Question("logo_rennes", "E", "Rennes", "Guingamps", "Dijon", 2 , LogoQuizz_Question.DIFFICULTY_EASY);
+        LogoQuizz_Question q1 = new LogoQuizz_Question("logo_rennes", "A: E", "B: Rennes", "C: Guingamps", "D: Dijon", 2 , LogoQuizz_Question.DIFFICULTY_EASY);
         addQuestion(q1);
         LogoQuizz_Question q2 = new LogoQuizz_Question("logo_nantes", "E", "Toulouse", "Nantes", "Strasbourg", 3 ,LogoQuizz_Question.DIFFICULTY_EASY);
         addQuestion(q2);
@@ -104,11 +104,11 @@ public class LogoQuizz_bdd extends SQLiteOpenHelper {
         addQuestion(q26);
         LogoQuizz_Question q27 = new LogoQuizz_Question("logo_rennes","H", "Rennes", "Marseille", "Reims", 2 ,LogoQuizz_Question.DIFFICULTY_HARD);
         addQuestion(q27);
-        LogoQuizz_Question q28 = new LogoQuizz_Question("logo_rennes","Nantes", "Rennes", "Marseille", "Reims", 2 ,LogoQuizz_Question.DIFFICULTY_HARD);
+        LogoQuizz_Question q28 = new LogoQuizz_Question("logo_rennes","H", "Rennes", "Marseille", "Reims", 2 ,LogoQuizz_Question.DIFFICULTY_HARD);
         addQuestion(q28);
-        LogoQuizz_Question q29 = new LogoQuizz_Question("logo_rennes","Nantes", "Rennes", "Marseille", "Reims", 2 ,LogoQuizz_Question.DIFFICULTY_HARD);
+        LogoQuizz_Question q29 = new LogoQuizz_Question("logo_rennes","H", "Rennes", "Marseille", "Reims", 2 ,LogoQuizz_Question.DIFFICULTY_HARD);
         addQuestion(q29);
-        LogoQuizz_Question q30 = new LogoQuizz_Question("logo_rennes","Nantes", "Rennes", "Marseille", "Reims", 2 ,LogoQuizz_Question.DIFFICULTY_HARD);
+        LogoQuizz_Question q30 = new LogoQuizz_Question("logo_rennes","H", "Rennes", "Marseille", "Reims", 2 ,LogoQuizz_Question.DIFFICULTY_HARD);
         addQuestion(q30);
     }
 

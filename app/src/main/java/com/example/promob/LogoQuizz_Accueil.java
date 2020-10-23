@@ -15,10 +15,11 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class HomeLogoQuizz extends AppCompatActivity {
+public class LogoQuizz_Accueil extends AppCompatActivity {
     Button btn_logoquizz;
     private FirebaseAuth firebaseAuth;
     private static final int REQUEST_CODE_QUIZ =1;
+    public static String EXTRA_DIFFICULTY = "extraDifficulty";
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String KEY_HIGHSCORE= "keyHighscore";
     private TextView textViewHighscoreEasy;
@@ -53,7 +54,16 @@ public class HomeLogoQuizz extends AppCompatActivity {
         btn_logoquizz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 openLogoQuizzMedium1();
+            }
+        });
+
+        btn_logoquizz = (Button) findViewById(R.id.button_logoquizz_hard);
+        btn_logoquizz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openLogoQuizzHard1();
             }
         });
 
@@ -61,13 +71,25 @@ public class HomeLogoQuizz extends AppCompatActivity {
     }
 
     public void openLogoQuizzEasy1() {
-        Intent intent = new Intent(this, Quiz_Activity.class);
+        //EXTRA_DIFFICULTY = "Easy";
+        Intent intent = new Intent(this, LogoQuizz_Activity.class);
+        intent.putExtra(EXTRA_DIFFICULTY, "Easy");
         startActivityForResult(intent, REQUEST_CODE_QUIZ); //Avoir un resultat d'une autre activité
     }
     public void openLogoQuizzMedium1() {
-        Intent intent = new Intent(this, LogoQuizzMedium.class);
+       // EXTRA_DIFFICULTY = "Medium";
+        Intent intent = new Intent(this, LogoQuizz_Activity.class);
+        intent.putExtra(EXTRA_DIFFICULTY, "Medium");
         startActivity(intent);
     }
+
+    public void openLogoQuizzHard1() {
+        //EXTRA_DIFFICULTY = "Hard";
+        Intent intent = new Intent(this, LogoQuizz_Activity.class);
+        intent.putExtra(EXTRA_DIFFICULTY, "Hard");
+        startActivity(intent);
+    }
+
     public void openActivityConnexion() {
         Intent intent = new Intent(this, Connexion.class);
         startActivity(intent);
@@ -85,7 +107,7 @@ public class HomeLogoQuizz extends AppCompatActivity {
     public void openProfil() {
         Intent intent = new Intent(this, Profile.class);
         startActivity(intent);
-        HomeLogoQuizz.this.finish();
+        LogoQuizz_Accueil.this.finish();
     }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -106,7 +128,7 @@ public class HomeLogoQuizz extends AppCompatActivity {
 
         if(requestCode == REQUEST_CODE_QUIZ){
             if(resultCode==RESULT_OK){
-                int score = data.getIntExtra(Quiz_Activity.EXTRA_SCORE, 0);
+                int score = data.getIntExtra(LogoQuizz_Activity.EXTRA_SCORE, 0);
                 if(score > highscore){
                     upadteHighscore(score);
                 }
@@ -124,3 +146,5 @@ public class HomeLogoQuizz extends AppCompatActivity {
         textViewHighscoreEasy.setText("Highscore: " + highscore);
     }
 }
+
+
