@@ -5,7 +5,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,11 +22,16 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Pendu_Activity extends AppCompatActivity {
 
+    private static final long COUNTDOWN_IN_MILLIS = 60000;
+    private CountDownTimer counterDownTimer;
+    private long timeLeftInMillis;
+
     private LinearLayout container;
-    private Button btn_send,rejouer;
+    private Button btn_send, rejouer;
     private TextView lettres_tapees;
     private ImageView image;
     private EditText et_letter;
@@ -33,6 +40,7 @@ public class Pendu_Activity extends AppCompatActivity {
     private int error;
     private List<Character> listOfLetters = new ArrayList<Character>();
     private boolean win;
+    private TextView textViewTimer;
     private List<String> listOfWords1 = new ArrayList<String>();
     private List<String> listOfWords2 = new ArrayList<String>();
     private List<String> listOfWords3 = new ArrayList<String>();
@@ -97,6 +105,9 @@ public class Pendu_Activity extends AppCompatActivity {
         lettres_tapees.setText("");
         image.setBackgroundResource(R.drawable.pendu1);
         listOfLetters = new ArrayList<>();
+        textViewTimer = (TextView) findViewById(R.id.timer);
+        timeLeftInMillis = COUNTDOWN_IN_MILLIS;
+        startCountDown();
 
         container.removeAllViews();
         for(int i=0;i<word.length();i++){
@@ -310,4 +321,52 @@ public class Pendu_Activity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+                      PARTIE TIMER
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+    private void startCountDown() {
+        counterDownTimer = new CountDownTimer(timeLeftInMillis,1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timeLeftInMillis = millisUntilFinished;
+                updateCountdownText();
+            }
+
+            @Override
+            public void onFinish() {
+                timeLeftInMillis= 0;
+                updateCountdownText();
+                createDialog();
+            }
+        }.start();
+    }
+
+    private void updateCountdownText(){
+        int minutes = (int) (timeLeftInMillis/1000)/60;
+        int seconds = (int) (timeLeftInMillis/1000)%60;
+
+        String timeFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+
+        textViewTimer.setText(timeFormatted);
+        if(timeLeftInMillis<10000){
+            textViewTimer.setTextColor(Color.RED);
+        }
+        else{
+            textViewTimer.setTextColor(Color.BLACK);
+        }
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(counterDownTimer!=null){
+            counterDownTimer.cancel();
+        }
+    }
+
 }

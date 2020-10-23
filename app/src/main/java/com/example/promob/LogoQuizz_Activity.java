@@ -61,8 +61,6 @@ public class LogoQuizz_Activity extends AppCompatActivity {
     private boolean answered;
     private List<LogoQuizz_Question> questionList;
 
-    Intent intent = getIntent();
-    public String difficulty = intent.getStringExtra(LogoQuizz_Home.EXTRA_DIFFICULTY);
 
 
     /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -92,7 +90,8 @@ public class LogoQuizz_Activity extends AppCompatActivity {
         textColorDefaultRb = rb1.getTextColors();
         textColorDefaultCb = textViewTimer.getTextColors();
 
-
+        Intent intent = getIntent();
+        String difficulty = intent.getStringExtra(LogoQuizz_Home.EXTRA_DIFFICULTY);
         textViewDifficulty.setText("difficulty: " + difficulty);
 
         LogoQuizz_bdd dbHelper = new LogoQuizz_bdd(this);
