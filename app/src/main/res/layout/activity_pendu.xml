@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context=".Pendu">
 
     <LinearLayout
@@ -17,7 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Pendu"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:layout_marginBottom="10dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -61,14 +63,18 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:hint="?"
                 android:maxLength="1"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
                 android:inputType="textPersonName"/>
 
             <Button
                 android:id="@+id/button_sendpendu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
                 android:layout_weight="1"
                 android:text="SEND" />
         </LinearLayout>
