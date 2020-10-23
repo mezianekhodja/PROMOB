@@ -29,7 +29,6 @@ public class LogoQuizz_Activity extends AppCompatActivity {
     -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
     public static final String EXTRA_SCORE = "extraScore";
-
     private static final long COUNTDOWN_IN_MILLIS = 15000;
 
     //textView
@@ -91,14 +90,15 @@ public class LogoQuizz_Activity extends AppCompatActivity {
         textColorDefaultRb = rb1.getTextColors();
         textColorDefaultCb = textViewTimer.getTextColors();
 
-        LogoQuizz_bdd dbHelper = new LogoQuizz_bdd(this);
-        questionList = dbHelper.getQuestion(LogoQuizz_Question.DIFFICULTY_MEDIUM);
-        questionCountTotal = 5; //Seulement 5 questions
-        Collections.shuffle(questionList);
 
         Intent intent = getIntent();
         String difficulty = intent.getStringExtra(LogoQuizz_Accueil.EXTRA_DIFFICULTY);
-        textViewDifficulty.setText("difficulty: " + difficulty );
+        textViewDifficulty.setText("difficulty: " + difficulty);
+
+        LogoQuizz_bdd dbHelper = new LogoQuizz_bdd(this);
+        questionList = dbHelper.getQuestion(difficulty);
+        questionCountTotal = 5; //Seulement 5 questions
+        Collections.shuffle(questionList);
 
         showNextQuestion();
 
