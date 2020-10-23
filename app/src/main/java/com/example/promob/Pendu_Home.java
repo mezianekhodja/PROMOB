@@ -12,7 +12,7 @@ import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class HomePendu extends AppCompatActivity {
+public class Pendu_Home extends AppCompatActivity {
     private Button easy,medium, hard;
     private FirebaseAuth firebaseAuth;
 
@@ -20,7 +20,7 @@ public class HomePendu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_pendu);
+        setContentView(R.layout.activity_pendu_home);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -31,28 +31,28 @@ public class HomePendu extends AppCompatActivity {
         easy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomePendu.this, Pendu.class);
+                Intent intent = new Intent(Pendu_Home.this, Pendu_Activity.class);
                 intent.putExtra("level",1);
                 startActivity(intent);
-                HomePendu.this.finish();
+                Pendu_Home.this.finish();
             }
         });
         medium.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomePendu.this, Pendu.class);
+                Intent intent = new Intent(Pendu_Home.this, Pendu_Activity.class);
                 intent.putExtra("level",2);
                 startActivity(intent);
-                HomePendu.this.finish();
+                Pendu_Home.this.finish();
             }
         });
         hard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomePendu.this, Pendu.class);
+                Intent intent = new Intent(Pendu_Home.this, Pendu_Activity.class);
                 intent.putExtra("level",3);
                 startActivity(intent);
-                HomePendu.this.finish();
+                Pendu_Home.this.finish();
             }
         });
     }
@@ -60,7 +60,7 @@ public class HomePendu extends AppCompatActivity {
     public void openActivityConnexion() {
         Intent intent = new Intent(this, Connexion.class);
         startActivity(intent);
-        HomePendu.this.finish();
+        Pendu_Home.this.finish();
     }
     private void Logout() {
         firebaseAuth.signOut();
@@ -74,7 +74,7 @@ public class HomePendu extends AppCompatActivity {
     public void openProfil() {
         Intent intent = new Intent(this, Profile.class);
         startActivity(intent);
-        HomePendu.this.finish();
+        Pendu_Home.this.finish();
     }
 
     public void openAcceuil(){

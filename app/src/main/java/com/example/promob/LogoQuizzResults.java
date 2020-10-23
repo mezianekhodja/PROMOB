@@ -24,7 +24,7 @@ public class LogoQuizzResults extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_logo_quizz_results);
+        setContentView(R.layout.activity_logoquizz_results);
         score = getIntent().getExtras().getInt("score");
 
         textviewa = (TextView) findViewById(R.id.textViewresultattest);
@@ -52,7 +52,7 @@ public class LogoQuizzResults extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
     }
     public void openHomeLogoQuizz() {
-        Intent intent = new Intent(this, LogoQuizz_Accueil.class);
+        Intent intent = new Intent(this, LogoQuizz_Home.class);
         startActivity(intent);
         LogoQuizzResults.this.finish();
     }

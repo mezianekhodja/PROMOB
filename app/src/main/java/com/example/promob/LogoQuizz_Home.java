@@ -5,7 +5,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,7 +14,7 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class LogoQuizz_Accueil extends AppCompatActivity {
+public class LogoQuizz_Home extends AppCompatActivity {
     Button btn_logoquizz;
     private FirebaseAuth firebaseAuth;
     private static final int REQUEST_CODE_QUIZ =1;
@@ -32,7 +31,7 @@ public class LogoQuizz_Accueil extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_logo_quizz);
+        setContentView(R.layout.activity_logoquizz_home);
 
         textViewHighscoreEasy = findViewById(R.id.LogoQuizzHighscoreEasy);
         textViewHighscoreMedium = findViewById(R.id.LogoQuizzHighscoreMedium);
@@ -54,11 +53,9 @@ public class LogoQuizz_Accueil extends AppCompatActivity {
         btn_logoquizz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 openLogoQuizzMedium1();
             }
         });
-
         btn_logoquizz = (Button) findViewById(R.id.button_logoquizz_hard);
         btn_logoquizz.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,14 +77,14 @@ public class LogoQuizz_Accueil extends AppCompatActivity {
        // EXTRA_DIFFICULTY = "Medium";
         Intent intent = new Intent(this, LogoQuizz_Activity.class);
         intent.putExtra(EXTRA_DIFFICULTY, "Medium");
-        startActivity(intent);
+        startActivityForResult(intent, REQUEST_CODE_QUIZ); //Avoir un resultat d'une autre activité
     }
 
     public void openLogoQuizzHard1() {
         //EXTRA_DIFFICULTY = "Hard";
         Intent intent = new Intent(this, LogoQuizz_Activity.class);
         intent.putExtra(EXTRA_DIFFICULTY, "Hard");
-        startActivity(intent);
+        startActivityForResult(intent, REQUEST_CODE_QUIZ); //Avoir un resultat d'une autre activité
     }
 
     public void openActivityConnexion() {
@@ -107,7 +104,7 @@ public class LogoQuizz_Accueil extends AppCompatActivity {
     public void openProfil() {
         Intent intent = new Intent(this, Profile.class);
         startActivity(intent);
-        LogoQuizz_Accueil.this.finish();
+        LogoQuizz_Home.this.finish();
     }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -139,11 +136,13 @@ public class LogoQuizz_Accueil extends AppCompatActivity {
 
     private void loadHighscore(){
         textViewHighscoreEasy.setText("Highscore: " + highscore);
+
     }
 
     private void upadteHighscore(int newHighscore) {
         highscore = newHighscore;
         textViewHighscoreEasy.setText("Highscore: " + highscore);
+
     }
 }
 

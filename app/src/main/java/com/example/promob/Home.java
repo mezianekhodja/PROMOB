@@ -39,12 +39,12 @@ public class Home extends AppCompatActivity {
     }
 
     public void openHomeLogoQuizz() {
-        Intent intent = new Intent(this, LogoQuizz_Accueil.class);
+        Intent intent = new Intent(this, LogoQuizz_Home.class);
         startActivity(intent);
         Home.this.finish();
     }
     public void openPendu() {
-        Intent intent = new Intent(this, HomePendu.class);
+        Intent intent = new Intent(this, Pendu_Home.class);
         startActivity(intent);
         Home.this.finish();
     }

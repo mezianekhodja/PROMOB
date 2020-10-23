@@ -9,8 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomePendu"></activity>
-        <activity android:name=".Pendu" />
+        <activity android:name=".Pendu_Home"></activity>
+        <activity android:name=".Pendu_Activity" />
         <activity android:name=".UpdateProfile" />
         <activity android:name=".UpdatePassword" />
         <activity android:name=".Profile" />
@@ -26,7 +26,7 @@
         <activity android:name=".Connexion" />
         <activity android:name=".Home" />
         <activity android:name=".LogoQuizzResults" />
-        <activity android:name=".LogoQuizz_Accueil" />
+        <activity android:name=".LogoQuizz_Home" />
         <activity android:name=".MainActivity" />
         <activity android:name=".LogoQuizz_Activity" />
         <activity android:name=".LogoQuizz_bdd" />

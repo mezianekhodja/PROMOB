@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -22,7 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pendu extends AppCompatActivity {
+public class Pendu_Activity extends AppCompatActivity {
 
     private LinearLayout container;
     private Button btn_send,rejouer;
@@ -247,7 +246,7 @@ public class Pendu extends AppCompatActivity {
     public void openActivityConnexion() {
         Intent intent = new Intent(this, Connexion.class);
         startActivity(intent);
-        Pendu.this.finish();
+        Pendu_Activity.this.finish();
     }
     private void Logout() {
         firebaseAuth.signOut();
@@ -261,13 +260,13 @@ public class Pendu extends AppCompatActivity {
     public void openProfil() {
         Intent intent = new Intent(this, Profile.class);
         startActivity(intent);
-        Pendu.this.finish();
+        Pendu_Activity.this.finish();
     }
 
     public void openAcceuil(){
         Intent intent = new Intent(this, Home.class);
         startActivity(intent);
-        Pendu.this.finish();
+        Pendu_Activity.this.finish();
     }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
