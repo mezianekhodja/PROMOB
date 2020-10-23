@@ -182,6 +182,7 @@ public class Pendu extends AppCompatActivity {
          }
 
         public void setListOfWords(){
+            //EASY
             listOfWords1.add("ingenieur");
             listOfWords1.add("signal");
             listOfWords1.add("donnee");
@@ -202,7 +203,17 @@ public class Pendu extends AppCompatActivity {
             listOfWords1.add("page");
             listOfWords1.add("pixel");
             listOfWords1.add("url");
+            listOfWords1.add("chat");
+            listOfWords1.add("dossier");
+            listOfWords1.add("gif");
+            listOfWords1.add("html");
+            listOfWords1.add("css");
+            listOfWords1.add("java");
+            listOfWords1.add("jpeg");
+            listOfWords1.add("wifi");
+            listOfWords1.add("url");
 
+            //MEDIUM
             listOfWords2.add("logiciel");
             listOfWords2.add("cookie");
             listOfWords2.add("canal");
@@ -230,7 +241,16 @@ public class Pendu extends AppCompatActivity {
             listOfWords2.add("systeme");
             listOfWords2.add("octet");
             listOfWords2.add("antivirus");
+            listOfWords2.add("bluetooth");
+            listOfWords2.add("firewall");
+            listOfWords2.add("fai");
+            listOfWords2.add("ftp");
+            listOfWords2.add("navigateur");
+            listOfWords2.add("protocole");
+            listOfWords2.add("routeur");
+            listOfWords2.add("serveur");
 
+            //HARD
             listOfWords3.add("troyan");
             listOfWords3.add("domotique");
             listOfWords3.add("demodulation");
@@ -243,6 +263,10 @@ public class Pendu extends AppCompatActivity {
             listOfWords3.add("hexadecimal");
             listOfWords3.add("nyquist");
             listOfWords3.add("webmaster");
+            listOfWords3.add("connectivite");
+            listOfWords3.add("ascii");
+            listOfWords3.add("defragmentation");
+            listOfWords3.add("spyware");
         }
     public void openActivityConnexion() {
         Intent intent = new Intent(this, Connexion.class);
