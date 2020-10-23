@@ -73,15 +73,23 @@
             android:gravity="center"
             android:padding="2dp"
             android:textSize="13dp"
-            android:text="Prochainement" />
+            android:text="Régalez vous dans l'univers fruité de Candy Crush" />
 
         <Button
-            android:id="@+id/buttongame3"
+            android:id="@+id/buttongamecandycrush"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:text="Jeu n°3" />
+            android:text="Candy Crush" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:padding="2dp"
+            android:textSize="13dp"
+            android:text="Bientôt de nouveaux jeux vont voir le jour ! Restez patient ;) " />
 
         <TextView
             android:id="@+id/textView"
