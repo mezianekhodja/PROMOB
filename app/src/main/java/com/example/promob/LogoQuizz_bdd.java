@@ -136,7 +136,7 @@ public class LogoQuizz_bdd extends SQLiteOpenHelper {
             do{
                 LogoQuizz_Question question = new LogoQuizz_Question();
                 question.setQuestion(c.getString(c.getColumnIndex(QuestionTable.COLONNE_QUESTION)));
-                question.setImage(c.getString(c.getColumnIndex(QuestionTable.COLONNE_IMAGE)));
+                question.setImage("@drawable/"+c.getString(c.getColumnIndex(QuestionTable.COLONNE_IMAGE)));
                 question.setOption1(c.getString(c.getColumnIndex(QuestionTable.COLONNE_OPTION1)));
                 question.setOption2(c.getString(c.getColumnIndex(QuestionTable.COLONNE_OPTION2)));
                 question.setOption3(c.getString(c.getColumnIndex(QuestionTable.COLONNE_OPTION3)));
