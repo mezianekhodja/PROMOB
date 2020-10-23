@@ -49,26 +49,16 @@ public class Quiz_bdd extends SQLiteOpenHelper {
     }
 
     private void fillQuestionTable(){
-        QuizQuestion q1 = new QuizQuestion("logo_rennes", "Reims", "Rennes", "Guingamps", "Dijon", 2 );
+        QuizQuestion q1 = new QuizQuestion("logoquizz_rennes", "Reims", "Rennes", "Guingamp", "Dijon", 2 );
         addQuestion(q1);
-        QuizQuestion q2 = new QuizQuestion("logo_nantes", "Montpellier", "Toulouse", "Nantes", "Strasbourg", 3 );
+        QuizQuestion q2 = new QuizQuestion("logoquizz_nantes", "Montpellier", "Nimes", "Nantes", "Strasbourg", 3 );
         addQuestion(q2);
-        QuizQuestion q3 = new QuizQuestion("logo_bordeaux", "Bordeaux", "Rennes", "Lyon", "Marseille", 1 );
+        QuizQuestion q3 = new QuizQuestion("logoquizz_marseille", "Monaco", "Rennes", "Lyon", "Marseille", 4 );
         addQuestion(q3);
-        QuizQuestion q4 = new QuizQuestion("logo_paris","Lyon", "Marseille", "St Etienne", "Paris", 4);
+        QuizQuestion q4 = new QuizQuestion("logoquizz_lorient","Lorient", "Brest", "St Etienne", "Guingamp", 1);
         addQuestion(q4);
-        QuizQuestion q5 = new QuizQuestion("logo_reims","Marseille", "Guimgamps", "Rennes", "Reims", 4 );
+        QuizQuestion q5 = new QuizQuestion("logoquizz_lyon","Marseille", "Lille", "Lyon", "Paris", 3 );
         addQuestion(q5);
-        QuizQuestion q6 = new QuizQuestion("logo_lyon","Lyon", "Paris", "Marseille", "Reims", 1 );
-        addQuestion(q6);
-        QuizQuestion q7 = new QuizQuestion("logo_guingamps","Rennes", "Guingamps", "Marseille", "Reims", 2 );
-        addQuestion(q7);
-        QuizQuestion q8 = new QuizQuestion("logo_lorient","Lorient", "Rennes", "Brest", "Nantes", 1 );
-        addQuestion(q8);
-        QuizQuestion q9 = new QuizQuestion("logo_marseille","Lyon", "Marseille", "Reims", "Rennes", 2 );
-        addQuestion(q9);
-        QuizQuestion q10 = new QuizQuestion("logo_rennes","Nantes", "Rennes", "Marseille", "Reims", 2 );
-        addQuestion(q10);
     }
 
     private void addQuestion(QuizQuestion question){
