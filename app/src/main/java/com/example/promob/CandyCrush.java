@@ -2,10 +2,14 @@ package com.example.promob;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.widget.GridLayout;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class CandyCrush extends AppCompatActivity {
 
@@ -14,7 +18,9 @@ public class CandyCrush extends AppCompatActivity {
             R.drawable.candycrush_purplecandy,R.drawable.candycrush_redcandy,R.drawable.candycrush_yellowcandy,
 };
     int widthBlock, widthScreen, heightScreen, numberBlocks=8;
+    ArrayList<ImageView> candy = new ArrayList<>();
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +32,33 @@ public class CandyCrush extends AppCompatActivity {
         widthBlock = widthScreen / numberBlocks;
 
         createBoard();
+        for (ImageView imageView : candy){
+            imageView.setOnTouchListener(new OnSwipeListener(CandyCrush.this){
+                @Override
+                void onSwipeLeft() {
+                    super.onSwipeLeft();
+                    Toast.makeText(CandyCrush.this, "Left", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                void onSwipeRight() {
+                    super.onSwipeRight();
+                    Toast.makeText(CandyCrush.this, "Right", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                void onSwipeTop() {
+                    super.onSwipeTop();
+                    Toast.makeText(CandyCrush.this, "Top", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                void onSwipeBottom() {
+                    super.onSwipeBottom();
+                    Toast.makeText(CandyCrush.this, "Bottom", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
     private void createBoard() {
@@ -43,6 +76,7 @@ public class CandyCrush extends AppCompatActivity {
             imageView.setMaxWidth(widthBlock);
             int randomCandy = (int) Math.floor(Math.random()*candies.length);
             imageView.setImageResource(candies[randomCandy]);
+            candy.add(imageView);
             gridLayout.addView(imageView);
         }
     }
