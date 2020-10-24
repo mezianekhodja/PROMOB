@@ -41,7 +41,7 @@
             android:layout_marginTop="30dp"
             android:gravity="center"
             android:textSize="13dp"
-            android:text="Trouvez les noms de 10 clubs de football à l'aide de leurs logos" />
+            android:text="Montrez vos connaissances footballistiques en associant les logos à leurs clubs" />
 
         <Button
             android:id="@+id/button_logoquizz"
@@ -57,7 +57,7 @@
             android:textSize="13dp"
             android:gravity="center"
             android:padding="2dp"
-            android:text="Retrouvez votre âme d'enfant dans ce jeu. Revisité pour ne traiter qu'autour du domaine de l'ingénieur" />
+            android:text="Retrouvez votre âme d'enfant dans ce jeu revisité pour porter sur le domaine de l'ingénieur" />
 
         <Button
             android:id="@+id/buttongamependu"

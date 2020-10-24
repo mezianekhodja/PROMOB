@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.widget.GridLayout;
 import android.widget.ImageView;
@@ -17,9 +18,10 @@ public class CandyCrush extends AppCompatActivity {
         R.drawable.candycrush_bluecandy, R.drawable.candycrush_greencandy,R.drawable.candycrush_orangecandy,
             R.drawable.candycrush_purplecandy,R.drawable.candycrush_redcandy,R.drawable.candycrush_yellowcandy,
 };
-    int widthBlock, widthScreen, heightScreen, numberBlocks=8;
+    int widthBlock, widthScreen, heightScreen, numberBlocks=8,candyToBeDragged, candyToBeReplaced, notCandy=R.drawable.ic_launcher_background;
     ArrayList<ImageView> candy = new ArrayList<>();
-    int candyToBeDragged, candyToBeReplaced;
+    Handler mHandler = new Handler();
+    int interval = 100;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -31,7 +33,6 @@ public class CandyCrush extends AppCompatActivity {
         widthScreen = displayMetrics.widthPixels;
         heightScreen = displayMetrics.heightPixels;
         widthBlock = widthScreen / numberBlocks;
-
         createBoard();
         for (final ImageView imageView : candy){
             imageView.setOnTouchListener(new OnSwipeListener(CandyCrush.this){
@@ -68,6 +69,8 @@ public class CandyCrush extends AppCompatActivity {
                 }
             });
         }
+        mHandler = new Handler();
+        startRepeat();
     }
 
     private void candyInterchange(){
@@ -99,4 +102,41 @@ public class CandyCrush extends AppCompatActivity {
             gridLayout.addView(imageView);
         }
     }
+    private void checkRowForThree(){
+        for (int i=0; i<(numberBlocks*numberBlocks)-2;i++){
+            int chosedCandy = (int) candy.get(i).getTag();
+            boolean isBlank = (int) candy.get(i).getTag() == notCandy;
+            //modulo 8 > 6 ou 7 faux !!! donc modulo numberblock  >numberblock -1 ou 2
+            if ((i%numberBlocks!=(numberBlocks-2))||((i%numberBlocks!=(numberBlocks-1)))) {
+                int x=i;
+                if ((int) candy.get(x++).getTag() == chosedCandy && !isBlank &&
+                        (int) candy.get(x++).getTag() == chosedCandy  &&
+                        (int) candy.get(x).getTag() == chosedCandy) {
+                candy.get(x).setImageResource(notCandy);
+                candy.get(x).setTag(notCandy);
+                x--;
+                candy.get(x).setImageResource(notCandy);
+                candy.get(x).setTag(notCandy);
+                x--;
+                candy.get(x).setImageResource(notCandy);
+                candy.get(x).setTag(notCandy);
+            }
+        }
+        }
+    }
+    Runnable repeatChecker = new Runnable() {
+        @Override
+        public void run() {
+            try{
+                checkRowForThree();
+            }
+            finally{
+                mHandler.postDelayed(repeatChecker,interval);
+            }
+        }
+
+    };
+        void startRepeat(){
+            repeatChecker.run();
+        }
 }
