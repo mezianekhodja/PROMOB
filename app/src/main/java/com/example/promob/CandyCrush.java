@@ -8,9 +8,12 @@ import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.widget.GridLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class CandyCrush extends AppCompatActivity {
 
@@ -22,6 +25,8 @@ public class CandyCrush extends AppCompatActivity {
     ArrayList<ImageView> candy = new ArrayList<>();
     Handler mHandler = new Handler();
     int interval = 100;
+    TextView scoreRes;
+    int score = 0;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -33,6 +38,8 @@ public class CandyCrush extends AppCompatActivity {
         widthScreen = displayMetrics.widthPixels;
         heightScreen = displayMetrics.heightPixels;
         widthBlock = widthScreen / numberBlocks;
+        scoreRes = (TextView) findViewById(R.id.tvscoreCC);
+
         createBoard();
         for (final ImageView imageView : candy){
             imageView.setOnTouchListener(new OnSwipeListener(CandyCrush.this){
@@ -106,20 +113,84 @@ public class CandyCrush extends AppCompatActivity {
         for (int i=1; i<(numberBlocks*numberBlocks)-1;i++){
             int chosedCandy = (int) candy.get(i).getTag();
             boolean isBlank = (int) candy.get(i).getTag() == notCandy;
-            //modulo 8 > 6 ou 7 faux !!! donc modulo numberblock  >numberblock -1 ou 2
-            if ((i%numberBlocks!=0)||((i%numberBlocks!=1))) {
+            if ((i%numberBlocks!=0)&&((i%numberBlocks!=1))) {
                 int x=i;
                 if ((int) candy.get(x).getTag() == chosedCandy && !isBlank &&
                         (int) candy.get(x-1).getTag() == chosedCandy  &&
                         (int) candy.get(x+1).getTag() == chosedCandy) {
-                candy.get(x).setImageResource(notCandy);
-                candy.get(x).setTag(notCandy);
-                candy.get(x-1).setImageResource(notCandy);
-                candy.get(x-1).setTag(notCandy);
-                candy.get(x+1).setImageResource(notCandy);
-                candy.get(x+1).setTag(notCandy);
+                    score = score+3;
+                    scoreRes.setText(String.valueOf(score));
+                    candy.get(x).setImageResource(notCandy);
+                    candy.get(x).setTag(notCandy);
+                    candy.get(x-1).setImageResource(notCandy);
+                    candy.get(x-1).setTag(notCandy);
+                    candy.get(x+1).setImageResource(notCandy);
+                    candy.get(x+1).setTag(notCandy);
+                }
             }
         }
+    }
+    private void checkColumnForThree(){
+        for (int i=numberBlocks; i<((numberBlocks*numberBlocks)-numberBlocks);i++){
+            int chosedCandy = (int) candy.get(i).getTag();
+            boolean isBlank = (int) candy.get(i).getTag() == notCandy;
+                int x=i;
+                if ((int) candy.get(x).getTag() == chosedCandy && !isBlank &&
+                        (int) candy.get(x-numberBlocks).getTag() == chosedCandy  &&
+                        (int) candy.get(x+numberBlocks).getTag() == chosedCandy) {
+                    score = score+3;
+                    scoreRes.setText(String.valueOf(score));
+                    candy.get(x).setImageResource(notCandy);
+                    candy.get(x).setTag(notCandy);
+                    candy.get(x-numberBlocks).setImageResource(notCandy);
+                    candy.get(x-numberBlocks).setTag(notCandy);
+                    candy.get(x+numberBlocks).setImageResource(notCandy);
+                    candy.get(x+numberBlocks).setTag(notCandy);
+                }
+        }
+    }
+    //à modifier ca pue la merde
+   /* private void moveDownCandies2(){
+        Integer[] firstRow = {0,1,2,3,4,5,6,7};
+        List<Integer> list = Arrays.asList(firstRow);
+        for(int i=55;i<0;i--){
+            if ((int)candy.get(i+numberBlocks).getTag() == notCandy){
+                candy.get(i+numberBlocks).setImageResource((int)candy.get(i).getTag());
+                candy.get(i+numberBlocks).setTag((int)candy.get(i).getTag());
+                candy.get(i).setImageResource(notCandy);
+                candy.get(i).setTag(notCandy);
+
+                if(list.contains(i) &&(int)candy.get(i).getTag()==notCandy ){
+                    int randomColor = (int) Math.floor(Math.random()*candies.length );
+                    candy.get(i).setImageResource(candies[randomColor]);
+                    candy.get(i).setTag(candies[randomColor]);
+                }
+            }
+        }
+        for(int i=0;i<8;i++){
+            if ((int)candy.get(i).getTag()==notCandy){
+                int randomColor = (int) Math.floor(Math.random()*candies.length );
+                candy.get(i).setImageResource(candies[randomColor]);
+                candy.get(i).setTag(candies[randomColor]);
+            }
+        }
+    }*/
+
+    private void moveDownCandies(){
+        for(int i=((numberBlocks*numberBlocks)-1);i<(numberBlocks-1);i--){
+            if ((int)candy.get(i).getTag() == notCandy){
+                candy.get(i).setImageResource((int)candy.get(i-numberBlocks).getTag());
+                candy.get(i).setTag((int)candy.get(i-numberBlocks).getTag());
+                candy.get(i-numberBlocks).setImageResource(notCandy);
+                candy.get(i-numberBlocks).setTag(notCandy);
+            }
+        }
+        for(int i=0;i<(numberBlocks*numberBlocks);i++){
+            if ((int)candy.get(i).getTag()==notCandy){
+                int randomColor = (int) Math.floor(Math.random()*candies.length);
+                candy.get(i).setImageResource(candies[randomColor]);
+                candy.get(i).setTag(candies[randomColor]);
+            }
         }
     }
     Runnable repeatChecker = new Runnable() {
@@ -127,6 +198,8 @@ public class CandyCrush extends AppCompatActivity {
         public void run() {
             try{
                 checkRowForThree();
+                checkColumnForThree();
+                moveDownCandies();
             }
             finally{
                 mHandler.postDelayed(repeatChecker,interval);
