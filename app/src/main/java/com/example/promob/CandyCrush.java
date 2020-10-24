@@ -21,7 +21,7 @@ public class CandyCrush extends AppCompatActivity {
         R.drawable.candycrush_bluecandy, R.drawable.candycrush_greencandy,R.drawable.candycrush_orangecandy,
             R.drawable.candycrush_purplecandy,R.drawable.candycrush_redcandy,R.drawable.candycrush_yellowcandy,
 };
-    int widthBlock, widthScreen, heightScreen, numberBlocks=8,candyToBeDragged, candyToBeReplaced, notCandy=R.drawable.ic_launcher_background;
+    int widthBlock, widthScreen, heightScreen, numberBlocks,candyToBeDragged, candyToBeReplaced, notCandy=R.drawable.ic_launcher_background;
     ArrayList<ImageView> candy = new ArrayList<>();
     Handler mHandler = new Handler();
     int interval = 100;
@@ -33,6 +33,18 @@ public class CandyCrush extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_candy_crush);
+
+        int level = getIntent().getExtras().getInt("level");
+        if (level == 1){
+            numberBlocks=8;
+        }
+        else if (level == 2){
+            numberBlocks=7;
+        }
+        else{
+            numberBlocks=6;
+        }
+
         DisplayMetrics displayMetrics =  new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         widthScreen = displayMetrics.widthPixels;

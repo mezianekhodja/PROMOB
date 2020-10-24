@@ -188,9 +188,11 @@ public class Pendu_Activity extends AppCompatActivity {
                 int random = (int) Math.floor(Math.random()*listOfWords2.size());
                 return listOfWords2.get(random).trim();
         }
+        else{
             int random = (int) Math.floor(Math.random()*listOfWords3.size());
             return listOfWords3.get(random).trim();
-         }
+            }
+        }
 
         public void setListOfWords(){
             //EASY

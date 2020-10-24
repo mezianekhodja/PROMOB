@@ -12,58 +12,56 @@ import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class Home extends AppCompatActivity {
+public class CandyCrush_Home extends AppCompatActivity {
 
-    Button btn_logoquizz,btn_pendu,btn_cc;
+    private Button easy,medium, hard;
     private FirebaseAuth firebaseAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_candy_crush__home);
+
         firebaseAuth = FirebaseAuth.getInstance();
-        btn_logoquizz = (Button) findViewById(R.id.button_logoquizz);
-        btn_logoquizz.setOnClickListener(new View.OnClickListener() {
+
+        easy = (Button) findViewById(R.id.button_cc_easy);
+        medium = (Button) findViewById(R.id.button_cc_medium);
+        hard = (Button) findViewById(R.id.button_cc_hard);
+
+        easy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openHomeLogoQuizz();
+                Intent intent = new Intent(CandyCrush_Home.this, CandyCrush.class);
+                intent.putExtra("level",1);
+                startActivity(intent);
+                CandyCrush_Home.this.finish();
             }
         });
-        btn_pendu = (Button) findViewById(R.id.buttongamependu);
-        btn_pendu.setOnClickListener(new View.OnClickListener() {
+        medium.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openPendu();
+                Intent intent = new Intent(CandyCrush_Home.this, CandyCrush.class);
+                intent.putExtra("level",2);
+                startActivity(intent);
+                CandyCrush_Home.this.finish();
             }
         });
-        btn_cc = (Button) findViewById(R.id.buttongamecandycrush);
-        btn_cc.setOnClickListener(new View.OnClickListener() {
+        hard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openCC();
+                Intent intent = new Intent(CandyCrush_Home.this, CandyCrush.class);
+                intent.putExtra("level",3);
+                startActivity(intent);
+                CandyCrush_Home.this.finish();
             }
         });
     }
 
-    public void openHomeLogoQuizz() {
-        Intent intent = new Intent(this, LogoQuizz_Home.class);
-        startActivity(intent);
-        Home.this.finish();
-    }
-    public void openCC() {
-        Intent intent = new Intent(this, CandyCrush_Home.class);
-        startActivity(intent);
-        Home.this.finish();
-    }
-    public void openPendu() {
-        Intent intent = new Intent(this, Pendu_Home.class);
-        startActivity(intent);
-        Home.this.finish();
-    }
     public void openActivityConnexion() {
         Intent intent = new Intent(this, Connexion.class);
         startActivity(intent);
-        Home.this.finish();
+        CandyCrush_Home.this.finish();
     }
     private void Logout() {
         firebaseAuth.signOut();
@@ -77,7 +75,7 @@ public class Home extends AppCompatActivity {
     public void openProfil() {
         Intent intent = new Intent(this, Profile.class);
         startActivity(intent);
-        Home.this.finish();
+        CandyCrush_Home.this.finish();
     }
 
     public void openAcceuil(){
