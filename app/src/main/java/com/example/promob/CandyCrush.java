@@ -19,6 +19,7 @@ public class CandyCrush extends AppCompatActivity {
 };
     int widthBlock, widthScreen, heightScreen, numberBlocks=8;
     ArrayList<ImageView> candy = new ArrayList<>();
+    int candyToBeDragged, candyToBeReplaced;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -32,33 +33,50 @@ public class CandyCrush extends AppCompatActivity {
         widthBlock = widthScreen / numberBlocks;
 
         createBoard();
-        for (ImageView imageView : candy){
+        for (final ImageView imageView : candy){
             imageView.setOnTouchListener(new OnSwipeListener(CandyCrush.this){
                 @Override
                 void onSwipeLeft() {
                     super.onSwipeLeft();
-                    Toast.makeText(CandyCrush.this, "Left", Toast.LENGTH_SHORT).show();
+                    candyToBeDragged = imageView.getId();
+                    candyToBeReplaced = candyToBeDragged -1;
+                    candyInterchange();
                 }
 
                 @Override
                 void onSwipeRight() {
                     super.onSwipeRight();
-                    Toast.makeText(CandyCrush.this, "Right", Toast.LENGTH_SHORT).show();
+                    candyToBeDragged = imageView.getId();
+                    candyToBeReplaced = candyToBeDragged +1;
+                    candyInterchange();
                 }
 
                 @Override
                 void onSwipeTop() {
                     super.onSwipeTop();
-                    Toast.makeText(CandyCrush.this, "Top", Toast.LENGTH_SHORT).show();
+                    candyToBeDragged = imageView.getId();
+                    candyToBeReplaced = candyToBeDragged -numberBlocks;
+                    candyInterchange();
                 }
 
                 @Override
                 void onSwipeBottom() {
                     super.onSwipeBottom();
-                    Toast.makeText(CandyCrush.this, "Bottom", Toast.LENGTH_SHORT).show();
+                    candyToBeDragged = imageView.getId();
+                    candyToBeReplaced = candyToBeDragged +numberBlocks;
+                    candyInterchange();
                 }
             });
         }
+    }
+
+    private void candyInterchange(){
+        int background = (int) candy.get(candyToBeReplaced).getTag();
+        int background1 = (int) candy.get(candyToBeDragged).getTag();
+        candy.get(candyToBeDragged).setImageResource(background);
+        candy.get(candyToBeReplaced).setImageResource(background1 );
+        candy.get(candyToBeDragged).setTag(background);
+        candy.get(candyToBeReplaced).setTag(background1);
     }
 
     private void createBoard() {
@@ -76,6 +94,7 @@ public class CandyCrush extends AppCompatActivity {
             imageView.setMaxWidth(widthBlock);
             int randomCandy = (int) Math.floor(Math.random()*candies.length);
             imageView.setImageResource(candies[randomCandy]);
+            imageView.setTag(candies[randomCandy]);
             candy.add(imageView);
             gridLayout.addView(imageView);
         }
