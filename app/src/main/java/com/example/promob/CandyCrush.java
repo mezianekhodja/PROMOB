@@ -103,23 +103,21 @@ public class CandyCrush extends AppCompatActivity {
         }
     }
     private void checkRowForThree(){
-        for (int i=0; i<(numberBlocks*numberBlocks)-2;i++){
+        for (int i=1; i<(numberBlocks*numberBlocks)-1;i++){
             int chosedCandy = (int) candy.get(i).getTag();
             boolean isBlank = (int) candy.get(i).getTag() == notCandy;
             //modulo 8 > 6 ou 7 faux !!! donc modulo numberblock  >numberblock -1 ou 2
-            if ((i%numberBlocks!=(numberBlocks-2))||((i%numberBlocks!=(numberBlocks-1)))) {
+            if ((i%numberBlocks!=0)||((i%numberBlocks!=1))) {
                 int x=i;
-                if ((int) candy.get(x++).getTag() == chosedCandy && !isBlank &&
-                        (int) candy.get(x++).getTag() == chosedCandy  &&
-                        (int) candy.get(x).getTag() == chosedCandy) {
+                if ((int) candy.get(x).getTag() == chosedCandy && !isBlank &&
+                        (int) candy.get(x-1).getTag() == chosedCandy  &&
+                        (int) candy.get(x+1).getTag() == chosedCandy) {
                 candy.get(x).setImageResource(notCandy);
                 candy.get(x).setTag(notCandy);
-                x--;
-                candy.get(x).setImageResource(notCandy);
-                candy.get(x).setTag(notCandy);
-                x--;
-                candy.get(x).setImageResource(notCandy);
-                candy.get(x).setTag(notCandy);
+                candy.get(x-1).setImageResource(notCandy);
+                candy.get(x-1).setTag(notCandy);
+                candy.get(x+1).setImageResource(notCandy);
+                candy.get(x+1).setTag(notCandy);
             }
         }
         }
