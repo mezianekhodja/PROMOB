@@ -48,7 +48,7 @@ public class CandyCrush extends AppCompatActivity {
                     super.onSwipeLeft();
                     candyToBeDragged = imageView.getId();
                     candyToBeReplaced = candyToBeDragged -1;
-                    candyInterchange();
+                    candyInterchange(candyToBeDragged,candyToBeReplaced);
                 }
 
                 @Override
@@ -56,7 +56,7 @@ public class CandyCrush extends AppCompatActivity {
                     super.onSwipeRight();
                     candyToBeDragged = imageView.getId();
                     candyToBeReplaced = candyToBeDragged +1;
-                    candyInterchange();
+                    candyInterchange(candyToBeDragged,candyToBeReplaced);
                 }
 
                 @Override
@@ -64,7 +64,7 @@ public class CandyCrush extends AppCompatActivity {
                     super.onSwipeTop();
                     candyToBeDragged = imageView.getId();
                     candyToBeReplaced = candyToBeDragged -numberBlocks;
-                    candyInterchange();
+                    candyInterchange(candyToBeDragged,candyToBeReplaced);
                 }
 
                 @Override
@@ -72,23 +72,13 @@ public class CandyCrush extends AppCompatActivity {
                     super.onSwipeBottom();
                     candyToBeDragged = imageView.getId();
                     candyToBeReplaced = candyToBeDragged +numberBlocks;
-                    candyInterchange();
+                    candyInterchange(candyToBeDragged,candyToBeReplaced);
                 }
             });
         }
         mHandler = new Handler();
         startRepeat();
     }
-
-    private void candyInterchange(){
-        int background = (int) candy.get(candyToBeReplaced).getTag();
-        int background1 = (int) candy.get(candyToBeDragged).getTag();
-        candy.get(candyToBeDragged).setImageResource(background);
-        candy.get(candyToBeReplaced).setImageResource(background1 );
-        candy.get(candyToBeDragged).setTag(background);
-        candy.get(candyToBeReplaced).setTag(background1);
-    }
-
     private void createBoard() {
         GridLayout gridLayout = findViewById(R.id.boardCC);
         gridLayout.setRowCount(numberBlocks);
@@ -149,40 +139,20 @@ public class CandyCrush extends AppCompatActivity {
                 }
         }
     }
-    //à modifier ca pue la merde
-   /* private void moveDownCandies2(){
-        Integer[] firstRow = {0,1,2,3,4,5,6,7};
-        List<Integer> list = Arrays.asList(firstRow);
-        for(int i=55;i<0;i--){
-            if ((int)candy.get(i+numberBlocks).getTag() == notCandy){
-                candy.get(i+numberBlocks).setImageResource((int)candy.get(i).getTag());
-                candy.get(i+numberBlocks).setTag((int)candy.get(i).getTag());
-                candy.get(i).setImageResource(notCandy);
-                candy.get(i).setTag(notCandy);
 
-                if(list.contains(i) &&(int)candy.get(i).getTag()==notCandy ){
-                    int randomColor = (int) Math.floor(Math.random()*candies.length );
-                    candy.get(i).setImageResource(candies[randomColor]);
-                    candy.get(i).setTag(candies[randomColor]);
-                }
-            }
-        }
-        for(int i=0;i<8;i++){
-            if ((int)candy.get(i).getTag()==notCandy){
-                int randomColor = (int) Math.floor(Math.random()*candies.length );
-                candy.get(i).setImageResource(candies[randomColor]);
-                candy.get(i).setTag(candies[randomColor]);
-            }
-        }
-    }*/
+    private void candyInterchange(int a, int b){
+        int background = (int) candy.get(b).getTag();
+        int background1 = (int) candy.get(a).getTag();
+        candy.get(a).setImageResource(background);
+        candy.get(b).setImageResource(background1);
+        candy.get(a).setTag(background);
+        candy.get(b).setTag(background1);
+    }
 
     private void moveDownCandies(){
-        for(int i=((numberBlocks*numberBlocks)-1);i<(numberBlocks-1);i--){
+        for(int i=((numberBlocks*numberBlocks)-1);i>(numberBlocks-1);i--){
             if ((int)candy.get(i).getTag() == notCandy){
-                candy.get(i).setImageResource((int)candy.get(i-numberBlocks).getTag());
-                candy.get(i).setTag((int)candy.get(i-numberBlocks).getTag());
-                candy.get(i-numberBlocks).setImageResource(notCandy);
-                candy.get(i-numberBlocks).setTag(notCandy);
+                candyInterchange(i,(i-numberBlocks));
             }
         }
         for(int i=0;i<(numberBlocks*numberBlocks);i++){
