@@ -176,6 +176,7 @@ public class Pendu_Activity extends AppCompatActivity {
             }
             builder.create().show();
         }
+
         public String generateWord() {
         int level = getIntent().getExtras().getInt("level");
 

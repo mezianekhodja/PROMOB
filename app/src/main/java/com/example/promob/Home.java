@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Home extends AppCompatActivity {
 
-    Button btn_logoquizz,btn_pendu;
+    Button btn_logoquizz,btn_pendu,btn_cc;
     private FirebaseAuth firebaseAuth;
 
     @Override
@@ -36,10 +36,22 @@ public class Home extends AppCompatActivity {
                 openPendu();
             }
         });
+        btn_cc = (Button) findViewById(R.id.buttongamecandycrush);
+        btn_cc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openCC();
+            }
+        });
     }
 
     public void openHomeLogoQuizz() {
         Intent intent = new Intent(this, LogoQuizz_Home.class);
+        startActivity(intent);
+        Home.this.finish();
+    }
+    public void openCC() {
+        Intent intent = new Intent(this, CandyCrush.class);
         startActivity(intent);
         Home.this.finish();
     }

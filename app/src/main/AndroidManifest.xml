@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Pendu_Home"></activity>
+        <activity android:name=".CandyCrush"></activity>
+        <activity android:name=".Pendu_Home" />
         <activity android:name=".Pendu_Activity" />
         <activity android:name=".UpdateProfile" />
         <activity android:name=".UpdatePassword" />
