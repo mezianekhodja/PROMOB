@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
@@ -96,7 +97,7 @@ public class CandyCrush extends AppCompatActivity {
                 }
 
                 @Override
-                void onSwipeRight() {
+                void onSwipeRight(){
                     super.onSwipeRight();
                     candyToBeDragged = imageView.getId();
                     candyToBeReplaced = candyToBeDragged +1;
@@ -127,7 +128,7 @@ public class CandyCrush extends AppCompatActivity {
                 }
 
                 @Override
-                void onSwipeTop() {
+                void onSwipeTop(){
                     super.onSwipeTop();
                     candyToBeDragged = imageView.getId();
                     candyToBeReplaced = candyToBeDragged -numberBlocks;
@@ -158,7 +159,7 @@ public class CandyCrush extends AppCompatActivity {
                 }
 
                 @Override
-                void onSwipeBottom() {
+                void onSwipeBottom(){
                     super.onSwipeBottom();
                     candyToBeDragged = imageView.getId();
                     candyToBeReplaced = candyToBeDragged +numberBlocks;
@@ -193,13 +194,18 @@ public class CandyCrush extends AppCompatActivity {
         startRepeat();
     }
 
-    public void createDialog(){
+    public void createDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Votre score est de  : "+String.valueOf(score));
         builder.setMessage("Le nombre de mouvements a été atteint");
         builder.create().show();
     }
-
+    private void finishGame(){
+        Intent intent = new Intent(this, CandyCrush_Home.class);
+        intent.putExtra("score", score);
+        startActivity(intent);
+        CandyCrush.this.finish();
+    }
     private void createBoard() {
         GridLayout gridLayout = findViewById(R.id.boardCC);
         gridLayout.setRowCount(numberBlocks);

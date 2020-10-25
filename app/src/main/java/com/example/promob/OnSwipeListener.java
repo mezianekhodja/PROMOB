@@ -52,16 +52,16 @@ public GestureDetector gestureDetector;
             return result;
         }
     }
-    void onSwipeLeft(){
+    void onSwipeLeft() {
 
     }
     void onSwipeRight(){
 
     }
-    void onSwipeTop(){
+    void onSwipeTop() {
 
     }
-    void onSwipeBottom(){
+    void onSwipeBottom()  {
 
     }
 }
