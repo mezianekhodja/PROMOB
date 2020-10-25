@@ -1,5 +1,6 @@
 package com.example.promob;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -25,9 +26,9 @@ public class CandyCrush extends AppCompatActivity {
     ArrayList<ImageView> candy = new ArrayList<>();
     Handler mHandler = new Handler();
     int interval = 100;
-    TextView scoreRes;
+    TextView scoreRes, moveRes;
     int score = 0;
-
+    int move  = 30;
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,7 @@ public class CandyCrush extends AppCompatActivity {
         heightScreen = displayMetrics.heightPixels;
         widthBlock = widthScreen / numberBlocks;
         scoreRes = (TextView) findViewById(R.id.tvscoreCC);
+        moveRes = (TextView) findViewById(R.id.tvmoveCC);
 
         createBoard();
         for (final ImageView imageView : candy){
@@ -61,6 +63,8 @@ public class CandyCrush extends AppCompatActivity {
                     candyToBeDragged = imageView.getId();
                     candyToBeReplaced = candyToBeDragged -1;
                     candyInterchange(candyToBeDragged,candyToBeReplaced);
+                    move--;
+                    moveRes.setText(String.valueOf(move));
                 }
 
                 @Override
@@ -69,6 +73,8 @@ public class CandyCrush extends AppCompatActivity {
                     candyToBeDragged = imageView.getId();
                     candyToBeReplaced = candyToBeDragged +1;
                     candyInterchange(candyToBeDragged,candyToBeReplaced);
+                    move--;
+                    moveRes.setText(String.valueOf(move));
                 }
 
                 @Override
@@ -77,6 +83,8 @@ public class CandyCrush extends AppCompatActivity {
                     candyToBeDragged = imageView.getId();
                     candyToBeReplaced = candyToBeDragged -numberBlocks;
                     candyInterchange(candyToBeDragged,candyToBeReplaced);
+                    move--;
+                    moveRes.setText(String.valueOf(move));
                 }
 
                 @Override
@@ -85,12 +93,25 @@ public class CandyCrush extends AppCompatActivity {
                     candyToBeDragged = imageView.getId();
                     candyToBeReplaced = candyToBeDragged +numberBlocks;
                     candyInterchange(candyToBeDragged,candyToBeReplaced);
+                    move--;
+                    moveRes.setText(String.valueOf(move));
                 }
             });
         }
         mHandler = new Handler();
         startRepeat();
+        if (move==0){
+            createDialog();
+        }
     }
+
+    public void createDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Votre score est de  : "+String.valueOf(score));
+        builder.setMessage("Le nombre de mouvements a été atteint");
+        builder.create().show();
+    }
+
     private void createBoard() {
         GridLayout gridLayout = findViewById(R.id.boardCC);
         gridLayout.setRowCount(numberBlocks);
@@ -115,7 +136,7 @@ public class CandyCrush extends AppCompatActivity {
         for (int i=1; i<(numberBlocks*numberBlocks)-1;i++){
             int chosedCandy = (int) candy.get(i).getTag();
             boolean isBlank = (int) candy.get(i).getTag() == notCandy;
-            if ((i%numberBlocks!=0)&&((i%numberBlocks!=1))) {
+            if ((i%numberBlocks!=0)&&((i%numberBlocks!=7))) {
                 int x=i;
                 if ((int) candy.get(x).getTag() == chosedCandy && !isBlank &&
                         (int) candy.get(x-1).getTag() == chosedCandy  &&
@@ -162,9 +183,11 @@ public class CandyCrush extends AppCompatActivity {
     }
 
     private void moveDownCandies(){
-        for(int i=((numberBlocks*numberBlocks)-1);i>(numberBlocks-1);i--){
-            if ((int)candy.get(i).getTag() == notCandy){
-                candyInterchange(i,(i-numberBlocks));
+        for(int a=0;a<3;a++){
+            for(int i=((numberBlocks*numberBlocks)-1);i>(numberBlocks-1);i--){
+                if ((int)candy.get(i).getTag() == notCandy){
+                    candyInterchange(i,(i-numberBlocks));
+                }
             }
         }
         for(int i=0;i<(numberBlocks*numberBlocks);i++){
@@ -175,6 +198,7 @@ public class CandyCrush extends AppCompatActivity {
             }
         }
     }
+
     Runnable repeatChecker = new Runnable() {
         @Override
         public void run() {
