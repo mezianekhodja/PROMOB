@@ -21,7 +21,12 @@ public class CandyCrush extends AppCompatActivity {
     int[] candies = {
         R.drawable.candycrush_bluecandy, R.drawable.candycrush_greencandy,R.drawable.candycrush_orangecandy,
             R.drawable.candycrush_purplecandy,R.drawable.candycrush_redcandy,R.drawable.candycrush_yellowcandy,
+            R.drawable.bombcc
 };
+    int[] candiesstart = {
+            R.drawable.candycrush_bluecandy, R.drawable.candycrush_greencandy,R.drawable.candycrush_orangecandy,
+            R.drawable.candycrush_purplecandy,R.drawable.candycrush_redcandy,R.drawable.candycrush_yellowcandy,
+    };
     int widthBlock, widthScreen, heightScreen, numberBlocks,candyToBeDragged, candyToBeReplaced, notCandy=R.drawable.ic_launcher_background;
     ArrayList<ImageView> candy = new ArrayList<>();
     Handler mHandler = new Handler();
@@ -125,9 +130,9 @@ public class CandyCrush extends AppCompatActivity {
             imageView.setLayoutParams(new android.view.ViewGroup.LayoutParams(widthBlock, widthBlock));
             imageView.setMaxHeight(widthBlock);
             imageView.setMaxWidth(widthBlock);
-            int randomCandy = (int) Math.floor(Math.random()*candies.length);
-            imageView.setImageResource(candies[randomCandy]);
-            imageView.setTag(candies[randomCandy]);
+            int randomCandy = (int) Math.floor(Math.random()*candiesstart.length);
+            imageView.setImageResource(candiesstart[randomCandy]);
+            imageView.setTag(candiesstart[randomCandy]);
             candy.add(imageView);
             gridLayout.addView(imageView);
         }
@@ -153,6 +158,65 @@ public class CandyCrush extends AppCompatActivity {
             }
         }
     }
+    private void checkRowForFive(){
+        for (int i=2; i<(numberBlocks*numberBlocks)-2;i++){
+            int chosedCandy = (int) candy.get(i).getTag();
+            boolean isBlank = (int) candy.get(i).getTag() == notCandy;
+
+            if ((i%numberBlocks!=0)&&((i%numberBlocks!=(numberBlocks-1)))&&(i%numberBlocks!=1)&&(i%numberBlocks!=(numberBlocks-2))) {
+                int x=i;
+                if ((int) candy.get(x).getTag() == chosedCandy && !isBlank &&
+                        (int) candy.get(x-1).getTag() == chosedCandy  &&
+                        (int) candy.get(x+1).getTag() == chosedCandy &&
+                        (int) candy.get(x+2).getTag() == chosedCandy &&
+                        (int) candy.get(x-2).getTag() == chosedCandy)
+                {
+                    score = score+5;
+                    scoreRes.setText(String.valueOf(score));
+                    candy.get(x).setImageResource( R.drawable.bombcc);
+                    candy.get(x).setTag(R.drawable.bombcc);
+                    candy.get(x-1).setImageResource(notCandy);
+                    candy.get(x-1).setTag(notCandy);
+                    candy.get(x+1).setImageResource(notCandy);
+                    candy.get(x+1).setTag(notCandy);
+                    candy.get(x-2).setImageResource(notCandy);
+                    candy.get(x-2).setTag(notCandy);
+                    candy.get(x+2).setImageResource(notCandy);
+                    candy.get(x+2).setTag(notCandy);
+                }
+            }
+
+
+
+        }
+    }
+    private void checkColumnForFive(){
+        for (int i=2*numberBlocks; i<((numberBlocks*numberBlocks)-2*numberBlocks);i++){
+            int chosedCandy = (int) candy.get(i).getTag();
+            boolean isBlank = (int) candy.get(i).getTag() == notCandy;
+            int x=i;
+
+            if ((int) candy.get(x).getTag() == chosedCandy && !isBlank &&
+                    (int) candy.get(x-numberBlocks).getTag() == chosedCandy  &&
+                    (int) candy.get(x-2*numberBlocks).getTag() == chosedCandy  &&
+                    (int) candy.get(x+2*numberBlocks).getTag() == chosedCandy  &&
+                    (int) candy.get(x+numberBlocks).getTag() == chosedCandy) {
+                score = score+5;
+                scoreRes.setText(String.valueOf(score));
+                candy.get(x).setImageResource( R.drawable.bombcc);
+                candy.get(x).setTag(R.drawable.bombcc);
+                candy.get(x-numberBlocks).setImageResource(notCandy);
+                candy.get(x-numberBlocks).setTag(notCandy);
+                candy.get(x+numberBlocks).setImageResource(notCandy);
+                candy.get(x+numberBlocks).setTag(notCandy);
+                candy.get(x-2*numberBlocks).setImageResource(notCandy);
+                candy.get(x-2*numberBlocks).setTag(notCandy);
+                candy.get(x+2*numberBlocks).setImageResource(notCandy);
+                candy.get(x+2*numberBlocks).setTag(notCandy);
+            }
+        }
+    }
+
     private void checkColumnForThree(){
         for (int i=numberBlocks; i<((numberBlocks*numberBlocks)-numberBlocks);i++){
             int chosedCandy = (int) candy.get(i).getTag();
@@ -183,7 +247,7 @@ public class CandyCrush extends AppCompatActivity {
     }
 
     private void moveDownCandies(){
-        for(int a=0;a<3;a++){
+        for(int a=0;a<5;a++){
             for(int i=((numberBlocks*numberBlocks)-1);i>(numberBlocks-1);i--){
                 if ((int)candy.get(i).getTag() == notCandy){
                     candyInterchange(i,(i-numberBlocks));
@@ -192,9 +256,9 @@ public class CandyCrush extends AppCompatActivity {
         }
         for(int i=0;i<(numberBlocks*numberBlocks);i++){
             if ((int)candy.get(i).getTag()==notCandy){
-                int randomColor = (int) Math.floor(Math.random()*candies.length);
-                candy.get(i).setImageResource(candies[randomColor]);
-                candy.get(i).setTag(candies[randomColor]);
+                int randomColor = (int) Math.floor(Math.random()*candiesstart.length);
+                candy.get(i).setImageResource(candiesstart[randomColor]);
+                candy.get(i).setTag(candiesstart[randomColor]);
             }
         }
     }
@@ -203,6 +267,8 @@ public class CandyCrush extends AppCompatActivity {
         @Override
         public void run() {
             try{
+                checkRowForFive();
+                checkColumnForFive();
                 checkRowForThree();
                 checkColumnForThree();
                 moveDownCandies();
