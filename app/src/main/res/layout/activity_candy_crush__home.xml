@@ -24,6 +24,12 @@
             android:layout_height="325dp"
             app:srcCompat="@drawable/logocc"/>
 
+        <TextView
+            android:id="@+id/tvcchighscoreeasy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="High score =  "/>
+
         <Button
             android:id="@+id/button_cc_easy"
             android:layout_width="match_parent"
@@ -31,14 +37,22 @@
             android:text="Easy"
             android:textStyle="bold"
             android:layout_marginBottom="5dp"/>
-
+        <TextView
+            android:id="@+id/tvcchighscoremedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Highscore = " />
         <Button
             android:id="@+id/button_cc_medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="MEDIUM"
             android:textStyle="bold"/>
-
+        <TextView
+            android:id="@+id/tvcchighscorehard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Highscore = "/>
         <Button
             android:id="@+id/button_cc_hard"
             android:layout_width="match_parent"
@@ -50,5 +64,6 @@
             android:gravity="center"
             android:layout_height="wrap_content"
             android:text="By Meziane and Vincent" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

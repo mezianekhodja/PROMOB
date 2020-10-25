@@ -143,6 +143,7 @@ public class CandyCrush extends AppCompatActivity {
         builder.setTitle("Votre score est de  : "+String.valueOf(score));
         builder.setMessage("Le nombre de mouvements a été atteint");
         builder.create().show();
+        finishGame();
     }
     private void finishGame(){
         Intent intent = new Intent(this, CandyCrush_Home.class);

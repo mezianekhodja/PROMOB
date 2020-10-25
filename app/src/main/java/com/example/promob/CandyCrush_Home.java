@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -16,7 +17,9 @@ public class CandyCrush_Home extends AppCompatActivity {
 
     private Button easy,medium, hard;
     private FirebaseAuth firebaseAuth;
+    private TextView textViewHighscoreEasy,textViewHighscoreMedium, textViewHighscoreHard;
 
+    private int highscore = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,13 @@ public class CandyCrush_Home extends AppCompatActivity {
         easy = (Button) findViewById(R.id.button_cc_easy);
         medium = (Button) findViewById(R.id.button_cc_medium);
         hard = (Button) findViewById(R.id.button_cc_hard);
+
+        textViewHighscoreEasy = (TextView) findViewById(R.id.tvcchighscoreeasy);
+        textViewHighscoreMedium = (TextView) findViewById(R.id.tvcchighscoremedium);
+        textViewHighscoreHard = (TextView) findViewById(R.id.tvcchighscorehard);
+
+        loadHighscore();
+
 
         easy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,5 +110,15 @@ public class CandyCrush_Home extends AppCompatActivity {
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void loadHighscore(){
+        textViewHighscoreEasy.setText("Highscore = " + highscore);
+    }
+
+    private void upadteHighscore(int newHighscore) {
+        highscore = newHighscore;
+        textViewHighscoreEasy.setText("Highscore = " + highscore);
+
     }
 }

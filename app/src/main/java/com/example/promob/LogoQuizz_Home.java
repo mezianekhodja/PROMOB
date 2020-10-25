@@ -21,9 +21,7 @@ public class LogoQuizz_Home extends AppCompatActivity {
     public static String EXTRA_DIFFICULTY = "extraDifficulty";
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String KEY_HIGHSCORE= "keyHighscore";
-    private TextView textViewHighscoreEasy;
-    private TextView textViewHighscoreMedium;
-    private TextView textViewHighscoreHard;
+    private TextView textViewHighscoreEasy,textViewHighscoreMedium, textViewHighscoreHard;
 
     private int highscore = 0;
 
@@ -136,7 +134,6 @@ public class LogoQuizz_Home extends AppCompatActivity {
 
     private void loadHighscore(){
         textViewHighscoreEasy.setText("Highscore: " + highscore);
-
     }
 
     private void upadteHighscore(int newHighscore) {
