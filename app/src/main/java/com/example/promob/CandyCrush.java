@@ -34,7 +34,7 @@ public class CandyCrush extends AppCompatActivity {
     int interval = 100;
     TextView scoreRes, moveRes;
     int score = 0;
-    int move  = 30;
+    int move  = 5;
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +62,7 @@ public class CandyCrush extends AppCompatActivity {
 
         createBoard();
         for (final ImageView imageView : candy){
+
             imageView.setOnTouchListener(new OnSwipeListener(CandyCrush.this){
                 @Override
                 void onSwipeLeft() {
@@ -69,19 +70,28 @@ public class CandyCrush extends AppCompatActivity {
                     candyToBeDragged = imageView.getId();
                     candyToBeReplaced = candyToBeDragged -1;
                     candyInterchange(candyToBeDragged,candyToBeReplaced);
-                    move--;
-                    moveRes.setText(String.valueOf(move));
                     if(((int) candy.get(candyToBeDragged).getTag() == R.drawable.bombcc)||((int) candy.get(candyToBeReplaced).getTag() == R.drawable.bombcc)){
                         removeKindCandy((int) candy.get(candyToBeDragged).getTag());
                         removeKindCandy((int) candy.get(candyToBeReplaced).getTag());
                     }
-                    if(((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedyellowcc)||((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedyellowcc)||
-                    ((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedbluecc)||((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedbluecc)||
-                            ((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedgreencc)||((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedgreencc)||
-                            ((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedredcc)||((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedredcc)||
-                            ((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedorangecc)||((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedorangecc) ||
-                            ((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedpurplecc)||((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedpurplecc)){
+                    if((((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedyellowcc)&&((int) candy.get(candyToBeReplaced).getTag() == R.drawable.candycrush_yellowcandy))||
+                            (((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedredcc)&&((int) candy.get(candyToBeReplaced).getTag() == R.drawable.candycrush_redcandy))||
+                            (((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedgreencc)&&((int) candy.get(candyToBeReplaced).getTag() == R.drawable.candycrush_greencandy))||
+                            (((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedbluecc)&&((int) candy.get(candyToBeReplaced).getTag() == R.drawable.candycrush_bluecandy))||
+                            (((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedorangecc)&&((int) candy.get(candyToBeReplaced).getTag() == R.drawable.candycrush_orangecandy))||
+                            (((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedpurplecc)&&((int) candy.get(candyToBeReplaced).getTag() == R.drawable.candycrush_purplecandy))||
+                            (((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedyellowcc)&&((int) candy.get(candyToBeDragged).getTag() == R.drawable.candycrush_yellowcandy))||
+                            (((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedredcc)&&((int) candy.get(candyToBeDragged).getTag() == R.drawable.candycrush_redcandy))||
+                            (((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedgreencc)&&((int) candy.get(candyToBeDragged).getTag() == R.drawable.candycrush_greencandy))||
+                            (((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedbluecc)&&((int) candy.get(candyToBeDragged).getTag() == R.drawable.candycrush_bluecandy))||
+                            (((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedorangecc)&&((int) candy.get(candyToBeDragged).getTag() == R.drawable.candycrush_orangecandy))||
+                            (((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedpurplecc)&&((int) candy.get(candyToBeDragged).getTag() == R.drawable.candycrush_purplecandy))){
                         removeRow(candy.get(candyToBeDragged).getId());
+                    }
+                    move--;
+                    moveRes.setText(String.valueOf(move));
+                    if (move==0){
+                        createDialog();
                     }
                 }
 
@@ -91,19 +101,28 @@ public class CandyCrush extends AppCompatActivity {
                     candyToBeDragged = imageView.getId();
                     candyToBeReplaced = candyToBeDragged +1;
                     candyInterchange(candyToBeDragged,candyToBeReplaced);
-                    move--;
-                    moveRes.setText(String.valueOf(move));
                     if(((int) candy.get(candyToBeDragged).getTag() == R.drawable.bombcc)||((int) candy.get(candyToBeReplaced).getTag() == R.drawable.bombcc)){
                         removeKindCandy((int) candy.get(candyToBeDragged).getTag());
                         removeKindCandy((int) candy.get(candyToBeReplaced).getTag());
                     }
-                    if(((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedyellowcc)||((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedyellowcc)||
-                            ((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedbluecc)||((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedbluecc)||
-                            ((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedgreencc)||((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedgreencc)||
-                            ((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedredcc)||((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedredcc)||
-                            ((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedorangecc)||((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedorangecc) ||
-                            ((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedpurplecc)||((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedpurplecc)){
+                    if((((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedyellowcc)&&((int) candy.get(candyToBeReplaced).getTag() == R.drawable.candycrush_yellowcandy))||
+                            (((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedredcc)&&((int) candy.get(candyToBeReplaced).getTag() == R.drawable.candycrush_redcandy))||
+                            (((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedgreencc)&&((int) candy.get(candyToBeReplaced).getTag() == R.drawable.candycrush_greencandy))||
+                            (((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedbluecc)&&((int) candy.get(candyToBeReplaced).getTag() == R.drawable.candycrush_bluecandy))||
+                            (((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedorangecc)&&((int) candy.get(candyToBeReplaced).getTag() == R.drawable.candycrush_orangecandy))||
+                            (((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedpurplecc)&&((int) candy.get(candyToBeReplaced).getTag() == R.drawable.candycrush_purplecandy))||
+                            (((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedyellowcc)&&((int) candy.get(candyToBeDragged).getTag() == R.drawable.candycrush_yellowcandy))||
+                            (((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedredcc)&&((int) candy.get(candyToBeDragged).getTag() == R.drawable.candycrush_redcandy))||
+                            (((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedgreencc)&&((int) candy.get(candyToBeDragged).getTag() == R.drawable.candycrush_greencandy))||
+                            (((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedbluecc)&&((int) candy.get(candyToBeDragged).getTag() == R.drawable.candycrush_bluecandy))||
+                            (((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedorangecc)&&((int) candy.get(candyToBeDragged).getTag() == R.drawable.candycrush_orangecandy))||
+                            (((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedpurplecc)&&((int) candy.get(candyToBeDragged).getTag() == R.drawable.candycrush_purplecandy))){
                         removeRow(candy.get(candyToBeDragged).getId());
+                    }
+                    move--;
+                    moveRes.setText(String.valueOf(move));
+                    if (move==0){
+                        createDialog();
                     }
                 }
 
@@ -113,19 +132,28 @@ public class CandyCrush extends AppCompatActivity {
                     candyToBeDragged = imageView.getId();
                     candyToBeReplaced = candyToBeDragged -numberBlocks;
                     candyInterchange(candyToBeDragged,candyToBeReplaced);
-                    move--;
-                    moveRes.setText(String.valueOf(move));
                     if(((int) candy.get(candyToBeDragged).getTag() == R.drawable.bombcc)||((int) candy.get(candyToBeReplaced).getTag() == R.drawable.bombcc)){
                         removeKindCandy((int) candy.get(candyToBeDragged).getTag());
                         removeKindCandy((int) candy.get(candyToBeReplaced).getTag());
                     }
-                    if(((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedyellowcc)||((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedyellowcc)||
-                            ((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedbluecc)||((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedbluecc)||
-                            ((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedgreencc)||((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedgreencc)||
-                            ((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedredcc)||((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedredcc)||
-                            ((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedorangecc)||((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedorangecc) ||
-                            ((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedpurplecc)||((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedpurplecc)){
+                    if((((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedyellowcc)&&((int) candy.get(candyToBeReplaced).getTag() == R.drawable.candycrush_yellowcandy))||
+                            (((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedredcc)&&((int) candy.get(candyToBeReplaced).getTag() == R.drawable.candycrush_redcandy))||
+                            (((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedgreencc)&&((int) candy.get(candyToBeReplaced).getTag() == R.drawable.candycrush_greencandy))||
+                            (((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedbluecc)&&((int) candy.get(candyToBeReplaced).getTag() == R.drawable.candycrush_bluecandy))||
+                            (((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedorangecc)&&((int) candy.get(candyToBeReplaced).getTag() == R.drawable.candycrush_orangecandy))||
+                            (((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedpurplecc)&&((int) candy.get(candyToBeReplaced).getTag() == R.drawable.candycrush_purplecandy))||
+                            (((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedyellowcc)&&((int) candy.get(candyToBeDragged).getTag() == R.drawable.candycrush_yellowcandy))||
+                            (((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedredcc)&&((int) candy.get(candyToBeDragged).getTag() == R.drawable.candycrush_redcandy))||
+                            (((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedgreencc)&&((int) candy.get(candyToBeDragged).getTag() == R.drawable.candycrush_greencandy))||
+                            (((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedbluecc)&&((int) candy.get(candyToBeDragged).getTag() == R.drawable.candycrush_bluecandy))||
+                            (((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedorangecc)&&((int) candy.get(candyToBeDragged).getTag() == R.drawable.candycrush_orangecandy))||
+                            (((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedpurplecc)&&((int) candy.get(candyToBeDragged).getTag() == R.drawable.candycrush_purplecandy))){
                         removeColumn(candy.get(candyToBeDragged).getId());
+                    }
+                    move--;
+                    moveRes.setText(String.valueOf(move));
+                    if (move==0){
+                        createDialog();
                     }
                 }
 
@@ -135,28 +163,34 @@ public class CandyCrush extends AppCompatActivity {
                     candyToBeDragged = imageView.getId();
                     candyToBeReplaced = candyToBeDragged +numberBlocks;
                     candyInterchange(candyToBeDragged,candyToBeReplaced);
-                    move--;
-                    moveRes.setText(String.valueOf(move));
                     if(((int) candy.get(candyToBeDragged).getTag() == R.drawable.bombcc)||((int) candy.get(candyToBeReplaced).getTag() == R.drawable.bombcc)){
                         removeKindCandy((int) candy.get(candyToBeDragged).getTag());
                         removeKindCandy((int) candy.get(candyToBeReplaced).getTag());
                     }
-                    if(((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedyellowcc)||((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedyellowcc)||
-                            ((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedbluecc)||((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedbluecc)||
-                            ((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedgreencc)||((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedgreencc)||
-                            ((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedredcc)||((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedredcc)||
-                            ((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedorangecc)||((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedorangecc) ||
-                            ((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedpurplecc)||((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedpurplecc)){
+                    if((((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedyellowcc)&&((int) candy.get(candyToBeReplaced).getTag() == R.drawable.candycrush_yellowcandy))||
+                            (((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedredcc)&&((int) candy.get(candyToBeReplaced).getTag() == R.drawable.candycrush_redcandy))||
+                            (((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedgreencc)&&((int) candy.get(candyToBeReplaced).getTag() == R.drawable.candycrush_greencandy))||
+                            (((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedbluecc)&&((int) candy.get(candyToBeReplaced).getTag() == R.drawable.candycrush_bluecandy))||
+                            (((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedorangecc)&&((int) candy.get(candyToBeReplaced).getTag() == R.drawable.candycrush_orangecandy))||
+                            (((int) candy.get(candyToBeDragged).getTag() == R.drawable.stripedpurplecc)&&((int) candy.get(candyToBeReplaced).getTag() == R.drawable.candycrush_purplecandy))||
+                            (((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedyellowcc)&&((int) candy.get(candyToBeDragged).getTag() == R.drawable.candycrush_yellowcandy))||
+                            (((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedredcc)&&((int) candy.get(candyToBeDragged).getTag() == R.drawable.candycrush_redcandy))||
+                            (((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedgreencc)&&((int) candy.get(candyToBeDragged).getTag() == R.drawable.candycrush_greencandy))||
+                            (((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedbluecc)&&((int) candy.get(candyToBeDragged).getTag() == R.drawable.candycrush_bluecandy))||
+                            (((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedorangecc)&&((int) candy.get(candyToBeDragged).getTag() == R.drawable.candycrush_orangecandy))||
+                            (((int) candy.get(candyToBeReplaced).getTag() == R.drawable.stripedpurplecc)&&((int) candy.get(candyToBeDragged).getTag() == R.drawable.candycrush_purplecandy))){
                         removeColumn(candy.get(candyToBeDragged).getId());
+                    }
+                    move--;
+                    moveRes.setText(String.valueOf(move));
+                    if (move==0){
+                        createDialog();
                     }
                 }
             });
         }
         mHandler = new Handler();
         startRepeat();
-        if (move==0){
-            createDialog();
-        }
     }
 
     public void createDialog(){
@@ -172,7 +206,7 @@ public class CandyCrush extends AppCompatActivity {
         gridLayout.setColumnCount(numberBlocks);
         gridLayout.getLayoutParams().width = widthScreen;
         gridLayout.getLayoutParams().height = heightScreen;
-
+        moveRes.setText(String.valueOf(move));
         for (int i = 0; i< numberBlocks*numberBlocks;i++){
             ImageView imageView = new ImageView(this);
             imageView.setId(i);
@@ -236,7 +270,7 @@ public class CandyCrush extends AppCompatActivity {
                     }
                     else if (chosedCandy == R.drawable.candycrush_orangecandy) {
                         candy.get(x).setImageResource( R.drawable.stripedorangecc);
-                        candy.get(x).setTag(R.drawable.stripedbluecc);
+                        candy.get(x).setTag(R.drawable.stripedorangecc);
                     }
                     else if (chosedCandy == R.drawable.candycrush_purplecandy) {
                         candy.get(x).setImageResource( R.drawable.stripedpurplecc);
@@ -313,7 +347,7 @@ public class CandyCrush extends AppCompatActivity {
                 }
                 else if (chosedCandy == R.drawable.candycrush_orangecandy) {
                     candy.get(x).setImageResource( R.drawable.stripedorangecc);
-                    candy.get(x).setTag(R.drawable.stripedbluecc);
+                    candy.get(x).setTag(R.drawable.stripedorangecc);
                 }
                 else if (chosedCandy == R.drawable.candycrush_purplecandy) {
                     candy.get(x).setImageResource( R.drawable.stripedpurplecc);

@@ -56,7 +56,6 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="40dp"
                     android:layout_marginTop="20dp"
-                    android:text="30"
                     android:textColor="#FFFFFF"
                     android:textSize="30sp" />
 
