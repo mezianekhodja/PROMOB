@@ -70,6 +70,10 @@ public class CandyCrush extends AppCompatActivity {
                     candyInterchange(candyToBeDragged,candyToBeReplaced);
                     move--;
                     moveRes.setText(String.valueOf(move));
+                    if(((int) candy.get(candyToBeDragged).getTag() == R.drawable.bombcc)||((int) candy.get(candyToBeReplaced).getTag() == R.drawable.bombcc)){
+                        removeKindCandy((int) candy.get(candyToBeDragged).getTag());
+                        removeKindCandy((int) candy.get(candyToBeReplaced).getTag());
+                    }
                 }
 
                 @Override
@@ -80,6 +84,10 @@ public class CandyCrush extends AppCompatActivity {
                     candyInterchange(candyToBeDragged,candyToBeReplaced);
                     move--;
                     moveRes.setText(String.valueOf(move));
+                    if(((int) candy.get(candyToBeDragged).getTag() == R.drawable.bombcc)||((int) candy.get(candyToBeReplaced).getTag() == R.drawable.bombcc)){
+                        removeKindCandy((int) candy.get(candyToBeDragged).getTag());
+                        removeKindCandy((int) candy.get(candyToBeReplaced).getTag());
+                    }
                 }
 
                 @Override
@@ -90,6 +98,10 @@ public class CandyCrush extends AppCompatActivity {
                     candyInterchange(candyToBeDragged,candyToBeReplaced);
                     move--;
                     moveRes.setText(String.valueOf(move));
+                    if(((int) candy.get(candyToBeDragged).getTag() == R.drawable.bombcc)||((int) candy.get(candyToBeReplaced).getTag() == R.drawable.bombcc)){
+                        removeKindCandy((int) candy.get(candyToBeDragged).getTag());
+                        removeKindCandy((int) candy.get(candyToBeReplaced).getTag());
+                    }
                 }
 
                 @Override
@@ -100,6 +112,10 @@ public class CandyCrush extends AppCompatActivity {
                     candyInterchange(candyToBeDragged,candyToBeReplaced);
                     move--;
                     moveRes.setText(String.valueOf(move));
+                    if(((int) candy.get(candyToBeDragged).getTag() == R.drawable.bombcc)||((int) candy.get(candyToBeReplaced).getTag() == R.drawable.bombcc)){
+                        removeKindCandy((int) candy.get(candyToBeDragged).getTag());
+                        removeKindCandy((int) candy.get(candyToBeReplaced).getTag());
+                    }
                 }
             });
         }
@@ -245,9 +261,18 @@ public class CandyCrush extends AppCompatActivity {
         candy.get(a).setTag(background);
         candy.get(b).setTag(background1);
     }
-
+    private void removeKindCandy(int color){
+        for (int i = 0; i< numberBlocks*numberBlocks;i++){
+            if  ((int) candy.get(i).getTag() == color){
+                candy.get(i).setImageResource(notCandy);
+                candy.get(i).setTag(notCandy);
+                score++;
+            }
+        }
+        moveDownCandies();
+    }
     private void moveDownCandies(){
-        for(int a=0;a<5;a++){
+        for(int a=0;a<numberBlocks;a++){
             for(int i=((numberBlocks*numberBlocks)-1);i>(numberBlocks-1);i--){
                 if ((int)candy.get(i).getTag() == notCandy){
                     candyInterchange(i,(i-numberBlocks));
