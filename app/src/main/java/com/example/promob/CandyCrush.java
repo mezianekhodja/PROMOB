@@ -21,7 +21,8 @@ public class CandyCrush extends AppCompatActivity {
     int[] candies = {
         R.drawable.candycrush_bluecandy, R.drawable.candycrush_greencandy,R.drawable.candycrush_orangecandy,
             R.drawable.candycrush_purplecandy,R.drawable.candycrush_redcandy,R.drawable.candycrush_yellowcandy,
-            R.drawable.bombcc
+            R.drawable.bombcc, R.drawable.stripedbluecc,R.drawable.stripedgreencc,R.drawable.stripedorangecc,
+            R.drawable.stripedpurplecc,R.drawable.stripedredcc,R.drawable.stripedyellowcc
 };
     int[] candiesstart = {
             R.drawable.candycrush_bluecandy, R.drawable.candycrush_greencandy,R.drawable.candycrush_orangecandy,
@@ -174,6 +175,56 @@ public class CandyCrush extends AppCompatActivity {
             }
         }
     }
+    private void checkRowForFour(){
+        for (int i=2; i<(numberBlocks*numberBlocks)-1;i++){
+            int chosedCandy = (int) candy.get(i).getTag();
+            boolean isBlank = (int) candy.get(i).getTag() == notCandy;
+
+            if ((i%numberBlocks!=0)&&((i%numberBlocks!=(numberBlocks-1)))&&(i%numberBlocks!=1)) {
+                int x=i;
+                if ((int) candy.get(x).getTag() == chosedCandy && !isBlank &&
+                        (int) candy.get(x-1).getTag() == chosedCandy  &&
+                        (int) candy.get(x+1).getTag() == chosedCandy &&
+                        (int) candy.get(x-2).getTag() == chosedCandy)
+                {
+                    score = score+4;
+                    scoreRes.setText(String.valueOf(score));
+
+                    if (chosedCandy == R.drawable.candycrush_bluecandy) {
+                        candy.get(x).setImageResource( R.drawable.stripedbluecc);
+                        candy.get(x).setTag(R.drawable.stripedbluecc);
+                    }
+                    else if (chosedCandy == R.drawable.candycrush_greencandy) {
+                        candy.get(x).setImageResource( R.drawable.stripedgreencc);
+                        candy.get(x).setTag(R.drawable.stripedgreencc);
+                    }
+                    else if (chosedCandy == R.drawable.candycrush_yellowcandy) {
+                        candy.get(x).setImageResource( R.drawable.stripedyellowcc);
+                        candy.get(x).setTag(R.drawable.stripedyellowcc);
+                    }
+                    else if (chosedCandy == R.drawable.candycrush_orangecandy) {
+                        candy.get(x).setImageResource( R.drawable.stripedorangecc);
+                        candy.get(x).setTag(R.drawable.stripedbluecc);
+                    }
+                    else if (chosedCandy == R.drawable.candycrush_purplecandy) {
+                        candy.get(x).setImageResource( R.drawable.stripedpurplecc);
+                        candy.get(x).setTag(R.drawable.stripedpurplecc);
+                    }
+                    else {
+                        candy.get(x).setImageResource( R.drawable.stripedredcc);
+                        candy.get(x).setTag(R.drawable.stripedredcc);
+                    }
+                    candy.get(x-1).setImageResource(notCandy);
+                    candy.get(x-1).setTag(notCandy);
+                    candy.get(x+1).setImageResource(notCandy);
+                    candy.get(x+1).setTag(notCandy);
+                    candy.get(x-2).setImageResource(notCandy);
+                    candy.get(x-2).setTag(notCandy);
+                }
+            }
+        }
+    }
+
     private void checkRowForFive(){
         for (int i=2; i<(numberBlocks*numberBlocks)-2;i++){
             int chosedCandy = (int) candy.get(i).getTag();
@@ -201,9 +252,53 @@ public class CandyCrush extends AppCompatActivity {
                     candy.get(x+2).setTag(notCandy);
                 }
             }
+        }
+    }
+    private void checkColumnForFour(){
+        for (int i=2*numberBlocks; i<((numberBlocks*numberBlocks)-numberBlocks);i++){
+            int chosedCandy = (int) candy.get(i).getTag();
+            boolean isBlank = (int) candy.get(i).getTag() == notCandy;
+            int x=i;
 
+            if ((int) candy.get(x).getTag() == chosedCandy && !isBlank &&
+                    (int) candy.get(x-numberBlocks).getTag() == chosedCandy  &&
+                    (int) candy.get(x-2*numberBlocks).getTag() == chosedCandy  &&
+                    (int) candy.get(x+numberBlocks).getTag() == chosedCandy) {
+                score = score+4;
+                scoreRes.setText(String.valueOf(score));
 
-
+                if (chosedCandy == R.drawable.candycrush_bluecandy) {
+                    candy.get(x).setImageResource( R.drawable.stripedbluecc);
+                    candy.get(x).setTag(R.drawable.stripedbluecc);
+                }
+                else if (chosedCandy == R.drawable.candycrush_greencandy) {
+                    candy.get(x).setImageResource( R.drawable.stripedgreencc);
+                    candy.get(x).setTag(R.drawable.stripedgreencc);
+                }
+                else if (chosedCandy == R.drawable.candycrush_yellowcandy) {
+                    candy.get(x).setImageResource( R.drawable.stripedyellowcc);
+                    candy.get(x).setTag(R.drawable.stripedyellowcc);
+                }
+                else if (chosedCandy == R.drawable.candycrush_orangecandy) {
+                    candy.get(x).setImageResource( R.drawable.stripedorangecc);
+                    candy.get(x).setTag(R.drawable.stripedbluecc);
+                }
+                else if (chosedCandy == R.drawable.candycrush_purplecandy) {
+                    candy.get(x).setImageResource( R.drawable.stripedpurplecc);
+                    candy.get(x).setTag(R.drawable.stripedpurplecc);
+                }
+                else {
+                    candy.get(x).setImageResource( R.drawable.stripedredcc);
+                    candy.get(x).setTag(R.drawable.stripedredcc);
+                }
+                
+                candy.get(x-numberBlocks).setImageResource(notCandy);
+                candy.get(x-numberBlocks).setTag(notCandy);
+                candy.get(x+numberBlocks).setImageResource(notCandy);
+                candy.get(x+numberBlocks).setTag(notCandy);
+                candy.get(x-2*numberBlocks).setImageResource(notCandy);
+                candy.get(x-2*numberBlocks).setTag(notCandy);
+            }
         }
     }
     private void checkColumnForFive(){
@@ -294,6 +389,8 @@ public class CandyCrush extends AppCompatActivity {
             try{
                 checkRowForFive();
                 checkColumnForFive();
+                checkRowForFour();
+                checkColumnForFour();
                 checkRowForThree();
                 checkColumnForThree();
                 moveDownCandies();
