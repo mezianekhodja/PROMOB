@@ -302,7 +302,7 @@ public class Pendu_Activity extends AppCompatActivity {
     }
 
     public void openAcceuil(){
-        Intent intent = new Intent(this, Home.class);
+        Intent intent = new Intent(this, Entrainement.class);
         startActivity(intent);
         Pendu_Activity.this.finish();
     }

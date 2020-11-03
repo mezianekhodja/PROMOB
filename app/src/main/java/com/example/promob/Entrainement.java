@@ -12,7 +12,7 @@ import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class Home extends AppCompatActivity {
+public class Entrainement extends AppCompatActivity {
 
     Button btn_logoquizz,btn_pendu,btn_cc;
     private FirebaseAuth firebaseAuth;
@@ -20,7 +20,7 @@ public class Home extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_liste_jeux);
         firebaseAuth = FirebaseAuth.getInstance();
         btn_logoquizz = (Button) findViewById(R.id.button_logoquizz);
         btn_logoquizz.setOnClickListener(new View.OnClickListener() {
@@ -48,22 +48,22 @@ public class Home extends AppCompatActivity {
     public void openHomeLogoQuizz() {
         Intent intent = new Intent(this, LogoQuizz_Home.class);
         startActivity(intent);
-        Home.this.finish();
+        Entrainement.this.finish();
     }
     public void openCC() {
         Intent intent = new Intent(this, CandyCrush_Home.class);
         startActivity(intent);
-        Home.this.finish();
+        Entrainement.this.finish();
     }
     public void openPendu() {
         Intent intent = new Intent(this, Pendu_Home.class);
         startActivity(intent);
-        Home.this.finish();
+        Entrainement.this.finish();
     }
     public void openActivityConnexion() {
         Intent intent = new Intent(this, Connexion.class);
         startActivity(intent);
-        Home.this.finish();
+        Entrainement.this.finish();
     }
     private void Logout() {
         firebaseAuth.signOut();
@@ -77,12 +77,12 @@ public class Home extends AppCompatActivity {
     public void openProfil() {
         Intent intent = new Intent(this, Profile.class);
         startActivity(intent);
-        Home.this.finish();
+        Entrainement.this.finish();
     }
 
     public void openAcceuil(){
         finish();
-        Intent intent = new Intent(this, Home.class);
+        Intent intent = new Intent(this, Entrainement.class);
         startActivity(intent);
     }
     @Override

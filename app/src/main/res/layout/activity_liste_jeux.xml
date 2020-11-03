@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context=".Home">
+    tools:context=".Entrainement">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,12 +26,6 @@
             android:textSize="25dp"
             android:textStyle="bold" />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            android:src="@drawable/logo" />
 
         <TextView
             android:id="@+id/textView8"
@@ -39,9 +33,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:gravity="center"
-            android:padding="2dp"
+            android:textColor="@color/noir"
             android:text="Montrez vos connaissances footballistiques en associant les logos à leurs clubs"
-            android:textSize="13dp" />
+            android:textSize="10dp" />
 
         <Button
             android:id="@+id/button_logoquizz"
@@ -53,11 +47,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:gravity="center"
-            android:padding="2dp"
-            android:text="Retrouvez votre âme d'enfant dans ce jeu revisité pour porter sur le domaine de l'ingénieur"
-            android:textSize="13dp" />
+            android:textColor="@color/noir"
+            android:text="Retrouvez une âme d'enfant dans ce jeu revisité qui porte sur le domaine de l'ingénieur"
+            android:textSize="10dp" />
 
         <Button
             android:id="@+id/buttongamependu"
@@ -85,6 +79,54 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:textColor="@color/noir"
+            android:text="Venez jouer a l'un des jeux les plus populaires du monde"
+            android:textSize="10dp" />
+
+        <Button
+            android:id="@+id/buttongame2048"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2048"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:textColor="@color/noir"
+            android:text="Bientot disponible !"
+            android:textSize="10dp" />
+
+        <Button
+            android:id="@+id/buttongamepasencoredispo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bientot disponible !"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:textColor="@color/noir"
+            android:text="Bientot disponible !"
+            android:textSize="10dp" />
+
+        <Button
+            android:id="@+id/buttongamepasencoredispo2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bientot disponible !"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:gravity="center"
             android:padding="2dp"
@@ -103,12 +145,13 @@
             android:textSize="20dp" />
 
         <TextView
+            android:id="@+id/textViewVersion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
             android:gravity="center"
-            android:text="Version 0.1"
+            android:text="Version 1.0"
             android:textSize="15dp" />
+
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

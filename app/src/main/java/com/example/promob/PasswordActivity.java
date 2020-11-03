@@ -77,7 +77,7 @@ public class PasswordActivity extends AppCompatActivity {
     }
 
     public void openAcceuil(){
-        Intent intent = new Intent(this, Home.class);
+        Intent intent = new Intent(this, Entrainement.class);
         startActivity(intent);
         PasswordActivity.this.finish();
     }

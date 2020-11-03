@@ -99,7 +99,7 @@ public class Connexion extends AppCompatActivity {
         Connexion.this.finish();
     }
     private void openHome(){
-        Intent intent = new Intent(this, Home.class);
+        Intent intent = new Intent(this, Solo_Multi.class);
         startActivity(intent);
         Connexion.this.finish();
     }

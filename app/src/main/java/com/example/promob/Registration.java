@@ -90,7 +90,7 @@ public class Registration extends AppCompatActivity {
         return result;
     }
     private void openPage(){
-        Intent intent = new Intent(this, Home.class);
+        Intent intent = new Intent(this, Entrainement.class);
         startActivity(intent);
         Registration.this.finish();
     }

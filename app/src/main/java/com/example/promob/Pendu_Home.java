@@ -79,7 +79,7 @@ public class Pendu_Home extends AppCompatActivity {
 
     public void openAcceuil(){
         finish();
-        Intent intent = new Intent(this, Home.class);
+        Intent intent = new Intent(this, Entrainement.class);
         startActivity(intent);
     }
     @Override

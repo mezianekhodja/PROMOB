@@ -109,7 +109,7 @@ public class Profile extends AppCompatActivity {
     }
 
     public void openAcceuil(){
-        Intent intent = new Intent(this, Home.class);
+        Intent intent = new Intent(this, Entrainement.class);
         startActivity(intent);
         Profile.this.finish();
     }
