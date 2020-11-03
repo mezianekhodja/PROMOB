@@ -237,6 +237,25 @@ public class LogoQuizz_bdd extends SQLiteOpenHelper {
         addQuestion(qH14);
         LogoQuizz_Question qH15 = new LogoQuizz_Question("logoquizz_hanovre","Hanovre", "Werder", "Wolfsburg", "Stuttgart", 1 ,LogoQuizz_Question.DIFFICULTY_HARD);
         addQuestion(qH15);
+        LogoQuizz_Question qH16 = new LogoQuizz_Question("logoquizz_antwerp","Antwerp", "Oostende", "Louvain", "Courtrai", 1 ,LogoQuizz_Question.DIFFICULTY_HARD);
+        addQuestion(qH16);
+        LogoQuizz_Question qH17 = new LogoQuizz_Question("logoquizz_antwerp","Genk", "Oostende", "Antwerp", "Courtrai", 3 ,LogoQuizz_Question.DIFFICULTY_HARD);
+        addQuestion(qH17);
+        LogoQuizz_Question qH18 = new LogoQuizz_Question("logoquizz_antwerp","Mechelen", "Oostende", "Louvain", "Antwerp", 4 ,LogoQuizz_Question.DIFFICULTY_HARD);
+        addQuestion(qH18);
+        LogoQuizz_Question qH19 = new LogoQuizz_Question("logoquizz_arminia","Arminia", "Vitebsk", "Minsk", "Antwerp", 1 ,LogoQuizz_Question.DIFFICULTY_HARD);
+        addQuestion(qH19);
+        LogoQuizz_Question qH20 = new LogoQuizz_Question("logoquizz_arminia","Brest", "Vitebsk", "Arminia", "Antwerp", 3 ,LogoQuizz_Question.DIFFICULTY_HARD);
+        addQuestion(qH20);
+        LogoQuizz_Question qH21 = new LogoQuizz_Question("logoquizz_arminia","Sloutsk", "Arminia", "Minsk", "Antwerp", 2 ,LogoQuizz_Question.DIFFICULTY_HARD);
+        addQuestion(qH21);
+        LogoQuizz_Question qH22 = new LogoQuizz_Question("logoquizz_bate","Bate", "Brest", "Sochi", "Minsk", 1 ,LogoQuizz_Question.DIFFICULTY_HARD);
+        addQuestion(qH22);
+        LogoQuizz_Question qH23 = new LogoQuizz_Question("logoquizz_bate","Tula", "Bate", "Sochi", "Minsk", 2 ,LogoQuizz_Question.DIFFICULTY_HARD);
+        addQuestion(qH23);
+        LogoQuizz_Question qH24 = new LogoQuizz_Question("logoquizz_bate","Ufa", "Brest", "Sochi", "Bate", 4 ,LogoQuizz_Question.DIFFICULTY_HARD);
+        addQuestion(qH24);
+        
     }
 
     private void addQuestion(LogoQuizz_Question question){
