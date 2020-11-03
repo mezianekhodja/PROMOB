@@ -34,7 +34,6 @@ public class LogoQuizz_Home extends AppCompatActivity {
         textViewHighscoreEasy = findViewById(R.id.LogoQuizzHighscoreEasy);
         textViewHighscoreMedium = findViewById(R.id.LogoQuizzHighscoreMedium);
         textViewHighscoreHard = findViewById(R.id.LogoQuizzHighscoreHard);
-
         loadHighscore();
 
 
