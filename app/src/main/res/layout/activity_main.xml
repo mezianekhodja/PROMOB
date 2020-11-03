@@ -37,6 +37,7 @@
             android:layout_height="wrap_content"
             android:text="Possibilité d'affronter vos amis dans des parties acharnées et d'enregistrer votre progression"
             android:layout_marginBottom="10dp"
+            android:gravity="center"
             android:layout_marginTop="10dp" />
         <Button
             android:id="@+id/btn_P1_connexion"
@@ -47,6 +48,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="Pas de sauvegarde des scores et pas de multijoueur"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp" />
@@ -58,9 +60,21 @@
             android:text="Jouer en tant qu'invité"/>
 
         <TextView
+            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="VMgames 2020, by Mez and Vince v1.0" />
+            android:text="@string/games_by_mez_and_vince"
+            android:layout_marginTop="40dp"
+            android:textSize="20dp"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Version 0.1"
+            android:layout_marginTop="5dp"
+            android:textSize="15dp"
+            android:gravity="center"/>
     </LinearLayout>
 
 

@@ -11,102 +11,104 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp"
-        tools:ignore="MissingConstraints">
+        tools:layout_editor_absoluteY="1dp">
 
         <TextView
             android:id="@+id/textView7"
-            android:textStyle="bold"
-            android:textColor="@color/noir"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/questionjeux"
+            android:layout_marginTop="5dp"
             android:gravity="center"
+            android:text="@string/questionjeux"
+            android:textColor="@color/blanc"
             android:textSize="25dp"
-            android:layout_marginTop="5dp"/>
+            android:textStyle="bold" />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_marginTop="5dp"
-            android:src="@drawable/logo"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:src="@drawable/logo" />
 
         <TextView
             android:id="@+id/textView8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="2dp"
             android:layout_marginTop="30dp"
             android:gravity="center"
-            android:textSize="13dp"
-            android:text="Montrez vos connaissances footballistiques en associant les logos à leurs clubs" />
+            android:padding="2dp"
+            android:text="Montrez vos connaissances footballistiques en associant les logos à leurs clubs"
+            android:textSize="13dp" />
 
         <Button
             android:id="@+id/button_logoquizz"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Logo Quizz"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:textSize="13dp"
+            android:layout_marginTop="5dp"
             android:gravity="center"
             android:padding="2dp"
-            android:text="Retrouvez votre âme d'enfant dans ce jeu revisité pour porter sur le domaine de l'ingénieur" />
+            android:text="Retrouvez votre âme d'enfant dans ce jeu revisité pour porter sur le domaine de l'ingénieur"
+            android:textSize="13dp" />
 
         <Button
             android:id="@+id/buttongamependu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="Pendu" />
+            android:text="Pendu"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="5dp"
             android:gravity="center"
             android:padding="2dp"
-            android:textSize="13dp"
-            android:text="Régalez vous dans l'univers fruité de Candy Crush" />
+            android:text="Régalez vous dans l'univers fruité de Candy Crush"
+            android:textSize="13dp" />
 
         <Button
             android:id="@+id/buttongamecandycrush"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="Candy Crush" />
+            android:text="Candy Crush"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="20dp"
             android:gravity="center"
             android:padding="2dp"
+            android:text="Bientôt de nouveaux jeux vont voir le jour ! Restez patient ;) "
+            android:textColor="@color/noir"
             android:textSize="13dp"
-            android:text="Bientôt de nouveaux jeux vont voir le jour ! Restez patient ;) " />
+            android:textStyle="italic" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
             android:text="@string/games_by_mez_and_vince"
-            android:layout_marginTop="20dp"
-            android:textSize="20dp"
-            android:gravity="center"/>
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:gravity="center"
             android:text="Version 0.1"
-            android:layout_marginTop="5dp"
-            android:textSize="15dp"
-            android:gravity="center"/>
+            android:textSize="15dp" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
