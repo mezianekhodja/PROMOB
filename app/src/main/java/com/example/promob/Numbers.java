@@ -16,11 +16,9 @@ import java.util.ArrayList;
 
 public class Numbers extends AppCompatActivity {
 
-    int[] numberslist = {
-            R.drawable.nb2048_0,R.drawable.nb2048_2, R.drawable.nb2048_4, R.drawable.nb2048_8,
+    int[] numberslist = {R.drawable.nb2048_0,R.drawable.nb2048_2, R.drawable.nb2048_4, R.drawable.nb2048_8,
             R.drawable.nb2048_16, R.drawable.nb2048_32, R.drawable.nb2048_64, R.drawable.nb2048_128,
-            R.drawable.nb2048_256, R.drawable.nb2048_512, R.drawable.nb2048_1024, R.drawable.nb2048_2048
-    };
+            R.drawable.nb2048_256, R.drawable.nb2048_512, R.drawable.nb2048_1024, R.drawable.nb2048_2048};
 
     int widthBlock, widthScreen, heightScreen, numberBlocks=4;
     ArrayList<ImageView> number = new ArrayList<>();
@@ -94,15 +92,16 @@ public class Numbers extends AppCompatActivity {
         number.get(randomnb).setTag(numberslist[1]);
     }
 
-    private int randomNumber(int size){
-        return ((int)Math.floor(Math.random() * size));
-    }
-
     Runnable repeatChecker = new Runnable() {
         @Override
         public void run() {
             try{
-
+                if (testVictory()){
+                   createDialog(true);
+                }
+                if(testLoose()){
+                    createDialog(false);
+                }
             }
             finally{
                 mHandler.postDelayed(repeatChecker,interval);
@@ -113,4 +112,44 @@ public class Numbers extends AppCompatActivity {
     void startRepeat(){
         repeatChecker.run();
     }
+
+    private int randomNumber(int size){
+        return ((int)Math.floor(Math.random() * size));
+    }
+
+    private boolean testVictory(){
+        for(int index = 0; index<number.size();index++ ){
+            if ((int)number.get(index).getTag()==R.drawable.nb2048_2048){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean testLoose(){
+        for(int index = 0; index<number.size();index++ ){
+            if ((int)number.get(index).getTag()==R.drawable.nb2048_0){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void createDialog(boolean win) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Dommage... ");
+        builder.setMessage("Votre score est de  : "+String.valueOf(score));
+        if (win){
+            builder.setTitle("Belle victoire ! ");
+        }
+        builder.create().show();
+        finishGame();
+    }
+    private void finishGame(){
+        Intent intent = new Intent(this, Numbers_Home.class);
+        intent.putExtra("score", score);
+        startActivity(intent);
+        Numbers.this.finish();
+    }
+
 }
