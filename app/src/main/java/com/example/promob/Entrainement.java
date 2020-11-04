@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Entrainement extends AppCompatActivity {
 
-    Button btn_logoquizz,btn_pendu,btn_cc;
+    Button btn_logoquizz,btn_pendu,btn_cc,btn_nb;
     private FirebaseAuth firebaseAuth;
 
     @Override
@@ -43,6 +43,13 @@ public class Entrainement extends AppCompatActivity {
                 openCC();
             }
         });
+        btn_nb = (Button) findViewById(R.id.buttongame2048);
+        btn_nb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openNumbers();
+            }
+        });
     }
 
     public void openHomeLogoQuizz() {
@@ -57,6 +64,11 @@ public class Entrainement extends AppCompatActivity {
     }
     public void openPendu() {
         Intent intent = new Intent(this, Pendu_Home.class);
+        startActivity(intent);
+        Entrainement.this.finish();
+    }
+    public void openNumbers() {
+        Intent intent = new Intent(this, Numbers_Home.class);
         startActivity(intent);
         Entrainement.this.finish();
     }
