@@ -46,22 +46,22 @@ public class Numbers extends AppCompatActivity {
             imageView.setOnTouchListener(new OnSwipeListener(Numbers.this){
                 @Override
                 void onSwipeLeft() {
-
+                    instructions();
                 }
 
                 @Override
                 void onSwipeRight(){
-
+                    instructions();
                 }
 
                 @Override
                 void onSwipeTop(){
-
+                    instructions();
                 }
 
                 @Override
                 void onSwipeBottom(){
-
+                    instructions();
                 }
             });
         }
@@ -96,12 +96,7 @@ public class Numbers extends AppCompatActivity {
         @Override
         public void run() {
             try{
-                if (testVictory()){
-                   createDialog(true);
-                }
-                if(testLoose()){
-                    createDialog(false);
-                }
+
             }
             finally{
                 mHandler.postDelayed(repeatChecker,interval);
@@ -135,6 +130,33 @@ public class Numbers extends AppCompatActivity {
         return true;
     }
 
+    private void addBlock(){
+        int x = randomNumber(numberslist.length);
+        boolean changement = false;
+        while (!changement){
+           if ((int)number.get(x).getTag()==R.drawable.nb2048_0){
+               number.get(x).setImageResource(numberslist[1]);
+               number.get(x).setTag(numberslist[1]);
+               changement = true;
+               break;
+           }
+           x++;
+           if (x==number.size()){
+               x=0;
+           }
+        }
+    }
+    private void instructions(){
+        if (testVictory()){
+            createDialog(true);
+        }
+        else if(testLoose()){
+            createDialog(false);
+        }
+        else {
+            addBlock();
+        }
+    }
     public void createDialog(boolean win) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Dommage... ");
