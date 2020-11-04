@@ -21,7 +21,7 @@ public class Numbers_Home extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_candy_crush__home);
+        setContentView(R.layout.activity_numbers__home);
 
         firebaseAuth = FirebaseAuth.getInstance();
 

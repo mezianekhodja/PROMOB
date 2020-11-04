@@ -17,9 +17,9 @@ import java.util.ArrayList;
 public class Numbers extends AppCompatActivity {
 
     int[] numberslist = {
-             R.drawable.nb2048_2, R.drawable.nb2048_4, R.drawable.nb2048_8, R.drawable.nb2048_16,
-            R.drawable.nb2048_32, R.drawable.nb2048_64, R.drawable.nb2048_128, R.drawable.nb2048_256,
-            R.drawable.nb2048_512, R.drawable.nb2048_1024, R.drawable.nb2048_2048
+            R.drawable.nb2048_0,R.drawable.nb2048_2, R.drawable.nb2048_4, R.drawable.nb2048_8,
+            R.drawable.nb2048_16, R.drawable.nb2048_32, R.drawable.nb2048_64, R.drawable.nb2048_128,
+            R.drawable.nb2048_256, R.drawable.nb2048_512, R.drawable.nb2048_1024, R.drawable.nb2048_2048
     };
 
     int widthBlock, widthScreen, heightScreen, numberBlocks=4;
@@ -33,7 +33,7 @@ public class Numbers extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_candy_crush);
+        setContentView(R.layout.activity_numbers);
 
         DisplayMetrics displayMetrics =  new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -71,36 +71,31 @@ public class Numbers extends AppCompatActivity {
         startRepeat();
     }
 
-    public void createDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Votre score est de  : "+String.valueOf(score));
-        builder.create().show();
-        finishGame();
-    }
-    private void finishGame(){
-        Intent intent = new Intent(this, Numbers_Home.class);
-        intent.putExtra("score", score);
-        startActivity(intent);
-        Numbers.this.finish();
-    }
     private void createBoard() {
         GridLayout gridLayout = findViewById(R.id.boardnb);
         gridLayout.setRowCount(numberBlocks);
         gridLayout.setColumnCount(numberBlocks);
         gridLayout.getLayoutParams().width = widthScreen;
         gridLayout.getLayoutParams().height = heightScreen;
+
         for (int i = 0; i< numberBlocks*numberBlocks;i++){
             ImageView imageView = new ImageView(this);
             imageView.setId(i);
             imageView.setLayoutParams(new android.view.ViewGroup.LayoutParams(widthBlock, widthBlock));
             imageView.setMaxHeight(widthBlock);
             imageView.setMaxWidth(widthBlock);
-            int randomnb = (int) Math.floor(Math.random()*numberslist.length);
-            imageView.setImageResource(numberslist[randomnb]);
-            imageView.setTag(numberslist[randomnb]);
+            imageView.setImageResource(numberslist[0]);//image vierge
+            imageView.setTag(numberslist[0]);
             number.add(imageView);
             gridLayout.addView(imageView);
         }
+        int randomnb = randomNumber(numberslist.length);
+        number.get(randomnb).setImageResource(numberslist[1]);
+        number.get(randomnb).setTag(numberslist[1]);
+    }
+
+    private int randomNumber(int size){
+        return ((int)Math.floor(Math.random() * size));
     }
 
     Runnable repeatChecker = new Runnable() {
