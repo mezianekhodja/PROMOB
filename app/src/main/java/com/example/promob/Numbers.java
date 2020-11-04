@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.widget.GridLayout;
 import android.widget.ImageView;
@@ -22,10 +21,9 @@ public class Numbers extends AppCompatActivity {
 
     int widthBlock, widthScreen, heightScreen, numberBlocks=4;
     ArrayList<ImageView> number = new ArrayList<>();
-    Handler mHandler = new Handler();
     int interval = 100;
     TextView scoreRes;
-    int score = 0;
+    int score = 2;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -65,8 +63,6 @@ public class Numbers extends AppCompatActivity {
                 }
             });
         }
-        mHandler = new Handler();
-        startRepeat();
     }
 
     private void createBoard() {
@@ -90,22 +86,6 @@ public class Numbers extends AppCompatActivity {
         int randomnb = randomNumber(numberslist.length);
         number.get(randomnb).setImageResource(numberslist[1]);
         number.get(randomnb).setTag(numberslist[1]);
-    }
-
-    Runnable repeatChecker = new Runnable() {
-        @Override
-        public void run() {
-            try{
-
-            }
-            finally{
-                mHandler.postDelayed(repeatChecker,interval);
-            }
-        }
-
-    };
-    void startRepeat(){
-        repeatChecker.run();
     }
 
     private int randomNumber(int size){
@@ -155,8 +135,48 @@ public class Numbers extends AppCompatActivity {
         }
         else {
             addBlock();
+            gestionScore();
         }
     }
+
+    private void gestionScore(){
+        int value = 0;
+        for(int index = 0; index<number.size();index++ ){
+            int valuetemp;
+            switch((int)number.get(index).getTag()){
+                case R.drawable.nb2048_2048: valuetemp=2048;
+                    break;
+                case R.drawable.nb2048_1024: valuetemp=1024;
+                    break;
+                case R.drawable.nb2048_512: valuetemp=512;
+                    break;
+                case R.drawable.nb2048_256: valuetemp=256;
+                    break;
+                case R.drawable.nb2048_128: valuetemp=128;
+                    break;
+                case R.drawable.nb2048_64: valuetemp=64;
+                    break;
+                case R.drawable.nb2048_32: valuetemp=32;
+                    break;
+                case R.drawable.nb2048_16: valuetemp=16;
+                    break;
+                case R.drawable.nb2048_8: valuetemp=8;
+                    break;
+                case R.drawable.nb2048_4: valuetemp=4;
+                    break;
+                case R.drawable.nb2048_2: valuetemp=2;
+                    break;
+                default: valuetemp=0;
+                    break;
+            }
+            if(valuetemp>value){
+                value=valuetemp;
+            }
+        }
+        score = value;
+        scoreRes.setText(String.valueOf(score));
+    }
+
     public void createDialog(boolean win) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Dommage... ");
