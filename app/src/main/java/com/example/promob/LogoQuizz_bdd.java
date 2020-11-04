@@ -226,7 +226,7 @@ public class LogoQuizz_bdd extends SQLiteOpenHelper {
         addQuestion(qM34);
         LogoQuizz_Question qM35 = new LogoQuizz_Question("logoquizz_wolfsburg","Wolfsburg", "Augsbourg", "Watford", "Wolverhampton", 1 ,LogoQuizz_Question.DIFFICULTY_MEDIUM);
         addQuestion(qM35);
-        LogoQuizz_Question qM36 = new LogoQuizz_Question("logoquizz_wolfsburg","Wolverhampton", "Wolfsburg", "Watford", "Wolfsburg", 4 ,LogoQuizz_Question.DIFFICULTY_MEDIUM);
+        LogoQuizz_Question qM36 = new LogoQuizz_Question("logoquizz_wolfsburg","Wolverhampton", "Francfort", "Watford", "Wolfsburg", 4 ,LogoQuizz_Question.DIFFICULTY_MEDIUM);
         addQuestion(qM36);
         LogoQuizz_Question qM37 = new LogoQuizz_Question("logoquizz_wolverhampton","Leeds", "Wolfsburg", "Watford", "Wolverhampton", 4 ,LogoQuizz_Question.DIFFICULTY_MEDIUM);
         addQuestion(qM37);
