@@ -123,6 +123,31 @@ public class LogoQuizz_bdd extends SQLiteOpenHelper {
         addQuestion(qE35);
         LogoQuizz_Question qE36 = new LogoQuizz_Question("logoquizz_tottenham","Benfica", "Tottenham", "Manchester City", "Leeds", 2, LogoQuizz_Question.DIFFICULTY_EASY);
         addQuestion(qE36);
+        LogoQuizz_Question qE37 = new LogoQuizz_Question("logoquizz_ajax","Ajax", "Tottenham", "Manchester City", "PSV", 1, LogoQuizz_Question.DIFFICULTY_EASY);
+        addQuestion(qE37);
+        LogoQuizz_Question qE38 = new LogoQuizz_Question("logoquizz_ajax","Copenhague", "Tottenham", "Ajax", "PSV", 3, LogoQuizz_Question.DIFFICULTY_EASY);
+        addQuestion(qE38);
+        LogoQuizz_Question qE39 = new LogoQuizz_Question("logoquizz_ajax","Bale", "Ajax", "Manchester City", "PSV", 2, LogoQuizz_Question.DIFFICULTY_EASY);
+        addQuestion(qE39);
+        LogoQuizz_Question qE40 = new LogoQuizz_Question("logoquizz_barcelone","Barcelone", "Real Madrid", "Seville", "Atletico", 1, LogoQuizz_Question.DIFFICULTY_EASY);
+        addQuestion(qE40);
+        LogoQuizz_Question qE41 = new LogoQuizz_Question("logoquizz_barcelone","Marseille Consolat", "Real Madrid", "Barcelone", "Atletico", 3, LogoQuizz_Question.DIFFICULTY_EASY);
+        addQuestion(qE41);
+        LogoQuizz_Question qE42 = new LogoQuizz_Question("logoquizz_barcelone","Bournemouth", "Real Madrid", "Seville", "Barcelone", 4, LogoQuizz_Question.DIFFICULTY_EASY);
+        addQuestion(qE42);
+        LogoQuizz_Question qE43 = new LogoQuizz_Question("logoquizz_realmadrid","Barcelone", "Real Madrid", "Seville", "Atletico", 2, LogoQuizz_Question.DIFFICULTY_EASY);
+        addQuestion(qE43);
+        LogoQuizz_Question qE44 = new LogoQuizz_Question("logoquizz_realmadrid","Barcelone", "Arsenal", "Seville", "Real Madrid", 4, LogoQuizz_Question.DIFFICULTY_EASY);
+        addQuestion(qE44);
+        LogoQuizz_Question qE45 = new LogoQuizz_Question("logoquizz_realmadrid","Barcelone", "Betis", "Real Madrid", "Atletico", 3, LogoQuizz_Question.DIFFICULTY_EASY);
+        addQuestion(qE45);
+        LogoQuizz_Question qE46 = new LogoQuizz_Question("logoquizz_city","Barcelone", "Manchester City", "Manchester United", "Arsenal", 2, LogoQuizz_Question.DIFFICULTY_EASY);
+        addQuestion(qE46);
+        LogoQuizz_Question qE47 = new LogoQuizz_Question("logoquizz_city","Manchester City", "Leeds", "Manchester United", "Arsenal", 1, LogoQuizz_Question.DIFFICULTY_EASY);
+        addQuestion(qE47);
+        LogoQuizz_Question qE48 = new LogoQuizz_Question("logoquizz_city","Barcelone", "Chelsea", "Manchester United", "Manchester City", 4, LogoQuizz_Question.DIFFICULTY_EASY);
+        addQuestion(qE48);
+
 
         //MEDIUM
         LogoQuizz_Question qM1 = new LogoQuizz_Question("logoquizz_rennes","Brest", "Rennes", "Lorient", "Nantes", 2 ,LogoQuizz_Question.DIFFICULTY_MEDIUM);
@@ -203,7 +228,24 @@ public class LogoQuizz_bdd extends SQLiteOpenHelper {
         addQuestion(qM38);
         LogoQuizz_Question qM39 = new LogoQuizz_Question("logoquizz_wolverhampton","Wolverhampton", "Wolfsburg", "Watford", "Crystal Palace", 1 ,LogoQuizz_Question.DIFFICULTY_MEDIUM);
         addQuestion(qM39);
-
+        LogoQuizz_Question qM40 = new LogoQuizz_Question("logoquizz_besiktas","Besiktas", "Fenerbahce", "Galatasaray", "Bale", 1 ,LogoQuizz_Question.DIFFICULTY_MEDIUM);
+        addQuestion(qM40);
+        LogoQuizz_Question qM41 = new LogoQuizz_Question("logoquizz_besiktas","Olympiacos", "Fenerbahce", "Galatasaray", "Besiktas", 4 ,LogoQuizz_Question.DIFFICULTY_MEDIUM);
+        addQuestion(qM41);
+        LogoQuizz_Question qM42 = new LogoQuizz_Question("logoquizz_besiktas","Betis", "Besiktas", "Galatasaray", "Bale", 2 ,LogoQuizz_Question.DIFFICULTY_MEDIUM);
+        addQuestion(qM42);
+        LogoQuizz_Question qM43 = new LogoQuizz_Question("logoquizz_brest","Betis", "Brest", "Bordeaux", "Rennes", 2 ,LogoQuizz_Question.DIFFICULTY_MEDIUM);
+        addQuestion(qM43);
+        LogoQuizz_Question qM44 = new LogoQuizz_Question("logoquizz_brest","Lorient", "Nantes", "Beziers", "Brest", 4 ,LogoQuizz_Question.DIFFICULTY_MEDIUM);
+        addQuestion(qM44);
+        LogoQuizz_Question qM45 = new LogoQuizz_Question("logoquizz_brest","Brest", "Beziers", "Bordeaux", "Bourg en bresse", 1 ,LogoQuizz_Question.DIFFICULTY_MEDIUM);
+        addQuestion(qM45);
+        LogoQuizz_Question qM46 = new LogoQuizz_Question("logoquizz_leeds","Leicester", "Leeds", "Liverpool", "Tottenham", 2 ,LogoQuizz_Question.DIFFICULTY_MEDIUM);
+        addQuestion(qM46);
+        LogoQuizz_Question qM47 = new LogoQuizz_Question("logoquizz_leeds","Leicester", "Lens", "Liverpool", "Leeds", 4 ,LogoQuizz_Question.DIFFICULTY_MEDIUM);
+        addQuestion(qM47);
+        LogoQuizz_Question qM48 = new LogoQuizz_Question("logoquizz_leeds","Leicester", "Liverpool", "Leeds", "Laval", 3 ,LogoQuizz_Question.DIFFICULTY_MEDIUM);
+        addQuestion(qM48);
 
 
         //HARD
@@ -255,7 +297,42 @@ public class LogoQuizz_bdd extends SQLiteOpenHelper {
         addQuestion(qH23);
         LogoQuizz_Question qH24 = new LogoQuizz_Question("logoquizz_bate","Ufa", "Brest", "Sochi", "Bate", 4 ,LogoQuizz_Question.DIFFICULTY_HARD);
         addQuestion(qH24);
-        
+        LogoQuizz_Question qH25 = new LogoQuizz_Question("logoquizz_boavista","Boavista", "Besiktas", "Bournemouth", "Braga", 1 ,LogoQuizz_Question.DIFFICULTY_HARD);
+        addQuestion(qH25);
+        LogoQuizz_Question qH26 = new LogoQuizz_Question("logoquizz_boavista","Blackburn", "Bourg en bresse", "Bournemouth", "Boavista", 4 ,LogoQuizz_Question.DIFFICULTY_HARD);
+        addQuestion(qH26);
+        LogoQuizz_Question qH27 = new LogoQuizz_Question("logoquizz_boavista","Braga", "Boavista", "Bournemouth", "Bordeaux", 2 ,LogoQuizz_Question.DIFFICULTY_HARD);
+        addQuestion(qH27);
+        LogoQuizz_Question qH28 = new LogoQuizz_Question("logoquizz_cork","Dundalk", "Derry City", "Cork", "Dublin", 3 ,LogoQuizz_Question.DIFFICULTY_HARD);
+        addQuestion(qH28);
+        LogoQuizz_Question qH29 = new LogoQuizz_Question("logoquizz_cork","Cork", "Derry City", "Finn Harps", "Dublin", 1 ,LogoQuizz_Question.DIFFICULTY_HARD);
+        addQuestion(qH29);
+        LogoQuizz_Question qH30 = new LogoQuizz_Question("logoquizz_cork","Dundalk", "Derry City", "Waterford United", "Cork", 4 ,LogoQuizz_Question.DIFFICULTY_HARD);
+        addQuestion(qH30);
+        LogoQuizz_Question qH31 = new LogoQuizz_Question("logoquizz_maritimo","Maritimo", "Santa Clara", "Madere", "Sporting", 1 ,LogoQuizz_Question.DIFFICULTY_HARD);
+        addQuestion(qH31);
+        LogoQuizz_Question qH32 = new LogoQuizz_Question("logoquizz_maritimo","Madere", "Maritimo", "Rio Ave", "Sporting", 2 ,LogoQuizz_Question.DIFFICULTY_HARD);
+        addQuestion(qH32);
+        LogoQuizz_Question qH33 = new LogoQuizz_Question("logoquizz_maritimo","Madere", "Moreinse", "Maritimo", "Sporting", 3 ,LogoQuizz_Question.DIFFICULTY_HARD);
+        addQuestion(qH33);
+        LogoQuizz_Question qH34 = new LogoQuizz_Question("logoquizz_konyaspor","Konyaspor", "Tondela", "Farense", "Portimonense", 1 ,LogoQuizz_Question.DIFFICULTY_HARD);
+        addQuestion(qH34);
+        LogoQuizz_Question qH35 = new LogoQuizz_Question("logoquizz_konyaspor","Belenses", "Tondela", "Konyaspor", "Portimonense", 3 ,LogoQuizz_Question.DIFFICULTY_HARD);
+        addQuestion(qH35);
+        LogoQuizz_Question qH36 = new LogoQuizz_Question("logoquizz_konyaspor","Gil Vicente", "Tondela", "Farense", "Konyaspor", 4 ,LogoQuizz_Question.DIFFICULTY_HARD);
+        addQuestion(qH36);
+        LogoQuizz_Question qH37 = new LogoQuizz_Question("logoquizz_legia","Lubin", "Lech", "Pogon", "Legia", 4 ,LogoQuizz_Question.DIFFICULTY_HARD);
+        addQuestion(qH37);
+        LogoQuizz_Question qH38 = new LogoQuizz_Question("logoquizz_legia","Lubin", "Lech", "Legia", "Leeds", 3 ,LogoQuizz_Question.DIFFICULTY_HARD);
+        addQuestion(qH38);
+        LogoQuizz_Question qH39 = new LogoQuizz_Question("logoquizz_legia","Lubin", "Legia", "Pogon", "Leeds", 2 ,LogoQuizz_Question.DIFFICULTY_HARD);
+        addQuestion(qH39);
+        LogoQuizz_Question qH40 = new LogoQuizz_Question("logoquizz_lech","Lubin", "Legia", "Warta", "Lech", 4 ,LogoQuizz_Question.DIFFICULTY_HARD);
+        addQuestion(qH40);
+        LogoQuizz_Question qH41 = new LogoQuizz_Question("logoquizz_lech","Lech", "Legia", "Warta", "Podbeskidzie", 1 ,LogoQuizz_Question.DIFFICULTY_HARD);
+        addQuestion(qH41);
+        LogoQuizz_Question qH42 = new LogoQuizz_Question("logoquizz_lech","Lubin", "Lech", "Warta", "Wisla", 2 ,LogoQuizz_Question.DIFFICULTY_HARD);
+        addQuestion(qH42);
     }
 
     private void addQuestion(LogoQuizz_Question question){
