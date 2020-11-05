@@ -44,21 +44,36 @@ public class Numbers extends AppCompatActivity {
             imageView.setOnTouchListener(new OnSwipeListener(Numbers.this){
                 @Override
                 void onSwipeLeft() {
+                    for (int i = 0; i< 3;i++){
+                        decalageGauche();
+                        correspondanceGauche();
+                    }
                     instructions();
                 }
 
                 @Override
                 void onSwipeRight(){
+                    for (int i = 0; i< 3;i++){
+                        correspondanceDroite();
+                        decalageDroite();
+                    }
                     instructions();
                 }
-
                 @Override
                 void onSwipeTop(){
+                    for (int i = 0; i< 3;i++){
+                        correspondanceHaut();
+                        decalageHaut();
+                    }
                     instructions();
                 }
 
                 @Override
                 void onSwipeBottom(){
+                    for (int i = 0; i< 3;i++){
+                        correspondanceBas();
+                        decalageBas();
+                    }
                     instructions();
                 }
             });
@@ -90,6 +105,219 @@ public class Numbers extends AppCompatActivity {
 
     private int randomNumber(int size){
         return ((int)Math.floor(Math.random() * size));
+    }
+
+    private void blockInterchange(int a, int b){
+        int background = (int) number.get(b).getTag();
+        int background1 = (int) number.get(a).getTag();
+        number.get(a).setImageResource(background);
+        number.get(b).setImageResource(background1);
+        number.get(a).setTag(background);
+        number.get(b).setTag(background1);
+    }
+
+    private void decalageDroite(){
+        for(int a = 0; a<(numberBlocks-1);a++ ){
+            for(int index = (numberBlocks-1); index<number.size();index+=numberBlocks ){
+             for(int j = index; j>index-(numberBlocks-1);j-- ){
+                if ((int)number.get(j).getTag()==R.drawable.nb2048_0){
+                    blockInterchange(j,j-1);
+                }
+             }
+            }
+        }
+    }
+    private void correspondanceDroite(){
+        for(int a = 0; a<(numberBlocks-1);a++ ){
+            for(int index = (numberBlocks-1); index<number.size();index+=numberBlocks ){
+                for(int j = index; j>index-(numberBlocks-1);j-- ){
+                    if ((int)number.get(j).getTag()==(int)number.get(j-1).getTag()){
+                        int level=0;
+                        switch((int)number.get(j).getTag()){
+                            case R.drawable.nb2048_1024: level=11;
+                                break;
+                            case R.drawable.nb2048_512: level=10;
+                                break;
+                            case R.drawable.nb2048_256: level=9;
+                                break;
+                            case R.drawable.nb2048_128: level=8;
+                                break;
+                            case R.drawable.nb2048_64: level=7;
+                                break;
+                            case R.drawable.nb2048_32: level=6;
+                                break;
+                            case R.drawable.nb2048_16: level=5;
+                                break;
+                            case R.drawable.nb2048_8: level=4;
+                                break;
+                            case R.drawable.nb2048_4: level=3;
+                                break;
+                            case R.drawable.nb2048_2: level=2;
+                                break;
+                            default: level=0;
+                                break;
+                        }
+                        number.get(j).setImageResource(numberslist[level]);
+                        number.get(j).setTag(numberslist[level]);
+                        number.get(j-1).setImageResource(numberslist[0]);
+                        number.get(j-1).setTag(numberslist[0]);
+                    }
+                }
+            }
+        }
+    }
+    private void decalageHaut(){
+        for(int a = 0; a<(numberBlocks-1);a++ ){
+            for(int index = 0; index<numberBlocks;index++ ){
+                for(int j = index; j<(number.size()-numberBlocks);j+=numberBlocks ){
+                    if ((int)number.get(j).getTag()==R.drawable.nb2048_0){
+                        blockInterchange(j,j+numberBlocks);
+                    }
+                }
+            }
+        }
+    }
+    private void correspondanceHaut(){
+        for(int a = 0; a<(numberBlocks-1);a++ ){
+            for(int index = 0; index<numberBlocks;index++ ){
+                for(int j = index; j<(number.size()-numberBlocks);j+=numberBlocks ){
+                    if ((int)number.get(j).getTag()==(int)number.get(j+numberBlocks).getTag()){
+                        int level=0;
+                        switch((int)number.get(j).getTag()){
+                            case R.drawable.nb2048_1024: level=11;
+                                break;
+                            case R.drawable.nb2048_512: level=10;
+                                break;
+                            case R.drawable.nb2048_256: level=9;
+                                break;
+                            case R.drawable.nb2048_128: level=8;
+                                break;
+                            case R.drawable.nb2048_64: level=7;
+                                break;
+                            case R.drawable.nb2048_32: level=6;
+                                break;
+                            case R.drawable.nb2048_16: level=5;
+                                break;
+                            case R.drawable.nb2048_8: level=4;
+                                break;
+                            case R.drawable.nb2048_4: level=3;
+                                break;
+                            case R.drawable.nb2048_2: level=2;
+                                break;
+                            default: level=0;
+                                break;
+                        }
+                        number.get(j).setImageResource(numberslist[level]);
+                        number.get(j).setTag(numberslist[level]);
+                        number.get(j+numberBlocks).setImageResource(numberslist[0]);
+                        number.get(j+numberBlocks).setTag(numberslist[0]);
+                    }
+                }
+            }
+        }
+    }
+    private void decalageBas(){
+        for(int a = 0; a<(numberBlocks-1);a++ ){
+            for(int index = (number.size()-numberBlocks); index<number.size();index++ ){
+                for(int j = index; j>=numberBlocks;j-=numberBlocks ){
+                    if ((int)number.get(j).getTag()==R.drawable.nb2048_0){
+                        blockInterchange(j,j-numberBlocks);
+                    }
+                }
+            }
+        }
+    }
+    private void correspondanceBas(){
+        for(int a = 0; a<(numberBlocks-1);a++ ){
+            for(int index = (number.size()-numberBlocks); index<number.size();index++ ){
+                for(int j = index; j>=numberBlocks;j-=numberBlocks ){
+                    if ((int)number.get(j).getTag()==(int)number.get(j-numberBlocks).getTag()){
+                        int level=0;
+                        switch((int)number.get(j).getTag()){
+                            case R.drawable.nb2048_1024: level=11;
+                                break;
+                            case R.drawable.nb2048_512: level=10;
+                                break;
+                            case R.drawable.nb2048_256: level=9;
+                                break;
+                            case R.drawable.nb2048_128: level=8;
+                                break;
+                            case R.drawable.nb2048_64: level=7;
+                                break;
+                            case R.drawable.nb2048_32: level=6;
+                                break;
+                            case R.drawable.nb2048_16: level=5;
+                                break;
+                            case R.drawable.nb2048_8: level=4;
+                                break;
+                            case R.drawable.nb2048_4: level=3;
+                                break;
+                            case R.drawable.nb2048_2: level=2;
+                                break;
+                            default: level=0;
+                                break;
+                        }
+                        number.get(j).setImageResource(numberslist[level]);
+                        number.get(j).setTag(numberslist[level]);
+                        number.get(j-numberBlocks).setImageResource(numberslist[0]);
+                        number.get(j-numberBlocks).setTag(numberslist[0]);
+                    }
+                }
+            }
+        }
+    }
+
+
+    private void decalageGauche(){
+        for(int a = 0; a<(numberBlocks-1);a++ ){
+            for(int index = 0; index<number.size();index+=numberBlocks ){
+                for(int j = index; j<index+(numberBlocks-1);j++ ){
+                    if ((int)number.get(j).getTag()==R.drawable.nb2048_0){
+                        blockInterchange(j,j+1);
+                    }
+                }
+            }
+        }
+    }
+
+    private void correspondanceGauche(){
+        for(int a = 0; a<(numberBlocks-1);a++ ){
+            for(int index = 0; index<number.size();index+=numberBlocks ){
+                for(int j = index; j<index+(numberBlocks-1);j++ ){
+                    if ((int)number.get(j).getTag()==(int)number.get(j+1).getTag()){
+                        int level=0;
+                        switch((int)number.get(j).getTag()){
+                            case R.drawable.nb2048_1024: level=11;
+                                break;
+                            case R.drawable.nb2048_512: level=10;
+                                break;
+                            case R.drawable.nb2048_256: level=9;
+                                break;
+                            case R.drawable.nb2048_128: level=8;
+                                break;
+                            case R.drawable.nb2048_64: level=7;
+                                break;
+                            case R.drawable.nb2048_32: level=6;
+                                break;
+                            case R.drawable.nb2048_16: level=5;
+                                break;
+                            case R.drawable.nb2048_8: level=4;
+                                break;
+                            case R.drawable.nb2048_4: level=3;
+                                break;
+                            case R.drawable.nb2048_2: level=2;
+                                break;
+                            default: level=0;
+                                break;
+                        }
+                    number.get(j).setImageResource(numberslist[level]);
+                    number.get(j).setTag(numberslist[level]);
+                    number.get(j+1).setImageResource(numberslist[0]);
+                    number.get(j+1).setTag(numberslist[0]);
+                    }
+                }
+            }
+        }
     }
 
     private boolean testVictory(){
