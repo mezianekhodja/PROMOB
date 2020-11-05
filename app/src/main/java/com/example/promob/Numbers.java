@@ -370,35 +370,31 @@ public class Numbers extends AppCompatActivity {
     private void gestionScore(){
         int value = 0;
         for(int index = 0; index<number.size();index++ ){
-            int valuetemp;
             switch((int)number.get(index).getTag()){
-                case R.drawable.nb2048_2048: valuetemp=2048;
+                case R.drawable.nb2048_2048: value+=2048;
                     break;
-                case R.drawable.nb2048_1024: valuetemp=1024;
+                case R.drawable.nb2048_1024: value+=1024;
                     break;
-                case R.drawable.nb2048_512: valuetemp=512;
+                case R.drawable.nb2048_512: value+=512;
                     break;
-                case R.drawable.nb2048_256: valuetemp=256;
+                case R.drawable.nb2048_256: value+=256;
                     break;
-                case R.drawable.nb2048_128: valuetemp=128;
+                case R.drawable.nb2048_128: value+=128;
                     break;
-                case R.drawable.nb2048_64: valuetemp=64;
+                case R.drawable.nb2048_64: value+=64;
                     break;
-                case R.drawable.nb2048_32: valuetemp=32;
+                case R.drawable.nb2048_32: value+=32;
                     break;
-                case R.drawable.nb2048_16: valuetemp=16;
+                case R.drawable.nb2048_16: value+=16;
                     break;
-                case R.drawable.nb2048_8: valuetemp=8;
+                case R.drawable.nb2048_8: value+=8;
                     break;
-                case R.drawable.nb2048_4: valuetemp=4;
+                case R.drawable.nb2048_4: value+=4;
                     break;
-                case R.drawable.nb2048_2: valuetemp=2;
+                case R.drawable.nb2048_2: value+=2;
                     break;
-                default: valuetemp=0;
+                default: value+=0;
                     break;
-            }
-            if(valuetemp>value){
-                value=valuetemp;
             }
         }
         score = value;
