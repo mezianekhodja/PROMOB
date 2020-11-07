@@ -129,6 +129,9 @@ public class CandyCrush extends AppCompatActivity {
                     if (move==0){
                         createDialog();
                     }
+                    if (move==15){
+                        loadNote();
+                    }
                 }
 
                 @Override
@@ -144,6 +147,9 @@ public class CandyCrush extends AppCompatActivity {
                     moveRes.setText(String.valueOf(move));
                     if (move==0){
                         createDialog();
+                    }
+                    if (move==15){
+                        loadNote();
                     }
                 }
 
@@ -161,6 +167,9 @@ public class CandyCrush extends AppCompatActivity {
                     if (move==0){
                         createDialog();
                     }
+                    if (move==15){
+                        loadNote();
+                    }
                 }
 
                 @Override
@@ -176,6 +185,9 @@ public class CandyCrush extends AppCompatActivity {
                     moveRes.setText(String.valueOf(move));
                     if (move==0){
                         createDialog();
+                    }
+                    if (move==15){
+                        loadNote();
                     }
                 }
             });
@@ -199,7 +211,6 @@ public class CandyCrush extends AppCompatActivity {
         CandyCrush.this.finish();
     }
     private void createBoard() {
-        //loadNote();
         GridLayout gridLayout = findViewById(R.id.boardCC);
         gridLayout.setRowCount(numberBlocks);
         gridLayout.setColumnCount(numberBlocks);
@@ -986,7 +997,7 @@ public class CandyCrush extends AppCompatActivity {
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if (documentSnapshot.exists()){
                             String scoreglob = documentSnapshot.get(KEY_SCORE).toString();
-                            highscore_user=Integer.parseInt(scoreglob);
+                            highscore_global=Integer.parseInt(scoreglob);
                         }
                         else{
                             Toast.makeText(CandyCrush.this, "Fail", Toast.LENGTH_SHORT).show();
@@ -1005,7 +1016,7 @@ public class CandyCrush extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if (documentSnapshot.exists()){
-                            String scoreus = documentSnapshot.getString(KEY_SCORE);
+                            String scoreus = documentSnapshot.get(KEY_SCORE).toString();
                             highscore_user=Integer.parseInt(scoreus);                        }
                         else{
                             Toast.makeText(CandyCrush.this, "Fail", Toast.LENGTH_SHORT).show();
@@ -1025,6 +1036,7 @@ public class CandyCrush extends AppCompatActivity {
         note.put(KEY_USER,username);
         note.put(KEY_SCORE,score);
         note.put(KEY_DATE,currentTime);
+
         int level = getIntent().getExtras().getInt("level");
 
         if (score>highscore_global){
