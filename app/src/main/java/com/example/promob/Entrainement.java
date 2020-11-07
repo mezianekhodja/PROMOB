@@ -97,6 +97,11 @@ public class Entrainement extends AppCompatActivity {
         Intent intent = new Intent(this, Entrainement.class);
         startActivity(intent);
     }
+    public void openClassement(){
+        finish();
+        Intent intent = new Intent(this, Classement.class);
+        startActivity(intent);
+    }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
@@ -110,6 +115,10 @@ public class Entrainement extends AppCompatActivity {
             }
             case R.id.logoutMenu:{
                 Logout();
+                break;
+            }
+            case R.id.classementMenu:{
+                openClassement();
                 break;
             }
         }

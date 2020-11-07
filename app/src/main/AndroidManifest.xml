@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Numbers"></activity>
+        <activity android:name=".Classement"></activity>
+        <activity android:name=".Numbers" />
         <activity android:name=".Numbers_Home" />
         <activity android:name=".CandyCrush_Home" />
         <activity android:name=".CandyCrush" />

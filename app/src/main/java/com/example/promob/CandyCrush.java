@@ -1,5 +1,6 @@
 package com.example.promob;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,17 +9,35 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.View;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CandyCrush extends AppCompatActivity {
 
+    private static final String TAG = "CandyCrush";
     int[] candies = {
         R.drawable.candycrush_bluecandy, R.drawable.candycrush_greencandy,R.drawable.candycrush_orangecandy,
             R.drawable.candycrush_purplecandy,R.drawable.candycrush_redcandy,R.drawable.candycrush_yellowcandy,
@@ -40,6 +59,15 @@ public class CandyCrush extends AppCompatActivity {
     TextView scoreRes, moveRes;
     int score = 0;
     int move  = 30;
+    String username = "Undefined";
+    private static final String KEY_USER = "user", KEY_SCORE = "score", KEY_DATE="date";
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseAuth firebaseAuth;
+    private FirebaseDatabase firebaseDatabase;
+    String currentTime = Calendar.getInstance().getTime().toString();
+    int highscore_global = 0;
+    int highscore_user = 0;
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +93,25 @@ public class CandyCrush extends AppCompatActivity {
         scoreRes = (TextView) findViewById(R.id.tvscoreCC);
         moveRes = (TextView) findViewById(R.id.tvmoveCC);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        final DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                UserProfile userProfile = snapshot.getValue(UserProfile.class);
+                username=userProfile.getUserName();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(CandyCrush.this, error.getCode(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
         createBoard();
+
         for (final ImageView imageView : candy){
 
             imageView.setOnTouchListener(new OnSwipeListener(CandyCrush.this){
@@ -139,6 +185,7 @@ public class CandyCrush extends AppCompatActivity {
     }
 
     public void createDialog() {
+        saveNote();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Votre score est de  : "+String.valueOf(score));
         builder.setMessage("Le nombre de mouvements a été atteint");
@@ -152,6 +199,7 @@ public class CandyCrush extends AppCompatActivity {
         CandyCrush.this.finish();
     }
     private void createBoard() {
+        //loadNote();
         GridLayout gridLayout = findViewById(R.id.boardCC);
         gridLayout.setRowCount(numberBlocks);
         gridLayout.setColumnCount(numberBlocks);
@@ -929,4 +977,88 @@ public class CandyCrush extends AppCompatActivity {
         void startRepeat(){
             repeatChecker.run();
         }
+
+    public void loadNote(){
+        int level = getIntent().getExtras().getInt("level");
+        db.collection("CandyCrush_level_"+level).document("highscore_global").get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()){
+                            String scoreglob = documentSnapshot.get(KEY_SCORE).toString();
+                            highscore_user=Integer.parseInt(scoreglob);
+                        }
+                        else{
+                            Toast.makeText(CandyCrush.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(CandyCrush.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+        db.collection("CandyCrush_level_"+level).document("highscore_"+username).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()){
+                            String scoreus = documentSnapshot.getString(KEY_SCORE);
+                            highscore_user=Integer.parseInt(scoreus);                        }
+                        else{
+                            Toast.makeText(CandyCrush.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(CandyCrush.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+    }
+    public void saveNote() {
+        Map<String, Object> note = new HashMap<>();
+        note.put(KEY_USER,username);
+        note.put(KEY_SCORE,score);
+        note.put(KEY_DATE,currentTime);
+        int level = getIntent().getExtras().getInt("level");
+
+        if (score>highscore_global){
+        db.collection("CandyCrush_level_"+level).document("highscore_global").set(note)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(CandyCrush.this, "Sucess", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(CandyCrush.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+
+        }
+        if (score>highscore_user){
+        db.collection("CandyCrush_level_"+level).document("highscore_"+username).set(note)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(CandyCrush.this, "Sucess", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(CandyCrush.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+        }
+    }
 }

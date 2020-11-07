@@ -20,4 +20,10 @@
         app:showAsAction="always"
         android:title="Acceuil">
     </item>
+    <item
+        android:id="@+id/classementMenu"
+        android:orderInCategory="400"
+        app:showAsAction="never"
+        android:title="Classement">
+    </item>
 </menu>
