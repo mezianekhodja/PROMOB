@@ -1,14 +1,239 @@
 package com.example.promob;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Classement extends AppCompatActivity {
+    private TextView textViewG,textViewL;
+    String username = "Undefined";
+
+    private FirebaseAuth firebaseAuth;
+    private FirebaseDatabase firebaseDatabase;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private static final String TAG = "Classement";
+    private static final String KEY_USER = "user", KEY_SCORE = "score", KEY_DATE="date";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_classement);
+        textViewG = findViewById(R.id.textViewResultsG);
+        textViewL = findViewById(R.id.textViewResultsL);
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        final DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                UserProfile userProfile = snapshot.getValue(UserProfile.class);
+                username=userProfile.getUserName();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(Classement.this, error.getCode(),Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void onRadioButtonClicked(View view) {
+        boolean checked = ((RadioButton) view).isChecked();
+
+        switch(view.getId()) {
+            case R.id.radioButtonLQR:
+                if (checked)
+                    textViewG.setText("bientot LQ");
+                    textViewL.setText("bientot LQ");
+                break;
+            case R.id.radioButtonPR:
+                if (checked)
+                    textViewG.setText("bientot P");
+                    textViewL.setText("bientot P");
+                break;
+            case R.id.radioButtonCCR:
+                if (checked)
+                    loadNoteCC1();
+                    loadNoteCC2();
+                    loadNoteCC3();
+                    break;
+            case R.id.radioButtonNR:
+                    textViewG.setText("bientot N");
+                    textViewL.setText("bientot N");
+                break;
+            case R.id.radioButtonB1:
+                if (checked)
+                    textViewG.setText("bientot 1");
+                    textViewL.setText("bientot 1");
+                break;
+            case R.id.radioButtonB2:
+                if (checked)
+                    textViewG.setText("bientot 2");
+                    textViewL.setText("bientot 2");
+                break;
+        }
+    }
+    public void loadNoteCC1(){
+            db.collection("CandyCrush_level_1").document("highscore_global").get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()){
+                            String user = documentSnapshot.getString(KEY_USER);
+                            String score = documentSnapshot.get(KEY_SCORE).toString();
+                            String date = documentSnapshot.getString(KEY_DATE);
+
+                            textViewG.setText("GLOBAL : Level 1 : user : "+user+", score : "+score+", date : "+date);
+                        }
+                        else{
+                            Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+        db.collection("CandyCrush_level_1").document("highscore_"+username).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()){
+                            String user = documentSnapshot.getString(KEY_USER);
+                            String score = documentSnapshot.get(KEY_SCORE).toString();
+                            String date = documentSnapshot.getString(KEY_DATE);
+
+                            textViewL.setText("LOCAL : Level 1 : user : "+user+", score : "+score+", date : "+date);
+                        }
+                        else{
+                            Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+        }
+    public void loadNoteCC2(){
+        db.collection("CandyCrush_level_2").document("highscore_global").get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()){
+                            String user = documentSnapshot.getString(KEY_USER);
+                            String score = documentSnapshot.get(KEY_SCORE).toString();
+                            String date = documentSnapshot.getString(KEY_DATE);
+
+                            textViewG.setText(textViewG.getText() + " \n Level 2 : user : "+user+", score : "+score+", date : "+date);
+                        }
+                        else{
+                            Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+        db.collection("CandyCrush_level_2").document("highscore_"+username).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()){
+                            String user = documentSnapshot.getString(KEY_USER);
+                            String score = documentSnapshot.get(KEY_SCORE).toString();
+                            String date = documentSnapshot.getString(KEY_DATE);
+
+                            textViewL.setText(textViewL.getText() + " \n Level 2 : user : "+user+", score : "+score+", date : "+date);
+                        }
+                        else{
+                            Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+    }
+    public void loadNoteCC3(){
+        db.collection("CandyCrush_level_3").document("highscore_global").get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()){
+                            String user = documentSnapshot.getString(KEY_USER);
+                            String score = documentSnapshot.get(KEY_SCORE).toString();
+                            String date = documentSnapshot.getString(KEY_DATE);
+
+                            textViewG.setText(textViewG.getText() + " \n Level 3 : user : "+user+", score : "+score+", date : "+date);
+                        }
+                        else{
+                            Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+        db.collection("CandyCrush_level_3").document("highscore_"+username).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()){
+                            String user = documentSnapshot.getString(KEY_USER);
+                            String score = documentSnapshot.get(KEY_SCORE).toString();
+                            String date = documentSnapshot.getString(KEY_DATE);
+
+                            textViewL.setText(textViewL.getText() + " \n Level 3 : user : "+user+", score : "+score+", date : "+date);
+                        }
+                        else{
+                            Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
     }
 }

@@ -24,68 +24,72 @@
             android:textSize="25dp"
             android:textStyle="bold" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Logo Quizz (Prochainement)"
-            android:textStyle="bold" />
 
-        <Button
+        <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Pendu (prochainement)"
-            android:textStyle="bold" />
+            android:addStatesFromChildren="false">
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Candy Crush (en cours)"
-            android:textStyle="bold" />
+            <RadioButton
+                android:id="@+id/radioButtonLQR"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Logo Quizz"
+                android:onClick="onRadioButtonClicked"/>
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="2048 (prochainement)"
-            android:textStyle="bold" />
+            <RadioButton
+                android:id="@+id/radioButtonPR"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pendu"
+                android:onClick="onRadioButtonClicked"/>
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Bientot disponible !"
-            android:textStyle="bold" />
+            <RadioButton
+                android:id="@+id/radioButtonCCR"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Candy Crush"
+                android:onClick="onRadioButtonClicked"/>
 
+            <RadioButton
+                android:id="@+id/radioButtonNR"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Numbers"
+                android:onClick="onRadioButtonClicked"/>
+
+            <RadioButton
+                android:id="@+id/radioButtonB1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Prochainement"
+                android:onClick="onRadioButtonClicked"/>
+
+            <RadioButton
+                android:id="@+id/radioButtonB2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Prochainement"
+                android:onClick="onRadioButtonClicked"/>
+        </RadioGroup>
         <Button
+            android:id="@+id/buttonRES"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Bientot disponible !"
-            android:textStyle="bold" />
+            android:text="LOAD" />
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:padding="2dp"
-            android:text="Bientôt de nouveaux jeux vont voir le jour ! Restez patient ;) "
-            android:textColor="@color/noir"
-            android:textSize="13dp"
-            android:textStyle="italic" />
+        android:id="@+id/textViewResultsG"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Undefined" />
 
         <TextView
+            android:id="@+id/textViewResultsL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:gravity="center"
-            android:text="@string/games_by_mez_and_vince"
-            android:textSize="20dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Version 1.0"
-            android:textSize="15dp" />
-
+            android:text="Undefined"
+            android:layout_marginTop="10dp"/>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

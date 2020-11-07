@@ -81,19 +81,28 @@ public class PasswordActivity extends AppCompatActivity {
         startActivity(intent);
         PasswordActivity.this.finish();
     }
+    public void openClassement(){
+        finish();
+        Intent intent = new Intent(this, Classement.class);
+        startActivity(intent);
+    }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
-            case R.id.logoutMenu:{
-                Logout();
-                break;
-            }
             case R.id.profileMenu:{
                 openProfil();
                 break;
             }
             case R.id.acceuilMenu:{
                 openAcceuil();
+                break;
+            }
+            case R.id.logoutMenu:{
+                Logout();
+                break;
+            }
+            case R.id.classementMenu:{
+                openClassement();
                 break;
             }
         }
