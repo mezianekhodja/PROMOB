@@ -15,7 +15,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Numbers_Home extends AppCompatActivity {
 
-    private Button go;
+    private Button easy,medium,hard;
     private FirebaseAuth firebaseAuth;
 
     @Override
@@ -25,12 +25,33 @@ public class Numbers_Home extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        go = (Button) findViewById(R.id.button_numbers_go);
+        easy = (Button) findViewById(R.id.button_numbers_easy);
+        medium = (Button) findViewById(R.id.button_numbers_medium);
+        hard = (Button) findViewById(R.id.button_numbers_hard);
 
-        go.setOnClickListener(new View.OnClickListener() {
+        easy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Numbers_Home.this, Numbers.class);
+                intent.putExtra("level",1);
+                startActivity(intent);
+                Numbers_Home.this.finish();
+            }
+        });
+        medium.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Numbers_Home.this, Numbers.class);
+                intent.putExtra("level",2);
+                startActivity(intent);
+                Numbers_Home.this.finish();
+            }
+        });
+        hard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Numbers_Home.this, Numbers.class);
+                intent.putExtra("level",3);
                 startActivity(intent);
                 Numbers_Home.this.finish();
             }

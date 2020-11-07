@@ -21,7 +21,6 @@ public class Numbers extends AppCompatActivity {
 
     int widthBlock, widthScreen, heightScreen, numberBlocks=4;
     ArrayList<ImageView> number = new ArrayList<>();
-    int interval = 100;
     TextView scoreRes;
     int score = 2;
 
@@ -321,9 +320,22 @@ public class Numbers extends AppCompatActivity {
     }
 
     private boolean testVictory(){
+        int level = getIntent().getExtras().getInt("level");
         for(int index = 0; index<number.size();index++ ){
-            if ((int)number.get(index).getTag()==R.drawable.nb2048_2048){
-                return true;
+            if (level == 1){
+                if ((int)number.get(index).getTag()==R.drawable.nb2048_512){
+                    return true;
+                }
+            }
+            else if (level == 2){
+                if ((int)number.get(index).getTag()==R.drawable.nb2048_1024){
+                    return true;
+                }
+            }
+            else{
+                if ((int)number.get(index).getTag()==R.drawable.nb2048_2048){
+                    return true;
+                }
             }
         }
         return false;
