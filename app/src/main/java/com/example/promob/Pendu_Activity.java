@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,11 +19,23 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class Pendu_Activity extends AppCompatActivity {
 
@@ -38,6 +51,7 @@ public class Pendu_Activity extends AppCompatActivity {
     private String word;
     private int found;
     private int error;
+    private int move=0;
     private List<Character> listOfLetters = new ArrayList<Character>();
     private boolean win;
     private TextView textViewTimer;
@@ -45,7 +59,16 @@ public class Pendu_Activity extends AppCompatActivity {
     private List<String> listOfWords2 = new ArrayList<String>();
     private List<String> listOfWords3 = new ArrayList<String>();
 
+    //GESTION BDD
     private FirebaseAuth firebaseAuth;
+    String username = "Undefined";
+    private static final String KEY_USER = "user", KEY_ERROR = "error", KEY_DATE="date";
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseDatabase firebaseDatabase;
+    String currentTime = Calendar.getInstance().getTime().toString();
+    int highscore_global = 7;
+    int highscore_user = 7;
+    private static final String TAG = "Pendu_Activity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +84,24 @@ public class Pendu_Activity extends AppCompatActivity {
         et_letter = (EditText)findViewById(R.id.etletter);
         setListOfWords();
         initGame();
+
+        //GESTION BDD
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        final DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                UserProfile userProfile = snapshot.getValue(UserProfile.class);
+                username=userProfile.getUserName();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError e) {
+                Toast.makeText(Pendu_Activity.this, e.getCode(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,6 +110,10 @@ public class Pendu_Activity extends AppCompatActivity {
 
                 if (letterFromInput.length()>0){
                     if (!letterAlreadyUsed(letterFromInput.charAt(0),listOfLetters)){
+                            move++;
+                            if(move==1){
+                                loadNote();
+                            }
                             listOfLetters.add(letterFromInput.charAt(0));
                             checkLetterContained(letterFromInput,word);
                     }
@@ -173,6 +218,9 @@ public class Pendu_Activity extends AppCompatActivity {
             if(!win){
                 builder.setTitle("Vous avez perdu");
                 builder.setMessage("Le mot à trouver était : "+word);
+            }
+            else{
+                saveNote();
             }
             builder.create().show();
         }
@@ -371,5 +419,88 @@ public class Pendu_Activity extends AppCompatActivity {
             counterDownTimer.cancel();
         }
     }
+    public void loadNote(){
+        int level = getIntent().getExtras().getInt("level");
+        db.collection("Pendu_level_"+level).document("highscore_global").get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()){
+                            String scoreglob = documentSnapshot.get(KEY_ERROR).toString();
+                            highscore_global=Integer.parseInt(scoreglob);
+                        }
+                        else{
+                            Toast.makeText(Pendu_Activity.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Pendu_Activity.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+        db.collection("Pendu_level_"+level).document("highscore_"+username).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()){
+                            String scoreus = documentSnapshot.get(KEY_ERROR).toString();
+                            highscore_user=Integer.parseInt(scoreus);                        }
+                        else{
+                            Toast.makeText(Pendu_Activity.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Pendu_Activity.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+    }
+    public void saveNote() {
+        Map<String, Object> note = new HashMap<>();
+        note.put(KEY_USER,username);
+        note.put(KEY_ERROR,error);
+        note.put(KEY_DATE,currentTime);
 
+        int level = getIntent().getExtras().getInt("level");
+
+        if (error<highscore_global){
+            db.collection("Pendu_level_"+level).document("highscore_global").set(note)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(Pendu_Activity.this, "Sucess", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(Pendu_Activity.this, "Fail", Toast.LENGTH_SHORT).show();
+                            Log.d(TAG, e.toString());
+                        }
+                    });
+
+        }
+        if (error<highscore_user){
+            db.collection("Pendu_level_"+level).document("highscore_"+username).set(note)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(Pendu_Activity.this, "Sucess", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(Pendu_Activity.this, "Fail", Toast.LENGTH_SHORT).show();
+                            Log.d(TAG, e.toString());
+                        }
+                    });
+        }
+    }
 }
