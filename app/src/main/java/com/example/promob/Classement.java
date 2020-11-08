@@ -62,8 +62,9 @@ public class Classement extends AppCompatActivity {
         switch(view.getId()) {
             case R.id.radioButtonLQR:
                 if (checked)
-                    textViewG.setText("bientot LQ");
-                    textViewL.setText("bientot LQ");
+                    loadNoteLQE();
+                    loadNoteLQM();
+                    loadNoteLQH();
                 break;
             case R.id.radioButtonPR:
                 if (checked)
@@ -222,6 +223,151 @@ public class Classement extends AppCompatActivity {
                             String date = documentSnapshot.getString(KEY_DATE);
 
                             textViewL.setText(textViewL.getText() + " \n Level 3 : user : "+user+", score : "+score+", date : "+date);
+                        }
+                        else{
+                            Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+    }
+
+    public void loadNoteLQE(){
+        db.collection("LogoQuizz_level_Easy").document("highscore_global").get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()){
+                            String user = documentSnapshot.getString(KEY_USER);
+                            String score = documentSnapshot.get(KEY_SCORE).toString();
+                            String date = documentSnapshot.getString(KEY_DATE);
+
+                            textViewG.setText("GLOBAL : Level Easy : user : "+user+", score : "+score+", date : "+date);
+                        }
+                        else{
+                            Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+        db.collection("LogoQuizz_level_Easy").document("highscore_"+username).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()){
+                            String user = documentSnapshot.getString(KEY_USER);
+                            String score = documentSnapshot.get(KEY_SCORE).toString();
+                            String date = documentSnapshot.getString(KEY_DATE);
+
+                            textViewL.setText("LOCAL : Level Easy : user : "+user+", score : "+score+", date : "+date);
+                        }
+                        else{
+                            Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+    }
+    public void loadNoteLQM(){
+        db.collection("LogoQuizz_level_Medium").document("highscore_global").get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()){
+                            String user = documentSnapshot.getString(KEY_USER);
+                            String score = documentSnapshot.get(KEY_SCORE).toString();
+                            String date = documentSnapshot.getString(KEY_DATE);
+
+                            textViewG.setText(textViewG.getText() + " \n Level Medium : user : "+user+", score : "+score+", date : "+date);
+                        }
+                        else{
+                            Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+        db.collection("LogoQuizz_level_Medium").document("highscore_"+username).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()){
+                            String user = documentSnapshot.getString(KEY_USER);
+                            String score = documentSnapshot.get(KEY_SCORE).toString();
+                            String date = documentSnapshot.getString(KEY_DATE);
+
+                            textViewL.setText(textViewL.getText() + " \n Level Medium : user : "+user+", score : "+score+", date : "+date);
+                        }
+                        else{
+                            Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+    }
+    public void loadNoteLQH(){
+        db.collection("LogoQuizz_level_Hard").document("highscore_global").get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()){
+                            String user = documentSnapshot.getString(KEY_USER);
+                            String score = documentSnapshot.get(KEY_SCORE).toString();
+                            String date = documentSnapshot.getString(KEY_DATE);
+
+                            textViewG.setText(textViewG.getText() + " \n Level Hard : user : "+user+", score : "+score+", date : "+date);
+                        }
+                        else{
+                            Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+        db.collection("LogoQuizz_level_Hard").document("highscore_"+username).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()){
+                            String user = documentSnapshot.getString(KEY_USER);
+                            String score = documentSnapshot.get(KEY_SCORE).toString();
+                            String date = documentSnapshot.getString(KEY_DATE);
+
+                            textViewL.setText(textViewL.getText() + " \n Level Hard : user : "+user+", score : "+score+", date : "+date);
                         }
                         else{
                             Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();

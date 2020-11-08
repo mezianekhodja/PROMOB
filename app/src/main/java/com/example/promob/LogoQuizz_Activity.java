@@ -5,6 +5,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -13,11 +14,26 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class LogoQuizz_Activity extends AppCompatActivity {
 
@@ -30,6 +46,17 @@ public class LogoQuizz_Activity extends AppCompatActivity {
 
     public static final String EXTRA_SCORE = "extraScore";
     private static final long COUNTDOWN_IN_MILLIS = 15000;
+
+    //GESTION SCORE BDD
+    private static final String KEY_USER = "user", KEY_SCORE = "score", KEY_DATE="date";
+    String username = "Undefined";
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseAuth firebaseAuth;
+    private FirebaseDatabase firebaseDatabase;
+    String currentTime = Calendar.getInstance().getTime().toString();
+    int highscore_global = 0;
+    int highscore_user = 0;
+    private static final String TAG = "LogoQuizz_Activity";
 
     //textView
     private TextView textViewQuestion;
@@ -93,6 +120,25 @@ public class LogoQuizz_Activity extends AppCompatActivity {
         Intent intent = getIntent();
         String difficulty = intent.getStringExtra(LogoQuizz_Home.EXTRA_DIFFICULTY);
         textViewDifficulty.setText("difficulty: " + difficulty);
+
+        //GESTION SCORE BDD
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        final DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                UserProfile userProfile = snapshot.getValue(UserProfile.class);
+                username=userProfile.getUserName();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(LogoQuizz_Activity.this, error.getCode(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
         LogoQuizz_bdd dbHelper = new LogoQuizz_bdd(this);
         questionList = dbHelper.getQuestion(difficulty);
@@ -180,6 +226,10 @@ public class LogoQuizz_Activity extends AppCompatActivity {
         rb4.setTextColor(textColorDefaultRb);
         rbGroup.clearCheck();
 
+        //GESTION SCORE BDD
+        if(questionCounter ==2){
+            loadNote();
+        }
         if(questionCounter < questionCountTotal){
             currentQuestion = questionList.get((questionCounter));
             //PASSER L'IMAGE EN INT
@@ -262,10 +312,101 @@ public class LogoQuizz_Activity extends AppCompatActivity {
 
 
     private void finishQuizz(){
+        saveNote();
         Intent resultIntent = new Intent();
         resultIntent.putExtra(EXTRA_SCORE, score);
         setResult(RESULT_OK, resultIntent);
         finish();
+    }
+
+
+    //GESTION SCORE BDD
+    public void loadNote(){
+        Intent intent = getIntent();
+        String difficulty = intent.getStringExtra(LogoQuizz_Home.EXTRA_DIFFICULTY);
+
+        db.collection("LogoQuizz_level_"+difficulty).document("highscore_global").get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()){
+                            String scoreglob = documentSnapshot.get(KEY_SCORE).toString();
+                            highscore_global=Integer.parseInt(scoreglob);
+                        }
+                        else{
+                            Toast.makeText(LogoQuizz_Activity.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(LogoQuizz_Activity.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+        db.collection("LogoQuizz_level_"+difficulty).document("highscore_"+username).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()){
+                            String scoreus = documentSnapshot.get(KEY_SCORE).toString();
+                            highscore_user=Integer.parseInt(scoreus);                        }
+                        else{
+                            Toast.makeText(LogoQuizz_Activity.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(LogoQuizz_Activity.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+    }
+    public void saveNote() {
+        Map<String, Object> note = new HashMap<>();
+        note.put(KEY_USER,username);
+        note.put(KEY_SCORE,score);
+        note.put(KEY_DATE,currentTime);
+
+        Intent intent = getIntent();
+        String difficulty = intent.getStringExtra(LogoQuizz_Home.EXTRA_DIFFICULTY);
+
+        if (score>highscore_global){
+            db.collection("LogoQuizz_level_"+difficulty).document("highscore_global").set(note)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(LogoQuizz_Activity.this, "Sucess", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(LogoQuizz_Activity.this, "Fail", Toast.LENGTH_SHORT).show();
+                            Log.d(TAG, e.toString());
+                        }
+                    });
+
+        }
+        if (score>highscore_user){
+            db.collection("LogoQuizz_level_"+difficulty).document("highscore_"+username).set(note)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(LogoQuizz_Activity.this, "Sucess", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(LogoQuizz_Activity.this, "Fail", Toast.LENGTH_SHORT).show();
+                            Log.d(TAG, e.toString());
+                        }
+                    });
+        }
     }
 
 }
