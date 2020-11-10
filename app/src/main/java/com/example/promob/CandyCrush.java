@@ -129,7 +129,7 @@ public class CandyCrush extends AppCompatActivity {
                     if (move==0){
                         createDialog();
                     }
-                    if (move==15){
+                    if (move==15 && !username.equals("invite")){
                         loadNote();
                     }
                 }
@@ -148,7 +148,7 @@ public class CandyCrush extends AppCompatActivity {
                     if (move==0){
                         createDialog();
                     }
-                    if (move==15){
+                    if (move==15 && !username.equals("invite")){
                         loadNote();
                     }
                 }
@@ -167,7 +167,7 @@ public class CandyCrush extends AppCompatActivity {
                     if (move==0){
                         createDialog();
                     }
-                    if (move==15){
+                    if (move==15 && !username.equals("invite")){
                         loadNote();
                     }
                 }
