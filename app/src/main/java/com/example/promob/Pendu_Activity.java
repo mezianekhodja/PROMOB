@@ -137,7 +137,8 @@ public class Pendu_Activity extends AppCompatActivity {
         rejouer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               initGame();
+                counterDownTimer.cancel();
+                initGame();
             }
         });
     }
