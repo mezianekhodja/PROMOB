@@ -112,7 +112,9 @@ public class Pendu_Activity extends AppCompatActivity {
                     if (!letterAlreadyUsed(letterFromInput.charAt(0),listOfLetters)){
                             move++;
                             if(move==1){
-                                loadNote();
+                                if(!username.equals("invite")){
+                                    loadNote();
+                                }
                             }
                             listOfLetters.add(letterFromInput.charAt(0));
                             checkLetterContained(letterFromInput,word);
@@ -221,7 +223,9 @@ public class Pendu_Activity extends AppCompatActivity {
                 builder.setMessage("Le mot à trouver était : "+word);
             }
             else{
-                saveNote();
+                if(!username.equals("invite")){
+                    saveNote();
+                }
             }
             builder.create().show();
         }

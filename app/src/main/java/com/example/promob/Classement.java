@@ -57,6 +57,7 @@ public class Classement extends AppCompatActivity {
     }
 
     public void onRadioButtonClicked(View view) {
+        if(!username.equals("invite")){
         boolean checked = ((RadioButton) view).isChecked();
 
         switch(view.getId()) {
@@ -92,6 +93,11 @@ public class Classement extends AppCompatActivity {
                     textViewG.setText("bientot 2");
                     textViewL.setText("bientot 2");
                 break;
+        }
+        }
+        else {
+            textViewG.setText("Pas de résultats globaux disponibles en mode invité");
+            textViewL.setText("Pas de résultats locaux disponibles en mode invité");
         }
     }
     public void loadNoteCC1(){
