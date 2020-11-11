@@ -1,5 +1,6 @@
 package com.example.promob;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,11 +8,27 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Numbers extends AppCompatActivity {
 
@@ -23,6 +40,17 @@ public class Numbers extends AppCompatActivity {
     ArrayList<ImageView> number = new ArrayList<>();
     TextView scoreRes;
     int score = 2;
+    String username = "Undefined";
+    private static final String KEY_USER = "user", KEY_SCORE = "score", KEY_DATE="date";
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseAuth firebaseAuth;
+    private FirebaseDatabase firebaseDatabase;
+    String currentTime = Calendar.getInstance().getTime().toString();
+    int highscore_global = 0;
+    int highscore_user = 0;
+    int move =0;
+    private static final String TAG = "Numbers";
+
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -37,12 +65,32 @@ public class Numbers extends AppCompatActivity {
         widthBlock = widthScreen / numberBlocks;
         scoreRes = (TextView) findViewById(R.id.tvscoreNB);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        final DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                UserProfile userProfile = snapshot.getValue(UserProfile.class);
+                username=userProfile.getUserName();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(Numbers.this, error.getCode(),Toast.LENGTH_SHORT).show();
+            }
+        });
         createBoard();
         for (final ImageView imageView : number){
 
             imageView.setOnTouchListener(new OnSwipeListener(Numbers.this){
                 @Override
                 void onSwipeLeft() {
+                    move++;
+                    if (move==1 && !username.equals("invite")){
+                        loadNote();
+                    }
                     for (int i = 0; i< 3;i++){
                         decalageGauche();
                         correspondanceGauche();
@@ -52,6 +100,10 @@ public class Numbers extends AppCompatActivity {
 
                 @Override
                 void onSwipeRight(){
+                    move++;
+                    if (move==1 && !username.equals("invite")){
+                        loadNote();
+                    }
                     for (int i = 0; i< 3;i++){
                         correspondanceDroite();
                         decalageDroite();
@@ -60,6 +112,10 @@ public class Numbers extends AppCompatActivity {
                 }
                 @Override
                 void onSwipeTop(){
+                    move++;
+                    if (move==1 && !username.equals("invite")){
+                        loadNote();
+                    }
                     for (int i = 0; i< 3;i++){
                         correspondanceHaut();
                         decalageHaut();
@@ -69,6 +125,10 @@ public class Numbers extends AppCompatActivity {
 
                 @Override
                 void onSwipeBottom(){
+                    move++;
+                    if (move==1 && !username.equals("invite")){
+                        loadNote();
+                    }
                     for (int i = 0; i< 3;i++){
                         correspondanceBas();
                         decalageBas();
@@ -414,6 +474,9 @@ public class Numbers extends AppCompatActivity {
     }
 
     public void createDialog(boolean win) {
+        if(!username.equals("invite")){
+            saveNote();
+        }
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Dommage... ");
         builder.setMessage("Votre score est de  : "+String.valueOf(score));
@@ -429,5 +492,88 @@ public class Numbers extends AppCompatActivity {
         startActivity(intent);
         Numbers.this.finish();
     }
+    public void loadNote(){
+        int level = getIntent().getExtras().getInt("level");
+        db.collection("Numbers_level_"+level).document("highscore_global").get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()){
+                            String scoreglob = documentSnapshot.get(KEY_SCORE).toString();
+                            highscore_global=Integer.parseInt(scoreglob);
+                        }
+                        else{
+                            Toast.makeText(Numbers.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Numbers.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+        db.collection("Numbers_level_"+level).document("highscore_"+username).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()){
+                            String scoreus = documentSnapshot.get(KEY_SCORE).toString();
+                            highscore_user=Integer.parseInt(scoreus);                        }
+                        else{
+                            Toast.makeText(Numbers.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Numbers.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+    }
+    public void saveNote() {
+        Map<String, Object> note = new HashMap<>();
+        note.put(KEY_USER,username);
+        note.put(KEY_SCORE,score);
+        note.put(KEY_DATE,currentTime);
 
+        int level = getIntent().getExtras().getInt("level");
+
+        if (score>highscore_global){
+            db.collection("Numbers_level_"+level).document("highscore_global").set(note)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(Numbers.this, "Sucess", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(Numbers.this, "Fail", Toast.LENGTH_SHORT).show();
+                            Log.d(TAG, e.toString());
+                        }
+                    });
+
+        }
+        if (score>highscore_user){
+            db.collection("Numbers_level_"+level).document("highscore_"+username).set(note)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(Numbers.this, "Sucess", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(Numbers.this, "Fail", Toast.LENGTH_SHORT).show();
+                            Log.d(TAG, e.toString());
+                        }
+                    });
+        }
+    }
 }

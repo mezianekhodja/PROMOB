@@ -227,8 +227,8 @@ public class LogoQuizz_Activity extends AppCompatActivity {
         rbGroup.clearCheck();
 
         //GESTION SCORE BDD
-        if(questionCounter ==2){
-            loadNote();
+        if(questionCounter ==2 && !username.equals("invite")){
+                loadNote();
         }
         if(questionCounter < questionCountTotal){
             currentQuestion = questionList.get((questionCounter));
@@ -312,7 +312,9 @@ public class LogoQuizz_Activity extends AppCompatActivity {
 
 
     private void finishQuizz(){
-        saveNote();
+        if(!username.equals("invite")){
+            saveNote();
+        }
         Intent resultIntent = new Intent();
         resultIntent.putExtra(EXTRA_SCORE, score);
         setResult(RESULT_OK, resultIntent);

@@ -129,7 +129,7 @@ public class CandyCrush extends AppCompatActivity {
                     if (move==0){
                         createDialog();
                     }
-                    if (move==15){
+                    if (move==15 && !username.equals("invite")){
                         loadNote();
                     }
                 }
@@ -148,7 +148,7 @@ public class CandyCrush extends AppCompatActivity {
                     if (move==0){
                         createDialog();
                     }
-                    if (move==15){
+                    if (move==15 && !username.equals("invite")){
                         loadNote();
                     }
                 }
@@ -167,7 +167,7 @@ public class CandyCrush extends AppCompatActivity {
                     if (move==0){
                         createDialog();
                     }
-                    if (move==15){
+                    if (move==15 && !username.equals("invite")){
                         loadNote();
                     }
                 }
@@ -186,8 +186,8 @@ public class CandyCrush extends AppCompatActivity {
                     if (move==0){
                         createDialog();
                     }
-                    if (move==15){
-                        loadNote();
+                    if (move==15 && !username.equals("invite")){
+                            loadNote();
                     }
                 }
             });
@@ -197,7 +197,9 @@ public class CandyCrush extends AppCompatActivity {
     }
 
     public void createDialog() {
-        saveNote();
+        if(!username.equals("invite")){
+            saveNote();
+        }
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Votre score est de  : "+String.valueOf(score));
         builder.setMessage("Le nombre de mouvements a été atteint");
