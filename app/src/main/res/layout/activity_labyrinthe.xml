@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/noir"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+
+            <view
+                android:id="@+id/view2"
+                class="com.example.promob.LabyrintheGame"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:id="@+id/testoo"
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:id="@+id/test1o"
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:id="@+id/test2o"
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:id="@+id/test3o"
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:id="@+id/test4o"
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:id="@+id/test5o"
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:id="@+id/test6o"
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:id="@+id/test11"
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:id="@+id/test12"
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:id="@+id/test13"
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:id="@+id/test14"
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:id="@+id/test16"
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:id="@+id/test17"
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:id="@+id/test18"
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+            <Button
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:background="@color/noir" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
+

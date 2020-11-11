@@ -28,6 +28,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Registration" />
+        <activity android:name=".Labyrinthe" />
+        <activity android:name=".LabyrintheGame" />
         <activity android:name=".Connexion" />
         <activity android:name=".Entrainement" />
         <activity android:name=".LogoQuizzResults" />

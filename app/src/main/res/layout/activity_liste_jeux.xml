@@ -102,10 +102,10 @@
             android:textSize="10dp" />
 
         <Button
-            android:id="@+id/buttongamepasencoredispo"
+            android:id="@+id/btn_laby"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Bientot disponible !"
+            android:text="Labyrinthe"
             android:textStyle="bold" />
 
         <TextView
