@@ -85,7 +85,7 @@ public class Entrainement extends AppCompatActivity {
         Entrainement.this.finish();
     }
     public void openLabyrithe() {
-        Intent intent = new Intent(this, Labyrinthe.class);
+        Intent intent = new Intent(this, LabyrintheHome.class);
         startActivity(intent);
         Entrainement.this.finish();
     }

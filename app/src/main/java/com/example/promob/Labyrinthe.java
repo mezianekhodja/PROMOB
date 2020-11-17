@@ -1,26 +1,15 @@
 package com.example.promob;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.widget.Button;
-import android.widget.GridLayout;
-import android.widget.ImageView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Labyrinthe extends AppCompatActivity {
 
+    private static int niv;
     private LabyrintheGame view;
     private SensorManager mgr;
 
@@ -28,6 +17,8 @@ public class Labyrinthe extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_labyrinthe);
+
+        niv= getIntent().getExtras().getInt("level");;
 
         view =  (LabyrintheGame) findViewById(R.id.view2);
         //Initilisation du sensor
@@ -48,5 +39,8 @@ public class Labyrinthe extends AppCompatActivity {
         super.onPause();
         //Arreter d'enregistrer le listener de l'accelerometre car fenetre plus en premier plan
         mgr.unregisterListener(view);
+    }
+    protected static int getLevel(){
+        return niv;
     }
 }

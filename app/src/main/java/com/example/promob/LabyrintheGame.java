@@ -1,5 +1,6 @@
 package com.example.promob;
 
+import android.content.ClipDescription;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -68,42 +69,103 @@ public class LabyrintheGame extends View implements SensorEventListener {
         currentY =  (h - imageHeight);
 
         //création des chemins en fonction des niveaux de difficulté (plusieurs chemins possibles par niveau)
-        //chemin niveau facile
-        Rect rchemeasy1A = new Rect(centerwidht-intervalwidht,10,centerwidht+intervalwidht,1350);
-        listeChemin.add(rchemeasy1A);
+        int level = Labyrinthe.getLevel();
+        if (level ==2){
+            //chemin niveau moyen
+            int random = (int)(Math.random() * 4); //tirage aléatoire parmi nos circuits
+            if (random ==1){
+                //chemin 1 niveau moyen
+                Rect rchemed1A = new Rect(centerwidht-intervalwidht,1000,centerwidht+intervalwidht,1350);
+                listeChemin.add(rchemed1A);
+                Rect rchemed1B = new Rect(centerwidht-intervalwidht,10,centerwidht+intervalwidht,700);
+                listeChemin.add(rchemed1B);
+                Rect rchemed1C = new Rect(centerwidht-intervalwidht,500,centerwidht+3*intervalwidht,700);
+                listeChemin.add(rchemed1C);
+                Rect rchemed1D = new Rect(centerwidht-intervalwidht,1000,centerwidht+3*intervalwidht,1200);
+                listeChemin.add(rchemed1D);
+                Rect rchemed1E = new Rect(centerwidht+intervalwidht,500,centerwidht+3*intervalwidht,1200);
+                listeChemin.add(rchemed1E);
+            }
 
-        //chemin niveau moyen
-        //chemin 1 niveau moyen
-        /*
-        Rect rchemed1A = new Rect(centerwidht-intervalwidht,1000,centerwidht+intervalwidht,1350);
-        listeChemin.add(rchemed1A);
-        Rect rchemed1B = new Rect(centerwidht-intervalwidht,10,centerwidht+intervalwidht,700);
-        listeChemin.add(rchemed1B);
-        Rect rchemed1C = new Rect(centerwidht-intervalwidht,500,centerwidht+3*intervalwidht,700);
-        listeChemin.add(rchemed1C);
-        Rect rchemed1D = new Rect(centerwidht-intervalwidht,1000,centerwidht+3*intervalwidht,1200);
-        listeChemin.add(rchemed1D);
-        Rect rchemed1E = new Rect(centerwidht+intervalwidht,500,centerwidht+3*intervalwidht,1200);
-        listeChemin.add(rchemed1E);
-         */
-
-        /*
-        //chemin 2 niveau moyen
-        Rect rchemed2A = new Rect(centerwidht-intervalwidht,1000,centerwidht+intervalwidht,1350);
-        listeChemin.add(rchemed2A);
-        Rect rchemed2B = new Rect(centerwidht-intervalwidht,10,centerwidht+intervalwidht,700);
-        listeChemin.add(rchemed2B);
-        Rect rchemed2C = new Rect(centerwidht-3*intervalwidht,500,centerwidht-intervalwidht,700);
-        listeChemin.add(rchemed2C);
-        Rect rchemed2D = new Rect(centerwidht-3*intervalwidht,1000,centerwidht-intervalwidht,1200);
-        listeChemin.add(rchemed2D);
-        Rect rchemed2E = new Rect(centerwidht-3*intervalwidht,500,centerwidht-intervalwidht,1200);
-        listeChemin.add(rchemed2E);
-        */
-
-        //chemin niveau difficile
+            else if (random ==2){
+                //chemin 2 niveau moyen
+                Rect rchemed2A = new Rect(centerwidht-intervalwidht,1000,centerwidht+intervalwidht,1350);
+                listeChemin.add(rchemed2A);
+                Rect rchemed2B = new Rect(centerwidht-intervalwidht,10,centerwidht+intervalwidht,700);
+                listeChemin.add(rchemed2B);
+                Rect rchemed2C = new Rect(centerwidht-3*intervalwidht,500,centerwidht-intervalwidht,700);
+                listeChemin.add(rchemed2C);
+                Rect rchemed2D = new Rect(centerwidht-3*intervalwidht,1000,centerwidht-intervalwidht,1200);
+                listeChemin.add(rchemed2D);
+                Rect rchemed2E = new Rect(centerwidht-3*intervalwidht,500,centerwidht-intervalwidht,1200);
+                listeChemin.add(rchemed2E);
+            }
+            else {
+                //chemin 3 niveau moyen
+                Rect rchemed2A = new Rect(centerwidht-intervalwidht,800,centerwidht+intervalwidht,1350);
+                listeChemin.add(rchemed2A);
+                Rect rchemed2B = new Rect(centerwidht-intervalwidht,10,centerwidht+intervalwidht,400);
+                listeChemin.add(rchemed2B);
+                Rect rchemed2C = new Rect(centerwidht-3*intervalwidht,200,centerwidht-intervalwidht,400);
+                listeChemin.add(rchemed2C);
+                Rect rchemed2D = new Rect(centerwidht-3*intervalwidht,800,centerwidht-intervalwidht,1000);
+                listeChemin.add(rchemed2D);
+                Rect rchemed2E = new Rect(centerwidht-3*intervalwidht,200,centerwidht-intervalwidht,800);
+                listeChemin.add(rchemed2E);
+            }
+        }
+        else if (level ==3){
+            //chemins niveau difficile
+            int random = (int)(Math.random() * 2); //tirage aléatoire parmi nos circuits
+            if (random ==1){
+            //chemin niveau difficile 1
+            Rect rchemhard1A = new Rect(centerwidht-5*intervalwidht,1150,centerwidht+intervalwidht,1350);
+            listeChemin.add(rchemhard1A);
+            Rect rchemhard1B = new Rect(centerwidht-5*intervalwidht,800,centerwidht+5*intervalwidht,1000);
+            listeChemin.add(rchemhard1B);
+            Rect rchemhard1C = new Rect(centerwidht-5*intervalwidht,500,centerwidht+5*intervalwidht,700);
+            listeChemin.add(rchemhard1C);
+            Rect rchemhard1D = new Rect(centerwidht-5*intervalwidht,250,centerwidht+5*intervalwidht,450);
+            listeChemin.add(rchemhard1D);
+            Rect rchemhard1E = new Rect(centerwidht-intervalwidht,10,centerwidht+5*intervalwidht,210);
+            listeChemin.add(rchemhard1E);
+            Rect rchemhard1F = new Rect(centerwidht-5*intervalwidht,800,centerwidht-3*intervalwidht,1350);
+            listeChemin.add(rchemhard1F);
+            Rect rchemhard1G = new Rect(centerwidht+3*intervalwidht,500,centerwidht+5*intervalwidht,1000);
+            listeChemin.add(rchemhard1G);
+            Rect rchemhard1H = new Rect(centerwidht-5*intervalwidht,250,centerwidht-3*intervalwidht,700);
+            listeChemin.add(rchemhard1H);
+            Rect rchemhard1I = new Rect(centerwidht+3*intervalwidht,10,centerwidht+5*intervalwidht,450);
+            listeChemin.add(rchemhard1I);
+             }
+            else{
+                //chemin niveau difficile 2
+                Rect rchemhard1A = new Rect(centerwidht-intervalwidht,1150,centerwidht+5*intervalwidht,1350);
+                listeChemin.add(rchemhard1A);
+                Rect rchemhard1B = new Rect(centerwidht-5*intervalwidht,800,centerwidht+5*intervalwidht,1000);
+                listeChemin.add(rchemhard1B);
+                Rect rchemhard1C = new Rect(centerwidht-5*intervalwidht,500,centerwidht+5*intervalwidht,700);
+                listeChemin.add(rchemhard1C);
+                Rect rchemhard1D = new Rect(centerwidht-5*intervalwidht,250,centerwidht+5*intervalwidht,450);
+                listeChemin.add(rchemhard1D);
+                Rect rchemhard1E = new Rect(centerwidht-5*intervalwidht,10,centerwidht+intervalwidht,210);
+                listeChemin.add(rchemhard1E);
+                Rect rchemhard1F = new Rect(centerwidht+3*intervalwidht,800,centerwidht+5*intervalwidht,1350);
+                listeChemin.add(rchemhard1F);
+                Rect rchemhard1G = new Rect(centerwidht-5*intervalwidht,500,centerwidht-3*intervalwidht,1000);
+                listeChemin.add(rchemhard1G);
+                Rect rchemhard1H = new Rect(centerwidht+3*intervalwidht,250,centerwidht+5*intervalwidht,700);
+                listeChemin.add(rchemhard1H);
+                Rect rchemhard1I = new Rect(centerwidht-5*intervalwidht,10,centerwidht-3*intervalwidht,450);
+                listeChemin.add(rchemhard1I);
+            }
+        }
+        else{
+            //chemin niveau facile
+            Rect rchemeasy1A = new Rect(centerwidht-intervalwidht,10,centerwidht+intervalwidht,1350);
+            listeChemin.add(rchemeasy1A);
+        }
     }
-
 
     @Override
     //appele a chaque fois que l'ecran devra se re actualiser
