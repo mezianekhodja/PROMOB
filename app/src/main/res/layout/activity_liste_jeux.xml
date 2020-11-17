@@ -98,7 +98,7 @@
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:textColor="@color/noir"
-            android:text="Bientot disponible !"
+            android:text="Démontrez votre dextérité avec ce labyrinthe complètement tordu"
             android:textSize="10dp" />
 
         <Button
