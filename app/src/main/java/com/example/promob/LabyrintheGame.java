@@ -49,8 +49,8 @@ public class LabyrintheGame extends View implements SensorEventListener {
         this.imageHeight = ballBitmap.getHeight();
 
         //w et h sont la taille et hauteur de l'ecran
-        currentX =  (w - imageWidth) / 2;
-        currentY =  (h - imageHeight) / 2;
+        currentX =  (w - imageWidth)/2;
+        currentY =  (h - imageHeight);
     }
 
 
@@ -58,6 +58,20 @@ public class LabyrintheGame extends View implements SensorEventListener {
     //appele a chaque fois que l'ecran devra se re actualiser
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        //reglage couleurs arrivees
+        Paint paintmodif = new Paint();
+        //affichage background
+        paintmodif.setARGB(255,0,0,0);
+        canvas.drawRect(0,0,1100,1400,paintmodif);
+        //affichage chemin
+        paintmodif.setARGB(255,255,255,255);
+        canvas.drawRect(420,0,620,1400,paintmodif);
+        //affichage arrivée
+        paintmodif.setARGB(255,255,0,0);
+        canvas.drawRect(420,0,620,50,paintmodif);
+        //affichage départ
+        paintmodif.setARGB(255,0,255,0);
+        canvas.drawRect(420,1300,620,1400,paintmodif);
         //Sur la zone graphique du composant, on affiche l'image
         canvas.drawBitmap(ballBitmap, currentX, currentY, paint);
     }
@@ -68,7 +82,6 @@ public class LabyrintheGame extends View implements SensorEventListener {
         float x = sensorEvent.values[0];
         float y = sensorEvent.values[1];
         //float z = sensorEvent.values[2];
-        Log.i("DEBUG",x +" --- "+y);
         this.moveImage(-x*2,y*2);
     }
 
