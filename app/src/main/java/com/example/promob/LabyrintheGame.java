@@ -22,7 +22,7 @@ public class LabyrintheGame extends View implements SensorEventListener {
     private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
     //Charger l'image dans une instance de bitmap
-    private Bitmap ballBitmap;
+    private Bitmap ballBitmap,victoirebitmap,defaitebitmap;
 
     //Largeur et hauteur de l'image
     private int imageWidth;
@@ -34,8 +34,14 @@ public class LabyrintheGame extends View implements SensorEventListener {
     //liste de nos rectangles representant le chemin
     private List<Rect> listeChemin = new ArrayList<>();
     //ajustement valeurs en fonction du niveau
-    int centerwidht=520,intervalwidht=100;
+    private int centerwidht=520,intervalwidht=100;
+    //rectangle arrivée
+    private Rect arrivee = new Rect(centerwidht-intervalwidht,10,centerwidht+intervalwidht,50);
+    //rectangle départ
+    private Rect dep = new Rect(centerwidht-intervalwidht,1270,centerwidht+intervalwidht,1320);
 
+    //booleens représentant la victoire ou la defaite
+    private boolean win=false,loose=false;
     public LabyrintheGame(Context context){
         super(context);
     }
@@ -51,6 +57,8 @@ public class LabyrintheGame extends View implements SensorEventListener {
         super.onSizeChanged(w, h, oldw, oldh);
         //decoder l'image
         ballBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.balle);
+        victoirebitmap = BitmapFactory.decodeResource(getResources(), R.drawable.victoire);
+        defaitebitmap =BitmapFactory.decodeResource(getResources(), R.drawable.loose);
         //On recupere donc son image et sa taille
         this.imageWidth = ballBitmap.getWidth();
         this.imageHeight = ballBitmap.getHeight();
@@ -62,7 +70,7 @@ public class LabyrintheGame extends View implements SensorEventListener {
         //création des chemins en fonction des niveaux de difficulté (plusieurs chemins possibles par niveau)
         //chemin niveau facile
         Rect rchemeasy1A = new Rect(centerwidht-intervalwidht,10,centerwidht+intervalwidht,1350);
-        //listeChemin.add(rchemeasy1);
+        listeChemin.add(rchemeasy1A);
 
         //chemin niveau moyen
         //chemin 1 niveau moyen
@@ -79,6 +87,7 @@ public class LabyrintheGame extends View implements SensorEventListener {
         listeChemin.add(rchemed1E);
          */
 
+        /*
         //chemin 2 niveau moyen
         Rect rchemed2A = new Rect(centerwidht-intervalwidht,1000,centerwidht+intervalwidht,1350);
         listeChemin.add(rchemed2A);
@@ -90,6 +99,7 @@ public class LabyrintheGame extends View implements SensorEventListener {
         listeChemin.add(rchemed2D);
         Rect rchemed2E = new Rect(centerwidht-3*intervalwidht,500,centerwidht-intervalwidht,1200);
         listeChemin.add(rchemed2E);
+        */
 
         //chemin niveau difficile
     }
@@ -106,25 +116,36 @@ public class LabyrintheGame extends View implements SensorEventListener {
         //affichage delimitation background
         paintmodif.setARGB(255,0,0,0);
         canvas.drawRect(0,0,1100,10,paintmodif);
-
-        //affichage chemin
-        paintmodif.setARGB(255,255,255,255);
-        if (!listeChemin.isEmpty()){
-            for(int i = 0 ; i < listeChemin.size(); i++){
-                canvas.drawRect(listeChemin.get(i),paintmodif);
+        //verifaction victoire/défaite
+        if (!win && !loose){
+            isWin();
+            isLoose();
+            //affichage chemin
+            paintmodif.setARGB(255,255,255,255);
+            if (!listeChemin.isEmpty()){
+                for(int i = 0 ; i < listeChemin.size(); i++){
+                    canvas.drawRect(listeChemin.get(i),paintmodif);
+                }
             }
+
+            //affichage arrivée
+            paintmodif.setARGB(255,255,0,0);
+            canvas.drawRect(arrivee,paintmodif);
+
+            //affichage départ
+            paintmodif.setARGB(255,0,255,0);
+            canvas.drawRect(dep,paintmodif);
+
+            //affichage bille
+            canvas.drawBitmap(ballBitmap, currentX, currentY, paint);
+        }
+        else if (loose) {
+            canvas.drawBitmap(defaitebitmap, 300, 500, paint);
+        }
+        else {
+            canvas.drawBitmap(victoirebitmap, 300, 500, paint);
         }
 
-        //affichage arrivée
-        paintmodif.setARGB(255,255,0,0);
-        canvas.drawRect(centerwidht-intervalwidht,10,centerwidht+intervalwidht,50,paintmodif);
-
-        //affichage départ
-        paintmodif.setARGB(255,0,255,0);
-        canvas.drawRect(centerwidht-intervalwidht,1270,centerwidht+intervalwidht,1320,paintmodif);
-
-        //affichage bille
-        canvas.drawBitmap(ballBitmap, currentX, currentY, paint);
     }
 
     @Override
@@ -132,7 +153,7 @@ public class LabyrintheGame extends View implements SensorEventListener {
     public void onSensorChanged(SensorEvent sensorEvent) {
         float x = sensorEvent.values[0];
         float y = sensorEvent.values[1];
-        //float z = sensorEvent.values[2];
+
         this.moveImage(-x*2,y*2);
     }
 
@@ -160,7 +181,22 @@ public class LabyrintheGame extends View implements SensorEventListener {
         this.invalidate();
     }
 
-    private void genereGrille(){
-
+    private void isWin(){
+        if((currentX>=arrivee.left)&&(currentX<=arrivee.right)&&(currentY<=arrivee.bottom)
+                &&(currentY>=arrivee.top)){
+                win= true;
+        }
+    }
+    private void isLoose(){
+        boolean trouve=loose;
+        if (!listeChemin.isEmpty()){
+            for(int i = 0 ; i < listeChemin.size(); i++){
+                if((currentX>=listeChemin.get(i).left)&&(currentX<=listeChemin.get(i).right)&&
+                        (currentY<=listeChemin.get(i).bottom) &&(currentY>=listeChemin.get(i).top)){
+                            trouve=true;
+                }
+            }
+         }
+        if (!trouve){loose= true; }
     }
 }
