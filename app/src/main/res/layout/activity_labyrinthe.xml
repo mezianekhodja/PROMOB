@@ -9,13 +9,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@drawable/background">
 
         <FrameLayout
             android:id="@+id/frameLayoutLB"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@drawable/background">
+            android:layout_height="100dp">
 
             <ImageView
                 android:layout_width="200dp"
