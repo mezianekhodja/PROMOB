@@ -34,18 +34,11 @@
                 android:textColor="#FFFFFF"
                 android:textSize="26sp" />
         </FrameLayout>
-
-        <GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/boardLB"
-            android:orientation="horizontal">
             <view
                 android:id="@+id/view2"
                 class="com.example.promob.LabyrintheGame"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
-        </GridLayout>
     </LinearLayout>
 
 
