@@ -10,14 +10,19 @@ import android.graphics.Rect;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
+import android.os.CountDownTimer;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 //Composant grafique (View)
 public class LabyrintheGame extends View implements SensorEventListener {
+
+    //timer
 
     //stylo graphique pour afficher l'image
     private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -203,6 +208,8 @@ public class LabyrintheGame extends View implements SensorEventListener {
         }
         else if (loose) {
             canvas.drawBitmap(defaitebitmap, 300, 500, paint);
+            
+
         }
         else {
             canvas.drawBitmap(victoirebitmap, 300, 500, paint);

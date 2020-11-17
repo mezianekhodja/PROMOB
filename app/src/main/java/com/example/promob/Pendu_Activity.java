@@ -218,6 +218,7 @@ public class Pendu_Activity extends AppCompatActivity {
         public void createDialog(){
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Vous avez gagné");
+            counterDownTimer.cancel();
             if(!win){
                 builder.setTitle("Vous avez perdu");
                 builder.setMessage("Le mot à trouver était : "+word);

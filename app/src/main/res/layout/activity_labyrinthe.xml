@@ -25,6 +25,16 @@
                 android:background="@drawable/scoretable" />
 
             <TextView
+                android:id="@+id/timer"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0:30"
+                android:textColor="@color/noir"
+                android:textSize="30dp" />
+
+            <TextView
                 android:id="@+id/tvscoreLB"
                 android:layout_width="163dp"
                 android:layout_height="wrap_content"
@@ -33,12 +43,21 @@
                 android:text="0"
                 android:textColor="#FFFFFF"
                 android:textSize="26sp" />
+
         </FrameLayout>
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/boardLB"
+            android:orientation="horizontal">
+
             <view
                 android:id="@+id/view2"
                 class="com.example.promob.LabyrintheGame"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
+        </GridLayout>
     </LinearLayout>
 
 
