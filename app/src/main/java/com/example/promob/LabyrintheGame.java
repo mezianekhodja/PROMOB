@@ -10,15 +10,37 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 //Composant grafique (View)
 public class LabyrintheGame extends View implements SensorEventListener {
 
     //gestion score
     int score = 5000;
+
+    //gestion niveau
+    int level;
 
     //stylo graphique pour afficher l'image
     private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -41,6 +63,18 @@ public class LabyrintheGame extends View implements SensorEventListener {
     private Rect arrivee = new Rect(centerwidht-intervalwidht,10,centerwidht+intervalwidht,50);
     //rectangle départ
     private Rect dep = new Rect(centerwidht-intervalwidht,1270,centerwidht+intervalwidht,1350);
+
+
+    //gestion score bdd
+    String username = "Undefined";
+    private static final String KEY_USER = "user", KEY_SCORE = "score", KEY_DATE="date";
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseAuth firebaseAuth;
+    private FirebaseDatabase firebaseDatabase;
+    String currentTime = Calendar.getInstance().getTime().toString();
+    int highscore_global = 0;
+    int highscore_user = 0;
+    private static final String TAG = "Labyrinthe";
 
     //booleens représentant la victoire ou la defaite
     private boolean win=false,loose=false;
@@ -71,7 +105,7 @@ public class LabyrintheGame extends View implements SensorEventListener {
         currentY =  1320;
 
         //création des chemins en fonction des niveaux de difficulté (plusieurs chemins possibles par niveau)
-        int level = Labyrinthe.getLevel();
+        level = Labyrinthe.getLevel();
         if (level ==2){
             //chemin niveau moyen
             int random = (int)(Math.random() * 4); //tirage aléatoire parmi nos circuits
@@ -167,6 +201,23 @@ public class LabyrintheGame extends View implements SensorEventListener {
             Rect rchemeasy1A = new Rect(centerwidht-intervalwidht,10,centerwidht+intervalwidht,1350);
             listeChemin.add(rchemeasy1A);
         }
+        //gestion bdd
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        final DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                UserProfile userProfile = snapshot.getValue(UserProfile.class);
+                username=userProfile.getUserName();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(Labyrinthe.getContext(), error.getCode(),Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -189,6 +240,10 @@ public class LabyrintheGame extends View implements SensorEventListener {
 
         //verification victoire/défaite
         if (!win && !loose){
+            /*//chargement score bdd
+            if ((score==4950)&&(!username.equals("invite"))){
+                loadNote();
+            }*/
             //gestion score
             if (score>0){
                 score--;
@@ -200,7 +255,7 @@ public class LabyrintheGame extends View implements SensorEventListener {
             }
 
             isWin();
-            isLoose();
+            //isLoose();
             //affichage chemin
             paintmodif.setARGB(255,255,255,255);
             if (!listeChemin.isEmpty()){
@@ -219,6 +274,13 @@ public class LabyrintheGame extends View implements SensorEventListener {
 
             //affichage bille
             canvas.drawBitmap(ballBitmap, currentX, currentY, paint);
+
+            //vérifcation fin de game
+            if (!(!win && !loose)){
+                if(!username.equals("invite")){
+                    saveNote();
+                }
+            }
         }
         else if (loose) {
             canvas.drawBitmap(defaitebitmap, 300, 500, paint);
@@ -281,6 +343,88 @@ public class LabyrintheGame extends View implements SensorEventListener {
         if (!trouve){
             score=0;
             loose= true;
+        }
+    }
+    /*
+    public void loadNote(){
+        db.collection("Labyrinthe_level_"+level).document("highscore_global").get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()){
+                            String scoreglob = documentSnapshot.get(KEY_SCORE).toString();
+                            highscore_global=Integer.parseInt(scoreglob);
+                        }
+                        else{
+                            Toast.makeText(Labyrinthe.getContext(), "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Labyrinthe.getContext(), "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+        db.collection("Labyrinthe_level_"+level).document("highscore_"+username).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()){
+                            String scoreus = documentSnapshot.get(KEY_SCORE).toString();
+                            highscore_user=Integer.parseInt(scoreus);                        }
+                        else{
+                            Toast.makeText(Labyrinthe.getContext(), "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Labyrinthe.getContext(), "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+    }*/
+    public void saveNote() {
+        Map<String, Object> note = new HashMap<>();
+        note.put(KEY_USER,username);
+        note.put(KEY_SCORE,score);
+        note.put(KEY_DATE,currentTime);
+
+        if (score>highscore_global){
+            db.collection("Labyrinthe_level_"+level).document("highscore_global").set(note)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(Labyrinthe.getContext(), "Sucess", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(Labyrinthe.getContext(), "Fail", Toast.LENGTH_SHORT).show();
+                            Log.d(TAG, e.toString());
+                        }
+                    });
+
+        }
+        if (score>highscore_user){
+            db.collection("Labyrinthe_level_"+level).document("highscore_"+username).set(note)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(Labyrinthe.getContext(), "Sucess", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(Labyrinthe.getContext(), "Fail", Toast.LENGTH_SHORT).show();
+                            Log.d(TAG, e.toString());
+                        }
+                    });
         }
     }
 }
