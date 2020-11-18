@@ -103,6 +103,9 @@ public class LabyrintheGame extends View implements SensorEventListener {
         //w et h sont la taille et hauteur de l'ecran
         currentX =  (w - imageWidth)/2;
         currentY =  1320;
+        //récupération records
+        highscore_global=Labyrinthe.getHsg();
+        highscore_user=Labyrinthe.getHsp();
 
         //création des chemins en fonction des niveaux de difficulté (plusieurs chemins possibles par niveau)
         level = Labyrinthe.getLevel();
@@ -240,10 +243,6 @@ public class LabyrintheGame extends View implements SensorEventListener {
 
         //verification victoire/défaite
         if (!win && !loose){
-            /*//chargement score bdd
-            if ((score==4950)&&(!username.equals("invite"))){
-                loadNote();
-            }*/
             //gestion score
             if (score>0){
                 score--;
@@ -345,48 +344,7 @@ public class LabyrintheGame extends View implements SensorEventListener {
             loose= true;
         }
     }
-    /*
-    public void loadNote(){
-        db.collection("Labyrinthe_level_"+level).document("highscore_global").get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if (documentSnapshot.exists()){
-                            String scoreglob = documentSnapshot.get(KEY_SCORE).toString();
-                            highscore_global=Integer.parseInt(scoreglob);
-                        }
-                        else{
-                            Toast.makeText(Labyrinthe.getContext(), "Fail", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(Labyrinthe.getContext(), "Fail", Toast.LENGTH_SHORT).show();
-                        Log.d(TAG, e.toString());
-                    }
-                });
-        db.collection("Labyrinthe_level_"+level).document("highscore_"+username).get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if (documentSnapshot.exists()){
-                            String scoreus = documentSnapshot.get(KEY_SCORE).toString();
-                            highscore_user=Integer.parseInt(scoreus);                        }
-                        else{
-                            Toast.makeText(Labyrinthe.getContext(), "Fail", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(Labyrinthe.getContext(), "Fail", Toast.LENGTH_SHORT).show();
-                        Log.d(TAG, e.toString());
-                    }
-                });
-    }*/
+
     public void saveNote() {
         Map<String, Object> note = new HashMap<>();
         note.put(KEY_USER,username);

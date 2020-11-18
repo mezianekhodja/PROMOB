@@ -4,25 +4,13 @@ import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.Calendar;
 
 
 public class Labyrinthe extends AppCompatActivity {
 
-    private static int niv;
+    private static int niv,hsp,hsg;
     private LabyrintheGame view;
     private SensorManager mgr;
 
@@ -30,7 +18,9 @@ public class Labyrinthe extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_labyrinthe);
-        niv= getIntent().getExtras().getInt("level");;
+        niv= getIntent().getExtras().getInt("level");
+        hsp= getIntent().getExtras().getInt("hsp");
+        hsg= getIntent().getExtras().getInt("hsg");
 
         view =  (LabyrintheGame) findViewById(R.id.view2);
         //Initilisation du sensor
@@ -54,6 +44,12 @@ public class Labyrinthe extends AppCompatActivity {
     }
     protected static int getLevel(){
         return niv;
+    }
+    protected static int getHsp(){
+        return hsp;
+    }
+    protected static int getHsg(){
+        return hsg;
     }
     protected static Context getContext(){
         return getContext();

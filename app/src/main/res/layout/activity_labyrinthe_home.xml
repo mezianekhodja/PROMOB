@@ -44,7 +44,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="HARD" />
-
+        <Button
+            android:id="@+id/button_lb_loadHS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="LOAD" />
         <TextView
             android:layout_width="match_parent"
             android:gravity="center"
