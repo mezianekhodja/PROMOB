@@ -1,6 +1,5 @@
 package com.example.promob;
 
-import android.content.ClipDescription;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,25 +9,22 @@ import android.graphics.Rect;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
-import android.os.CountDownTimer;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.List;
 
 //Composant grafique (View)
 public class LabyrintheGame extends View implements SensorEventListener {
 
-    //timer
+    //gestion score
+    int score = 5000;
 
     //stylo graphique pour afficher l'image
     private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
     //Charger l'image dans une instance de bitmap
-    private Bitmap ballBitmap,victoirebitmap,defaitebitmap;
+    private Bitmap ballBitmap,victoirebitmap,defaitebitmap,scoretableBitmap;
 
     //Largeur et hauteur de l'image
     private int imageWidth;
@@ -44,7 +40,7 @@ public class LabyrintheGame extends View implements SensorEventListener {
     //rectangle arrivée
     private Rect arrivee = new Rect(centerwidht-intervalwidht,10,centerwidht+intervalwidht,50);
     //rectangle départ
-    private Rect dep = new Rect(centerwidht-intervalwidht,1270,centerwidht+intervalwidht,1320);
+    private Rect dep = new Rect(centerwidht-intervalwidht,1270,centerwidht+intervalwidht,1350);
 
     //booleens représentant la victoire ou la defaite
     private boolean win=false,loose=false;
@@ -65,13 +61,14 @@ public class LabyrintheGame extends View implements SensorEventListener {
         ballBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.balle);
         victoirebitmap = BitmapFactory.decodeResource(getResources(), R.drawable.victoire);
         defaitebitmap =BitmapFactory.decodeResource(getResources(), R.drawable.loose);
+        scoretableBitmap=BitmapFactory.decodeResource(getResources(),R.drawable.littlescoretable);
         //On recupere donc son image et sa taille
         this.imageWidth = ballBitmap.getWidth();
         this.imageHeight = ballBitmap.getHeight();
 
         //w et h sont la taille et hauteur de l'ecran
         currentX =  (w - imageWidth)/2;
-        currentY =  (h - imageHeight);
+        currentY =  1320;
 
         //création des chemins en fonction des niveaux de difficulté (plusieurs chemins possibles par niveau)
         int level = Labyrinthe.getLevel();
@@ -183,8 +180,25 @@ public class LabyrintheGame extends View implements SensorEventListener {
         //affichage delimitation background
         paintmodif.setARGB(255,0,0,0);
         canvas.drawRect(0,0,1100,10,paintmodif);
-        //verifaction victoire/défaite
+
+        //affichage score
+        canvas.drawBitmap(scoretableBitmap,320,1370,paint);
+        paintmodif.setTextSize(60);
+        paintmodif.setARGB(255,255,255,255);
+        canvas.drawText(String.valueOf(score),460,1500,paintmodif);
+
+        //verification victoire/défaite
         if (!win && !loose){
+            //gestion score
+            if (score>0){
+                score--;
+            }
+
+            //vérification timerscore non vide
+            else if (score==0){
+                loose = true;
+            }
+
             isWin();
             isLoose();
             //affichage chemin
@@ -208,8 +222,6 @@ public class LabyrintheGame extends View implements SensorEventListener {
         }
         else if (loose) {
             canvas.drawBitmap(defaitebitmap, 300, 500, paint);
-            
-
         }
         else {
             canvas.drawBitmap(victoirebitmap, 300, 500, paint);
@@ -266,6 +278,9 @@ public class LabyrintheGame extends View implements SensorEventListener {
                 }
             }
          }
-        if (!trouve){loose= true; }
+        if (!trouve){
+            score=0;
+            loose= true;
+        }
     }
 }

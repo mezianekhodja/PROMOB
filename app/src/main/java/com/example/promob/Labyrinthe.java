@@ -1,16 +1,10 @@
 package com.example.promob;
 
-import android.content.Intent;
-import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.Locale;
 
 public class Labyrinthe extends AppCompatActivity {
 
@@ -18,23 +12,24 @@ public class Labyrinthe extends AppCompatActivity {
     private static int niv;
     private LabyrintheGame view;
     private SensorManager mgr;
-    private CountDownTimer counterDownTimer;
-    private long timeLeftInMillis;
-    private TextView textViewTimer;
+    //private CountDownTimer counterDownTimer;
+   //private long timeLeftInMillis;
+    //private TextView textViewTimer;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_labyrinthe);
-        textViewTimer = findViewById(R.id.timer);
+        //textViewTimer = findViewById(R.id.timer);
         niv= getIntent().getExtras().getInt("level");;
 
         view =  (LabyrintheGame) findViewById(R.id.view2);
         //Initilisation du sensor
         mgr = (SensorManager) getSystemService(SENSOR_SERVICE);
-        timeLeftInMillis = COUNTDOWN_IN_MILLIS;
-        startCountDown();
+
+       // timeLeftInMillis = COUNTDOWN_IN_MILLIS;
+       // startCountDown();
     }
 
     @Override
@@ -56,6 +51,7 @@ public class Labyrinthe extends AppCompatActivity {
         return niv;
     }
 
+    /*
     private void startCountDown() {
         counterDownTimer = new CountDownTimer(timeLeftInMillis,1000) {
             @Override
@@ -94,6 +90,5 @@ public class Labyrinthe extends AppCompatActivity {
         if(counterDownTimer!=null){
             counterDownTimer.cancel();
         }
-    }
-
+    }*/
 }
