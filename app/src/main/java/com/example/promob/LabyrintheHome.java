@@ -24,7 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.Calendar;
 
 public class LabyrintheHome extends AppCompatActivity {
-    private Button easy,medium, hard,load;
+    private Button easy,medium, hard,load1,load2,load3;
 
     //gestion score bdd
     String username = "Undefined";
@@ -35,6 +35,7 @@ public class LabyrintheHome extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase;
     String currentTime = Calendar.getInstance().getTime().toString();
     private static final String TAG = "LabyrintheHome";
+    private boolean v1=false,v2=false,v3=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,9 @@ public class LabyrintheHome extends AppCompatActivity {
         easy = (Button) findViewById(R.id.button_lb_easy);
         medium = (Button) findViewById(R.id.button_lb_medium);
         hard = (Button) findViewById(R.id.button_lb_hard);
-        load = (Button) findViewById(R.id.button_lb_loadHS);
+        load1 = (Button) findViewById(R.id.button_lb_loadHS1);
+        load2 = (Button) findViewById(R.id.button_lb_loadHS2);
+        load3 = (Button) findViewById(R.id.button_lb_loadHS3);
 
         //gestion bdd
         firebaseAuth = FirebaseAuth.getInstance();
@@ -67,42 +70,70 @@ public class LabyrintheHome extends AppCompatActivity {
         easy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LabyrintheHome.this, Labyrinthe.class);
-                intent.putExtra("hsp",hsp1);
-                intent.putExtra("hsg",hsg1);
-                intent.putExtra("level",1);
-                startActivity(intent);
-                LabyrintheHome.this.finish();
+                if(v1){
+                    Intent intent = new Intent(LabyrintheHome.this, Labyrinthe.class);
+                    intent.putExtra("hsp",hsp1);
+                    intent.putExtra("hsg",hsg1);
+                    intent.putExtra("level",1);
+                    startActivity(intent);
+                    LabyrintheHome.this.finish();
+                }
+                else {
+                    Toast.makeText(LabyrintheHome.this, "Validez le bouton", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         medium.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LabyrintheHome.this, Labyrinthe.class);
-                intent.putExtra("level",2);
-                intent.putExtra("hsp",hsp2);
-                intent.putExtra("hsg",hsg2);
-                startActivity(intent);
-                LabyrintheHome.this.finish();
+                if(v2){
+                    Intent intent = new Intent(LabyrintheHome.this, Labyrinthe.class);
+                    intent.putExtra("level",2);
+                    intent.putExtra("hsp",hsp2);
+                    intent.putExtra("hsg",hsg2);
+                    startActivity(intent);
+                    LabyrintheHome.this.finish();
+                }
+                else {
+                    Toast.makeText(LabyrintheHome.this, "Validez le bouton", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         hard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LabyrintheHome.this, Labyrinthe.class);
-                intent.putExtra("level",3);
-                intent.putExtra("hsp",hsp3);
-                intent.putExtra("hsg",hsg3);
-                startActivity(intent);
-                LabyrintheHome.this.finish();
+                if(v3){
+                    Intent intent = new Intent(LabyrintheHome.this, Labyrinthe.class);
+                    intent.putExtra("level",3);
+                    intent.putExtra("hsp",hsp3);
+                    intent.putExtra("hsg",hsg3);
+                    startActivity(intent);
+                    LabyrintheHome.this.finish();
+                }
+               else {
+                    Toast.makeText(LabyrintheHome.this, "Validez le bouton", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-        load.setOnClickListener(new View.OnClickListener() {
+        load1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                v1=true;
                 loadNote1();
-                //loadNote2();
-                //loadNote3();
+            }
+        });
+        load2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v2=true;
+                loadNote2();
+            }
+        });
+        load3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v3=true;
+                loadNote3();
             }
         });
 
