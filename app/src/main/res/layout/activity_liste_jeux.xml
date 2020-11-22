@@ -114,14 +114,14 @@
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:textColor="@color/noir"
-            android:text="Bientot disponible !"
+            android:text="Collectez le plus de pièces mais faites attention aux pièges !"
             android:textSize="10dp" />
 
         <Button
-            android:id="@+id/buttongamepasencoredispo2"
+            android:id="@+id/buttonhole"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Bientot disponible !"
+            android:text="Hole"
             android:textStyle="bold" />
 
         <TextView

@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Entrainement extends AppCompatActivity {
 
-    Button btn_logoquizz,btn_pendu,btn_cc,btn_nb,btn_laby;
+    Button btn_logoquizz,btn_pendu,btn_cc,btn_nb,btn_laby,btn_hole;
     private FirebaseAuth firebaseAuth;
 
     @Override
@@ -57,6 +57,13 @@ public class Entrainement extends AppCompatActivity {
                 openLabyrithe();
             }
         });
+        btn_hole = (Button) findViewById(R.id.buttonhole);
+        btn_hole.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                openHole();
+            }
+        });
     }
 
     public void openHomeLogoQuizz() {
@@ -86,6 +93,11 @@ public class Entrainement extends AppCompatActivity {
     }
     public void openLabyrithe() {
         Intent intent = new Intent(this, LabyrintheHome.class);
+        startActivity(intent);
+        Entrainement.this.finish();
+    }
+    public void openHole() {
+        Intent intent = new Intent(this, Hole_Home.class);
         startActivity(intent);
         Entrainement.this.finish();
     }

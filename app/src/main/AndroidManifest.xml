@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LabyrintheHome"></activity>
+        <activity android:name=".Hole"></activity>
+        <activity android:name=".Hole_Home" />
+        <activity android:name=".LabyrintheHome" />
         <activity android:name=".Classement" />
         <activity android:name=".Numbers" />
         <activity android:name=".Numbers_Home" />

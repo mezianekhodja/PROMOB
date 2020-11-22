@@ -1,9 +1,9 @@
 package com.example.promob;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import android.content.Intent;
 import android.os.Bundle;
+import androidx.annotation.NonNull;
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,10 +18,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.util.Calendar;
 
-public class LabyrintheHome extends AppCompatActivity {
+
+public class Hole_Home extends AppCompatActivity {
+
     private Button easy,medium, hard,load1,load2,load3;
 
     //gestion score bdd
@@ -32,20 +33,20 @@ public class LabyrintheHome extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
     String currentTime = Calendar.getInstance().getTime().toString();
-    private static final String TAG = "LabyrintheHome";
+    private static final String TAG = "Hole_Home";
     private boolean v1=false,v2=false,v3=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_labyrinthe_home);
+        setContentView(R.layout.activity_hole__home);
 
-        easy = (Button) findViewById(R.id.button_lb_easy);
-        medium = (Button) findViewById(R.id.button_lb_medium);
-        hard = (Button) findViewById(R.id.button_lb_hard);
-        load1 = (Button) findViewById(R.id.button_lb_loadHS1);
-        load2 = (Button) findViewById(R.id.button_lb_loadHS2);
-        load3 = (Button) findViewById(R.id.button_lb_loadHS3);
+        easy = (Button) findViewById(R.id.button_ho_easy);
+        medium = (Button) findViewById(R.id.button_ho_medium);
+        hard = (Button) findViewById(R.id.button_ho_hard);
+        load1 = (Button) findViewById(R.id.button_ho_loadHS1);
+        load2 = (Button) findViewById(R.id.button_ho_loadHS2);
+        load3 = (Button) findViewById(R.id.button_ho_loadHS3);
 
         //gestion bdd
         firebaseAuth = FirebaseAuth.getInstance();
@@ -61,7 +62,7 @@ public class LabyrintheHome extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(Labyrinthe.getContext(), error.getCode(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(Hole.getContext(), error.getCode(),Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -69,15 +70,15 @@ public class LabyrintheHome extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(v1){
-                    Intent intent = new Intent(LabyrintheHome.this, Labyrinthe.class);
+                    Intent intent = new Intent(Hole_Home.this, Hole.class);
                     intent.putExtra("hsp",hsp1);
                     intent.putExtra("hsg",hsg1);
                     intent.putExtra("level",1);
                     startActivity(intent);
-                    LabyrintheHome.this.finish();
+                    Hole_Home.this.finish();
                 }
                 else {
-                    Toast.makeText(LabyrintheHome.this, "Validez le bouton", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Hole_Home.this, "Validez le bouton", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -85,15 +86,15 @@ public class LabyrintheHome extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(v2){
-                    Intent intent = new Intent(LabyrintheHome.this, Labyrinthe.class);
+                    Intent intent = new Intent(Hole_Home.this, Hole.class);
                     intent.putExtra("level",2);
                     intent.putExtra("hsp",hsp2);
                     intent.putExtra("hsg",hsg2);
                     startActivity(intent);
-                    LabyrintheHome.this.finish();
+                    Hole_Home.this.finish();
                 }
                 else {
-                    Toast.makeText(LabyrintheHome.this, "Validez le bouton", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Hole_Home.this, "Validez le bouton", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -101,15 +102,15 @@ public class LabyrintheHome extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(v3){
-                    Intent intent = new Intent(LabyrintheHome.this, Labyrinthe.class);
+                    Intent intent = new Intent(Hole_Home.this, Hole.class);
                     intent.putExtra("level",3);
                     intent.putExtra("hsp",hsp3);
                     intent.putExtra("hsg",hsg3);
                     startActivity(intent);
-                    LabyrintheHome.this.finish();
+                    Hole_Home.this.finish();
                 }
-               else {
-                    Toast.makeText(LabyrintheHome.this, "Validez le bouton", Toast.LENGTH_SHORT).show();
+                else {
+                    Toast.makeText(Hole_Home.this, "Validez le bouton", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -117,27 +118,27 @@ public class LabyrintheHome extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 v1=true;
-                loadNote1();
+                //loadNote1();
             }
         });
         load2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 v2=true;
-                loadNote2();
+                //loadNote2();
             }
         });
         load3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 v3=true;
-                loadNote3();
+                //loadNote3();
             }
         });
 
     }
     public void loadNote1(){
-        db.collection("Labyrinthe_level_"+1).document("highscore_global").get()
+        db.collection("Hole_level_"+1).document("highscore_global").get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -146,18 +147,18 @@ public class LabyrintheHome extends AppCompatActivity {
                             hsg1 =Integer.parseInt(scoreglob);
                         }
                         else{
-                            Toast.makeText(Labyrinthe.getContext(), "Fail", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Hole.getContext(), "Fail", Toast.LENGTH_SHORT).show();
                         }
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(Labyrinthe.getContext(), "Fail", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Hole.getContext(), "Fail", Toast.LENGTH_SHORT).show();
                         Log.d(TAG, e.toString());
                     }
                 });
-        db.collection("Labyrinthe_level_"+1).document("highscore_"+username).get()
+        db.collection("Hole_level_"+1).document("highscore_"+username).get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -165,20 +166,20 @@ public class LabyrintheHome extends AppCompatActivity {
                             String scoreus = documentSnapshot.get(KEY_SCORE).toString();
                             hsp1=Integer.parseInt(scoreus);                        }
                         else{
-                            Toast.makeText(Labyrinthe.getContext(), "Fail", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Hole.getContext(), "Fail", Toast.LENGTH_SHORT).show();
                         }
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(Labyrinthe.getContext(), "Fail", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Hole.getContext(), "Fail", Toast.LENGTH_SHORT).show();
                         Log.d(TAG, e.toString());
                     }
                 });
     }
     public void loadNote2(){
-        db.collection("Labyrinthe_level_"+2).document("highscore_global").get()
+        db.collection("Hole_level_"+2).document("highscore_global").get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -187,18 +188,18 @@ public class LabyrintheHome extends AppCompatActivity {
                             hsg2=Integer.parseInt(scoreglob2);
                         }
                         else{
-                            Toast.makeText(Labyrinthe.getContext(), "Fail", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Hole.getContext(), "Fail", Toast.LENGTH_SHORT).show();
                         }
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(Labyrinthe.getContext(), "Fail", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Hole.getContext(), "Fail", Toast.LENGTH_SHORT).show();
                         Log.d(TAG, e.toString());
                     }
                 });
-        db.collection("Labyrinthe_level_"+2).document("highscore_"+username).get()
+        db.collection("Hole_level_"+2).document("highscore_"+username).get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -206,20 +207,20 @@ public class LabyrintheHome extends AppCompatActivity {
                             String scoreus2 = documentSnapshot.get(KEY_SCORE).toString();
                             hsp2=Integer.parseInt(scoreus2);                        }
                         else{
-                            Toast.makeText(Labyrinthe.getContext(), "Fail", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Hole.getContext(), "Fail", Toast.LENGTH_SHORT).show();
                         }
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(Labyrinthe.getContext(), "Fail", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Hole.getContext(), "Fail", Toast.LENGTH_SHORT).show();
                         Log.d(TAG, e.toString());
                     }
                 });
     }
     public void loadNote3(){
-        db.collection("Labyrinthe_level_"+3).document("highscore_global").get()
+        db.collection("Hole_level_"+3).document("highscore_global").get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -228,18 +229,18 @@ public class LabyrintheHome extends AppCompatActivity {
                             hsg3=Integer.parseInt(scoreglob3);
                         }
                         else{
-                            Toast.makeText(Labyrinthe.getContext(), "Fail", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Hole.getContext(), "Fail", Toast.LENGTH_SHORT).show();
                         }
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(Labyrinthe.getContext(), "Fail", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Hole.getContext(), "Fail", Toast.LENGTH_SHORT).show();
                         Log.d(TAG, e.toString());
                     }
                 });
-        db.collection("Labyrinthe_level_"+3).document("highscore_"+username).get()
+        db.collection("Hole_level_"+3).document("highscore_"+username).get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -247,14 +248,14 @@ public class LabyrintheHome extends AppCompatActivity {
                             String scoreus3 = documentSnapshot.get(KEY_SCORE).toString();
                             hsp3=Integer.parseInt(scoreus3);                        }
                         else{
-                            Toast.makeText(Labyrinthe.getContext(), "Fail", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Hole.getContext(), "Fail", Toast.LENGTH_SHORT).show();
                         }
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(Labyrinthe.getContext(), "Fail", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Hole.getContext(), "Fail", Toast.LENGTH_SHORT).show();
                         Log.d(TAG, e.toString());
                     }
                 });

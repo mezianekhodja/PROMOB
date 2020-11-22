@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LabyrintheHome">
+    tools:context=".Hole_Home">
     <LinearLayout
         android:layout_width="409dp"
         android:layout_height="729dp"
@@ -17,7 +17,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Labyrinthe v1.0" />
+            android:text="Hole v1.0" />
 
         <ImageView
             android:layout_width="match_parent"
@@ -25,7 +25,7 @@
             app:srcCompat="@drawable/logolb"/>
 
         <Button
-            android:id="@+id/button_lb_easy"
+            android:id="@+id/button_ho_easy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Easy"
@@ -33,29 +33,29 @@
             android:layout_marginBottom="5dp"/>
 
         <Button
-            android:id="@+id/button_lb_medium"
+            android:id="@+id/button_ho_medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="MEDIUM"
             android:textStyle="bold"/>
 
         <Button
-            android:id="@+id/button_lb_hard"
+            android:id="@+id/button_ho_hard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="HARD" />
         <Button
-            android:id="@+id/button_lb_loadHS1"
+            android:id="@+id/button_ho_loadHS1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="LOAD1" />
         <Button
-            android:id="@+id/button_lb_loadHS2"
+            android:id="@+id/button_ho_loadHS2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="LOAD2" />
         <Button
-            android:id="@+id/button_lb_loadHS3"
+            android:id="@+id/button_ho_loadHS3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="LOAD3" />
