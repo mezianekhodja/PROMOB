@@ -151,7 +151,7 @@ public class HoleGame extends View implements SensorEventListener {
         paintmodif.setTextSize(60);
         paintmodif.setARGB(255,255,255,255);
         //canvas.drawText(String.valueOf(score),460,1500,paintmodif);
-        canvas.drawText(String.valueOf(timer),460,1500,paintmodif);
+        canvas.drawText(String.valueOf(score),460,1500,paintmodif);
 
         //verification victoire/défaite
         if (!win && !loose){
@@ -161,25 +161,30 @@ public class HoleGame extends View implements SensorEventListener {
             }
 
             //vérification timerscore non vide
-            else if (timer==0){
+           /* else if (timer==0){
                 loose = true;
-            }
+            }*/
 
             //affichage bille
             canvas.drawBitmap(ballBitmap, currentX, currentY, paint);
 
             //gestion pieces
-            if (timer%50==0){
+            if (timer%200==0){
                 addCoin();
             }
             //gestion pieges
-            if (timer%100==0){
+            if (timer%10000==0){
                 addHole();
             }
             //parcours de nos maps
             if (!listePieces.isEmpty()){
                 for (Map.Entry mapentry : listePieces.entrySet()) {
                     canvas.drawBitmap(coinBitmap,(Integer)mapentry.getKey(),(Integer)mapentry.getValue(),paint);
+                    if(currentX>=(Integer) mapentry.getKey()-5&&currentX<=(Integer)mapentry.getKey()+5&& currentY<=(Integer)mapentry.getKey()+5
+                            &&currentY>=(Integer)mapentry.getKey()-5){
+                        score++;
+                        listePieces.remove(listePieces.get(mapentry.getKey()));
+                    }
                 }
             }
             if (!listePieges.isEmpty()){
