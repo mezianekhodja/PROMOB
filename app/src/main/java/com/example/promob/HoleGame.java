@@ -35,8 +35,6 @@ import java.util.List;
 import java.util.Map;
 
 public class HoleGame extends View implements SensorEventListener {
-    //gestion timer
-    int timer = 5000;
     //gestion score
     int score = 0;
 
@@ -47,7 +45,7 @@ public class HoleGame extends View implements SensorEventListener {
     private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
     //Charger l'image dans une instance de bitmap
-    private Bitmap ballBitmap,victoirebitmap,defaitebitmap,scoretableBitmap,holeBitmap,coinBitmap;
+    private Bitmap ballBitmap,victoirebitmap,defaitebitmap,scoretableBitmap;
 
     //Largeur et hauteur de l'image
     private int imageWidth;
@@ -57,12 +55,8 @@ public class HoleGame extends View implements SensorEventListener {
     private int currentX;
     private int currentY;
 
-    //liste de nos pièces et de nos pièges
-    private List<Position> listePieces = new ArrayList<>();
-    private List<Position> listePieges = new ArrayList<>();
-
-    //ajustement valeurs en fonction du niveau
-    private int centerwidht=520,intervalwidht=100;
+    //définition rectangle de jeu
+    Rect rectGame = new Rect(0,0,1100,1500);
 
     //gestion score bdd
     String username = "Undefined";
@@ -96,8 +90,6 @@ public class HoleGame extends View implements SensorEventListener {
         victoirebitmap = BitmapFactory.decodeResource(getResources(), R.drawable.victoire);
         defaitebitmap =BitmapFactory.decodeResource(getResources(), R.drawable.loose);
         scoretableBitmap=BitmapFactory.decodeResource(getResources(),R.drawable.littlescoretable);
-        holeBitmap=BitmapFactory.decodeResource(getResources(),R.drawable.hole);
-        coinBitmap=BitmapFactory.decodeResource(getResources(),R.drawable.coin);
 
         //On recupere donc son image et sa taille
         this.imageWidth = ballBitmap.getWidth();
@@ -155,48 +147,35 @@ public class HoleGame extends View implements SensorEventListener {
         canvas.drawText(String.valueOf(score),460,1500,paintmodif);
 
         //verification victoire/défaite
-        if (!win && !loose){
-            //gestion timer
-            if (timer>0){
-                timer--;
-            }
+        if (!loose){
 
-            //vérification timerscore non vide
-           /* else if (timer==0){
-                loose = true;
-            }*/
+            //test défaite
+            testLoose();
+
+
+
+            //redéfinition rect
+            if ((rectGame.left<rectGame.right) && (rectGame.top<rectGame.bottom)){
+                rectGame.top=rectGame.top+1;
+                rectGame.bottom=rectGame.bottom-1;
+                rectGame.left=rectGame.left+1;
+                rectGame.right=rectGame.right-1;
+
+                //incrémentation score
+                score++;
+            }
+            //affichage rect
+            paintmodif.setARGB(255,255,255,255);
+            canvas.drawRect(rectGame,paintmodif);
 
             //affichage bille
             canvas.drawBitmap(ballBitmap, currentX, currentY, paint);
 
-            //gestion pieces
-            if (timer%200==0){
-                addCoin();
-            }
-            //gestion pieges
-            if (timer%10000==0){
-                addHole();
-            }
-            //parcours de nos maps
-                for(int i=0; i<listePieces.size();i++){
-                    canvas.drawBitmap(coinBitmap,listePieces.get(i).getXpos(),listePieces.get(i).getXpos(),paint);
-                }
-                for(int i=0; i<listePieges.size();i++){
-                    canvas.drawBitmap(holeBitmap,listePieges.get(i).getXpos(),listePieges.get(i).getXpos(),paint);
-            }
-            supprPiece();
-            //vérifcation fin de game
-            if (!(!win && !loose)){
-                if(!username.equals("invite")){
-                    //saveNote();
-                }
-            }
         }
-        else if (loose) {
-            canvas.drawBitmap(defaitebitmap, 300, 500, paint);
-        }
+
         else {
-            canvas.drawBitmap(victoirebitmap, 300, 500, paint);
+            paintmodif.setTextSize(50);
+            canvas.drawText("votre score : "+String.valueOf(score),500,500,paintmodif);
         }
 
     }
@@ -233,40 +212,12 @@ public class HoleGame extends View implements SensorEventListener {
 
         this.invalidate();
     }
-
-    //générer position aléatoire
-    private int generePosition(int max){
-        return (int)(Math.random() * max);
-    }
-
-    //ajouter une pièce
-    private void addCoin(){
-       int width = generePosition(1000);
-       int height = generePosition(1400);
-       Position temp =new Position(width,height);
-       listePieces.add(temp);
-    }
-    //ajouter un piège
-    private void addHole(){
-        int width = generePosition(1000);
-        int height = generePosition(1400);
-        Position temp =new Position(width,height);
-        listePieges.add(temp);
-    }
-
-    //suppression
-    private void supprPiece(){
-        for(int i=0; i<listePieces.size();i++){
-            if ((currentX<listePieces.get(i).getXpos()+5)&&(currentX>listePieces.get(i).getXpos()-5)
-                    &&(currentY<listePieces.get(i).getYpos()+5)&&(currentY>listePieces.get(i).getYpos()-5))
-            {
-                score++;
-                listePieces.remove(i);
-            }
+    public void testLoose(){
+        if ((currentX<rectGame.left)||(currentX>rectGame.right)||(currentY<rectGame.top)
+                ||(currentY>rectGame.bottom)){
+            loose=true;
         }
     }
-
-
 
     public void saveNote() {
         Map<String, Object> note = new HashMap<>();
@@ -307,5 +258,6 @@ public class HoleGame extends View implements SensorEventListener {
                         }
                     });
         }
+
     }
 }
