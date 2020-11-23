@@ -30,6 +30,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -57,8 +58,8 @@ public class HoleGame extends View implements SensorEventListener {
     private int currentY;
 
     //liste de nos pièces et de nos pièges
-    private Map<Integer,Integer> listePieces = new HashMap<>();
-    private Map<Integer,Integer> listePieges = new HashMap<>();
+    private List<Position> listePieces = new ArrayList<>();
+    private List<Position> listePieges = new ArrayList<>();
 
     //ajustement valeurs en fonction du niveau
     private int centerwidht=520,intervalwidht=100;
@@ -177,20 +178,12 @@ public class HoleGame extends View implements SensorEventListener {
                 addHole();
             }
             //parcours de nos maps
-            if (!listePieces.isEmpty()){
-                for (Map.Entry mapentry : listePieces.entrySet()) {
-                    canvas.drawBitmap(coinBitmap,(Integer)mapentry.getKey(),(Integer)mapentry.getValue(),paint);
-                    if(currentX>=(Integer) mapentry.getKey()-5&&currentX<=(Integer)mapentry.getKey()+5&& currentY<=(Integer)mapentry.getKey()+5
-                            &&currentY>=(Integer)mapentry.getKey()-5){
-                        score++;
-                        listePieces.remove(listePieces.get(mapentry.getKey()));
-                    }
+                for(int i=0; i<listePieces.size();i++){
+                    canvas.drawBitmap(coinBitmap,listePieces.get(i).getXpos(),listePieces.get(i).getXpos(),paint);
                 }
-            }
-            if (!listePieges.isEmpty()){
-                for (Map.Entry mapentry : listePieges.entrySet()) {
-                    canvas.drawBitmap(holeBitmap,(Integer)mapentry.getKey(),(Integer)mapentry.getValue(),paint);
-                }
+            //supprPiece();
+                for(int i=0; i<listePieges.size();i++){
+                    canvas.drawBitmap(holeBitmap,listePieges.get(i).getXpos(),listePieges.get(i).getXpos(),paint);
             }
             //vérifcation fin de game
             if (!(!win && !loose)){
@@ -250,14 +243,22 @@ public class HoleGame extends View implements SensorEventListener {
     private void addCoin(){
        int width = generePosition(1000);
        int height = generePosition(1400);
-       listePieces.put(width,height);
+       Position temp =new Position(width,height);
+       listePieces.add(temp);
     }
     //ajouter un piège
     private void addHole(){
         int width = generePosition(1000);
         int height = generePosition(1400);
-        listePieges.put(width,height);
+        Position temp =new Position(width,height);
+        listePieges.add(temp);
     }
+
+    //suppression
+    private void supprPiece(){
+
+    }
+
 
 
     public void saveNote() {
