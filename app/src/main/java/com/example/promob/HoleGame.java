@@ -181,10 +181,10 @@ public class HoleGame extends View implements SensorEventListener {
                 for(int i=0; i<listePieces.size();i++){
                     canvas.drawBitmap(coinBitmap,listePieces.get(i).getXpos(),listePieces.get(i).getXpos(),paint);
                 }
-            //supprPiece();
                 for(int i=0; i<listePieges.size();i++){
                     canvas.drawBitmap(holeBitmap,listePieges.get(i).getXpos(),listePieges.get(i).getXpos(),paint);
             }
+            supprPiece();
             //vérifcation fin de game
             if (!(!win && !loose)){
                 if(!username.equals("invite")){
@@ -256,7 +256,14 @@ public class HoleGame extends View implements SensorEventListener {
 
     //suppression
     private void supprPiece(){
-
+        for(int i=0; i<listePieces.size();i++){
+            if ((currentX<listePieces.get(i).getXpos()+5)&&(currentX>listePieces.get(i).getXpos()-5)
+                    &&(currentY<listePieces.get(i).getYpos()+5)&&(currentY>listePieces.get(i).getYpos()-5))
+            {
+                score++;
+                listePieces.remove(i);
+            }
+        }
     }
 
 
