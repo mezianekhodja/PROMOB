@@ -21,24 +21,25 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             app:srcCompat="@drawable/logo"
-            android:layout_marginTop="40dp"/>
+            android:layout_marginTop="10dp"/>
 
-        <TextView
-            android:id="@+id/textViewmulti"
+        <ListView
+            android:id="@+id/lvRooms"
             android:layout_width="match_parent"
+            android:layout_height="200dp" >
+        </ListView>
+        <Button
+            android:id="@+id/buttonCreateRoom"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Multijoueur -> Arrive tres prochainement !!"
-            android:layout_marginTop="110dp"
-            android:textSize="20dp"
-            android:gravity="center"/>
-
-
+            android:layout_gravity="center"
+            android:text="create room" />
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/games_by_mez_and_vince"
-            android:layout_marginTop="200dp"
+            android:layout_marginTop="10dp"
             android:textSize="20dp"
             android:gravity="center"/>
 
@@ -49,6 +50,7 @@
             android:layout_marginTop="5dp"
             android:textSize="15dp"
             android:gravity="center"/>
+
     </LinearLayout>
 
 
