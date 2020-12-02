@@ -17,7 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class MultiConnexion extends AppCompatActivity {
-    private Button button,btndef,btnstop;
+    private Button btngg,btnrev,btneheh,btnsalut,btndef,btnstop;
     private String playerName ="",roomName="",message="",role="";
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference,messageHostRef,messageGuestRef;
@@ -28,7 +28,10 @@ public class MultiConnexion extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_multi_connexion);
-        button = findViewById(R.id.buttonPokeMulti);
+        btngg = findViewById(R.id.buttonGGMulti);
+        btneheh = findViewById(R.id.buttonEHEHMulti);
+        btnsalut = findViewById(R.id.buttonSALUTMulti);
+        btnrev = findViewById(R.id.buttonREVANCHEMulti);
         btndef=findViewById(R.id.buttonDefiMulti);
         btnstop=findViewById(R.id.buttonStopMulti);
         firebaseAuth = FirebaseAuth.getInstance();
@@ -77,10 +80,46 @@ public class MultiConnexion extends AppCompatActivity {
             }
         });
 
-        button.setOnClickListener(new View.OnClickListener() {
+        btngg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                message = role+": Poked ! ";
+                message = role+": GG ! ";
+                if (role.equals("host")){
+                    messageHostRef.setValue(message);
+                }
+                else {
+                    messageGuestRef.setValue(message);
+                }
+            }
+        });
+        btnsalut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                message = role+": Salut ! ";
+                if (role.equals("host")){
+                    messageHostRef.setValue(message);
+                }
+                else {
+                    messageGuestRef.setValue(message);
+                }
+            }
+        });
+        btneheh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                message = role+": Eheh ;) ";
+                if (role.equals("host")){
+                    messageHostRef.setValue(message);
+                }
+                else {
+                    messageGuestRef.setValue(message);
+                }
+            }
+        });
+        btnrev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                message = role+": Revanche ? ";
                 if (role.equals("host")){
                     messageHostRef.setValue(message);
                 }
@@ -91,7 +130,7 @@ public class MultiConnexion extends AppCompatActivity {
         });
         messageHostRef=firebaseDatabase.getReference("rooms/"+roomName+"/messageHost");
         messageGuestRef=firebaseDatabase.getReference("rooms/"+roomName+"/messageGuest");
-        message=role+": Poked!";
+        message=role+": Connected !";
         messageHostRef.setValue(message);
         messageGuestRef.setValue(message);
         addRoomEventListener();

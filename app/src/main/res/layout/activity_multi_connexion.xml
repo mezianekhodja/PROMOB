@@ -12,12 +12,36 @@
         tools:layout_editor_absoluteX="216dp"
         tools:layout_editor_absoluteY="212dp"
         android:background="@drawable/background">
-        <Button
-            android:id="@+id/buttonPokeMulti"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="POKE" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/buttonGGMulti"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="GG" />
+            <Button
+                android:id="@+id/buttonREVANCHEMulti"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Revanche?" />
+            <Button
+                android:id="@+id/buttonEHEHMulti"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Eheh" />
+            <Button
+                android:id="@+id/buttonSALUTMulti"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Salut" />
+
+        </LinearLayout>
         <Button
             android:id="@+id/buttonDefiMulti"
             android:layout_width="wrap_content"
@@ -30,6 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="STOP" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
