@@ -67,6 +67,7 @@ public class MultiConnexion extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 messageHostRef.setValue(role+": Leave");
+                close();
             }
         });
 
@@ -147,6 +148,9 @@ public class MultiConnexion extends AppCompatActivity {
                 }else {
                     if (snapshot.getValue(String.class).contains("host:")){
                         Toast.makeText(MultiConnexion.this, snapshot.getValue(String.class).replace("host:",""), Toast.LENGTH_SHORT).show();
+                        if (snapshot.getValue(String.class).contains("Leave")){
+                            close();
+                        }
                     }
                 }
             }
@@ -175,5 +179,10 @@ public class MultiConnexion extends AppCompatActivity {
                 messageGuestRef.setValue(message);
             }
         });
+    }
+    public void close(){
+        Intent intent = new Intent(MultiConnexion.this,Multi.class);
+        startActivity(intent);
+        MultiConnexion.this.finish();
     }
 }
