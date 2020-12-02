@@ -17,10 +17,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class MultiConnexion extends AppCompatActivity {
-    private Button button,btndef;
+    private Button button,btndef,btnstop;
     private String playerName ="",roomName="",message="",role="";
     private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference databaseReference,messageRef;
+    private DatabaseReference databaseReference,messageHostRef,messageGuestRef;
     private FirebaseAuth firebaseAuth;
 
 
@@ -30,6 +30,7 @@ public class MultiConnexion extends AppCompatActivity {
         setContentView(R.layout.activity_multi_connexion);
         button = findViewById(R.id.buttonPokeMulti);
         btndef=findViewById(R.id.buttonDefiMulti);
+        btnstop=findViewById(R.id.buttonStopMulti);
         firebaseAuth = FirebaseAuth.getInstance();
 
         firebaseDatabase=FirebaseDatabase.getInstance();
@@ -48,6 +49,8 @@ public class MultiConnexion extends AppCompatActivity {
                     role="host";
                 }else{
                     role="guest";
+                    btndef.setEnabled(false);
+                    btnstop.setEnabled(false);
                 }
             }
 
@@ -57,12 +60,20 @@ public class MultiConnexion extends AppCompatActivity {
             }
         });
 
+        btnstop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                messageHostRef.setValue(role+": Leave");
+            }
+        });
+
         btndef.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MultiConnexion.this, LogoQuizz_Activity.class);
-                intent.putExtra("extraDifficulty", "Medium");
-                startActivityForResult(intent, 1);
+                messageHostRef.setValue(role+": Start Game !");
+                //Intent intent = new Intent(MultiConnexion.this, LogoQuizz_Activity.class);
+                //intent.putExtra("extraDifficulty", "Medium");
+                //startActivityForResult(intent, 1);
             }
         });
 
@@ -70,17 +81,24 @@ public class MultiConnexion extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 message = role+": Poked ! ";
-                messageRef.setValue(message);
+                if (role.equals("host")){
+                    messageHostRef.setValue(message);
+                }
+                else {
+                    messageGuestRef.setValue(message);
+                }
             }
         });
-        messageRef=firebaseDatabase.getReference("rooms/"+roomName+"/message");
+        messageHostRef=firebaseDatabase.getReference("rooms/"+roomName+"/messageHost");
+        messageGuestRef=firebaseDatabase.getReference("rooms/"+roomName+"/messageGuest");
         message=role+": Poked!";
-        messageRef.setValue(message);
+        messageHostRef.setValue(message);
+        messageGuestRef.setValue(message);
         addRoomEventListener();
     }
 
     private void addRoomEventListener(){
-        messageRef.addValueEventListener(new ValueEventListener() {
+        messageHostRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(role.equals("host")){
@@ -96,7 +114,26 @@ public class MultiConnexion extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                messageRef.setValue(message);
+                messageHostRef.setValue(message);
+            }
+        });
+        messageGuestRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(role.equals("host")){
+                    if (snapshot.getValue(String.class).contains("guest:")){
+                        Toast.makeText(MultiConnexion.this, snapshot.getValue(String.class).replace("guest:",""), Toast.LENGTH_SHORT).show();
+                    }
+                }else {
+                    if (snapshot.getValue(String.class).contains("host:")){
+                        Toast.makeText(MultiConnexion.this, snapshot.getValue(String.class).replace("host:",""), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                messageGuestRef.setValue(message);
             }
         });
     }
