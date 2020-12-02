@@ -49,9 +49,9 @@ public class MultiConnexion extends AppCompatActivity {
                 UserProfile userProfile = snapshot.getValue(UserProfile.class);
                 playerName=userProfile.getUserName();
                 if (roomName.equals(playerName)){
-                    role="host";
+                    role="Host";
                 }else{
-                    role="guest";
+                    role="Guest";
                     btndef.setEnabled(false);
                     btnstop.setEnabled(false);
                     btnstop.setEnabled(false);
@@ -76,9 +76,7 @@ public class MultiConnexion extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 messageHostRef.setValue(role+": Start Game !");
-                //Intent intent = new Intent(MultiConnexion.this, LogoQuizz_Activity.class);
-                //intent.putExtra("extraDifficulty", "Medium");
-                //startActivityForResult(intent, 1);
+                loadGame();
             }
         });
 
@@ -86,7 +84,7 @@ public class MultiConnexion extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 message = role+": GG ! ";
-                if (role.equals("host")){
+                if (role.equals("Host")){
                     messageHostRef.setValue(message);
                 }
                 else {
@@ -98,7 +96,7 @@ public class MultiConnexion extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 message = role+": Salut ! ";
-                if (role.equals("host")){
+                if (role.equals("Host")){
                     messageHostRef.setValue(message);
                 }
                 else {
@@ -110,7 +108,7 @@ public class MultiConnexion extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 message = role+": Eheh ;) ";
-                if (role.equals("host")){
+                if (role.equals("Host")){
                     messageHostRef.setValue(message);
                 }
                 else {
@@ -122,7 +120,7 @@ public class MultiConnexion extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 message = role+": Revanche ? ";
-                if (role.equals("host")){
+                if (role.equals("Host")){
                     messageHostRef.setValue(message);
                 }
                 else {
@@ -142,15 +140,18 @@ public class MultiConnexion extends AppCompatActivity {
         messageHostRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(role.equals("host")){
-                    if (snapshot.getValue(String.class).contains("guest:")){
-                        Toast.makeText(MultiConnexion.this, snapshot.getValue(String.class).replace("guest:",""), Toast.LENGTH_SHORT).show();
+                if(role.equals("Host")){
+                    if (snapshot.getValue(String.class).contains("Guest:")){
+                        Toast.makeText(MultiConnexion.this, snapshot.getValue(String.class).replace("Guest:",""), Toast.LENGTH_SHORT).show();
                     }
                 }else {
-                    if (snapshot.getValue(String.class).contains("host:")){
-                        Toast.makeText(MultiConnexion.this, snapshot.getValue(String.class).replace("host:",""), Toast.LENGTH_SHORT).show();
+                    if (snapshot.getValue(String.class).contains("Host:")){
+                        Toast.makeText(MultiConnexion.this, snapshot.getValue(String.class).replace("Host:",""), Toast.LENGTH_SHORT).show();
                         if (snapshot.getValue(String.class).contains("Leave")){
                             close();
+                        }
+                        else if (snapshot.getValue(String.class).contains("Start Game")){
+                            loadGame();
                         }
                     }
                 }
@@ -164,13 +165,13 @@ public class MultiConnexion extends AppCompatActivity {
         messageGuestRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(role.equals("host")){
-                    if (snapshot.getValue(String.class).contains("guest:")){
-                        Toast.makeText(MultiConnexion.this, snapshot.getValue(String.class).replace("guest:",""), Toast.LENGTH_SHORT).show();
+                if(role.equals("Host")){
+                    if (snapshot.getValue(String.class).contains("Guest:")){
+                        Toast.makeText(MultiConnexion.this, snapshot.getValue(String.class).replace("Guest:",""), Toast.LENGTH_SHORT).show();
                     }
                 }else {
-                    if (snapshot.getValue(String.class).contains("host:")){
-                        Toast.makeText(MultiConnexion.this, snapshot.getValue(String.class).replace("host:",""), Toast.LENGTH_SHORT).show();
+                    if (snapshot.getValue(String.class).contains("Host:")){
+                        Toast.makeText(MultiConnexion.this, snapshot.getValue(String.class).replace("Host:",""), Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -185,5 +186,12 @@ public class MultiConnexion extends AppCompatActivity {
         Intent intent = new Intent(MultiConnexion.this,Multi.class);
         startActivity(intent);
         MultiConnexion.this.finish();
+    }
+    public void loadGame(){
+        Intent intent = new Intent(MultiConnexion.this, LogoQuizz_Activity.class);
+        intent.putExtra("extraDifficulty", "Medium");
+        intent.putExtra("pathScoreMulti", "rooms/"+roomName+"/score"+role);
+        intent.putExtra("pathMessageMulti", "rooms/"+roomName+"/message"+role);
+        startActivityForResult(intent, 1);
     }
 }

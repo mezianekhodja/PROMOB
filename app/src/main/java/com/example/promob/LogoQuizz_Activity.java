@@ -315,6 +315,11 @@ public class LogoQuizz_Activity extends AppCompatActivity {
         if(!username.equals("invite")){
             saveNote();
         }
+        String multipath = getIntent().getStringExtra("pathScoreMulti");
+        if (!multipath.equals("notMulti")){
+            firebaseDatabase.getReference(multipath).setValue(String.valueOf(score));
+            firebaseDatabase.getReference(getIntent().getStringExtra("pathMessageMulti")).setValue("Score transmis");
+        }
         Intent resultIntent = new Intent();
         resultIntent.putExtra(EXTRA_SCORE, score);
         setResult(RESULT_OK, resultIntent);
