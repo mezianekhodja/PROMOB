@@ -20,8 +20,10 @@ public class MultiConnexion extends AppCompatActivity {
     private Button btngg,btnrev,btneheh,btnsalut,btndef,btnstop;
     private String playerName ="",roomName="",message="",role="";
     private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference databaseReference,messageHostRef,messageGuestRef;
+    private DatabaseReference databaseReference,messageHostRef,messageGuestRef,scoreHostRef,scoreGuestRef;
     private FirebaseAuth firebaseAuth;
+    private boolean comparaisonScoreHost = false,comparaisonScoreGuest = false;
+    private int scoreHost=-1,scoreGuest=-1;
 
 
     @Override
@@ -130,10 +132,37 @@ public class MultiConnexion extends AppCompatActivity {
         });
         messageHostRef=firebaseDatabase.getReference("rooms/"+roomName+"/messageHost");
         messageGuestRef=firebaseDatabase.getReference("rooms/"+roomName+"/messageGuest");
+        scoreGuestRef=firebaseDatabase.getReference("rooms/"+roomName+"/scoreGuest");
+        scoreHostRef=firebaseDatabase.getReference("rooms/"+roomName+"/scoreHost");
         message=role+": Connected !";
         messageHostRef.setValue(message);
         messageGuestRef.setValue(message);
+        scoreHostRef.setValue("-1");
+        scoreGuestRef.setValue("-1");
         addRoomEventListener();
+        addScoreEventListener();
+    }
+    private void addScoreEventListener(){
+        scoreHostRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                scoreHost = Integer.parseInt(snapshot.getValue(String.class));
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(MultiConnexion.this, "error", Toast.LENGTH_SHORT).show();
+            }
+        });
+        scoreGuestRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                scoreGuest = Integer.parseInt(snapshot.getValue(String.class));
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(MultiConnexion.this, "error", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void addRoomEventListener(){
@@ -143,6 +172,9 @@ public class MultiConnexion extends AppCompatActivity {
                 if(role.equals("Host")){
                     if (snapshot.getValue(String.class).contains("Guest:")){
                         Toast.makeText(MultiConnexion.this, snapshot.getValue(String.class).replace("Guest:",""), Toast.LENGTH_SHORT).show();
+                        if (snapshot.getValue(String.class).contains("Score transmis")){
+                            comparaisonScoreHost=true;
+                        }
                     }
                 }else {
                     if (snapshot.getValue(String.class).contains("Host:")){
@@ -152,6 +184,12 @@ public class MultiConnexion extends AppCompatActivity {
                         }
                         else if (snapshot.getValue(String.class).contains("Start Game")){
                             loadGame();
+                        }
+                        else if (snapshot.getValue(String.class).contains("Score transmis")){
+                            comparaisonScoreGuest=true;
+                            if(comparaisonScoreGuest&&comparaisonScoreHost){
+                                determinationScore();
+                            }
                         }
                     }
                 }
@@ -192,6 +230,27 @@ public class MultiConnexion extends AppCompatActivity {
         intent.putExtra("extraDifficulty", "Medium");
         intent.putExtra("pathScoreMulti", "rooms/"+roomName+"/score"+role);
         intent.putExtra("pathMessageMulti", "rooms/"+roomName+"/message"+role);
+        intent.putExtra("role", role);
         startActivityForResult(intent, 1);
+        if (role.equals("Host")){
+            messageHostRef.setValue( "Host: Score transmis");
+        }
+        else{
+            messageGuestRef.setValue( "Guest: Score transmis");
+        }
+    }
+    public void determinationScore(){
+        if(scoreGuest>scoreHost){
+            messageHostRef.setValue("Host: You loose");
+            messageGuestRef.setValue("Guest: You win");
+        }
+        else{
+            messageHostRef.setValue("Host: You win");
+            messageGuestRef.setValue("Guest: You loose ");
+        }
+        comparaisonScoreGuest=false;
+        comparaisonScoreHost=false;
+        scoreHost=-1;
+        scoreGuest=-1;
     }
 }

@@ -318,7 +318,8 @@ public class LogoQuizz_Activity extends AppCompatActivity {
         String multipath = getIntent().getStringExtra("pathScoreMulti");
         if (!multipath.equals("notMulti")){
             firebaseDatabase.getReference(multipath).setValue(String.valueOf(score));
-            firebaseDatabase.getReference(getIntent().getStringExtra("pathMessageMulti")).setValue("Score transmis");
+           // firebaseDatabase.getReference(getIntent().getStringExtra("pathMessageMulti")).setValue(
+                   // getIntent().getStringExtra("role")+": Score transmis");
         }
         Intent resultIntent = new Intent();
         resultIntent.putExtra(EXTRA_SCORE, score);
