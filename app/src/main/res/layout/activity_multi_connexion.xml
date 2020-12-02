@@ -54,7 +54,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="STOP" />
-
+        <Button
+            android:id="@+id/buttonRESMulti"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Resultats" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,14 +17,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class MultiConnexion extends AppCompatActivity {
-    private Button btngg,btnrev,btneheh,btnsalut,btndef,btnstop;
+    private Button btngg,btnrev,btneheh,btnsalut,btndef,btnstop,btnres;
     private String playerName ="",roomName="",message="",role="";
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference,messageHostRef,messageGuestRef,scoreHostRef,scoreGuestRef;
     private FirebaseAuth firebaseAuth;
-    private boolean comparaisonScoreHost = false,comparaisonScoreGuest = false;
     private int scoreHost=-1,scoreGuest=-1;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +34,7 @@ public class MultiConnexion extends AppCompatActivity {
         btnrev = findViewById(R.id.buttonREVANCHEMulti);
         btndef=findViewById(R.id.buttonDefiMulti);
         btnstop=findViewById(R.id.buttonStopMulti);
+        btnres=findViewById(R.id.buttonRESMulti);
         firebaseAuth = FirebaseAuth.getInstance();
 
         firebaseDatabase=FirebaseDatabase.getInstance();
@@ -50,6 +49,7 @@ public class MultiConnexion extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 UserProfile userProfile = snapshot.getValue(UserProfile.class);
                 playerName=userProfile.getUserName();
+                btnres.setEnabled(false);
                 if (roomName.equals(playerName)){
                     role="Host";
                 }else{
@@ -65,7 +65,19 @@ public class MultiConnexion extends AppCompatActivity {
                 Toast.makeText(MultiConnexion.this, error.getCode(),Toast.LENGTH_SHORT).show();
             }
         });
-
+        btnres.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View v) {
+             Intent intent = new Intent(MultiConnexion.this, MultiResults.class);
+             intent.putExtra("role", role);
+             if(scoreHost>scoreGuest){
+                 intent.putExtra("winner", "Host");
+             } else{
+                 intent.putExtra("winner", "Guest");
+             }
+             startActivity(intent);
+            }
+        });
         btnstop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -172,9 +184,8 @@ public class MultiConnexion extends AppCompatActivity {
                 if(role.equals("Host")){
                     if (snapshot.getValue(String.class).contains("Guest:")){
                         Toast.makeText(MultiConnexion.this, snapshot.getValue(String.class).replace("Guest:",""), Toast.LENGTH_SHORT).show();
-                        if (snapshot.getValue(String.class).contains("Score transmis")){
-                            comparaisonScoreHost=true;
-                        }
+                        if (scoreGuest>0 && scoreHost>0){
+                            btnres.setEnabled(true);                        }
                     }
                 }else {
                     if (snapshot.getValue(String.class).contains("Host:")){
@@ -185,12 +196,8 @@ public class MultiConnexion extends AppCompatActivity {
                         else if (snapshot.getValue(String.class).contains("Start Game")){
                             loadGame();
                         }
-                        else if (snapshot.getValue(String.class).contains("Score transmis")){
-                            comparaisonScoreGuest=true;
-                            if(comparaisonScoreGuest&&comparaisonScoreHost){
-                                determinationScore();
-                            }
-                        }
+                        else if (scoreGuest>0 && scoreHost>0){
+                            btnres.setEnabled(true);                        }
                     }
                 }
             }
@@ -206,10 +213,14 @@ public class MultiConnexion extends AppCompatActivity {
                 if(role.equals("Host")){
                     if (snapshot.getValue(String.class).contains("Guest:")){
                         Toast.makeText(MultiConnexion.this, snapshot.getValue(String.class).replace("Guest:",""), Toast.LENGTH_SHORT).show();
+                        if (scoreGuest>0 && scoreHost>0){
+                            btnres.setEnabled(true);                        }
                     }
                 }else {
                     if (snapshot.getValue(String.class).contains("Host:")){
                         Toast.makeText(MultiConnexion.this, snapshot.getValue(String.class).replace("Host:",""), Toast.LENGTH_SHORT).show();
+                        if (scoreGuest>0 && scoreHost>0){
+                            btnres.setEnabled(true);                        }
                     }
                 }
             }
@@ -232,25 +243,5 @@ public class MultiConnexion extends AppCompatActivity {
         intent.putExtra("pathMessageMulti", "rooms/"+roomName+"/message"+role);
         intent.putExtra("role", role);
         startActivityForResult(intent, 1);
-        if (role.equals("Host")){
-            messageHostRef.setValue( "Host: Score transmis");
-        }
-        else{
-            messageGuestRef.setValue( "Guest: Score transmis");
-        }
-    }
-    public void determinationScore(){
-        if(scoreGuest>scoreHost){
-            messageHostRef.setValue("Host: You loose");
-            messageGuestRef.setValue("Guest: You win");
-        }
-        else{
-            messageHostRef.setValue("Host: You win");
-            messageGuestRef.setValue("Guest: You loose ");
-        }
-        comparaisonScoreGuest=false;
-        comparaisonScoreHost=false;
-        scoreHost=-1;
-        scoreGuest=-1;
     }
 }
