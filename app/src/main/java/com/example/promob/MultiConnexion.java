@@ -54,6 +54,7 @@ public class MultiConnexion extends AppCompatActivity {
                     role="guest";
                     btndef.setEnabled(false);
                     btnstop.setEnabled(false);
+                    btnstop.setEnabled(false);
                 }
             }
 
