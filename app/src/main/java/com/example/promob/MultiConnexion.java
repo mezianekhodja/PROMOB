@@ -20,9 +20,10 @@ public class MultiConnexion extends AppCompatActivity {
     private Button btngg,btnrev,btneheh,btnsalut,btndef,btnstop,btnres;
     private String playerName ="",roomName="",message="",role="";
     private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference databaseReference,messageHostRef,messageGuestRef,scoreHostRef,scoreGuestRef;
+    private DatabaseReference databaseReference,messageHostRef,messageGuestRef,scoreHost1Ref,
+            scoreGuest1Ref,scoreHost2Ref,scoreGuest2Ref,scoreHost3Ref,scoreGuest3Ref;
     private FirebaseAuth firebaseAuth;
-    private int scoreHost=-1,scoreGuest=-1;
+    private int scoreHost1=-1,scoreGuest1=-1,scoreHost2=-1,scoreGuest2=-1,scoreHost3=-1,scoreGuest3=-1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +71,17 @@ public class MultiConnexion extends AppCompatActivity {
          public void onClick(View v) {
              Intent intent = new Intent(MultiConnexion.this, MultiResults.class);
              intent.putExtra("role", role);
-             if(scoreHost>scoreGuest){
+             int cpt=0;
+             if(scoreHost1>scoreGuest1){
+                 cpt++;
+             }
+             if(scoreHost2>scoreGuest2){
+                 cpt++;
+             }
+             if(scoreHost3>scoreGuest3){
+                 cpt++;
+             }
+             if(cpt>1){
                  intent.putExtra("winner", "Host");
              } else{
                  intent.putExtra("winner", "Guest");
@@ -144,31 +155,79 @@ public class MultiConnexion extends AppCompatActivity {
         });
         messageHostRef=firebaseDatabase.getReference("rooms/"+roomName+"/messageHost");
         messageGuestRef=firebaseDatabase.getReference("rooms/"+roomName+"/messageGuest");
-        scoreGuestRef=firebaseDatabase.getReference("rooms/"+roomName+"/scoreGuest");
-        scoreHostRef=firebaseDatabase.getReference("rooms/"+roomName+"/scoreHost");
+        scoreGuest1Ref=firebaseDatabase.getReference("rooms/"+roomName+"/scoreGuest1");
+        scoreHost1Ref=firebaseDatabase.getReference("rooms/"+roomName+"/scoreHost1");
+        scoreGuest2Ref=firebaseDatabase.getReference("rooms/"+roomName+"/scoreGuest2");
+        scoreHost2Ref=firebaseDatabase.getReference("rooms/"+roomName+"/scoreHost2");
+        scoreGuest3Ref=firebaseDatabase.getReference("rooms/"+roomName+"/scoreGuest3");
+        scoreHost3Ref=firebaseDatabase.getReference("rooms/"+roomName+"/scoreHost3");
         message=role+": Connected !";
         messageHostRef.setValue(message);
         messageGuestRef.setValue(message);
-        scoreHostRef.setValue("-1");
-        scoreGuestRef.setValue("-1");
+        scoreHost1Ref.setValue("-1");
+        scoreGuest1Ref.setValue("-1");
+        scoreHost2Ref.setValue("-1");
+        scoreGuest2Ref.setValue("-1");
+        scoreHost3Ref.setValue("-1");
+        scoreGuest3Ref.setValue("-1");
         addRoomEventListener();
         addScoreEventListener();
     }
     private void addScoreEventListener(){
-        scoreHostRef.addValueEventListener(new ValueEventListener() {
+        scoreHost1Ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                scoreHost = Integer.parseInt(snapshot.getValue(String.class));
+                scoreHost1 = Integer.parseInt(snapshot.getValue(String.class));
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(MultiConnexion.this, "error", Toast.LENGTH_SHORT).show();
             }
         });
-        scoreGuestRef.addValueEventListener(new ValueEventListener() {
+        scoreHost2Ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                scoreGuest = Integer.parseInt(snapshot.getValue(String.class));
+                scoreHost2 = Integer.parseInt(snapshot.getValue(String.class));
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(MultiConnexion.this, "error", Toast.LENGTH_SHORT).show();
+            }
+        });
+        scoreHost3Ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                scoreHost3 = Integer.parseInt(snapshot.getValue(String.class));
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(MultiConnexion.this, "error", Toast.LENGTH_SHORT).show();
+            }
+        });
+        scoreGuest1Ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                scoreGuest1 = Integer.parseInt(snapshot.getValue(String.class));
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(MultiConnexion.this, "error", Toast.LENGTH_SHORT).show();
+            }
+        });
+        scoreGuest2Ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                scoreGuest2 = Integer.parseInt(snapshot.getValue(String.class));
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(MultiConnexion.this, "error", Toast.LENGTH_SHORT).show();
+            }
+        });
+        scoreGuest3Ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                scoreGuest3 = Integer.parseInt(snapshot.getValue(String.class));
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -184,7 +243,7 @@ public class MultiConnexion extends AppCompatActivity {
                 if(role.equals("Host")){
                     if (snapshot.getValue(String.class).contains("Guest:")){
                         Toast.makeText(MultiConnexion.this, snapshot.getValue(String.class).replace("Guest:",""), Toast.LENGTH_SHORT).show();
-                        if (scoreGuest>0 && scoreHost>0){
+                        if (scoreGuest3>0 && scoreHost3>0){
                             btnres.setEnabled(true);                        }
                     }
                 }else {
@@ -196,7 +255,7 @@ public class MultiConnexion extends AppCompatActivity {
                         else if (snapshot.getValue(String.class).contains("Start Game")){
                             loadGame();
                         }
-                        else if (scoreGuest>0 && scoreHost>0){
+                        else if (scoreGuest3>0 && scoreHost3>0){
                             btnres.setEnabled(true);                        }
                     }
                 }
@@ -213,13 +272,13 @@ public class MultiConnexion extends AppCompatActivity {
                 if(role.equals("Host")){
                     if (snapshot.getValue(String.class).contains("Guest:")){
                         Toast.makeText(MultiConnexion.this, snapshot.getValue(String.class).replace("Guest:",""), Toast.LENGTH_SHORT).show();
-                        if (scoreGuest>0 && scoreHost>0){
+                        if (scoreGuest3>0 && scoreHost3>0){
                             btnres.setEnabled(true);                        }
                     }
                 }else {
                     if (snapshot.getValue(String.class).contains("Host:")){
                         Toast.makeText(MultiConnexion.this, snapshot.getValue(String.class).replace("Host:",""), Toast.LENGTH_SHORT).show();
-                        if (scoreGuest>0 && scoreHost>0){
+                        if (scoreGuest3>0 && scoreHost3>0){
                             btnres.setEnabled(true);                        }
                     }
                 }
@@ -237,10 +296,15 @@ public class MultiConnexion extends AppCompatActivity {
         MultiConnexion.this.finish();
     }
     public void loadGame(){
+        startLogoQuizz("Hard","3");
+        startLogoQuizz("Medium","2");
+        startLogoQuizz("Easy","1");
+    }
+    private void startLogoQuizz(String difficulte, String number){
         Intent intent = new Intent(MultiConnexion.this, LogoQuizz_Activity.class);
-        intent.putExtra("extraDifficulty", "Medium");
-        intent.putExtra("pathScoreMulti", "rooms/"+roomName+"/score"+role);
-        intent.putExtra("pathMessageMulti", "rooms/"+roomName+"/message"+role);
+        intent.putExtra("extraDifficulty", difficulte);
+        intent.putExtra("pathScoreMulti", "rooms/"+roomName+"/score"+role+number);
+        intent.putExtra("pathMessageMulti", "rooms/"+roomName+"/message"+role+number);
         intent.putExtra("role", role);
         startActivityForResult(intent, 1);
     }

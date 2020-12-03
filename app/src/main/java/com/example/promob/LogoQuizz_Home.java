@@ -68,12 +68,14 @@ public class LogoQuizz_Home extends AppCompatActivity {
         //EXTRA_DIFFICULTY = "Easy";
         Intent intent = new Intent(this, LogoQuizz_Activity.class);
         intent.putExtra(EXTRA_DIFFICULTY, "Easy");
+        intent.putExtra("pathScoreMulti", "notMulti");
         startActivityForResult(intent, REQUEST_CODE_QUIZ); //Avoir un resultat d'une autre activité
     }
     public void openLogoQuizzMedium1() {
        // EXTRA_DIFFICULTY = "Medium";
         Intent intent = new Intent(this, LogoQuizz_Activity.class);
         intent.putExtra(EXTRA_DIFFICULTY, "Medium");
+        intent.putExtra("pathScoreMulti", "notMulti");
         startActivityForResult(intent, REQUEST_CODE_QUIZ); //Avoir un resultat d'une autre activité
     }
 
@@ -81,6 +83,7 @@ public class LogoQuizz_Home extends AppCompatActivity {
         //EXTRA_DIFFICULTY = "Hard";
         Intent intent = new Intent(this, LogoQuizz_Activity.class);
         intent.putExtra(EXTRA_DIFFICULTY, "Hard");
+        intent.putExtra("pathScoreMulti", "notMulti");
         startActivityForResult(intent, REQUEST_CODE_QUIZ); //Avoir un resultat d'une autre activité
     }
 
