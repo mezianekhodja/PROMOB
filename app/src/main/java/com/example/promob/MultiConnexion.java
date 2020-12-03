@@ -23,7 +23,7 @@ public class MultiConnexion extends AppCompatActivity {
     private DatabaseReference databaseReference,messageHostRef,messageGuestRef,scoreHost1Ref,
             scoreGuest1Ref,scoreHost2Ref,scoreGuest2Ref,scoreHost3Ref,scoreGuest3Ref;
     private FirebaseAuth firebaseAuth;
-    private int scoreHost1=-1,scoreGuest1=-1,scoreHost2=-1,scoreGuest2=-1,scoreHost3=-1,scoreGuest3=-1;
+    private int scoreHost1=-1,scoreGuest1=-1,scoreHost2=-1,scoreGuest2=-1,scoreHost3=1,scoreGuest3=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
