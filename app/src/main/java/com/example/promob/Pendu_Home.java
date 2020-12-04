@@ -33,8 +33,8 @@ public class Pendu_Home extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Pendu_Home.this, Pendu_Activity.class);
                 intent.putExtra("level",1);
-                startActivity(intent);
-                Pendu_Home.this.finish();
+                intent.putExtra("pathScoreMulti", "notMulti");
+                startActivityForResult(intent,1);
             }
         });
         medium.setOnClickListener(new View.OnClickListener() {
@@ -42,8 +42,8 @@ public class Pendu_Home extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Pendu_Home.this, Pendu_Activity.class);
                 intent.putExtra("level",2);
-                startActivity(intent);
-                Pendu_Home.this.finish();
+                intent.putExtra("pathScoreMulti", "notMulti");
+                startActivityForResult(intent,1);
             }
         });
         hard.setOnClickListener(new View.OnClickListener() {
@@ -51,8 +51,8 @@ public class Pendu_Home extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Pendu_Home.this, Pendu_Activity.class);
                 intent.putExtra("level",3);
-                startActivity(intent);
-                Pendu_Home.this.finish();
+                intent.putExtra("pathScoreMulti", "notMulti");
+                startActivityForResult(intent,1);
             }
         });
     }

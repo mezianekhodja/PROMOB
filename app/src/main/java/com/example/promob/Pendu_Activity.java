@@ -44,7 +44,7 @@ public class Pendu_Activity extends AppCompatActivity {
     private long timeLeftInMillis;
 
     private LinearLayout container;
-    private Button btn_send, rejouer;
+    private Button btn_send;
     private TextView lettres_tapees;
     private ImageView image;
     private EditText et_letter;
@@ -78,7 +78,6 @@ public class Pendu_Activity extends AppCompatActivity {
 
         container = (LinearLayout) findViewById(R.id.word_container);
         btn_send = (Button) findViewById(R.id.button_sendpendu);
-        rejouer = (Button) findViewById(R.id.buttonrejouerpendu);
         lettres_tapees = (TextView) findViewById(R.id.tev_lettres_tapees);
         image = (ImageView) findViewById(R.id.iv_pendu);
         et_letter = (EditText)findViewById(R.id.etletter);
@@ -136,13 +135,13 @@ public class Pendu_Activity extends AppCompatActivity {
             }
         });
 
-        rejouer.setOnClickListener(new View.OnClickListener() {
+        /*rejouer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 counterDownTimer.cancel();
                 initGame();
             }
-        });
+        });*/
     }
 
     public void initGame(){
@@ -229,6 +228,11 @@ public class Pendu_Activity extends AppCompatActivity {
                 }
             }
             builder.create().show();
+            String multipath = getIntent().getStringExtra("pathScoreMulti");
+            if (!multipath.equals("notMulti")){
+                firebaseDatabase.getReference(multipath).setValue(String.valueOf(6-error));
+            }
+            finish();
         }
 
         public String generateWord() {
@@ -396,6 +400,7 @@ public class Pendu_Activity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 timeLeftInMillis= 0;
+                error=6;
                 updateCountdownText();
                 createDialog();
             }

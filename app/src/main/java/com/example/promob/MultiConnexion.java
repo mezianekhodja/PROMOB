@@ -243,7 +243,7 @@ public class MultiConnexion extends AppCompatActivity {
                 if(role.equals("Host")){
                     if (snapshot.getValue(String.class).contains("Guest:")){
                         Toast.makeText(MultiConnexion.this, snapshot.getValue(String.class).replace("Guest:",""), Toast.LENGTH_SHORT).show();
-                        if (scoreGuest3>0 && scoreHost3>0){
+                        if (scoreGuest3>-1 && scoreHost3>-1){
                             btnres.setEnabled(true);                        }
                     }
                 }else {
@@ -255,7 +255,7 @@ public class MultiConnexion extends AppCompatActivity {
                         else if (snapshot.getValue(String.class).contains("Start Game")){
                             loadGame();
                         }
-                        else if (scoreGuest3>0 && scoreHost3>0){
+                        else if (scoreGuest3>-1 && scoreHost3>-1){
                             btnres.setEnabled(true);                        }
                     }
                 }
@@ -272,13 +272,13 @@ public class MultiConnexion extends AppCompatActivity {
                 if(role.equals("Host")){
                     if (snapshot.getValue(String.class).contains("Guest:")){
                         Toast.makeText(MultiConnexion.this, snapshot.getValue(String.class).replace("Guest:",""), Toast.LENGTH_SHORT).show();
-                        if (scoreGuest3>0 && scoreHost3>0){
+                        if (scoreGuest3>-1 && scoreHost3>-1){
                             btnres.setEnabled(true);                        }
                     }
                 }else {
                     if (snapshot.getValue(String.class).contains("Host:")){
                         Toast.makeText(MultiConnexion.this, snapshot.getValue(String.class).replace("Host:",""), Toast.LENGTH_SHORT).show();
-                        if (scoreGuest3>0 && scoreHost3>0){
+                        if (scoreGuest3>-1 && scoreHost3>-1){
                             btnres.setEnabled(true);                        }
                     }
                 }
@@ -296,13 +296,24 @@ public class MultiConnexion extends AppCompatActivity {
         MultiConnexion.this.finish();
     }
     public void loadGame(){
-        startLogoQuizz("Hard","3");
+        startPendu(1,"3");
+        //startPendu(2,"3");
+        //startPendu(3,"3");
+        //startLogoQuizz("Hard","3");
         startLogoQuizz("Medium","2");
         startLogoQuizz("Easy","1");
     }
     private void startLogoQuizz(String difficulte, String number){
         Intent intent = new Intent(MultiConnexion.this, LogoQuizz_Activity.class);
         intent.putExtra("extraDifficulty", difficulte);
+        intent.putExtra("pathScoreMulti", "rooms/"+roomName+"/score"+role+number);
+        intent.putExtra("pathMessageMulti", "rooms/"+roomName+"/message"+role+number);
+        intent.putExtra("role", role);
+        startActivityForResult(intent, 1);
+    }
+    private void startPendu(int difficulte, String number){
+        Intent intent = new Intent(MultiConnexion.this, Pendu_Activity.class);
+        intent.putExtra("level", difficulte);
         intent.putExtra("pathScoreMulti", "rooms/"+roomName+"/score"+role+number);
         intent.putExtra("pathMessageMulti", "rooms/"+roomName+"/message"+role+number);
         intent.putExtra("role", role);
