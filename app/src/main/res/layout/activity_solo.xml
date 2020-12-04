@@ -52,21 +52,10 @@
             android:text="Defi"/>
 
         <TextView
-            android:id="@+id/textView"
             android:layout_width="match_parent"
+            android:gravity="center"
             android:layout_height="wrap_content"
-            android:text="@string/games_by_mez_and_vince"
-            android:layout_marginTop="110dp"
-            android:textSize="20dp"
-            android:gravity="center"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Version 0.1"
-            android:layout_marginTop="5dp"
-            android:textSize="15dp"
-            android:gravity="center"/>
+            android:text="By Meziane and Vincent" />
     </LinearLayout>
 
 

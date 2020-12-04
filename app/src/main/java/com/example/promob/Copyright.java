@@ -116,6 +116,11 @@ public class Copyright extends AppCompatActivity {
         Intent intent = new Intent(this, Copyright.class);
         startActivity(intent);
     }
+    public void openSoloMulti(){
+        finish();
+        Intent intent = new Intent(this, Solo_Multi.class);
+        startActivity(intent);
+    }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
@@ -141,6 +146,10 @@ public class Copyright extends AppCompatActivity {
             }
             case R.id.copyrightMenu:{
                 openCopyright();
+                break;
+            }
+            case R.id.solomultiMenu:{
+                openSoloMulti();
                 break;
             }
         }

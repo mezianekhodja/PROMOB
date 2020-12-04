@@ -18,7 +18,7 @@
         android:id="@+id/acceuilMenu"
         android:orderInCategory="300"
         app:showAsAction="never"
-        android:title="Acceuil">
+        android:title="Liste Jeux Solo">
     </item>
     <item
         android:id="@+id/classementMenu"
@@ -37,5 +37,11 @@
         android:orderInCategory="600"
         app:showAsAction="never"
         android:title="Copyright">
+    </item>
+    <item
+        android:id="@+id/solomultiMenu"
+        android:orderInCategory="700"
+        app:showAsAction="never"
+        android:title="Choix Solo/Multi">
     </item>
 </menu>

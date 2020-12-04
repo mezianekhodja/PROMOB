@@ -98,6 +98,21 @@ public class CandyCrush_Home extends AppCompatActivity {
         Intent intent = new Intent(this, Classement.class);
         startActivity(intent);
     }
+    public void openCopyright(){
+        finish();
+        Intent intent = new Intent(this, Copyright.class);
+        startActivity(intent);
+    }
+    public void openTrophy(){
+        finish();
+        Intent intent = new Intent(this, Trophy.class);
+        startActivity(intent);
+    }
+    public void openSoloMulti(){
+        finish();
+        Intent intent = new Intent(this, Solo_Multi.class);
+        startActivity(intent);
+    }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
@@ -115,6 +130,18 @@ public class CandyCrush_Home extends AppCompatActivity {
             }
             case R.id.classementMenu:{
                 openClassement();
+                break;
+            }
+            case R.id.copyrightMenu:{
+                openCopyright();
+                break;
+            }
+            case R.id.trophyMenu:{
+                openTrophy();
+                break;
+            }
+            case R.id.solomultiMenu:{
+                openSoloMulti();
                 break;
             }
         }

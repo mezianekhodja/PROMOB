@@ -37,5 +37,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="RetourMulti" />
+        <TextView
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="By Meziane and Vincent" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

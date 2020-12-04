@@ -136,21 +136,10 @@
             android:textStyle="italic" />
 
         <TextView
-            android:id="@+id/textView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:gravity="center"
-            android:text="@string/games_by_mez_and_vince"
-            android:textSize="20dp" />
-
-        <TextView
-            android:id="@+id/textViewVersion"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Version 1.0"
-            android:textSize="15dp" />
+            android:text="By Meziane and Vincent" />
 
 
     </LinearLayout>

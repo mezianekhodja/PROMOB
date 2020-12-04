@@ -71,6 +71,10 @@
             android:stateListAnimator="@null"
             android:text="Mdp oublié? cliquez ici"
             android:textAllCaps="false" />
-
+        <TextView
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="By Meziane and Vincent" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

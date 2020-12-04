@@ -106,6 +106,31 @@ public class LogoQuizz_Home extends AppCompatActivity {
         startActivity(intent);
         LogoQuizz_Home.this.finish();
     }
+    public void openClassement(){
+        finish();
+        Intent intent = new Intent(this, Classement.class);
+        startActivity(intent);
+    }
+    public void openCopyright(){
+        finish();
+        Intent intent = new Intent(this, Copyright.class);
+        startActivity(intent);
+    }
+    public void openAcceuil(){
+        finish();
+        Intent intent = new Intent(this, Entrainement.class);
+        startActivity(intent);
+    }
+    public void openTrophy(){
+        finish();
+        Intent intent = new Intent(this, Trophy.class);
+        startActivity(intent);
+    }
+    public void openSoloMulti(){
+        finish();
+        Intent intent = new Intent(this, Solo_Multi.class);
+        startActivity(intent);
+    }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
@@ -114,6 +139,26 @@ public class LogoQuizz_Home extends AppCompatActivity {
             }
             case R.id.profileMenu:{
                 openProfil();
+            }
+            case R.id.acceuilMenu:{
+                openAcceuil();
+                break;
+            }
+            case R.id.copyrightMenu:{
+                openCopyright();
+                break;
+            }
+            case R.id.trophyMenu:{
+                openTrophy();
+                break;
+            }
+            case R.id.classementMenu:{
+                openClassement();
+                break;
+            }
+            case R.id.solomultiMenu:{
+                openSoloMulti();
+                break;
             }
         }
         return super.onOptionsItemSelected(item);
@@ -143,6 +188,7 @@ public class LogoQuizz_Home extends AppCompatActivity {
         textViewHighscoreEasy.setText("Highscore: " + highscore);
 
     }
+
 }
 
 

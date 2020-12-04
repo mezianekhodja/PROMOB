@@ -39,7 +39,6 @@
         <activity android:name=".LabyrintheGame" />
         <activity android:name=".Connexion" />
         <activity android:name=".Entrainement" />
-        <activity android:name=".LogoQuizzResults" />
         <activity android:name=".LogoQuizz_Home" />
         <activity android:name=".MainActivity" />
         <activity android:name=".LogoQuizz_Activity" />

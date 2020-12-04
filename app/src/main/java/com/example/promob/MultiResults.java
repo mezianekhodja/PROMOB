@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -28,6 +31,7 @@ public class MultiResults extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private static final String TAG = "MultiResults";
     String name ="";
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,7 @@ public class MultiResults extends AppCompatActivity {
         tvres= findViewById(R.id.textViewResultsMulti);
         btn = findViewById(R.id.buttonRetourMulti);
         ivicon=findViewById(R.id.imageViewResultsIconMulti);
+        firebaseAuth = FirebaseAuth.getInstance();
 
         name=getIntent().getExtras().getString("name");
         String winner = getIntent().getExtras().getString("winner");
@@ -75,5 +80,85 @@ public class MultiResults extends AppCompatActivity {
                         Log.d(TAG, e.toString());
                     }
                 });
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return true;
+    }
+
+    public void openProfil() {
+        finish();
+        Intent intent = new Intent(this, Profile.class);
+        startActivity(intent);
+    }
+
+    public void openAcceuil(){
+        finish();
+        Intent intent = new Intent(this, Entrainement.class);
+        startActivity(intent);
+    }
+    public void openClassement(){
+        finish();
+        Intent intent = new Intent(this, Classement.class);
+        startActivity(intent);
+    }
+    public void openTrophy(){
+        finish();
+        Intent intent = new Intent(this, Trophy.class);
+        startActivity(intent);
+    }
+    public void openCopyright(){
+        finish();
+        Intent intent = new Intent(this, Copyright.class);
+        startActivity(intent);
+    }
+    public void openActivityConnexion() {
+        finish();
+        Intent intent = new Intent(this, Connexion.class);
+        startActivity(intent);
+    }
+    private void Logout() {
+        firebaseAuth.signOut();
+        openActivityConnexion();
+    }
+    public void openSoloMulti(){
+        finish();
+        Intent intent = new Intent(this, Solo_Multi.class);
+        startActivity(intent);
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.profileMenu:{
+                openProfil();
+                break;
+            }
+            case R.id.acceuilMenu:{
+                openAcceuil();
+                break;
+            }
+            case R.id.logoutMenu:{
+                Logout();
+                break;
+            }
+            case R.id.classementMenu:{
+                openClassement();
+                break;
+            }
+            case R.id.trophyMenu:{
+                openTrophy();
+                break;
+            }
+            case R.id.copyrightMenu:{
+                openCopyright();
+                break;
+            }
+            case R.id.solomultiMenu:{
+                openSoloMulti();
+                break;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

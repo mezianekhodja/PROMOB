@@ -32,7 +32,12 @@
             android:layout_height="30dp"
             android:layout_marginBottom="20dp"
             android:gravity="center"
-            android:text="Projet universitaire d'application de jeux Androids" />
+            android:text="Projet universitaire d'application de jeux en Android" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:text="Étudiants à l'ESIR Rennes" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="30dp"
