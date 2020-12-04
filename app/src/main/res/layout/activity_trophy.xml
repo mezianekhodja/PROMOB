@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Trophy"
+    android:background="@drawable/background">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp"
+        tools:ignore="MissingConstraints">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            app:srcCompat="@drawable/logo"
+            android:layout_marginTop="10dp"/>
+
+        <Button
+            android:id="@+id/buttonLoadTrophy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Load" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="Trophies" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp"
+        tools:ignore="MissingConstraints">
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:id="@+id/ivTrophy1"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                app:srcCompat="@drawable/trophy_black" />
+
+            <TextView
+                android:id="@+id/tvTrophy1"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Pas débloqué"/>
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="8dp"
+                android:textColor="#000000"
+                android:text="Lance ta première partie en multijoueur"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:id="@+id/ivTrophy2"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                app:srcCompat="@drawable/trophy_black" />
+
+            <TextView
+                android:id="@+id/tvTrophy2"
+                android:layout_width="100dp"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:text="Pas débloqué"/>
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="8dp"
+                android:textColor="#000000"
+                android:text="Crée ton compte !"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:id="@+id/ivTrophy3"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                app:srcCompat="@drawable/trophy_black" />
+
+            <TextView
+                android:id="@+id/tvTrophy3"
+                android:layout_width="100dp"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:text="Pas débloqué"/>
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="8dp"
+                android:textColor="#000000"
+                android:text="Utilises un SuperBonbon sur Candy Crush"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:id="@+id/ivTrophy4"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                app:srcCompat="@drawable/trophy_black" />
+
+            <TextView
+                android:id="@+id/tvTrophy4"
+                android:layout_width="100dp"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:text="Pas débloqué"/>
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="8dp"
+                android:textColor="#000000"
+                android:text="Obtiens le score maximal sur une partie hard"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp"
+        tools:ignore="MissingConstraints">
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:id="@+id/ivTrophy5"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                app:srcCompat="@drawable/trophy_black" />
+
+            <TextView
+                android:id="@+id/tvTrophy5"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Pas débloqué"/>
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="8dp"
+                android:textColor="#000000"
+                android:text="Regarde la page de copyright"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:id="@+id/ivTrophy6"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                app:srcCompat="@drawable/trophy_black" />
+
+            <TextView
+                android:id="@+id/tvTrophy6"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Pas débloqué"/>
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="8dp"
+                android:textColor="#000000"
+                android:text="Obtiens un score de 0"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:id="@+id/ivTrophy7"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                app:srcCompat="@drawable/trophy_black" />
+
+            <TextView
+                android:id="@+id/tvTrophy7"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Pas débloqué"/>
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="8dp"
+                android:textColor="#000000"
+                android:text="Gagnes une partie multijoueur"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:id="@+id/ivTrophy8"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                app:srcCompat="@drawable/trophy_black" />
+
+            <TextView
+                android:id="@+id/tvTrophy8"
+                android:layout_width="100dp"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:text="Pas débloqué"/>
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="8dp"
+                android:textColor="#000000"
+                android:text="Obtiens tous les trophées"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

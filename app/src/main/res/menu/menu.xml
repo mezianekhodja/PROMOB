@@ -9,15 +9,15 @@
     </item>
     <item
         android:id="@+id/profileMenu"
+        android:icon="@drawable/logo"
         android:orderInCategory="200"
-        app:showAsAction="never"
+        app:showAsAction="always"
         android:title="Profil">
     </item>
     <item
         android:id="@+id/acceuilMenu"
-        android:icon="@drawable/logo"
         android:orderInCategory="300"
-        app:showAsAction="always"
+        app:showAsAction="never"
         android:title="Acceuil">
     </item>
     <item
@@ -25,5 +25,11 @@
         android:orderInCategory="400"
         app:showAsAction="never"
         android:title="Classement">
+    </item>
+    <item
+        android:id="@+id/trophyMenu"
+        android:orderInCategory="400"
+        app:showAsAction="never"
+        android:title="Trophy">
     </item>
 </menu>
