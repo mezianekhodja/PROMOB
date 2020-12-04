@@ -208,10 +208,11 @@ public class CandyCrush extends AppCompatActivity {
         finishGame();
     }
     private void finishGame(){
-        Intent intent = new Intent(this, CandyCrush_Home.class);
-        intent.putExtra("score", score);
-        startActivity(intent);
-        CandyCrush.this.finish();
+        String multipath = getIntent().getStringExtra("pathScoreMulti");
+        if (!multipath.equals("notMulti")){
+            firebaseDatabase.getReference(multipath).setValue(String.valueOf(score));
+        }
+        finish();
     }
     private void createBoard() {
         GridLayout gridLayout = findViewById(R.id.boardCC);

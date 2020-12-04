@@ -312,8 +312,10 @@ public class MultiConnexion extends AppCompatActivity {
         //startPendu(2,"3");
         //startPendu(3,"3");
         //startLogoQuizz("Hard","3");
-        startLogoQuizz("Medium","2");
-        startLogoQuizz("Easy","1");
+        //startLogoQuizz("Medium","2");
+        startCandyCrush(1,"2");
+        startNumbers(1,"1");
+        //startLogoQuizz("Easy","1");
     }
     private void startLogoQuizz(String difficulte, String number){
         Intent intent = new Intent(MultiConnexion.this, LogoQuizz_Activity.class);
@@ -331,7 +333,22 @@ public class MultiConnexion extends AppCompatActivity {
         intent.putExtra("role", role);
         startActivityForResult(intent, 1);
     }
-
+    private void startCandyCrush(int difficulte, String number){
+        Intent intent = new Intent(MultiConnexion.this, CandyCrush.class);
+        intent.putExtra("level", difficulte);
+        intent.putExtra("pathScoreMulti", "rooms/"+roomName+"/score"+role+number);
+        intent.putExtra("pathMessageMulti", "rooms/"+roomName+"/message"+role+number);
+        intent.putExtra("role", role);
+        startActivityForResult(intent, 1);
+    }
+    private void startNumbers(int difficulte, String number){
+        Intent intent = new Intent(MultiConnexion.this, Numbers.class);
+        intent.putExtra("level", difficulte);
+        intent.putExtra("pathScoreMulti", "rooms/"+roomName+"/score"+role+number);
+        intent.putExtra("pathMessageMulti", "rooms/"+roomName+"/message"+role+number);
+        intent.putExtra("role", role);
+        startActivityForResult(intent, 1);
+    }
     public void updateNote() {
         Map<String, Object> note = new HashMap<>();
         note.put(KEY_t1,"Never Walk Alone");

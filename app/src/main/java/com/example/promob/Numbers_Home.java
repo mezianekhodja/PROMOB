@@ -34,8 +34,8 @@ public class Numbers_Home extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Numbers_Home.this, Numbers.class);
                 intent.putExtra("level",1);
-                startActivity(intent);
-                Numbers_Home.this.finish();
+                intent.putExtra("pathScoreMulti", "notMulti");
+                startActivityForResult(intent,1);
             }
         });
         medium.setOnClickListener(new View.OnClickListener() {
@@ -43,8 +43,8 @@ public class Numbers_Home extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Numbers_Home.this, Numbers.class);
                 intent.putExtra("level",2);
-                startActivity(intent);
-                Numbers_Home.this.finish();
+                intent.putExtra("pathScoreMulti", "notMulti");
+                startActivityForResult(intent,1);
             }
         });
         hard.setOnClickListener(new View.OnClickListener() {
@@ -52,8 +52,8 @@ public class Numbers_Home extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Numbers_Home.this, Numbers.class);
                 intent.putExtra("level",3);
-                startActivity(intent);
-                Numbers_Home.this.finish();
+                intent.putExtra("pathScoreMulti", "notMulti");
+                startActivityForResult(intent,1);
             }
         });
     }

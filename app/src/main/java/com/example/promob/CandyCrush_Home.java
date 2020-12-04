@@ -44,8 +44,8 @@ public class CandyCrush_Home extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(CandyCrush_Home.this, CandyCrush.class);
                 intent.putExtra("level",1);
-                startActivity(intent);
-                CandyCrush_Home.this.finish();
+                intent.putExtra("pathScoreMulti", "notMulti");
+                startActivityForResult(intent,1);
             }
         });
         medium.setOnClickListener(new View.OnClickListener() {
@@ -53,8 +53,8 @@ public class CandyCrush_Home extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(CandyCrush_Home.this, CandyCrush.class);
                 intent.putExtra("level",2);
-                startActivity(intent);
-                CandyCrush_Home.this.finish();
+                intent.putExtra("pathScoreMulti", "notMulti");
+                startActivityForResult(intent,1);
             }
         });
         hard.setOnClickListener(new View.OnClickListener() {
@@ -62,8 +62,8 @@ public class CandyCrush_Home extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(CandyCrush_Home.this, CandyCrush.class);
                 intent.putExtra("level",3);
-                startActivity(intent);
-                CandyCrush_Home.this.finish();
+                intent.putExtra("pathScoreMulti", "notMulti");
+                startActivityForResult(intent,1);
             }
         });
     }

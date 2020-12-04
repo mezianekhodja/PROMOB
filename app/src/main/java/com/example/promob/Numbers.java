@@ -487,10 +487,11 @@ public class Numbers extends AppCompatActivity {
         finishGame();
     }
     private void finishGame(){
-        Intent intent = new Intent(this, Numbers_Home.class);
-        intent.putExtra("score", score);
-        startActivity(intent);
-        Numbers.this.finish();
+        String multipath = getIntent().getStringExtra("pathScoreMulti");
+        if (!multipath.equals("notMulti")){
+            firebaseDatabase.getReference(multipath).setValue(String.valueOf(score));
+        }
+        finish();
     }
     public void loadNote(){
         int level = getIntent().getExtras().getInt("level");
