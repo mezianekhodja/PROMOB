@@ -5,16 +5,23 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MultiConnexion extends AppCompatActivity {
     private Button btngg,btnrev,btneheh,btnsalut,btndef,btnstop,btnres;
@@ -23,6 +30,9 @@ public class MultiConnexion extends AppCompatActivity {
     private DatabaseReference databaseReference,messageHostRef,messageGuestRef,scoreHost1Ref,
             scoreGuest1Ref,scoreHost2Ref,scoreGuest2Ref,scoreHost3Ref,scoreGuest3Ref;
     private FirebaseAuth firebaseAuth;
+    private static final String TAG = "MultiConnexion";
+    private static final String KEY_t1 = "trophy1";
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private int scoreHost1=-1,scoreGuest1=-1,scoreHost2=-1,scoreGuest2=-1,scoreHost3=1,scoreGuest3=1;
 
     @Override
@@ -71,6 +81,7 @@ public class MultiConnexion extends AppCompatActivity {
          public void onClick(View v) {
              Intent intent = new Intent(MultiConnexion.this, MultiResults.class);
              intent.putExtra("role", role);
+             intent.putExtra("name",playerName);
              int cpt=0;
              if(scoreHost1>scoreGuest1){
                  cpt++;
@@ -296,6 +307,7 @@ public class MultiConnexion extends AppCompatActivity {
         MultiConnexion.this.finish();
     }
     public void loadGame(){
+        updateNote();
         startPendu(1,"3");
         //startPendu(2,"3");
         //startPendu(3,"3");
@@ -318,5 +330,25 @@ public class MultiConnexion extends AppCompatActivity {
         intent.putExtra("pathMessageMulti", "rooms/"+roomName+"/message"+role+number);
         intent.putExtra("role", role);
         startActivityForResult(intent, 1);
+    }
+
+    public void updateNote() {
+        Map<String, Object> note = new HashMap<>();
+        note.put(KEY_t1,"Never Walk Alone");
+
+        db.collection("Trophy").document(playerName).update(note)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(MultiConnexion.this, "Sucess", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(MultiConnexion.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
     }
 }
