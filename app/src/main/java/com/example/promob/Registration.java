@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,12 +13,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Registration extends AppCompatActivity {
 
@@ -25,7 +32,11 @@ public class Registration extends AppCompatActivity {
     private Button regButton;
     private TextView userLogin;
     private FirebaseAuth firebaseAuth;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     String name, phone, password, mail;
+    private static final String TAG = "Registration";
+    private static final String KEY_t1 = "trophy1", KEY_t2 = "trophy2",KEY_t3 = "trophy3",KEY_t4 = "trophy4",
+            KEY_t5 = "trophy5",KEY_t6 = "trophy6",KEY_t7 = "trophy7",KEY_t8 = "trophy8";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +124,7 @@ public class Registration extends AppCompatActivity {
                     if(task.isSuccessful()){
                         sendUserdata();
                         Toast.makeText(Registration.this, "Successfully register",Toast.LENGTH_SHORT).show();
+                        saveNote();
                         firebaseAuth.signOut();
                         openCoPage();
                     }
@@ -128,5 +140,31 @@ public class Registration extends AppCompatActivity {
         DatabaseReference myRef = firebaseDatabase.getReference(firebaseAuth.getUid());
         UserProfile userProfile = new UserProfile(name, mail, phone);
         myRef.setValue(userProfile);
+    }
+    public void saveNote() {
+        Map<String, Object> note = new HashMap<>();
+        note.put(KEY_t1,"false");
+        note.put(KEY_t2,"Home Sweet Home");
+        note.put(KEY_t3,"false");
+        note.put(KEY_t4,"false");
+        note.put(KEY_t5,"false");
+        note.put(KEY_t6,"false");
+        note.put(KEY_t7,"false");
+        note.put(KEY_t8,"false");
+
+            db.collection("Trophy").document(name).set(note)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(Registration.this, "Sucess", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(Registration.this, "Fail", Toast.LENGTH_SHORT).show();
+                            Log.d(TAG, e.toString());
+                        }
+                    });
     }
 }

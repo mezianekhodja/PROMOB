@@ -87,7 +87,7 @@ public class Trophy extends AppCompatActivity {
                                         tv1.setText(documentSnapshot.getString(KEY_t1));
                                     }
                                     if (!documentSnapshot.getString(KEY_t2).equals("false")) {
-                                        iv2.setImageResource(R.drawable.trophy);
+                                        iv2.setImageResource(R.drawable.logovm);
                                         tv2.setText(documentSnapshot.getString(KEY_t2));
                                     }
                                     if (!documentSnapshot.getString(KEY_t3).equals("false")) {

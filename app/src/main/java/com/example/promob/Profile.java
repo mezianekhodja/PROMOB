@@ -119,9 +119,9 @@ public class Profile extends AppCompatActivity {
         startActivity(intent);
     }
     public void openTrophy(){
-        finish();
-        Intent intent = new Intent(this, Trophy.class);
-        startActivity(intent);
+            finish();
+            Intent intent = new Intent(this, Trophy.class);
+            startActivity(intent);
     }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
