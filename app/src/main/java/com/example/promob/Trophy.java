@@ -91,7 +91,7 @@ public class Trophy extends AppCompatActivity {
                                         tv2.setText(documentSnapshot.getString(KEY_t2));
                                     }
                                     if (!documentSnapshot.getString(KEY_t3).equals("false")) {
-                                        iv3.setImageResource(R.drawable.trophy);
+                                        iv3.setImageResource(R.drawable.trophy_candy);
                                         tv3.setText(documentSnapshot.getString(KEY_t3));
                                     }
                                     if (!documentSnapshot.getString(KEY_t4).equals("false")) {
@@ -99,7 +99,7 @@ public class Trophy extends AppCompatActivity {
                                         tv4.setText(documentSnapshot.getString(KEY_t4));
                                     }
                                     if (!documentSnapshot.getString(KEY_t5).equals("false")) {
-                                        iv5.setImageResource(R.drawable.trophy);
+                                        iv5.setImageResource(R.drawable.trophy_jumelles);
                                         tv5.setText(documentSnapshot.getString(KEY_t5));
                                     }
                                     if (!documentSnapshot.getString(KEY_t6).equals("false")) {

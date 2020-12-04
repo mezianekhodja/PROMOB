@@ -67,6 +67,7 @@ public class CandyCrush extends AppCompatActivity {
     String currentTime = Calendar.getInstance().getTime().toString();
     int highscore_global = 0;
     int highscore_user = 0;
+    private static final String KEY_t3 = "trophy3";
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -287,6 +288,7 @@ public class CandyCrush extends AppCompatActivity {
         if(((int) candy.get(candyToBeDragged).getTag() == R.drawable.bombcc)||((int) candy.get(candyToBeReplaced).getTag() == R.drawable.bombcc)){
             removeKindCandy((int) candy.get(candyToBeDragged).getTag());
             removeKindCandy((int) candy.get(candyToBeReplaced).getTag());
+            updateNote();
         }
     }
 
@@ -1074,5 +1076,24 @@ public class CandyCrush extends AppCompatActivity {
                     }
                 });
         }
+    }
+    public void updateNote() {
+        Map<String, Object> note = new HashMap<>();
+        note.put(KEY_t3,"Gourmandise");
+
+        db.collection("Trophy").document(username).update(note)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(CandyCrush.this, "Sucess", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(CandyCrush.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
     }
 }

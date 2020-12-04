@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Trophy"></activity>
+        <activity android:name=".Copyright"></activity>
+        <activity android:name=".Trophy" />
         <activity android:name=".MultiResults" />
         <activity android:name=".MultiConnexion" />
         <activity android:name=".Hole" />

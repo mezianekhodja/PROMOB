@@ -28,8 +28,14 @@
     </item>
     <item
         android:id="@+id/trophyMenu"
-        android:orderInCategory="400"
+        android:orderInCategory="500"
         app:showAsAction="never"
         android:title="Trophy">
+    </item>
+    <item
+        android:id="@+id/copyrightMenu"
+        android:orderInCategory="600"
+        app:showAsAction="never"
+        android:title="Copyright">
     </item>
 </menu>
