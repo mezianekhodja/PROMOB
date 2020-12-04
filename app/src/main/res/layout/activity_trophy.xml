@@ -265,7 +265,7 @@
                 android:gravity="center"
                 android:textSize="8dp"
                 android:textColor="#000000"
-                android:text="Obtiens tous les trophées"/>
+                android:text="Fais toi pendre"/>
 
         </LinearLayout>
     </LinearLayout>

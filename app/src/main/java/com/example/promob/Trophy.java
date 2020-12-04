@@ -83,7 +83,7 @@ public class Trophy extends AppCompatActivity {
                             public void onSuccess(DocumentSnapshot documentSnapshot) {
                                 if (documentSnapshot.exists()){
                                     if (!documentSnapshot.getString(KEY_t1).equals("false")) {
-                                        iv1.setImageResource(R.drawable.trophy);
+                                        iv1.setImageResource(R.drawable.trophy_multi);
                                         tv1.setText(documentSnapshot.getString(KEY_t1));
                                     }
                                     if (!documentSnapshot.getString(KEY_t2).equals("false")) {
@@ -95,7 +95,7 @@ public class Trophy extends AppCompatActivity {
                                         tv3.setText(documentSnapshot.getString(KEY_t3));
                                     }
                                     if (!documentSnapshot.getString(KEY_t4).equals("false")) {
-                                        iv4.setImageResource(R.drawable.trophy);
+                                        iv4.setImageResource(R.drawable.trophy_max);
                                         tv4.setText(documentSnapshot.getString(KEY_t4));
                                     }
                                     if (!documentSnapshot.getString(KEY_t5).equals("false")) {
@@ -103,15 +103,15 @@ public class Trophy extends AppCompatActivity {
                                         tv5.setText(documentSnapshot.getString(KEY_t5));
                                     }
                                     if (!documentSnapshot.getString(KEY_t6).equals("false")) {
-                                        iv6.setImageResource(R.drawable.trophy);
+                                        iv6.setImageResource(R.drawable.trophy_zero);
                                         tv6.setText(documentSnapshot.getString(KEY_t6));
                                     }
                                     if (!documentSnapshot.getString(KEY_t7).equals("false")) {
-                                        iv7.setImageResource(R.drawable.trophy);
+                                        iv7.setImageResource(R.drawable.trophy_multiwinner);
                                         tv7.setText(documentSnapshot.getString(KEY_t7));
                                     }
                                     if (!documentSnapshot.getString(KEY_t8).equals("false")) {
-                                        iv8.setImageResource(R.drawable.trophy);
+                                        iv8.setImageResource(R.drawable.trophy_pendu);
                                         tv8.setText(documentSnapshot.getString(KEY_t8));
                                     }
                                 }

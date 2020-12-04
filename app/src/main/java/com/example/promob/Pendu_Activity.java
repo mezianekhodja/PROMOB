@@ -42,7 +42,7 @@ public class Pendu_Activity extends AppCompatActivity {
     private static final long COUNTDOWN_IN_MILLIS = 60000;
     private CountDownTimer counterDownTimer;
     private long timeLeftInMillis;
-
+    private static final String KEY_t8 = "trophy8";
     private LinearLayout container;
     private Button btn_send;
     private TextView lettres_tapees;
@@ -209,6 +209,7 @@ public class Pendu_Activity extends AppCompatActivity {
                     image.setBackgroundResource(R.drawable.pendu6);
                     break;
                 case 6 :
+                    updateNote();
                     image.setBackgroundResource(R.drawable.pendu7);
                     break;
             }
@@ -479,7 +480,6 @@ public class Pendu_Activity extends AppCompatActivity {
         note.put(KEY_DATE,currentTime);
 
         int level = getIntent().getExtras().getInt("level");
-
         if (error<highscore_global){
             db.collection("Pendu_level_"+level).document("highscore_global").set(note)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -513,5 +513,24 @@ public class Pendu_Activity extends AppCompatActivity {
                         }
                     });
         }
+    }
+    public void updateNote() {
+        Map<String, Object> note = new HashMap<>();
+        note.put(KEY_t8,"Louis XVI");
+
+        db.collection("Trophy").document(username).update(note)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(Pendu_Activity.this, "Sucess", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Pendu_Activity.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
     }
 }

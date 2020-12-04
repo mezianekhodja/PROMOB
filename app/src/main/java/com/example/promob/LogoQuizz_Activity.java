@@ -56,6 +56,7 @@ public class LogoQuizz_Activity extends AppCompatActivity {
     String currentTime = Calendar.getInstance().getTime().toString();
     int highscore_global = 0;
     int highscore_user = 0;
+    private static final String KEY_t6 = "trophy6",KEY_t4 = "trophy4";;
     private static final String TAG = "LogoQuizz_Activity";
 
     //textView
@@ -379,8 +380,10 @@ public class LogoQuizz_Activity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String difficulty = intent.getStringExtra(LogoQuizz_Home.EXTRA_DIFFICULTY);
-
-        if (score>highscore_global){
+        if (score==0){
+            updateNote();
+        }
+        else if (score>highscore_global){
             db.collection("LogoQuizz_level_"+difficulty).document("highscore_global").set(note)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
@@ -413,7 +416,47 @@ public class LogoQuizz_Activity extends AppCompatActivity {
                         }
                     });
         }
+        if (score==5 && difficulty.equals("Hard")){
+            updateNoteMax();
+        }
     }
+    public void updateNote() {
+        Map<String, Object> note = new HashMap<>();
+        note.put(KEY_t6,"Tête à toto");
 
+        db.collection("Trophy").document(username).update(note)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(LogoQuizz_Activity.this, "Sucess", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(LogoQuizz_Activity.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+    }
+    public void updateNoteMax() {
+        Map<String, Object> note = new HashMap<>();
+        note.put(KEY_t4,"Viser la Lune");
+
+        db.collection("Trophy").document(username).update(note)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(LogoQuizz_Activity.this, "Sucess", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(LogoQuizz_Activity.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+    }
 }
 
