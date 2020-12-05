@@ -308,18 +308,40 @@ public class MultiConnexion extends AppCompatActivity {
     }
     public void loadGame(){
         updateNote();
+        //différentes versions de jeux :
+
         startPendu(1,"3");
         //startPendu(2,"3");
         //startPendu(3,"3");
+
         //startLogoQuizz("Hard","3");
         //startLogoQuizz("Medium","2");
-        startCandyCrush(1,"2");
-        startNumbers(1,"1");
         //startLogoQuizz("Easy","1");
+
+        startCandyCrush(1,"2");
+        //startCandyCrush(2,"2");
+        //startCandyCrush(3,"2");
+
+        //startNumbers(1,"1");
+        //startNumbers(2,"1");
+        //startNumbers(3,"1");
+
+        startLabyrinthe(1,"1");
+        //startLabyrinthe(2,"1");
+        //startLabyrinthe(3,"1");
+
     }
     private void startLogoQuizz(String difficulte, String number){
         Intent intent = new Intent(MultiConnexion.this, LogoQuizz_Activity.class);
         intent.putExtra("extraDifficulty", difficulte);
+        intent.putExtra("pathScoreMulti", "rooms/"+roomName+"/score"+role+number);
+        intent.putExtra("pathMessageMulti", "rooms/"+roomName+"/message"+role+number);
+        intent.putExtra("role", role);
+        startActivityForResult(intent, 1);
+    }
+    private void startLabyrinthe(int difficulte, String number){
+        Intent intent = new Intent(MultiConnexion.this, Labyrinthe.class);
+        intent.putExtra("level", difficulte);
         intent.putExtra("pathScoreMulti", "rooms/"+roomName+"/score"+role+number);
         intent.putExtra("pathMessageMulti", "rooms/"+roomName+"/message"+role+number);
         intent.putExtra("role", role);

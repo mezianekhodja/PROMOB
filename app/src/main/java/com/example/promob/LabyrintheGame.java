@@ -253,7 +253,7 @@ public class LabyrintheGame extends View implements SensorEventListener {
             }
 
             isWin();
-            isLoose();
+            //isLoose();
             //affichage chemin
             paintmodif.setARGB(255,255,255,255);
             if (!listeChemin.isEmpty()){
