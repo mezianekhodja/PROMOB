@@ -380,7 +380,7 @@ public class LogoQuizz_Activity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String difficulty = intent.getStringExtra(LogoQuizz_Home.EXTRA_DIFFICULTY);
-        if (score==0){
+        if (score==0 && username.equals("invite")){
             updateNote();
         }
         else if (score>highscore_global){
@@ -416,7 +416,7 @@ public class LogoQuizz_Activity extends AppCompatActivity {
                         }
                     });
         }
-        if (score==5 && difficulty.equals("Hard")){
+        if (score==5 && difficulty.equals("Hard") && !username.equals("invite")){
             updateNoteMax();
         }
     }

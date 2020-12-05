@@ -37,7 +37,7 @@ public class Registration extends AppCompatActivity {
     private static final String TAG = "Registration";
     private static final String KEY_t1 = "trophy1", KEY_t2 = "trophy2",KEY_t3 = "trophy3",KEY_t4 = "trophy4",
             KEY_t5 = "trophy5",KEY_t6 = "trophy6",KEY_t7 = "trophy7",KEY_t8 = "trophy8",KEY_t9 = "trophy9",
-            KEY_t10 = "trophy10",KEY_t11 = "trophy11";
+            KEY_t10 = "trophy10",KEY_t11 = "trophy11",KEY_t12 = "trophy12";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,6 +155,7 @@ public class Registration extends AppCompatActivity {
         note.put(KEY_t9,"false");
         note.put(KEY_t10,"false");
         note.put(KEY_t11,"false");
+        note.put(KEY_t12,"false");
             db.collection("Trophy").document(name).set(note)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override

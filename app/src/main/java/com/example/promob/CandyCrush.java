@@ -289,7 +289,9 @@ public class CandyCrush extends AppCompatActivity {
         if(((int) candy.get(candyToBeDragged).getTag() == R.drawable.bombcc)||((int) candy.get(candyToBeReplaced).getTag() == R.drawable.bombcc)){
             removeKindCandy((int) candy.get(candyToBeDragged).getTag());
             removeKindCandy((int) candy.get(candyToBeReplaced).getTag());
-            updateNote();
+            if (!username.equals("invite")){
+                updateNote();
+            }
         }
     }
 

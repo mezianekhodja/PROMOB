@@ -395,7 +395,9 @@ public class Numbers extends AppCompatActivity {
             }
             else{
                 if ((int)number.get(index).getTag()==R.drawable.nb2048_2048){
-                    updateNote();
+                    if (!username.equals("invite")){
+                        updateNote();
+                    }
                     return true;
                 }
             }

@@ -45,7 +45,9 @@ public class Copyright extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 UserProfile userProfile = snapshot.getValue(UserProfile.class);
                 playerName=userProfile.getUserName();
-                updateNote();
+                if(!playerName.equals("invite")){
+                    updateNote();
+                }
             }
 
             @Override

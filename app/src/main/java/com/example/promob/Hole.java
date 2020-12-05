@@ -57,7 +57,7 @@ public class Hole extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (termine){
-                    if (score>=450){
+                    if (score>=450 && !username.equals("invite")){
                         updateNote();
                     }
                     if (!multipath.equals("notMulti")){

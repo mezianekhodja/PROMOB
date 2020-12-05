@@ -22,15 +22,17 @@
             android:layout_height="150dp"
             app:srcCompat="@drawable/logo"
             android:layout_marginTop="40dp"/>
-
         <TextView
-            android:id="@+id/textViewmulti"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="Page défi" />
+
+        <Button
+            android:id="@+id/buttonStartDefi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Defi -> Arrive tres prochainement !!"
-            android:layout_marginTop="110dp"
-            android:textSize="20dp"
-            android:gravity="center"/>
+            android:text="Start defi" />
 
         <TextView
             android:layout_width="match_parent"

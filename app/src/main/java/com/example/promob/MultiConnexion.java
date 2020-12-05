@@ -326,6 +326,10 @@ public class MultiConnexion extends AppCompatActivity {
         //startNumbers(2,"1");
         //startNumbers(3,"1");
 
+        //startHole(1,"1");
+        //startHole(2,"1");
+        //startHole(3,"1");
+
         startLabyrinthe(1,"1");
         //startLabyrinthe(2,"1");
         //startLabyrinthe(3,"1");
@@ -341,6 +345,14 @@ public class MultiConnexion extends AppCompatActivity {
     }
     private void startLabyrinthe(int difficulte, String number){
         Intent intent = new Intent(MultiConnexion.this, Labyrinthe.class);
+        intent.putExtra("level", difficulte);
+        intent.putExtra("pathScoreMulti", "rooms/"+roomName+"/score"+role+number);
+        intent.putExtra("pathMessageMulti", "rooms/"+roomName+"/message"+role+number);
+        intent.putExtra("role", role);
+        startActivityForResult(intent, 1);
+    }
+    private void startHole(int difficulte, String number){
+        Intent intent = new Intent(MultiConnexion.this, Hole.class);
         intent.putExtra("level", difficulte);
         intent.putExtra("pathScoreMulti", "rooms/"+roomName+"/score"+role+number);
         intent.putExtra("pathMessageMulti", "rooms/"+roomName+"/message"+role+number);

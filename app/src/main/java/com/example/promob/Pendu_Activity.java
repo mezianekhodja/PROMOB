@@ -515,6 +515,7 @@ public class Pendu_Activity extends AppCompatActivity {
         }
     }
     public void updateNote() {
+        if (!username.equals("invite")){
         Map<String, Object> note = new HashMap<>();
         note.put(KEY_t8,"Louis XVI");
 
@@ -532,5 +533,6 @@ public class Pendu_Activity extends AppCompatActivity {
                         Log.d(TAG, e.toString());
                     }
                 });
+        }
     }
 }

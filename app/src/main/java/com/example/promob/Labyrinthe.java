@@ -58,7 +58,7 @@ public class Labyrinthe extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (termine){
-                    if (score>=4500){
+                    if (score>=4500 && !username.equals("invite")){
                         updateNote();
                     }
                     if (!multipath.equals("notMulti")){
