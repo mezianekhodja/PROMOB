@@ -111,7 +111,6 @@ public class MultiConnexion extends AppCompatActivity {
         btndef.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                messageHostRef.setValue(role+": Start Game !");
                 loadGame();
             }
         });
@@ -263,8 +262,66 @@ public class MultiConnexion extends AppCompatActivity {
                         if (snapshot.getValue(String.class).contains("Leave")){
                             close();
                         }
-                        else if (snapshot.getValue(String.class).contains("Start Game")){
-                            loadGame();
+                        else if (snapshot.getValue(String.class).contains("StartGame")){
+                            updateNote();
+                            if (snapshot.getValue(String.class).contains("HoleEasy")){
+                                startHole(1,"3");
+                            }
+                            else if (snapshot.getValue(String.class).contains("HoleMedium")){
+                                startHole(2,"3");
+                            }
+                            else if (snapshot.getValue(String.class).contains("HoleHard")){
+                                startHole(3,"3");
+                            }
+                            else if (snapshot.getValue(String.class).contains("LabyrintheEasy")){
+                                startLabyrinthe(1,"3");
+                            }
+                            else if (snapshot.getValue(String.class).contains("LabyrintheMedium")){
+                                startLabyrinthe(2,"3");
+                            }
+                            else{
+                                startLabyrinthe(3,"3");
+                            }
+
+
+                            if (snapshot.getValue(String.class).contains("CandyCrushEasy")){
+                                startCandyCrush(1,"2");
+                            }
+                            else if (snapshot.getValue(String.class).contains("CandyCrushMedium")){
+                                startCandyCrush(2,"2");
+                            }
+                            else if (snapshot.getValue(String.class).contains("CandyCrushHard")){
+                                startCandyCrush(3,"2");
+                            }
+                            else if (snapshot.getValue(String.class).contains("NumbersEasy")){
+                                startNumbers(1,"2");
+                            }
+                            else if (snapshot.getValue(String.class).contains("NumbersMedium")){
+                                startNumbers(2,"2");
+                            }
+                            else{
+                                startNumbers(3,"2");
+                            }
+
+
+                            if (snapshot.getValue(String.class).contains("PenduEasy")){
+                                startPendu(1,"1");
+                            }
+                            else if (snapshot.getValue(String.class).contains("PenduMedium")){
+                                startPendu(2,"1");
+                            }
+                            else if (snapshot.getValue(String.class).contains("PenduHard")){
+                                startPendu(3,"1");
+                            }
+                            else if (snapshot.getValue(String.class).contains("LogoQuizzHard")){
+                                startLogoQuizz("Hard","1");
+                            }
+                            else if (snapshot.getValue(String.class).contains("LogoQuizzMedium")){
+                                startLogoQuizz("Medium","1");
+                            }
+                            else{
+                                startLogoQuizz("Easy","1");
+                            }
                         }
                         else if (scoreGuest3>-1 && scoreHost3>-1){
                             btnres.setEnabled(true);                        }
@@ -308,32 +365,76 @@ public class MultiConnexion extends AppCompatActivity {
     }
     public void loadGame(){
         updateNote();
-        //différentes versions de jeux :
+        if(role.equals("Host")){
+            String aEnvoyer = role;
+        //génération nb aleatoire
+        int nombreAleatoire1 = (int)(Math.random() * 6);
+        int nombreAleatoire2 = (int)(Math.random() * 6);
+        int nombreAleatoire3 = (int)(Math.random() * 6);
 
-        startPendu(1,"3");
-        //startPendu(2,"3");
-        //startPendu(3,"3");
+        switch (nombreAleatoire1){
+            case 0: startHole(1,"3");
+                aEnvoyer+=": StartGame HoleEasy ";
+                break;
+            case 1: startHole(2,"3");
+                aEnvoyer+=": StartGame HoleMedium ";
+                break;
+            case 2: startHole(3,"3");
+                aEnvoyer+=": StartGame HoleHard ";
+                break;
+            case 3: startLabyrinthe(1,"3");
+                aEnvoyer+=": StartGame LabyrintheEasy ";
+                break;
+            case 4: startLabyrinthe(2,"3");
+                aEnvoyer+=": StartGame LabyrintheMedium ";
+                break;
+            default: startLabyrinthe(3,"3");
+                aEnvoyer+=": StartGame LabyrintheHard ";
+                break;
+        }
+        switch (nombreAleatoire2){
+            case 0: startCandyCrush(1,"2");
+                aEnvoyer+="CandyCrushEasy ";
+                break;
+            case 1: startCandyCrush(2,"2");
+                aEnvoyer+="CandyCrushMedium ";
+                break;
+            case 2: startCandyCrush(3,"2");
+                aEnvoyer+="CandyCrushHard ";
+                break;
+            case 3: startNumbers(1,"2");
+                aEnvoyer+="NumbersEasy ";
+                break;
+            case 4: startNumbers(2,"2");
+                aEnvoyer+="NumbersMedium ";
+                break;
+            default: startNumbers(3,"2");
+                aEnvoyer+="NumbersHard ";
+                break;
+        }
+        switch (nombreAleatoire3){
+            case 0: startPendu(1,"1");
+                aEnvoyer+="PenduEasy";
+                break;
+            case 1: startPendu(2,"1");
+                aEnvoyer+="PenduMedium";
+                break;
+            case 2: startPendu(3,"1");
+                aEnvoyer+="PenduHard";
+                break;
+            case 3: startLogoQuizz("Hard","1");
+                aEnvoyer+="LogoQuizzHard";
+                break;
+            case 4: startLogoQuizz("Medium","1");
+                aEnvoyer+="LogoQuizzMedium";
 
-        //startLogoQuizz("Hard","3");
-        //startLogoQuizz("Medium","2");
-        //startLogoQuizz("Easy","1");
-
-        startCandyCrush(1,"2");
-        //startCandyCrush(2,"2");
-        //startCandyCrush(3,"2");
-
-        //startNumbers(1,"1");
-        //startNumbers(2,"1");
-        //startNumbers(3,"1");
-
-        //startHole(1,"1");
-        //startHole(2,"1");
-        //startHole(3,"1");
-
-        startLabyrinthe(1,"1");
-        //startLabyrinthe(2,"1");
-        //startLabyrinthe(3,"1");
-
+                break;
+            default: startLogoQuizz("Easy","1");
+                aEnvoyer+="LogoQuizzEasy";
+                break;
+        }
+        messageHostRef.setValue(aEnvoyer);
+        }
     }
     private void startLogoQuizz(String difficulte, String number){
         Intent intent = new Intent(MultiConnexion.this, LogoQuizz_Activity.class);
