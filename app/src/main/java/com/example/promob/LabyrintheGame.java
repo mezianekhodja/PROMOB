@@ -37,9 +37,6 @@ import java.util.Map;
 //Composant grafique (View)
 public class LabyrintheGame extends View implements SensorEventListener {
 
-    //gestion score
-    int score = 5000;
-
     //gestion niveau
     int level;
 
@@ -105,8 +102,8 @@ public class LabyrintheGame extends View implements SensorEventListener {
         currentX =  (w - imageWidth)/2;
         currentY =  1320;
         //récupération records
-        highscore_global=Labyrinthe.getHsg();
-        highscore_user=Labyrinthe.getHsp();
+        //highscore_global=Labyrinthe.getHsg();
+        //highscore_user=Labyrinthe.getHsp();
 
         //création des chemins en fonction des niveaux de difficulté (plusieurs chemins possibles par niveau)
         level = Labyrinthe.getLevel();
@@ -240,17 +237,18 @@ public class LabyrintheGame extends View implements SensorEventListener {
         canvas.drawBitmap(scoretableBitmap,320,1370,paint);
         paintmodif.setTextSize(60);
         paintmodif.setARGB(255,255,255,255);
-        canvas.drawText(String.valueOf(score),460,1500,paintmodif);
+        canvas.drawText(String.valueOf(Labyrinthe.getScore()),460,1500,paintmodif);
 
         //verification victoire/défaite
         if (!win && !loose){
+            int scoretemp =Labyrinthe.getScore();
             //gestion score
-            if (score>0){
-                score--;
+            if (scoretemp>0){
+                Labyrinthe.setScore(scoretemp-1);
             }
 
             //vérification timerscore non vide
-            else if (score==0){
+            else if (scoretemp==0){
                 loose = true;
             }
 
@@ -278,25 +276,17 @@ public class LabyrintheGame extends View implements SensorEventListener {
             //vérifcation fin de game
             if (!(!win && !loose)){
                 if(!username.equals("invite")){
-                    saveNote();
+                   // saveNote();
                 }
             }
         }
         else if (loose) {
             canvas.drawBitmap(defaitebitmap, 300, 500, paint);
-            String multipath = Labyrinthe.getMultiPath();
-            if (!multipath.equals("notMulti")){
-                firebaseDatabase.getReference(multipath).setValue(String.valueOf(score));
-            }
-            //finish();
+            Labyrinthe.setTermine(true);
         }
         else {
             canvas.drawBitmap(victoirebitmap, 300, 500, paint);
-            String multipath = Labyrinthe.getMultiPath();
-            if (!multipath.equals("notMulti")){
-                firebaseDatabase.getReference(multipath).setValue(String.valueOf(score));
-            }
-            //finish();
+            Labyrinthe.setTermine(true);
         }
 
     }
@@ -351,18 +341,19 @@ public class LabyrintheGame extends View implements SensorEventListener {
             }
          }
         if (!trouve){
-            score=0;
+            Labyrinthe.setScore(0);
             loose= true;
         }
     }
 
     public void saveNote() {
+        int scoretemp = Labyrinthe.getScore();
         Map<String, Object> note = new HashMap<>();
         note.put(KEY_USER,username);
-        note.put(KEY_SCORE,score);
+        note.put(KEY_SCORE,scoretemp);
         note.put(KEY_DATE,currentTime);
 
-        if (score>highscore_global){
+        if (scoretemp>highscore_global){
             db.collection("Labyrinthe_level_"+level).document("highscore_global").set(note)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
@@ -379,7 +370,7 @@ public class LabyrintheGame extends View implements SensorEventListener {
                     });
 
         }
-        if (score>highscore_user){
+        if (scoretemp>highscore_user){
             db.collection("Labyrinthe_level_"+level).document("highscore_"+username).set(note)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
