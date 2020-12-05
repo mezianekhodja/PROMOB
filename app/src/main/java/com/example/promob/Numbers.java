@@ -49,6 +49,7 @@ public class Numbers extends AppCompatActivity {
     int highscore_global = 0;
     int highscore_user = 0;
     int move =0;
+    private static final String KEY_t9 = "trophy9";
     private static final String TAG = "Numbers";
 
 
@@ -394,6 +395,7 @@ public class Numbers extends AppCompatActivity {
             }
             else{
                 if ((int)number.get(index).getTag()==R.drawable.nb2048_2048){
+                    updateNote();
                     return true;
                 }
             }
@@ -576,5 +578,24 @@ public class Numbers extends AppCompatActivity {
                         }
                     });
         }
+    }
+    public void updateNote() {
+        Map<String, Object> note = new HashMap<>();
+        note.put(KEY_t9,"Mathématicien");
+
+        db.collection("Trophy").document(username).update(note)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(Numbers.this, "Sucess", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Numbers.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
     }
 }
