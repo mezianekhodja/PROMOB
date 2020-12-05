@@ -422,7 +422,7 @@ public class LogoQuizz_Activity extends AppCompatActivity {
     }
     public void updateNote() {
         Map<String, Object> note = new HashMap<>();
-        note.put(KEY_t6,"Tête à toto");
+        note.put(KEY_t6,"Remplacant");
 
         db.collection("Trophy").document(username).update(note)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {

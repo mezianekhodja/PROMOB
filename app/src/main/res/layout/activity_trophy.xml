@@ -66,7 +66,7 @@
                 android:gravity="center"
                 android:textSize="8dp"
                 android:textColor="#000000"
-                android:text="Lance ta première partie en multijoueur"/>
+                android:text="Joues en multijoueur"/>
 
         </LinearLayout>
         <LinearLayout
@@ -211,7 +211,7 @@
                 android:gravity="center"
                 android:textSize="8dp"
                 android:textColor="#000000"
-                android:text="Obtiens un score de 0"/>
+                android:text="Obtiens un score de 0 sur LogoQuizz"/>
 
         </LinearLayout>
         <LinearLayout
@@ -269,6 +269,122 @@
 
         </LinearLayout>
     </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="horizontal"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="1dp"
+            tools:ignore="MissingConstraints">
+            <LinearLayout
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:orientation="vertical"
+                tools:ignore="MissingConstraints">
+
+                <ImageView
+                    android:id="@+id/ivTrophy9"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    app:srcCompat="@drawable/trophy_black" />
+
+                <TextView
+                    android:id="@+id/tvTrophy9"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Pas débloqué"/>
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="8dp"
+                    android:textColor="#000000"
+                    android:text="Obtiens le cube 2048"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:orientation="vertical"
+                tools:ignore="MissingConstraints">
+
+                <ImageView
+                    android:id="@+id/ivTrophy10"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    app:srcCompat="@drawable/trophy_black" />
+
+                <TextView
+                    android:id="@+id/tvTrophy10"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Pas débloqué"/>
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="8dp"
+                    android:textColor="#000000"
+                    android:text="Obtiens 200 ou + sur Hole"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:orientation="vertical"
+                tools:ignore="MissingConstraints">
+
+                <ImageView
+                    android:id="@+id/ivTrophy11"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    app:srcCompat="@drawable/trophy_black" />
+
+                <TextView
+                    android:id="@+id/tvTrophy11"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Pas débloqué"/>
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="8dp"
+                    android:textColor="#000000"
+                    android:text="Obtiens 4500 ou + sur Labyrinthe"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:orientation="vertical"
+                tools:ignore="MissingConstraints">
+
+                <ImageView
+                    android:id="@+id/ivTrophy12"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    app:srcCompat="@drawable/trophy_black" />
+
+                <TextView
+                    android:id="@+id/tvTrophy12"
+                    android:layout_width="100dp"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:text="Pas débloqué"/>
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="8dp"
+                    android:textColor="#000000"
+                    android:text="Lances un défi Solo"/>
+
+            </LinearLayout>
+        </LinearLayout>
 
 
         <TextView
