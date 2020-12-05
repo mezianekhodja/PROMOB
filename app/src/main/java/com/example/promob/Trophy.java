@@ -31,12 +31,12 @@ public class Trophy extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase;
     private String playerName ="";
     private static final String KEY_t1 = "trophy1", KEY_t2 = "trophy2",KEY_t3 = "trophy3",KEY_t4 = "trophy4",
-            KEY_t5 = "trophy5",KEY_t6 = "trophy6",KEY_t7 = "trophy7",KEY_t8 = "trophy8";
+            KEY_t5 = "trophy5",KEY_t6 = "trophy6",KEY_t7 = "trophy7",KEY_t8 = "trophy8",KEY_t11 = "trophy11";
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private Button load;
     private static final String TAG = "Trophy";
-    private ImageView iv1,iv2,iv3,iv4,iv5,iv6,iv7,iv8;
-    private TextView tv1,tv2,tv3,tv4,tv5,tv6,tv7,tv8;
+    private ImageView iv1,iv2,iv3,iv4,iv5,iv6,iv7,iv8,iv11;
+    private TextView tv1,tv2,tv3,tv4,tv5,tv6,tv7,tv8,tv11;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +52,8 @@ public class Trophy extends AppCompatActivity {
         iv6=findViewById(R.id.ivTrophy6);
         iv7=findViewById(R.id.ivTrophy7);
         iv8=findViewById(R.id.ivTrophy8);
+        iv11=findViewById(R.id.ivTrophy11);
+
         tv1=findViewById(R.id.tvTrophy1);
         tv2=findViewById(R.id.tvTrophy2);
         tv3=findViewById(R.id.tvTrophy3);
@@ -60,6 +62,7 @@ public class Trophy extends AppCompatActivity {
         tv6=findViewById(R.id.tvTrophy6);
         tv7=findViewById(R.id.tvTrophy7);
         tv8=findViewById(R.id.tvTrophy8);
+        tv11=findViewById(R.id.tvTrophy11);
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase=FirebaseDatabase.getInstance();
@@ -117,6 +120,10 @@ public class Trophy extends AppCompatActivity {
                                     if (!documentSnapshot.getString(KEY_t8).equals("false")) {
                                         iv8.setImageResource(R.drawable.trophy_pendu);
                                         tv8.setText(documentSnapshot.getString(KEY_t8));
+                                    }
+                                    if (!documentSnapshot.getString(KEY_t11).equals("false")) {
+                                        iv11.setImageResource(R.drawable.trophy_lab);
+                                        tv11.setText(documentSnapshot.getString(KEY_t11));
                                     }
                                 }
                                 else{

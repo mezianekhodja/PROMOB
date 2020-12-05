@@ -58,12 +58,12 @@ public class LabyrintheGame extends View implements SensorEventListener {
     //ajustement valeurs en fonction du niveau
     private int centerwidht=520,intervalwidht=100;
     //rectangle arrivée
-    private Rect arrivee = new Rect(centerwidht-intervalwidht,10,centerwidht+intervalwidht,50);
+    private Rect arrivee = new Rect(centerwidht-intervalwidht,10,centerwidht+intervalwidht,100);
     //rectangle départ
-    private Rect dep = new Rect(centerwidht-intervalwidht,1270,centerwidht+intervalwidht,1350);
+    private Rect dep = new Rect(centerwidht-intervalwidht,1000,centerwidht+intervalwidht,1120);
 
 
-    //gestion score bdd
+    //gestion score BDD
     String username = "Undefined";
     private static final String KEY_USER = "user", KEY_SCORE = "score", KEY_DATE="date";
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -100,7 +100,7 @@ public class LabyrintheGame extends View implements SensorEventListener {
 
         //w et h sont la taille et hauteur de l'ecran
         currentX =  (w - imageWidth)/2;
-        currentY =  1320;
+        currentY =  1200;
         //récupération records
         //highscore_global=Labyrinthe.getHsg();
         //highscore_user=Labyrinthe.getHsp();
@@ -112,34 +112,34 @@ public class LabyrintheGame extends View implements SensorEventListener {
             int random = (int)(Math.random() * 4); //tirage aléatoire parmi nos circuits
             if (random ==1){
                 //chemin 1 niveau moyen
-                Rect rchemed1A = new Rect(centerwidht-intervalwidht,1000,centerwidht+intervalwidht,1350);
+                Rect rchemed1A = new Rect(centerwidht-intervalwidht,1000,centerwidht+intervalwidht,1120);
                 listeChemin.add(rchemed1A);
                 Rect rchemed1B = new Rect(centerwidht-intervalwidht,10,centerwidht+intervalwidht,700);
                 listeChemin.add(rchemed1B);
                 Rect rchemed1C = new Rect(centerwidht-intervalwidht,500,centerwidht+3*intervalwidht,700);
                 listeChemin.add(rchemed1C);
-                Rect rchemed1D = new Rect(centerwidht-intervalwidht,1000,centerwidht+3*intervalwidht,1200);
+                Rect rchemed1D = new Rect(centerwidht-intervalwidht,1000,centerwidht+3*intervalwidht,1120);
                 listeChemin.add(rchemed1D);
-                Rect rchemed1E = new Rect(centerwidht+intervalwidht,500,centerwidht+3*intervalwidht,1200);
+                Rect rchemed1E = new Rect(centerwidht+intervalwidht,500,centerwidht+3*intervalwidht,1120);
                 listeChemin.add(rchemed1E);
             }
 
             else if (random ==2){
                 //chemin 2 niveau moyen
-                Rect rchemed2A = new Rect(centerwidht-intervalwidht,1000,centerwidht+intervalwidht,1350);
+                Rect rchemed2A = new Rect(centerwidht-intervalwidht,1000,centerwidht+intervalwidht,1120);
                 listeChemin.add(rchemed2A);
                 Rect rchemed2B = new Rect(centerwidht-intervalwidht,10,centerwidht+intervalwidht,700);
                 listeChemin.add(rchemed2B);
                 Rect rchemed2C = new Rect(centerwidht-3*intervalwidht,500,centerwidht-intervalwidht,700);
                 listeChemin.add(rchemed2C);
-                Rect rchemed2D = new Rect(centerwidht-3*intervalwidht,1000,centerwidht-intervalwidht,1200);
+                Rect rchemed2D = new Rect(centerwidht-3*intervalwidht,1000,centerwidht-intervalwidht,1120);
                 listeChemin.add(rchemed2D);
-                Rect rchemed2E = new Rect(centerwidht-3*intervalwidht,500,centerwidht-intervalwidht,1200);
+                Rect rchemed2E = new Rect(centerwidht-3*intervalwidht,500,centerwidht-intervalwidht,1120);
                 listeChemin.add(rchemed2E);
             }
             else {
                 //chemin 3 niveau moyen
-                Rect rchemed2A = new Rect(centerwidht-intervalwidht,800,centerwidht+intervalwidht,1350);
+                Rect rchemed2A = new Rect(centerwidht-intervalwidht,800,centerwidht+intervalwidht,1120);
                 listeChemin.add(rchemed2A);
                 Rect rchemed2B = new Rect(centerwidht-intervalwidht,10,centerwidht+intervalwidht,400);
                 listeChemin.add(rchemed2B);
@@ -156,7 +156,7 @@ public class LabyrintheGame extends View implements SensorEventListener {
             int random = (int)(Math.random() * 2); //tirage aléatoire parmi nos circuits
             if (random ==1){
             //chemin niveau difficile 1
-            Rect rchemhard1A = new Rect(centerwidht-5*intervalwidht,1150,centerwidht+intervalwidht,1350);
+            Rect rchemhard1A = new Rect(centerwidht-5*intervalwidht,1000,centerwidht+intervalwidht,1120);
             listeChemin.add(rchemhard1A);
             Rect rchemhard1B = new Rect(centerwidht-5*intervalwidht,800,centerwidht+5*intervalwidht,1000);
             listeChemin.add(rchemhard1B);
@@ -166,7 +166,7 @@ public class LabyrintheGame extends View implements SensorEventListener {
             listeChemin.add(rchemhard1D);
             Rect rchemhard1E = new Rect(centerwidht-intervalwidht,10,centerwidht+5*intervalwidht,210);
             listeChemin.add(rchemhard1E);
-            Rect rchemhard1F = new Rect(centerwidht-5*intervalwidht,800,centerwidht-3*intervalwidht,1350);
+            Rect rchemhard1F = new Rect(centerwidht-5*intervalwidht,800,centerwidht-3*intervalwidht,1120);
             listeChemin.add(rchemhard1F);
             Rect rchemhard1G = new Rect(centerwidht+3*intervalwidht,500,centerwidht+5*intervalwidht,1000);
             listeChemin.add(rchemhard1G);
@@ -177,7 +177,7 @@ public class LabyrintheGame extends View implements SensorEventListener {
              }
             else{
                 //chemin niveau difficile 2
-                Rect rchemhard1A = new Rect(centerwidht-intervalwidht,1150,centerwidht+5*intervalwidht,1350);
+                Rect rchemhard1A = new Rect(centerwidht-intervalwidht,1000,centerwidht+5*intervalwidht,1120);
                 listeChemin.add(rchemhard1A);
                 Rect rchemhard1B = new Rect(centerwidht-5*intervalwidht,800,centerwidht+5*intervalwidht,1000);
                 listeChemin.add(rchemhard1B);
@@ -187,7 +187,7 @@ public class LabyrintheGame extends View implements SensorEventListener {
                 listeChemin.add(rchemhard1D);
                 Rect rchemhard1E = new Rect(centerwidht-5*intervalwidht,10,centerwidht+intervalwidht,210);
                 listeChemin.add(rchemhard1E);
-                Rect rchemhard1F = new Rect(centerwidht+3*intervalwidht,800,centerwidht+5*intervalwidht,1350);
+                Rect rchemhard1F = new Rect(centerwidht+3*intervalwidht,800,centerwidht+5*intervalwidht,1120);
                 listeChemin.add(rchemhard1F);
                 Rect rchemhard1G = new Rect(centerwidht-5*intervalwidht,500,centerwidht-3*intervalwidht,1000);
                 listeChemin.add(rchemhard1G);
@@ -199,7 +199,7 @@ public class LabyrintheGame extends View implements SensorEventListener {
         }
         else{
             //chemin niveau facile
-            Rect rchemeasy1A = new Rect(centerwidht-intervalwidht,10,centerwidht+intervalwidht,1350);
+            Rect rchemeasy1A = new Rect(centerwidht-intervalwidht,10,centerwidht+intervalwidht,1120);
             listeChemin.add(rchemeasy1A);
         }
         //gestion bdd
@@ -234,10 +234,10 @@ public class LabyrintheGame extends View implements SensorEventListener {
         canvas.drawRect(0,0,1100,10,paintmodif);
 
         //affichage score
-        canvas.drawBitmap(scoretableBitmap,320,1370,paint);
+        canvas.drawBitmap(scoretableBitmap,320,1220,paint);
         paintmodif.setTextSize(60);
         paintmodif.setARGB(255,255,255,255);
-        canvas.drawText(String.valueOf(Labyrinthe.getScore()),460,1500,paintmodif);
+        canvas.drawText(String.valueOf(Labyrinthe.getScore()),460,1350,paintmodif);
 
         //verification victoire/défaite
         if (!win && !loose){
