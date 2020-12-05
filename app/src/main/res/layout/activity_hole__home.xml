@@ -44,21 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="HARD" />
-        <Button
-            android:id="@+id/button_ho_loadHS1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="LOAD1" />
-        <Button
-            android:id="@+id/button_ho_loadHS2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="LOAD2" />
-        <Button
-            android:id="@+id/button_ho_loadHS3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="LOAD3" />
+
         <TextView
             android:layout_width="match_parent"
             android:gravity="center"

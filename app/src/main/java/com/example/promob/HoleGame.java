@@ -35,17 +35,12 @@ import java.util.List;
 import java.util.Map;
 
 public class HoleGame extends View implements SensorEventListener {
-    //gestion score
-    int score = 0;
-
-    //gestion niveau
-    int level;
 
     //stylo graphique pour afficher l'image
     private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
     //Charger l'image dans une instance de bitmap
-    private Bitmap ballBitmap,victoirebitmap,defaitebitmap,scoretableBitmap;
+    private Bitmap ballBitmap,scoretableBitmap;
 
     //Largeur et hauteur de l'image
     private int imageWidth;
@@ -55,8 +50,11 @@ public class HoleGame extends View implements SensorEventListener {
     private int currentX;
     private int currentY;
 
+    //vitesse depend du niveau
+    private int vitesse=0;
+
     //définition rectangle de jeu
-    Rect rectGame = new Rect(0,0,1100,1500);
+    Rect rectGame = new Rect(0,0,1100,1200);
 
     //gestion score bdd
     String username = "Undefined";
@@ -85,10 +83,10 @@ public class HoleGame extends View implements SensorEventListener {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
+        //réglage level
+        vitesse=Hole.getLevel();
         //decoder l'image
         ballBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.balle);
-        victoirebitmap = BitmapFactory.decodeResource(getResources(), R.drawable.victoire);
-        defaitebitmap =BitmapFactory.decodeResource(getResources(), R.drawable.loose);
         scoretableBitmap=BitmapFactory.decodeResource(getResources(),R.drawable.littlescoretable);
 
         //On recupere donc son image et sa taille
@@ -97,15 +95,7 @@ public class HoleGame extends View implements SensorEventListener {
 
         //w et h sont la taille et hauteur de l'ecran
         currentX =  (w - imageWidth)/2;
-        currentY =  1320;
-
-        //récupération records
-        highscore_global=Hole.getHsg();
-        highscore_user=Hole.getHsp();
-
-        //création des chemins en fonction des niveaux de difficulté (plusieurs chemins possibles par niveau)
-        //level = Hole.getLevel();
-
+        currentY =  (w - imageHeight)/2;
         }
         //gestion bdd
         final DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
@@ -131,6 +121,7 @@ public class HoleGame extends View implements SensorEventListener {
     //appele a chaque fois que l'ecran devra se re actualiser
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        int scoretemp=Hole.getScore();
 
         //reglage couleurs arrivees
         Paint paintmodif = new Paint();
@@ -140,11 +131,11 @@ public class HoleGame extends View implements SensorEventListener {
         canvas.drawRect(0,0,1100,10,paintmodif);
 
         //affichage score
-        canvas.drawBitmap(scoretableBitmap,320,1370,paint);
+        canvas.drawBitmap(scoretableBitmap,320,1220,paint);
         paintmodif.setTextSize(60);
         paintmodif.setARGB(255,255,255,255);
-        //canvas.drawText(String.valueOf(score),460,1500,paintmodif);
-        canvas.drawText(String.valueOf(score),460,1500,paintmodif);
+        //canvas.drawText(String.valueOf(scoretemp),460,1500,paintmodif);
+        canvas.drawText(String.valueOf(scoretemp),460,1350,paintmodif);
 
         //verification victoire/défaite
         if (!loose){
@@ -152,17 +143,15 @@ public class HoleGame extends View implements SensorEventListener {
             //test défaite
             testLoose();
 
-
-
             //redéfinition rect
-            if ((rectGame.left<rectGame.right) && (rectGame.top<rectGame.bottom)){
-                rectGame.top=rectGame.top+1;
-                rectGame.bottom=rectGame.bottom-1;
-                rectGame.left=rectGame.left+1;
-                rectGame.right=rectGame.right-1;
+            if ((rectGame.left<=rectGame.right-vitesse) && (rectGame.top<=rectGame.bottom-vitesse)){
+                rectGame.top=rectGame.top+vitesse;
+                rectGame.bottom=rectGame.bottom-vitesse;
+                rectGame.left=rectGame.left+vitesse;
+                rectGame.right=rectGame.right-vitesse;
 
                 //incrémentation score
-                score++;
+                Hole.setScore(scoretemp+1);
             }
             //affichage rect
             paintmodif.setARGB(255,255,255,255);
@@ -175,7 +164,7 @@ public class HoleGame extends View implements SensorEventListener {
 
         else {
             paintmodif.setTextSize(50);
-            canvas.drawText("votre score : "+String.valueOf(score),500,500,paintmodif);
+            canvas.drawText("votre score : "+String.valueOf(scoretemp),500,500,paintmodif);
         }
 
     }
@@ -215,18 +204,21 @@ public class HoleGame extends View implements SensorEventListener {
     public void testLoose(){
         if ((currentX<rectGame.left)||(currentX>rectGame.right)||(currentY<rectGame.top)
                 ||(currentY>rectGame.bottom)){
+            Hole.setTermine(true);
+            Hole.setScore(0);
             loose=true;
         }
     }
 
     public void saveNote() {
+        int scoretemp= Hole.getScore();
         Map<String, Object> note = new HashMap<>();
         note.put(KEY_USER,username);
-        note.put(KEY_SCORE,score);
+        note.put(KEY_SCORE,scoretemp);
         note.put(KEY_DATE,currentTime);
 
-        if (score>highscore_global){
-            db.collection("Hole_level_"+level).document("highscore_global").set(note)
+        if (scoretemp>highscore_global){
+            db.collection("Hole_level_"+vitesse).document("highscore_global").set(note)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
@@ -242,8 +234,8 @@ public class HoleGame extends View implements SensorEventListener {
                     });
 
         }
-        if (score>highscore_user){
-            db.collection("Hole_level_"+level).document("highscore_"+username).set(note)
+        if (scoretemp>highscore_user){
+            db.collection("Hole_level_"+vitesse).document("highscore_"+username).set(note)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {

@@ -28,7 +28,7 @@ import java.util.Map;
 
 public class Labyrinthe extends AppCompatActivity {
 
-    private static int niv,hsp,hsg,score = 5000;
+    private static int niv,score = 5000;
     private static String multipath;
     private LabyrintheGame view;
     private SensorManager mgr;
@@ -48,8 +48,6 @@ public class Labyrinthe extends AppCompatActivity {
         setContentView(R.layout.activity_labyrinthe);
         btnfin=findViewById(R.id.buttonFINISHLAB);
         niv= getIntent().getExtras().getInt("level");
-        hsp= getIntent().getExtras().getInt("hsp");
-        hsg= getIntent().getExtras().getInt("hsg");
         multipath = getIntent().getStringExtra("pathScoreMulti");
         firebaseDatabase = FirebaseDatabase.getInstance();
 
@@ -68,6 +66,9 @@ public class Labyrinthe extends AppCompatActivity {
                     }
                     score=5000;
                     finish();
+                }
+                else{
+                    Toast.makeText(Labyrinthe.this, "Activité non finie", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -114,12 +115,6 @@ public class Labyrinthe extends AppCompatActivity {
     }
     protected static void setTermine(boolean tr){
         termine=tr;
-    }
-    protected static int getHsp(){
-        return hsp;
-    }
-    protected static int getHsg(){
-        return hsg;
     }
     protected static Context getContext(){
         return getContext();
