@@ -1,6 +1,7 @@
 package com.example.promob;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -254,7 +255,7 @@ public class LabyrintheGame extends View implements SensorEventListener {
             }
 
             isWin();
-            //isLoose();
+            isLoose();
             //affichage chemin
             paintmodif.setARGB(255,255,255,255);
             if (!listeChemin.isEmpty()){
@@ -283,9 +284,19 @@ public class LabyrintheGame extends View implements SensorEventListener {
         }
         else if (loose) {
             canvas.drawBitmap(defaitebitmap, 300, 500, paint);
+            String multipath = Labyrinthe.getMultiPath();
+            if (!multipath.equals("notMulti")){
+                firebaseDatabase.getReference(multipath).setValue(String.valueOf(score));
+            }
+            //finish();
         }
         else {
             canvas.drawBitmap(victoirebitmap, 300, 500, paint);
+            String multipath = Labyrinthe.getMultiPath();
+            if (!multipath.equals("notMulti")){
+                firebaseDatabase.getReference(multipath).setValue(String.valueOf(score));
+            }
+            //finish();
         }
 
     }

@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class Labyrinthe extends AppCompatActivity {
 
     private static int niv,hsp,hsg;
+    private static String multipath;
     private LabyrintheGame view;
     private SensorManager mgr;
 
@@ -21,7 +22,7 @@ public class Labyrinthe extends AppCompatActivity {
         niv= getIntent().getExtras().getInt("level");
         hsp= getIntent().getExtras().getInt("hsp");
         hsg= getIntent().getExtras().getInt("hsg");
-
+        multipath = getIntent().getStringExtra("pathScoreMulti");
         view =  (LabyrintheGame) findViewById(R.id.view2);
         //Initilisation du sensor
         mgr = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -45,6 +46,9 @@ public class Labyrinthe extends AppCompatActivity {
     protected static int getLevel(){
         return niv;
     }
+    protected static String getMultiPath(){
+        return multipath;
+    }
     protected static int getHsp(){
         return hsp;
     }
@@ -54,5 +58,4 @@ public class Labyrinthe extends AppCompatActivity {
     protected static Context getContext(){
         return getContext();
     }
-
 }
