@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Entrainement extends AppCompatActivity {
 
-    Button btn_logoquizz,btn_pendu,btn_cc,btn_nb,btn_laby,btn_hole;
+    Button btn_logoquizz,btn_pendu,btn_cc,btn_nb,btn_laby,btn_hole, btn_GoogleTrends;
     private FirebaseAuth firebaseAuth;
 
     @Override
@@ -22,7 +22,14 @@ public class Entrainement extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_liste_jeux);
         firebaseAuth = FirebaseAuth.getInstance();
-        btn_logoquizz = (Button) findViewById(R.id.button_logoquizz);
+        btn_GoogleTrends = findViewById(R.id.buttonGoogleTrends);
+        btn_GoogleTrends.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openGoogleTrends();
+            }
+        });
+                btn_logoquizz = (Button) findViewById(R.id.button_logoquizz);
         btn_logoquizz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,6 +105,12 @@ public class Entrainement extends AppCompatActivity {
     }
     public void openHole() {
         Intent intent = new Intent(this, Hole_Home.class);
+        startActivity(intent);
+        Entrainement.this.finish();
+    }
+
+    public void openGoogleTrends(){
+        Intent intent = new Intent(this, GoogleTrends_Home.class);
         startActivity(intent);
         Entrainement.this.finish();
     }
