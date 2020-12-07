@@ -213,6 +213,7 @@ public class Defi extends AppCompatActivity {
         firebaseAuth.signOut();
         openActivityConnexion();
     }
+
     public void openSoloMulti(){
         finish();
         Intent intent = new Intent(this, Solo_Multi.class);

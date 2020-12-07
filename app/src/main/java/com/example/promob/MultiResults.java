@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,6 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MultiResults extends AppCompatActivity {
+    MediaPlayer play;
     private TextView tvres;
     private Button btn;
     private ImageView ivicon;
@@ -48,9 +51,11 @@ public class MultiResults extends AppCompatActivity {
         if(role.equals(winner)){
             tvres.setText("Victoire");
             ivicon.setImageResource(R.drawable.victoire);
+            musiqueGagnant();
             updateNote();
         }else {
             tvres.setText("Défaite");
+            musiquePerdant();
             ivicon.setImageResource(R.drawable.loose);
         }
         btn.setOnClickListener(new View.OnClickListener() {
@@ -160,5 +165,19 @@ public class MultiResults extends AppCompatActivity {
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void musiqueGagnant(){
+        if(play == null){
+            play = MediaPlayer.create(this, R.raw.gagant);
+        }
+        play.start();
+    }
+
+    public void musiquePerdant(){
+        if(play == null){
+            play = MediaPlayer.create(this, R.raw.perdant);
+        }
+        play.start();
     }
 }
