@@ -9,76 +9,46 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-
-public class Solo_Multi extends AppCompatActivity  {
-    private Button solo,multi;
-    private FirebaseDatabase firebaseDatabase;
+public class Multi_Tournoi extends AppCompatActivity {
+    private Button defi1V1,tournoi;
     private FirebaseAuth firebaseAuth;
-    private DatabaseReference databaseReference;
-    private String username ="";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_solo_ou_multi);
+        setContentView(R.layout.activity_multi__tournoi);
+        tournoi =(Button)findViewById(R.id.btn_tournoi);
+        defi1V1 = (Button)findViewById(R.id.btn_multijoueur);
 
-        solo = (Button)findViewById(R.id.btn_solo);
-        multi = (Button)findViewById(R.id.btn_multijoueurMenu);
-
-
-        solo.setOnClickListener(new View.OnClickListener() {
+        defi1V1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openSolo();
+                openDefi1V1();
             }
         });
-        multi.setOnClickListener(new View.OnClickListener() {
+        tournoi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openMulti();
+                openTournoiRooms();
             }
         });
 
         firebaseAuth = FirebaseAuth.getInstance();
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                UserProfile userProfile = snapshot.getValue(UserProfile.class);
-                username=userProfile.getUserName();
-                if (username.equals("invite")){
-                    multi.setEnabled(false);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(Solo_Multi.this, error.getCode(),Toast.LENGTH_SHORT).show();
-            }
-        });
     }
-    public void openSolo() {
-        Intent intent = new Intent(this, Solo.class);
+    public void openDefi1V1() {
+        Intent intent = new Intent(this, Multi.class);
         startActivity(intent);
-        Solo_Multi.this.finish();
+        Multi_Tournoi.this.finish();
     }
-
-    public void openMulti() {
-        Intent intent = new Intent(this, Multi_Tournoi.class);
+    public void openTournoiRooms() {
+        Intent intent = new Intent(this, TournoiRooms.class);
         startActivity(intent);
-        Solo_Multi.this.finish();
+        Multi_Tournoi.this.finish();
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu,menu);
