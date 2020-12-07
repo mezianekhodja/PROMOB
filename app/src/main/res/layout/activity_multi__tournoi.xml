@@ -4,17 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@drawable/background">
-
-
+    tools:context=".Multi_Tournoi">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        android:background="@drawable/background">
 
 
         <ImageView
@@ -26,30 +24,30 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Vous pourrez vous entrainer et lancer le mode defi !"
+            android:text="Affronte un autre joueur dans une succession de 3 mini jeux"
             android:layout_gravity="center"
             android:layout_marginTop="80dp" />
-
         <Button
-            android:id="@+id/btn_solo"
+            android:id="@+id/btn_multijoueur"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:text="SOLO" />
+            android:text="Défi 1V1"/>
+
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Affrontez vos amis dans des batailles acharnées"
+            android:text="Bats tes 3 autres adversaires pour remporter le titre"
             android:layout_marginTop="20dp" />
 
         <Button
-            android:id="@+id/btn_multijoueurMenu"
+            android:id="@+id/btn_tournoi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:text="Multijoueur"/>
+            android:text="Tournoi"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -57,6 +55,4 @@
             android:layout_height="wrap_content"
             android:text="By Meziane and Vincent" />
     </LinearLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
