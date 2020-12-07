@@ -20,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 
 
 public class Solo_Multi extends AppCompatActivity  {
-    private Button solo,multi;
+    private Button solo,multi,tournoi;
     private FirebaseDatabase firebaseDatabase;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
@@ -33,6 +33,7 @@ public class Solo_Multi extends AppCompatActivity  {
 
         solo = (Button)findViewById(R.id.btn_solo);
         multi = (Button)findViewById(R.id.btn_multijoueur);
+        tournoi =(Button)findViewById(R.id.btn_tournoi);
 
         solo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,6 +45,12 @@ public class Solo_Multi extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 openMulti();
+            }
+        });
+        tournoi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openTournoiRooms();
             }
         });
 
@@ -74,6 +81,11 @@ public class Solo_Multi extends AppCompatActivity  {
 
     public void openMulti() {
         Intent intent = new Intent(this, Multi.class);
+        startActivity(intent);
+        Solo_Multi.this.finish();
+    }
+    public void openTournoiRooms() {
+        Intent intent = new Intent(this, TournoiRooms.class);
         startActivity(intent);
         Solo_Multi.this.finish();
     }
