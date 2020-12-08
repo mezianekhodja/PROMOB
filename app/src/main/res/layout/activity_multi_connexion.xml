@@ -18,24 +18,31 @@
             android:orientation="horizontal">
             <Button
                 android:id="@+id/buttonGGMulti"
+                android:background="@drawable/custom_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginRight="15dp"
                 android:text="GG" />
             <Button
                 android:id="@+id/buttonREVANCHEMulti"
                 android:layout_width="wrap_content"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/custom_btn"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Revanche?" />
             <Button
                 android:id="@+id/buttonEHEHMulti"
+                android:background="@drawable/custom_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
                 android:layout_gravity="center"
                 android:text="Eheh" />
             <Button
                 android:id="@+id/buttonSALUTMulti"
+                android:background="@drawable/custom_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -45,17 +52,20 @@
         <Button
             android:id="@+id/buttonDefiMulti"
             android:layout_width="wrap_content"
+            android:background="@drawable/custom_btn"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="DEFI" />
         <Button
             android:id="@+id/buttonStopMulti"
             android:layout_width="wrap_content"
+            android:background="@drawable/custom_btn"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="STOP" />
         <Button
             android:id="@+id/buttonRESMulti"
+            android:background="@drawable/custom_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

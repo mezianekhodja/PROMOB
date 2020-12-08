@@ -20,18 +20,24 @@
                 android:id="@+id/buttonGGMultiTournoi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/custom_btn"
+                android:layout_marginRight="15dp"
                 android:layout_gravity="center"
                 android:text="GG" />
             <Button
                 android:id="@+id/buttonREVANCHEMultiTournoi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/custom_btn"
+                android:layout_marginRight="15dp"
                 android:layout_gravity="center"
                 android:text="Revanche?" />
             <Button
                 android:id="@+id/buttonEHEHMultiTournoi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/custom_btn"
+                android:layout_marginRight="15dp"
                 android:layout_gravity="center"
                 android:text="Eheh" />
             <Button
@@ -39,6 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:background="@drawable/custom_btn"
                 android:text="Salut" />
 
         </LinearLayout>
@@ -47,10 +54,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:background="@drawable/custom_btn"
             android:text="DEFI" />
         <Button
             android:id="@+id/buttonStopMultiTournoi"
             android:layout_width="wrap_content"
+            android:background="@drawable/custom_btn"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="STOP" />
@@ -58,6 +67,7 @@
             android:id="@+id/buttonRESMultiTournoi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/custom_btn"
             android:layout_gravity="center"
             android:text="Resultats" />
         <TextView

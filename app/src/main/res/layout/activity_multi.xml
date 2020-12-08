@@ -33,6 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:background="@drawable/custom_btn"
             android:text="create room" />
         <TextView
             android:layout_width="match_parent"

@@ -40,6 +40,7 @@
         <Button
             android:id="@+id/button_logoquizz"
             android:layout_width="match_parent"
+            android:background="@drawable/custom_btn"
             android:layout_height="wrap_content"
             android:text="Logo Quizz"
             android:textStyle="bold" />
@@ -58,6 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Pendu"
+            android:background="@drawable/custom_btn"
             android:textStyle="bold" />
 
         <TextView
@@ -73,6 +75,7 @@
             android:id="@+id/buttongamecandycrush"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/custom_btn"
             android:text="Candy Crush"
             android:textStyle="bold" />
 
@@ -90,6 +93,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="2048"
+            android:background="@drawable/custom_btn"
             android:textStyle="bold" />
 
         <TextView
@@ -106,6 +110,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Labyrinthe"
+            android:background="@drawable/custom_btn"
             android:textStyle="bold" />
 
         <TextView
@@ -120,6 +125,7 @@
         <Button
             android:id="@+id/buttonhole"
             android:layout_width="match_parent"
+            android:background="@drawable/custom_btn"
             android:layout_height="wrap_content"
             android:text="Hole"
             android:textStyle="bold" />
@@ -139,6 +145,7 @@
             android:id="@+id/buttonGoogleTrends"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/custom_btn"
             android:text="GoogleTrends"
             android:textStyle="bold" />
 

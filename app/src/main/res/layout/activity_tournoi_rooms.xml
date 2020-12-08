@@ -31,11 +31,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:background="@drawable/custom_btn"
             android:text="join room" />
         <Button
             android:id="@+id/buttonCreateRoomTournoi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/custom_btn"
             android:layout_gravity="center"
             android:text="create room" />
         <TextView

@@ -27,11 +27,13 @@
             android:id="@+id/button_numbers_easy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/custom_btn"
             android:text="easy (goal = 512)"
             android:textStyle="bold"
             android:layout_marginBottom="5dp"/>
         <Button
             android:id="@+id/button_numbers_medium"
+            android:background="@drawable/custom_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="medium (goal = 1024)"
@@ -42,6 +44,7 @@
             android:id="@+id/button_numbers_hard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/custom_btn"
             android:text="hard (goal = 2048)"
             android:textStyle="bold"
             android:layout_marginBottom="5dp"/>

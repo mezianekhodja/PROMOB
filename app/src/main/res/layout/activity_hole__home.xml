@@ -28,6 +28,7 @@
             android:id="@+id/button_ho_easy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/custom_btn"
             android:text="Easy"
             android:textStyle="bold"
             android:layout_marginBottom="5dp"/>
@@ -36,6 +37,7 @@
             android:id="@+id/button_ho_medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/custom_btn"
             android:text="MEDIUM"
             android:textStyle="bold"/>
 
@@ -43,6 +45,7 @@
             android:id="@+id/button_ho_hard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/custom_btn"
             android:text="HARD" />
 
         <TextView

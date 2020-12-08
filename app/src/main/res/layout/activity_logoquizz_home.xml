@@ -35,6 +35,7 @@
         <Button
             android:id="@+id/button_logoquizz_easy"
             android:layout_width="match_parent"
+            android:background="@drawable/custom_btn"
             android:layout_height="wrap_content"
             android:text="Easy"
             android:textStyle="bold"
@@ -51,6 +52,7 @@
             android:id="@+id/button_logoquizz_medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/custom_btn"
             android:text="MEDIUM"
             android:textStyle="bold"/>
 
@@ -64,6 +66,8 @@
         <Button
             android:id="@+id/button_logoquizz_hard"
             android:layout_width="match_parent"
+            android:textStyle="bold"
+            android:background="@drawable/custom_btn"
             android:layout_height="wrap_content"
             android:text="HARD" />
 

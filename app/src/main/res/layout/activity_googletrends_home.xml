@@ -36,6 +36,7 @@
             android:id="@+id/button_easy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/custom_btn"
             android:text="Easy"
             android:textStyle="bold"
             android:layout_marginBottom="5dp"/>
@@ -51,6 +52,7 @@
             android:id="@+id/button_medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/custom_btn"
             android:text="MEDIUM"
             android:textStyle="bold"/>
 
@@ -63,6 +65,7 @@
 
         <Button
             android:id="@+id/button_hard"
+            android:background="@drawable/custom_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
