@@ -22,7 +22,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            app:srcCompat="@drawable/logolb"/>
+            app:srcCompat="@drawable/logo_hole"/>
 
         <Button
             android:id="@+id/button_ho_easy"
