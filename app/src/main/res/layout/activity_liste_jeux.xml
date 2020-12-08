@@ -31,7 +31,7 @@
             android:id="@+id/textView8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:gravity="center"
             android:textColor="@color/noir"
             android:text="Montrez vos connaissances footballistiques en associant les logos à leurs clubs"
@@ -127,7 +127,25 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="Venez vous amuser à deviner les mots les plus recherchés "
+            android:textColor="@color/noir"
+            android:textSize="13dp"
+            android:textStyle="italic" />
+
+        <Button
+            android:id="@+id/buttonGoogleTrends"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="GoogleTrends"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:gravity="center"
             android:padding="2dp"
             android:text="Bientôt de nouveaux jeux vont voir le jour ! Restez patient ;) "

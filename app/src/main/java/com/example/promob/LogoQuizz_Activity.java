@@ -48,7 +48,7 @@ public class LogoQuizz_Activity extends AppCompatActivity {
     private static final long COUNTDOWN_IN_MILLIS = 15000;
 
     //GESTION SCORE BDD
-    private static final String KEY_USER = "user", KEY_SCORE = "score", KEY_DATE="date";
+    private static final String KEY_USER = "user", KEY_SCORE = "score", KEY_DATE = "date";
     String username = "Undefined";
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth firebaseAuth;
@@ -56,7 +56,8 @@ public class LogoQuizz_Activity extends AppCompatActivity {
     String currentTime = Calendar.getInstance().getTime().toString();
     int highscore_global = 0;
     int highscore_user = 0;
-    private static final String KEY_t6 = "trophy6",KEY_t4 = "trophy4";;
+    private static final String KEY_t6 = "trophy6", KEY_t4 = "trophy4";
+    ;
     private static final String TAG = "LogoQuizz_Activity";
 
     //textView
@@ -106,8 +107,8 @@ public class LogoQuizz_Activity extends AppCompatActivity {
         textViewQuestion = findViewById(R.id.question);
         textViewScore = findViewById(R.id.score);
         textViewQuestionCount = findViewById(R.id.nombre_question);
-        textViewTimer =findViewById(R.id.timer);
-        textViewDifficulty=findViewById(R.id.difficulty);
+        textViewTimer = findViewById(R.id.timer);
+        textViewDifficulty = findViewById(R.id.difficulty);
         rbGroup = findViewById(R.id.radio_groupe);
         rb1 = findViewById(R.id.radio_bouton);
         rb2 = findViewById(R.id.radio_bouton2);
@@ -131,12 +132,12 @@ public class LogoQuizz_Activity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 UserProfile userProfile = snapshot.getValue(UserProfile.class);
-                username=userProfile.getUserName();
+                username = userProfile.getUserName();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(LogoQuizz_Activity.this, error.getCode(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(LogoQuizz_Activity.this, error.getCode(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -151,15 +152,13 @@ public class LogoQuizz_Activity extends AppCompatActivity {
         buttonConfirmeNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!answered){
-                    if(rb1.isChecked() || rb2.isChecked() || rb3.isChecked() || rb4.isChecked()){
+                if (!answered) {
+                    if (rb1.isChecked() || rb2.isChecked() || rb3.isChecked() || rb4.isChecked()) {
                         checkAnswer();
-                    }
-                    else {
+                    } else {
                         Toast.makeText(LogoQuizz_Activity.this, "Please select an answer", Toast.LENGTH_SHORT).show();
                     }
-                }
-                else{
+                } else {
                     showNextQuestion();
                 }
             }
@@ -173,13 +172,13 @@ public class LogoQuizz_Activity extends AppCompatActivity {
 
     -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-    private void checkAnswer(){
+    private void checkAnswer() {
         answered = true;
         counterDownTimer.cancel();
         RadioButton rbSelected = findViewById(rbGroup.getCheckedRadioButtonId());
         int answerNb = rbGroup.indexOfChild(rbSelected) + 1;
 
-        if(answerNb == currentQuestion.getNumeroReponse()){
+        if (answerNb == currentQuestion.getNumeroReponse()) {
             score++;
             textViewScore.setText("Score: " + score);
         }
@@ -187,13 +186,13 @@ public class LogoQuizz_Activity extends AppCompatActivity {
         showSolution();
     }
 
-    private void showSolution(){
+    private void showSolution() {
         rb1.setTextColor(Color.RED);
         rb2.setTextColor(Color.RED);
         rb3.setTextColor(Color.RED);
         rb4.setTextColor(Color.RED);
 
-        switch (currentQuestion.getNumeroReponse()){
+        switch (currentQuestion.getNumeroReponse()) {
             case 1:
                 rb1.setTextColor(Color.GREEN);
                 textViewQuestion.setText("Answer A is correct");
@@ -212,15 +211,14 @@ public class LogoQuizz_Activity extends AppCompatActivity {
                 break;
         }
 
-        if(questionCounter<questionCountTotal){
+        if (questionCounter < questionCountTotal) {
             buttonConfirmeNext.setText(("Next"));
-        }
-        else{
+        } else {
             buttonConfirmeNext.setText(("Finish"));
         }
     }
 
-    private void showNextQuestion(){
+    private void showNextQuestion() {
         rb1.setTextColor(textColorDefaultRb);
         rb2.setTextColor(textColorDefaultRb);
         rb3.setTextColor(textColorDefaultRb);
@@ -228,14 +226,14 @@ public class LogoQuizz_Activity extends AppCompatActivity {
         rbGroup.clearCheck();
 
         //GESTION SCORE BDD
-        if(questionCounter ==2 && !username.equals("invite")){
-                loadNote();
+        if (questionCounter == 2 && !username.equals("invite")) {
+            loadNote();
         }
-        if(questionCounter < questionCountTotal){
+        if (questionCounter < questionCountTotal) {
             currentQuestion = questionList.get((questionCounter));
             //PASSER L'IMAGE EN INT
             String mDrawableName = currentQuestion.getImage();
-            int resID = getResources().getIdentifier(mDrawableName , "drawable", getPackageName());
+            int resID = getResources().getIdentifier(mDrawableName, "drawable", getPackageName());
             ImageView.setImageResource(resID);
             textViewQuestion.setText(currentQuestion.getQuestion());
             rb1.setText(currentQuestion.getOption1());
@@ -250,8 +248,7 @@ public class LogoQuizz_Activity extends AppCompatActivity {
 
             timeLeftInMillis = COUNTDOWN_IN_MILLIS;
             startCountDown();
-        }
-        else{
+        } else {
             finishQuizz();
         }
     }
@@ -264,7 +261,7 @@ public class LogoQuizz_Activity extends AppCompatActivity {
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
     private void startCountDown() {
-        counterDownTimer = new CountDownTimer(timeLeftInMillis,1000) {
+        counterDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 timeLeftInMillis = millisUntilFinished;
@@ -273,24 +270,23 @@ public class LogoQuizz_Activity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                timeLeftInMillis= 0;
+                timeLeftInMillis = 0;
                 updateCountdownText();
                 checkAnswer();
             }
         }.start();
     }
 
-    private void updateCountdownText(){
-        int minutes = (int) (timeLeftInMillis/1000)/60;
-        int seconds = (int) (timeLeftInMillis/1000)%60;
+    private void updateCountdownText() {
+        int minutes = (int) (timeLeftInMillis / 1000) / 60;
+        int seconds = (int) (timeLeftInMillis / 1000) % 60;
 
         String timeFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
 
         textViewTimer.setText(timeFormatted);
-        if(timeLeftInMillis<5000){
+        if (timeLeftInMillis < 5000) {
             textViewTimer.setTextColor(Color.RED);
-        }
-        else{
+        } else {
             textViewTimer.setTextColor(textColorDefaultCb);
         }
 
@@ -299,7 +295,7 @@ public class LogoQuizz_Activity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(counterDownTimer!=null){
+        if (counterDownTimer != null) {
             counterDownTimer.cancel();
         }
     }
@@ -311,13 +307,12 @@ public class LogoQuizz_Activity extends AppCompatActivity {
     -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 
-
-    private void finishQuizz(){
-        if(!username.equals("invite")){
+    private void finishQuizz() {
+        if (!username.equals("invite")) {
             saveNote();
         }
         String multipath = getIntent().getStringExtra("pathScoreMulti");
-        if (!multipath.equals("notMulti")){
+        if (!multipath.equals("notMulti")) {
             firebaseDatabase.getReference(multipath).setValue(String.valueOf(score));
         }
         Intent resultIntent = new Intent();
@@ -328,19 +323,18 @@ public class LogoQuizz_Activity extends AppCompatActivity {
 
 
     //GESTION SCORE BDD
-    public void loadNote(){
+    public void loadNote() {
         Intent intent = getIntent();
         String difficulty = intent.getStringExtra(LogoQuizz_Home.EXTRA_DIFFICULTY);
 
-        db.collection("LogoQuizz_level_"+difficulty).document("highscore_global").get()
+        db.collection("LogoQuizz_level_" + difficulty).document("highscore_global").get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if (documentSnapshot.exists()){
+                        if (documentSnapshot.exists()) {
                             String scoreglob = documentSnapshot.get(KEY_SCORE).toString();
-                            highscore_global=Integer.parseInt(scoreglob);
-                        }
-                        else{
+                            highscore_global = Integer.parseInt(scoreglob);
+                        } else {
                             Toast.makeText(LogoQuizz_Activity.this, "Fail", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -352,14 +346,14 @@ public class LogoQuizz_Activity extends AppCompatActivity {
                         Log.d(TAG, e.toString());
                     }
                 });
-        db.collection("LogoQuizz_level_"+difficulty).document("highscore_"+username).get()
+        db.collection("LogoQuizz_level_" + difficulty).document("highscore_" + username).get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if (documentSnapshot.exists()){
+                        if (documentSnapshot.exists()) {
                             String scoreus = documentSnapshot.get(KEY_SCORE).toString();
-                            highscore_user=Integer.parseInt(scoreus);                        }
-                        else{
+                            highscore_user = Integer.parseInt(scoreus);
+                        } else {
                             Toast.makeText(LogoQuizz_Activity.this, "Fail", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -372,19 +366,19 @@ public class LogoQuizz_Activity extends AppCompatActivity {
                     }
                 });
     }
+
     public void saveNote() {
         Map<String, Object> note = new HashMap<>();
-        note.put(KEY_USER,username);
-        note.put(KEY_SCORE,score);
-        note.put(KEY_DATE,currentTime);
+        note.put(KEY_USER, username);
+        note.put(KEY_SCORE, score);
+        note.put(KEY_DATE, currentTime);
 
         Intent intent = getIntent();
         String difficulty = intent.getStringExtra(LogoQuizz_Home.EXTRA_DIFFICULTY);
-        if (score==0 && username.equals("invite")){
+        if (score == 0 && username.equals("invite")) {
             updateNote();
-        }
-        else if (score>highscore_global){
-            db.collection("LogoQuizz_level_"+difficulty).document("highscore_global").set(note)
+        } else if (score > highscore_global) {
+            db.collection("LogoQuizz_level_" + difficulty).document("highscore_global").set(note)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
@@ -400,8 +394,8 @@ public class LogoQuizz_Activity extends AppCompatActivity {
                     });
 
         }
-        if (score>highscore_user){
-            db.collection("LogoQuizz_level_"+difficulty).document("highscore_"+username).set(note)
+        if (score > highscore_user) {
+            db.collection("LogoQuizz_level_" + difficulty).document("highscore_" + username).set(note)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
@@ -416,13 +410,14 @@ public class LogoQuizz_Activity extends AppCompatActivity {
                         }
                     });
         }
-        if (score==5 && difficulty.equals("Hard") && !username.equals("invite")){
+        if (score == 5 && difficulty.equals("Hard") && !username.equals("invite")) {
             updateNoteMax();
         }
     }
+
     public void updateNote() {
         Map<String, Object> note = new HashMap<>();
-        note.put(KEY_t6,"Remplacant");
+        note.put(KEY_t6, "Remplacant");
 
         db.collection("Trophy").document(username).update(note)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -439,9 +434,10 @@ public class LogoQuizz_Activity extends AppCompatActivity {
                     }
                 });
     }
+
     public void updateNoteMax() {
         Map<String, Object> note = new HashMap<>();
-        note.put(KEY_t4,"Viser la Lune");
+        note.put(KEY_t4, "Viser la Lune");
 
         db.collection("Trophy").document(username).update(note)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {

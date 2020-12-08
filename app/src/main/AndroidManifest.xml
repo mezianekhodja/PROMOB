@@ -52,6 +52,8 @@
         <activity android:name=".LogoQuizz_bdd" />
         <activity android:name=".LogoQuizz_Contract" />
         <activity android:name=".LogoQuizz_Question" />
+        <activity android:name=".GoogleTrends_Activity" />
+        <activity android:name=".GoogleTrends_Home" />
     </application>
 
 </manifest>

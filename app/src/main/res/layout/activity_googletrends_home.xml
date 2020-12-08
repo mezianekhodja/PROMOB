@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LogoQuizz_Home"
-    tools:ignore="MissingDefaultResource">
+    tools:context=".LogoQuizz_Home">
 
     <LinearLayout
         android:layout_width="409dp"
@@ -19,21 +18,22 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Google trend v1.0" />
+            android:text="Logo Quizz v1.0" />
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="325dp"
-            app:srcCompat="@drawable/logologoquizz" />
+            android:layout_height="150dp"
+            app:srcCompat="@drawable/logo" />
 
         <TextView
-            android:id="@+id/LogoQuizzHighscoreEasy"
+            android:id="@+id/Easy"
+            android:layout_marginTop="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Highscore : 0"/>
 
         <Button
-            android:id="@+id/button_logoquizz_easy"
+            android:id="@+id/button_easy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Easy"
@@ -41,30 +41,31 @@
             android:layout_marginBottom="5dp"/>
 
         <TextView
-            android:id="@+id/LogoQuizzHighscoreMedium"
+            android:id="@+id/Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="Highscore : 0"/>
 
         <Button
-            android:id="@+id/button_logoquizz_medium"
+            android:id="@+id/button_medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="MEDIUM"
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/LogoQuizzHighscoreHard"
+            android:id="@+id/Hard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="Highscore : 0"/>
 
         <Button
-            android:id="@+id/button_logoquizz_hard"
+            android:id="@+id/button_hard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:text="HARD" />
 
         <TextView
