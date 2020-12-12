@@ -29,6 +29,13 @@
             android:layout_height="200dp" >
         </ListView>
         <Button
+            android:id="@+id/buttonJoinRoomMulti"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/custom_btn"
+            android:text="join room" />
+        <Button
             android:id="@+id/buttonCreateRoom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

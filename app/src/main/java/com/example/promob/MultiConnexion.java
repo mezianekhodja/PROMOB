@@ -28,12 +28,12 @@ public class MultiConnexion extends AppCompatActivity {
     private String playerName ="",roomName="",message="",role="";
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference,messageHostRef,messageGuestRef,scoreHost1Ref,
-            scoreGuest1Ref,scoreHost2Ref,scoreGuest2Ref,scoreHost3Ref,scoreGuest3Ref;
+            scoreGuest1Ref,scoreHost2Ref,scoreGuest2Ref,scoreHost3Ref,scoreGuest3Ref,nbplayers;
     private FirebaseAuth firebaseAuth;
     private static final String TAG = "MultiConnexion";
     private static final String KEY_t1 = "trophy1";
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private int scoreHost1=-1,scoreGuest1=-1,scoreHost2=-1,scoreGuest2=-1,scoreHost3=1,scoreGuest3=1;
+    private int scoreHost1=-1,scoreGuest1=-1,scoreHost2=-1,scoreGuest2=-1,scoreHost3=1,scoreGuest3=1,numberPlayers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +61,7 @@ public class MultiConnexion extends AppCompatActivity {
                 UserProfile userProfile = snapshot.getValue(UserProfile.class);
                 playerName=userProfile.getUserName();
                 btnres.setEnabled(false);
+                btndef.setEnabled(false);
                 if (roomName.equals(playerName)){
                     role="Host";
                 }else{
@@ -114,7 +115,19 @@ public class MultiConnexion extends AppCompatActivity {
                 loadGame();
             }
         });
-
+        nbplayers=firebaseDatabase.getReference("rooms/"+roomName+"/numberPlayers");
+        nbplayers.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String value = dataSnapshot.getValue(String.class);
+                numberPlayers=Integer.valueOf(value);
+                if (numberPlayers==2 && role.equals("Host")){btndef.setEnabled(true);}
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
         btngg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
