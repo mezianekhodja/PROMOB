@@ -73,16 +73,16 @@ public class GoogleTrends_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_googletrends_activity);
-        valider = findViewById(R.id.valider);
-        valider = findViewById(R.id.valider);
-        result = findViewById(R.id.result);
-        textViewScore = findViewById(R.id.score);
-        textViewQuestionCount = findViewById(R.id.question);
-        textViewTimer = findViewById(R.id.timer);
-        textViewDifficulty = findViewById(R.id.difficulté);
-        rbGroup = findViewById(R.id.radio_groupe);
-        rb1 = findViewById(R.id.bouton1);
-        rb2 = findViewById(R.id.bouton2);
+        valider = findViewById(R.id.validergt);
+        valider = findViewById(R.id.validergt);
+        result = findViewById(R.id.resultgt);
+        textViewScore = findViewById(R.id.scoregt);
+        textViewQuestionCount = findViewById(R.id.questiongt);
+        textViewTimer = findViewById(R.id.timergt);
+        textViewDifficulty = findViewById(R.id.difficultégt);
+        rbGroup = findViewById(R.id.radio_groupegt);
+        rb1 = findViewById(R.id.bouton1gt);
+        rb2 = findViewById(R.id.bouton2gt);
 
         textColorDefaultRb = rb1.getTextColors();
         textColorDefaultCb = textViewTimer.getTextColors();
@@ -113,7 +113,6 @@ public class GoogleTrends_Activity extends AppCompatActivity {
         questionList = dbHelper.getQuestion(difficulty);
         questionCountTotal = 5; //Seulement 5 questions
         Collections.shuffle(questionList);
-        rb1.setText("caca");
         showNextQuestion();
 
         valider.setOnClickListener(new View.OnClickListener() {

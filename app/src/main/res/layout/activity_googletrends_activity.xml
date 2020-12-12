@@ -22,7 +22,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/score"
+                android:id="@+id/scoregt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
@@ -32,7 +32,7 @@
                 android:textSize="20dp" />
 
             <TextView
-                android:id="@+id/question"
+                android:id="@+id/questiongt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
@@ -42,7 +42,7 @@
                 android:textSize="15dp" />
 
             <TextView
-                android:id="@+id/difficulté"
+                android:id="@+id/difficultégt"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="30dp"
@@ -53,7 +53,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/timer"
+            android:id="@+id/timergt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Timer: 0:30"
@@ -75,7 +75,7 @@
         android:text="Lequel des ces deux mots est le plus recherché sur google ?"/>
 
     <TextView
-        android:id="@+id/result"
+        android:id="@+id/resultgt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -84,20 +84,20 @@
         android:text=""/>
 
     <RadioGroup
-        android:id="@+id/radio_groupe"
+        android:id="@+id/radio_groupegt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="70dp">
 
         <RadioButton
-            android:id="@+id/bouton1"
+            android:id="@+id/bouton1gt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="25dp"
             android:text="Option 1"/>
         <RadioButton
-            android:id="@+id/bouton2"
+            android:id="@+id/bouton2gt"
             android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -107,7 +107,7 @@
     </RadioGroup>
 
     <Button
-        android:id="@+id/valider"
+        android:id="@+id/validergt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Valider"
