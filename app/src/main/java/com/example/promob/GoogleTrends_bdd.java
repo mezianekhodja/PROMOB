@@ -47,6 +47,12 @@ public class GoogleTrends_bdd extends SQLiteOpenHelper {
         addQuestion(qE2);
         GoogleTrends_Question qE3 = new GoogleTrends_Question("Lille", "Marseille", 2 , GoogleTrends_Question.DIFFICULTY_EASY);
         addQuestion(qE3);
+        GoogleTrends_Question qE4 = new GoogleTrends_Question("Patate", "Canette", 1 , GoogleTrends_Question.DIFFICULTY_EASY);
+        addQuestion(qE4);
+        GoogleTrends_Question qE5 = new GoogleTrends_Question("Rien", "Moi", 2 , GoogleTrends_Question.DIFFICULTY_EASY);
+        addQuestion(qE5);
+        GoogleTrends_Question qE6 = new GoogleTrends_Question("Lille", "Marseille", 2 , GoogleTrends_Question.DIFFICULTY_EASY);
+        addQuestion(qE6);
 
         GoogleTrends_Question qM1 = new GoogleTrends_Question("NiveauMedGood", "NiveauMed2", 1 , GoogleTrends_Question.DIFFICULTY_MEDIUM);
         addQuestion(qM1);
@@ -54,6 +60,12 @@ public class GoogleTrends_bdd extends SQLiteOpenHelper {
         addQuestion(qM2);
         GoogleTrends_Question qM3 = new GoogleTrends_Question("NiveauMed1", "NiveauMedGood", 2 , GoogleTrends_Question.DIFFICULTY_MEDIUM);
         addQuestion(qM3);
+        GoogleTrends_Question qM4 = new GoogleTrends_Question("NiveauMedGood", "NiveauMed2", 1 , GoogleTrends_Question.DIFFICULTY_MEDIUM);
+        addQuestion(qM4);
+        GoogleTrends_Question qM5 = new GoogleTrends_Question("NiveauMed1", "NiveauMedGood", 2 , GoogleTrends_Question.DIFFICULTY_MEDIUM);
+        addQuestion(qM5);
+        GoogleTrends_Question qM6 = new GoogleTrends_Question("NiveauMed1", "NiveauMedGood", 2 , GoogleTrends_Question.DIFFICULTY_MEDIUM);
+        addQuestion(qM6);
 
         GoogleTrends_Question qH1 = new GoogleTrends_Question("HEHE", "OHOH", 1 , GoogleTrends_Question.DIFFICULTY_HARD);
         addQuestion(qH1);
@@ -61,6 +73,12 @@ public class GoogleTrends_bdd extends SQLiteOpenHelper {
         addQuestion(qH2);
         GoogleTrends_Question qH3 = new GoogleTrends_Question("test", "toto", 2 , GoogleTrends_Question.DIFFICULTY_HARD);
         addQuestion(qH3);
+        GoogleTrends_Question qH4 = new GoogleTrends_Question("HEHE", "OHOH", 1 , GoogleTrends_Question.DIFFICULTY_HARD);
+        addQuestion(qH4);
+        GoogleTrends_Question qH5 = new GoogleTrends_Question("RIZ", "PP", 2 , GoogleTrends_Question.DIFFICULTY_HARD);
+        addQuestion(qH5);
+        GoogleTrends_Question qH6 = new GoogleTrends_Question("test", "toto", 2 , GoogleTrends_Question.DIFFICULTY_HARD);
+        addQuestion(qH6);
 
 
     }

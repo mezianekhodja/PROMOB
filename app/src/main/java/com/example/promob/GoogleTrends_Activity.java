@@ -74,7 +74,6 @@ public class GoogleTrends_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_googletrends_activity);
         valider = findViewById(R.id.validergt);
-        valider = findViewById(R.id.validergt);
         result = findViewById(R.id.resultgt);
         textViewScore = findViewById(R.id.scoregt);
         textViewQuestionCount = findViewById(R.id.questiongt);
@@ -111,7 +110,7 @@ public class GoogleTrends_Activity extends AppCompatActivity {
 
         GoogleTrends_bdd dbHelper = new GoogleTrends_bdd(this);
         questionList = dbHelper.getQuestion(difficulty);
-        questionCountTotal = 5; //Seulement 5 questions
+        questionCountTotal = 1; //Seulement 5 questions
         Collections.shuffle(questionList);
         showNextQuestion();
 
@@ -175,6 +174,7 @@ public class GoogleTrends_Activity extends AppCompatActivity {
             // loadNote();
         }
         if (questionCounter < questionCountTotal) {
+            Q = questionList.get((questionCounter));
             rb1.setText(Q.getOption1());
             rb2.setText(Q.getOption2());
 
