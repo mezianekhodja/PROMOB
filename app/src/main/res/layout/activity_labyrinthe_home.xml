@@ -21,8 +21,8 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            app:srcCompat="@drawable/logolb"/>
+            android:layout_height="325dp"
+            app:srcCompat="@drawable/logo_lab" />
 
         <Button
             android:id="@+id/button_lb_easy"

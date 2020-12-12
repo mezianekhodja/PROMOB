@@ -18,22 +18,13 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Logo Quizz v1.0" />
-
+            android:text="Google Trends v1.0" />
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="325dp"
             app:srcCompat="@drawable/logo_googletrends" />
-
-        <TextView
-            android:id="@+id/Easy"
-            android:layout_marginTop="50dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Highscore : 0"/>
-
         <Button
-            android:id="@+id/button_easy"
+            android:id="@+id/button_gteasy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_btn"
@@ -41,30 +32,16 @@
             android:textStyle="bold"
             android:layout_marginBottom="5dp"/>
 
-        <TextView
-            android:id="@+id/Medium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Highscore : 0"/>
-
         <Button
-            android:id="@+id/button_medium"
+            android:id="@+id/button_gtmedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_btn"
             android:text="MEDIUM"
             android:textStyle="bold"/>
 
-        <TextView
-            android:id="@+id/Hard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Highscore : 0"/>
-
         <Button
-            android:id="@+id/button_hard"
+            android:id="@+id/button_gthard"
             android:background="@drawable/custom_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
