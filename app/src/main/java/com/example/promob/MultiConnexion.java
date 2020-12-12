@@ -332,8 +332,17 @@ public class MultiConnexion extends AppCompatActivity {
                             else if (snapshot.getValue(String.class).contains("LogoQuizzMedium")){
                                 startLogoQuizz("Medium","1");
                             }
-                            else{
+                            else if (snapshot.getValue(String.class).contains("LogoQuizzEasy")){
                                 startLogoQuizz("Easy","1");
+                            }
+                            else if (snapshot.getValue(String.class).contains("GoogleTrendsHard")){
+                                startGoogleTrends("Hard","1");
+                            }
+                            else if (snapshot.getValue(String.class).contains("GoogleTrendsMedium")){
+                                startGoogleTrends("Medium","1");
+                            }
+                            else{
+                                startGoogleTrends("Easy","1");
                             }
                         }
                         else if (scoreGuest3>-1 && scoreHost3>-1){
@@ -383,7 +392,7 @@ public class MultiConnexion extends AppCompatActivity {
         //génération nb aleatoire
         int nombreAleatoire1 = (int)(Math.random() * 6);
         int nombreAleatoire2 = (int)(Math.random() * 6);
-        int nombreAleatoire3 = (int)(Math.random() * 6);
+        int nombreAleatoire3 = (int)(Math.random() * 9);
 
         switch (nombreAleatoire1){
             case 0: startHole(1,"3");
@@ -440,10 +449,18 @@ public class MultiConnexion extends AppCompatActivity {
                 break;
             case 4: startLogoQuizz("Medium","1");
                 aEnvoyer+="LogoQuizzMedium";
-
                 break;
-            default: startLogoQuizz("Easy","1");
+            case 5: startLogoQuizz("Easy","1");
                 aEnvoyer+="LogoQuizzEasy";
+                break;
+            case 6: startGoogleTrends("Hard","1");
+                aEnvoyer+="GoogleTrendsHard";
+                break;
+            case 7: startGoogleTrends("Medium","1");
+                aEnvoyer+="GoogleTrendsMedium";
+                break;
+            default: startGoogleTrends("Easy","1");
+                aEnvoyer+="GoogleTrendsEasy";
                 break;
         }
         messageHostRef.setValue(aEnvoyer);
@@ -451,6 +468,14 @@ public class MultiConnexion extends AppCompatActivity {
     }
     private void startLogoQuizz(String difficulte, String number){
         Intent intent = new Intent(MultiConnexion.this, LogoQuizz_Activity.class);
+        intent.putExtra("extraDifficulty", difficulte);
+        intent.putExtra("pathScoreMulti", "rooms/"+roomName+"/score"+role+number);
+        intent.putExtra("pathMessageMulti", "rooms/"+roomName+"/message"+role+number);
+        intent.putExtra("role", role);
+        startActivityForResult(intent, 1);
+    }
+    private void startGoogleTrends(String difficulte, String number){
+        Intent intent = new Intent(MultiConnexion.this, GoogleTrends_Activity.class);
         intent.putExtra("extraDifficulty", difficulte);
         intent.putExtra("pathScoreMulti", "rooms/"+roomName+"/score"+role+number);
         intent.putExtra("pathMessageMulti", "rooms/"+roomName+"/message"+role+number);

@@ -110,7 +110,7 @@ public class GoogleTrends_Activity extends AppCompatActivity {
 
         GoogleTrends_bdd dbHelper = new GoogleTrends_bdd(this);
         questionList = dbHelper.getQuestion(difficulty);
-        questionCountTotal = 1; //Seulement 5 questions
+        questionCountTotal = 5; //Seulement 5 questions
         Collections.shuffle(questionList);
         showNextQuestion();
 
@@ -171,7 +171,7 @@ public class GoogleTrends_Activity extends AppCompatActivity {
 
         //GESTION SCORE BDD
         if (questionCounter == 2 && !username.equals("invite")) {
-            // loadNote();
+            //loadNote();
         }
         if (questionCounter < questionCountTotal) {
             Q = questionList.get((questionCounter));
@@ -230,7 +230,7 @@ public class GoogleTrends_Activity extends AppCompatActivity {
 
     private void finishQuizz() {
         if (!username.equals("invite")) {
-            // saveNote();
+            //saveNote();
         }
         String multipath = getIntent().getStringExtra("pathScoreMulti");
         if (!multipath.equals("notMulti")) {

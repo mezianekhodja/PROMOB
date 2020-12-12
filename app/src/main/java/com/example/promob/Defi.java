@@ -72,7 +72,7 @@ public class Defi extends AppCompatActivity {
         //génération nb aleatoire
         int nombreAleatoire1 = (int)(Math.random() * 6);
         int nombreAleatoire2 = (int)(Math.random() * 6);
-        int nombreAleatoire3 = (int)(Math.random() * 6);
+        int nombreAleatoire3 = (int)(Math.random() * 9);
 
         switch (nombreAleatoire1){
             case 0: startHole(1);
@@ -113,12 +113,24 @@ public class Defi extends AppCompatActivity {
                 break;
             case 4: startLogoQuizz("Medium");
                 break;
-            default: startLogoQuizz("Easy");
+            case 5: startLogoQuizz("Easy");
+                break;
+            case 6: startGoogleTrends("Hard");
+                break;
+            case 7: startGoogleTrends("Medium");
+                break;
+            default: startGoogleTrends("Easy");
                 break;
         }
     }
     private void startLogoQuizz(String difficulte){
         Intent intent = new Intent(Defi.this, LogoQuizz_Activity.class);
+        intent.putExtra("extraDifficulty", difficulte);
+        intent.putExtra("pathScoreMulti", "notMulti");
+        startActivityForResult(intent, 1);
+    }
+    private void startGoogleTrends(String difficulte){
+        Intent intent = new Intent(Defi.this, GoogleTrends_Activity.class);
         intent.putExtra("extraDifficulty", difficulte);
         intent.putExtra("pathScoreMulti", "notMulti");
         startActivityForResult(intent, 1);

@@ -336,8 +336,17 @@ public class TournoiConnexion extends AppCompatActivity {
                             else if (snapshot.getValue(String.class).contains("LogoQuizzMedium")){
                                 startLogoQuizz("Medium");
                             }
-                            else{
+                            else if (snapshot.getValue(String.class).contains("LogoQuizzEasy")){
                                 startLogoQuizz("Easy");
+                            }
+                            else if (snapshot.getValue(String.class).contains("GoogleTrendsHard")){
+                                startGoogleTrends("Hard");
+                            }
+                            else if (snapshot.getValue(String.class).contains("GoogleTrendsMedium")){
+                                startGoogleTrends("Medium");
+                            }
+                            else{
+                                startGoogleTrends("Easy");
                             }
                         }
                 }
@@ -406,7 +415,7 @@ public class TournoiConnexion extends AppCompatActivity {
         if(role.equals("Host")){
             String aEnvoyer = role;
             //génération nb aleatoire
-            int nombreAleatoire1 = (int)(Math.random() * 18);
+            int nombreAleatoire1 = (int)(Math.random() * 21);
 
             switch (nombreAleatoire1){
                 case 0: startHole(1);
@@ -460,8 +469,17 @@ public class TournoiConnexion extends AppCompatActivity {
                 case 16: startLogoQuizz("Medium");
                     aEnvoyer+="StartGame LogoQuizzMedium";
                     break;
-                default: startLogoQuizz("Easy");
+                case 17: startLogoQuizz("Easy");
                     aEnvoyer+="StartGame LogoQuizzEasy";
+                    break;
+                case 18: startGoogleTrends("Hard");
+                    aEnvoyer+="StartGame GoogleTrendsHard";
+                    break;
+                case 19: startGoogleTrends("Medium");
+                    aEnvoyer+="StartGame GoogleTrendsMedium";
+                    break;
+                default: startGoogleTrends("Easy");
+                    aEnvoyer+="StartGame GoogleTrendsEasy";
                     break;
             }
             messageHostRef.setValue(aEnvoyer);
@@ -469,6 +487,14 @@ public class TournoiConnexion extends AppCompatActivity {
     }
     private void startLogoQuizz(String difficulte){
         Intent intent = new Intent(TournoiConnexion.this, LogoQuizz_Activity.class);
+        intent.putExtra("extraDifficulty", difficulte);
+        intent.putExtra("pathScoreMulti", "roomsTournoi/"+roomName+"/score"+role);
+        intent.putExtra("pathMessageMulti", "roomsTournoi/"+roomName+"/message"+role);
+        intent.putExtra("role", role);
+        startActivityForResult(intent, 1);
+    }
+    private void startGoogleTrends(String difficulte){
+        Intent intent = new Intent(TournoiConnexion.this, GoogleTrends_Activity.class);
         intent.putExtra("extraDifficulty", difficulte);
         intent.putExtra("pathScoreMulti", "roomsTournoi/"+roomName+"/score"+role);
         intent.putExtra("pathMessageMulti", "roomsTournoi/"+roomName+"/message"+role);
