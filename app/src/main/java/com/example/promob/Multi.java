@@ -29,7 +29,7 @@ import java.util.List;
 
 public class Multi extends AppCompatActivity {
     private ListView listView;
-    private Button button,join;
+    private Button button,join,rmv;
     List<String> roomList;
     private int numberPlayers;
     String playerName ="";
@@ -97,6 +97,17 @@ public class Multi extends AppCompatActivity {
                 numbplayer.setValue("1");
             }
         });
+        rmv =findViewById(R.id.buttonRemoveRoomMulti);
+        rmv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                roomRef=firebaseDatabase.getReference("rooms/"+playerName);
+                roomRef.setValue(null);
+                Toast.makeText(Multi.this, "Deleted room : "+playerName, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

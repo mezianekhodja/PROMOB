@@ -28,7 +28,7 @@ import java.util.List;
 public class TournoiRooms extends AppCompatActivity {
 
     private ListView listView;
-    private Button button,join;
+    private Button button,join,rmv;
     List<String> roomList;
     private int numberPlayers;
     String playerName ="";
@@ -99,6 +99,15 @@ public class TournoiRooms extends AppCompatActivity {
             }
         });
 
+        rmv =findViewById(R.id.buttonRemoveRoomTournoi);
+        rmv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                roomRef=firebaseDatabase.getReference("roomsTournoi/"+playerName);
+                roomRef.setValue(null);
+                Toast.makeText(TournoiRooms.this, "Deleted room : "+playerName, Toast.LENGTH_SHORT).show();
+            }
+        });
 
         roomList = new ArrayList<>();
         button.setOnClickListener(new View.OnClickListener() {
