@@ -49,6 +49,27 @@
                 android:text="Salut" />
 
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/editTextSendTournoi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Message" />
+
+            <Button
+                android:id="@+id/buttonSENDTournoi"
+                android:background="@drawable/custom_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Send" />
+        </LinearLayout>
         <Button
             android:id="@+id/buttonDefiMultiTournoi"
             android:layout_width="wrap_content"

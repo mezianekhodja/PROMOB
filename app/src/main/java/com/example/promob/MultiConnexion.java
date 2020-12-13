@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -24,7 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MultiConnexion extends AppCompatActivity {
-    private Button btngg,btnrev,btneheh,btnsalut,btndef,btnstop,btnres;
+    private Button btngg,btnrev,btneheh,btnsalut,btndef,btnstop,btnres,btnsend;
     private String playerName ="",roomName="",message="",role="";
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference,messageHostRef,messageGuestRef,scoreHost1Ref,
@@ -34,6 +35,7 @@ public class MultiConnexion extends AppCompatActivity {
     private static final String KEY_t1 = "trophy1";
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private int scoreHost1=-1,scoreGuest1=-1,scoreHost2=-1,scoreGuest2=-1,scoreHost3=1,scoreGuest3=1,numberPlayers;
+    private EditText messageToSend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,8 @@ public class MultiConnexion extends AppCompatActivity {
         btndef=findViewById(R.id.buttonDefiMulti);
         btnstop=findViewById(R.id.buttonStopMulti);
         btnres=findViewById(R.id.buttonRESMulti);
+        btnsend=findViewById(R.id.buttonSENDMulti);
+        messageToSend=findViewById(R.id.editTextSendMulti);
         firebaseAuth = FirebaseAuth.getInstance();
 
         firebaseDatabase=FirebaseDatabase.getInstance();
@@ -161,6 +165,24 @@ public class MultiConnexion extends AppCompatActivity {
                 }
                 else {
                     messageGuestRef.setValue(message);
+                }
+            }
+        });
+        btnsend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String userMessage=messageToSend.getText().toString();
+                if (!userMessage.isEmpty()){
+                message = role+": "+userMessage;
+                if (role.equals("Host")){
+                    messageHostRef.setValue(message);
+                }
+                else {
+                    messageGuestRef.setValue(message);
+                }
+                }
+                else{
+                    Toast.makeText(MultiConnexion.this, "Message Vide", Toast.LENGTH_SHORT).show();
                 }
             }
         });

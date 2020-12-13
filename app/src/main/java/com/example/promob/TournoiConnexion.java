@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -25,7 +26,7 @@ import java.util.Map;
 
 public class TournoiConnexion extends AppCompatActivity {
 
-    private Button btngg,btnrev,btneheh,btnsalut,btndef,btnstop,btnres;
+    private Button btngg,btnrev,btneheh,btnsalut,btndef,btnstop,btnres,btnsend;
     private String playerName ="",roomName="",message="",role="";
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference,messageHostRef,messageGuest1Ref,messageGuest2Ref,messageGuest3Ref,scoreHostRef,
@@ -35,6 +36,7 @@ public class TournoiConnexion extends AppCompatActivity {
     private static final String KEY_t1 = "trophy1";
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private int scoreHost=-1,scoreGuest1=-1,scoreGuest2=-1,scoreGuest3=-1,numberPlayers;
+    private EditText messageToSend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,8 @@ public class TournoiConnexion extends AppCompatActivity {
         btndef=findViewById(R.id.buttonDefiMultiTournoi);
         btnstop=findViewById(R.id.buttonStopMultiTournoi);
         btnres=findViewById(R.id.buttonRESMultiTournoi);
+        btnsend=findViewById(R.id.buttonSENDTournoi);
+        messageToSend=findViewById(R.id.editTextSendTournoi);
         firebaseAuth = FirebaseAuth.getInstance();
 
         firebaseDatabase=FirebaseDatabase.getInstance();
@@ -126,6 +130,30 @@ public class TournoiConnexion extends AppCompatActivity {
                 }
                 else {
                     messageGuest3Ref.setValue(message);
+                }
+            }
+        });
+        btnsend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String userMessage=messageToSend.getText().toString();
+                if (!userMessage.isEmpty()){
+                    message = role+": "+userMessage;
+                    if (role.equals("Host")){
+                        messageHostRef.setValue(message);
+                    }
+                    else if (role.equals("Guest1")){
+                        messageGuest1Ref.setValue(message);
+                    }
+                    else if (role.equals("Guest2")){
+                        messageGuest2Ref.setValue(message);
+                    }
+                    else {
+                        messageGuest3Ref.setValue(message);
+                    }
+                }
+                else{
+                    Toast.makeText(TournoiConnexion.this, "Message Vide", Toast.LENGTH_SHORT).show();
                 }
             }
         });
