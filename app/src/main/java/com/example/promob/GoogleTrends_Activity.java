@@ -47,6 +47,8 @@ public class GoogleTrends_Activity extends AppCompatActivity {
     String currentTime = Calendar.getInstance().getTime().toString();
     private static final String TAG = "GoogleTrends_Activity";
     private int highscore_global = 0, highscore_user = 0;
+    private static final String KEY_t4 = "trophy4";
+
 
     //textView
     private TextView textViewScore;
@@ -144,7 +146,8 @@ public class GoogleTrends_Activity extends AppCompatActivity {
         RadioButton rbSelected = findViewById(rbGroup.getCheckedRadioButtonId());
         int answerNb = rbGroup.indexOfChild(rbSelected) + 1;
         if (answerNb == Q.getNumeroReponse()) {
-            score++;
+            int seconds = (int) (timeLeftInMillis / 1000) % 60;
+            score+=seconds;
             textViewScore.setText("Score: " + score);
         }
         showSolution();
@@ -334,6 +337,28 @@ public class GoogleTrends_Activity extends AppCompatActivity {
                         }
                     });
         }
+        if (score > 59 && !username.equals("invite")) {
+            updateNote();
+        }
+    }
+    public void updateNote() {
+        Map<String, Object> note = new HashMap<>();
+        note.put(KEY_t4, "Einstein");
+
+        db.collection("Trophy").document(username).update(note)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(GoogleTrends_Activity.this, "Sucess", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(GoogleTrends_Activity.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
     }
 }
 

@@ -30,7 +30,7 @@
             android:background="@drawable/custom_btn"
             android:text="Easy"
             android:textStyle="bold"
-            android:layout_marginBottom="5dp"/>
+            android:layout_marginBottom="10dp"/>
 
         <Button
             android:id="@+id/button_gtmedium"
@@ -38,7 +38,9 @@
             android:layout_height="wrap_content"
             android:background="@drawable/custom_btn"
             android:text="MEDIUM"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"/>
+
 
         <Button
             android:id="@+id/button_gthard"
