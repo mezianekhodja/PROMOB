@@ -5,6 +5,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -15,18 +16,23 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class GoogleTrends_Activity extends AppCompatActivity {
     private static final long COUNTDOWN_IN_MILLIS = 15000;
@@ -39,6 +45,8 @@ public class GoogleTrends_Activity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
     String currentTime = Calendar.getInstance().getTime().toString();
+    private static final String TAG = "GoogleTrends_Activity";
+    private int highscore_global = 0, highscore_user = 0;
 
     //textView
     private TextView textViewScore;
@@ -171,7 +179,7 @@ public class GoogleTrends_Activity extends AppCompatActivity {
 
         //GESTION SCORE BDD
         if (questionCounter == 2 && !username.equals("invite")) {
-            //loadNote();
+            loadNote();
         }
         if (questionCounter < questionCountTotal) {
             Q = questionList.get((questionCounter));
@@ -230,7 +238,7 @@ public class GoogleTrends_Activity extends AppCompatActivity {
 
     private void finishQuizz() {
         if (!username.equals("invite")) {
-            //saveNote();
+            saveNote();
         }
         String multipath = getIntent().getStringExtra("pathScoreMulti");
         if (!multipath.equals("notMulti")) {
@@ -241,7 +249,92 @@ public class GoogleTrends_Activity extends AppCompatActivity {
         setResult(RESULT_OK, resultIntent);
         finish();
     }
+    //GESTION SCORE BDD
+    public void loadNote() {
+        Intent intent = getIntent();
+        String difficulty = intent.getStringExtra(LogoQuizz_Home.EXTRA_DIFFICULTY);
 
+        db.collection("GoogleTrends_level_" + difficulty).document("highscore_global").get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()) {
+                            String scoreglob = documentSnapshot.get(KEY_SCORE).toString();
+                            highscore_global = Integer.parseInt(scoreglob);
+                        } else {
+                            Toast.makeText(GoogleTrends_Activity.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(GoogleTrends_Activity.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+        db.collection("GoogleTrends_level_" + difficulty).document("highscore_" + username).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()) {
+                            String scoreus = documentSnapshot.get(KEY_SCORE).toString();
+                            highscore_user = Integer.parseInt(scoreus);
+                        } else {
+                            Toast.makeText(GoogleTrends_Activity.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(GoogleTrends_Activity.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+    }
+    public void saveNote() {
+        Map<String, Object> note = new HashMap<>();
+        note.put(KEY_USER, username);
+        note.put(KEY_SCORE, score);
+        note.put(KEY_DATE, currentTime);
+
+        Intent intent = getIntent();
+        String difficulty = intent.getStringExtra(LogoQuizz_Home.EXTRA_DIFFICULTY);
+        if (score > highscore_global) {
+            db.collection("GoogleTrends_level_" + difficulty).document("highscore_global").set(note)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(GoogleTrends_Activity.this, "Sucess", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(GoogleTrends_Activity.this, "Fail", Toast.LENGTH_SHORT).show();
+                            Log.d(TAG, e.toString());
+                        }
+                    });
+
+        }
+        if (score > highscore_user) {
+            db.collection("GoogleTrends_level_" + difficulty).document("highscore_" + username).set(note)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(GoogleTrends_Activity.this, "Sucess", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(GoogleTrends_Activity.this, "Fail", Toast.LENGTH_SHORT).show();
+                            Log.d(TAG, e.toString());
+                        }
+                    });
+        }
+    }
 }
 
 

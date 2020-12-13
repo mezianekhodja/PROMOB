@@ -66,10 +66,16 @@
                 android:onClick="onRadioButtonClicked"/>
 
             <RadioButton
-                android:id="@+id/radioButtonB2"
+                android:id="@+id/radioButtonHO"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Prochainement"
+                android:text="Hole"
+                android:onClick="onRadioButtonClicked"/>
+            <RadioButton
+                android:id="@+id/radioButtonGT"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Google Trends"
                 android:onClick="onRadioButtonClicked"/>
         </RadioGroup>
         <Button

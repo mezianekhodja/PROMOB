@@ -94,10 +94,17 @@ public class Classement extends AppCompatActivity {
                     loadNoteLB2();
                     loadNoteLB3();
                 break;
-            case R.id.radioButtonB2:
+            case R.id.radioButtonHO:
                 if (checked)
-                    textViewG.setText("bientot 2");
-                    textViewL.setText("bientot 2");
+                    loadNoteHO1();
+                    loadNoteHO2();
+                    loadNoteHO3();
+                break;
+            case R.id.radioButtonGT:
+                if (checked)
+                    loadNoteGTE();
+                    loadNoteGTM();
+                    loadNoteGTH();
                 break;
         }
         }
@@ -372,6 +379,151 @@ public class Classement extends AppCompatActivity {
                     }
                 });
         db.collection("Labyrinthe_level_3").document("highscore_"+username).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()){
+                            String user = documentSnapshot.getString(KEY_USER);
+                            String score = documentSnapshot.get(KEY_SCORE).toString();
+                            String date = documentSnapshot.getString(KEY_DATE);
+
+                            textViewL.setText(textViewL.getText() + " \n Level 3 : user : "+user+", score : "+score+", date : "+date);
+                        }
+                        else{
+                            Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+    }
+
+    public void loadNoteHO1(){
+        db.collection("Hole_level_1").document("highscore_global").get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()){
+                            String user = documentSnapshot.getString(KEY_USER);
+                            String score = documentSnapshot.get(KEY_SCORE).toString();
+                            String date = documentSnapshot.getString(KEY_DATE);
+
+                            textViewG.setText("GLOBAL : Level 1 : user : "+user+", score : "+score+", date : "+date);
+                        }
+                        else{
+                            Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+        db.collection("Hole_level_1").document("highscore_"+username).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()){
+                            String user = documentSnapshot.getString(KEY_USER);
+                            String score = documentSnapshot.get(KEY_SCORE).toString();
+                            String date = documentSnapshot.getString(KEY_DATE);
+
+                            textViewL.setText("LOCAL : Level 1 : user : "+user+", score : "+score+", date : "+date);
+                        }
+                        else{
+                            Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+    }
+    public void loadNoteHO2(){
+        db.collection("Hole_level_2").document("highscore_global").get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()){
+                            String user = documentSnapshot.getString(KEY_USER);
+                            String score = documentSnapshot.get(KEY_SCORE).toString();
+                            String date = documentSnapshot.getString(KEY_DATE);
+
+                            textViewG.setText(textViewG.getText() + " \n Level 2 : user : "+user+", score : "+score+", date : "+date);
+                        }
+                        else{
+                            Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+        db.collection("Hole_level_2").document("highscore_"+username).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()){
+                            String user = documentSnapshot.getString(KEY_USER);
+                            String score = documentSnapshot.get(KEY_SCORE).toString();
+                            String date = documentSnapshot.getString(KEY_DATE);
+
+                            textViewL.setText(textViewL.getText() + " \n Level 2 : user : "+user+", score : "+score+", date : "+date);
+                        }
+                        else{
+                            Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+    }
+    public void loadNoteHO3(){
+        db.collection("Hole_level_3").document("highscore_global").get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()){
+                            String user = documentSnapshot.getString(KEY_USER);
+                            String score = documentSnapshot.get(KEY_SCORE).toString();
+                            String date = documentSnapshot.getString(KEY_DATE);
+
+                            textViewG.setText(textViewG.getText() + " \n Level 3 : user : "+user+", score : "+score+", date : "+date);
+                        }
+                        else{
+                            Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+        db.collection("Hole_level_3").document("highscore_"+username).get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -813,6 +965,150 @@ public class Classement extends AppCompatActivity {
                     }
                 });
         db.collection("LogoQuizz_level_Hard").document("highscore_"+username).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()){
+                            String user = documentSnapshot.getString(KEY_USER);
+                            String score = documentSnapshot.get(KEY_SCORE).toString();
+                            String date = documentSnapshot.getString(KEY_DATE);
+
+                            textViewL.setText(textViewL.getText() + " \n Level Hard : user : "+user+", score : "+score+", date : "+date);
+                        }
+                        else{
+                            Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+    }
+    public void loadNoteGTE(){
+        db.collection("GoogleTrends_level_Easy").document("highscore_global").get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()){
+                            String user = documentSnapshot.getString(KEY_USER);
+                            String score = documentSnapshot.get(KEY_SCORE).toString();
+                            String date = documentSnapshot.getString(KEY_DATE);
+
+                            textViewG.setText("GLOBAL : Level Easy : user : "+user+", score : "+score+", date : "+date);
+                        }
+                        else{
+                            Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+        db.collection("GoogleTrends_level_Easy").document("highscore_"+username).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()){
+                            String user = documentSnapshot.getString(KEY_USER);
+                            String score = documentSnapshot.get(KEY_SCORE).toString();
+                            String date = documentSnapshot.getString(KEY_DATE);
+
+                            textViewL.setText("LOCAL : Level Easy : user : "+user+", score : "+score+", date : "+date);
+                        }
+                        else{
+                            Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+    }
+    public void loadNoteGTM(){
+        db.collection("GoogleTrends_level_Medium").document("highscore_global").get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()){
+                            String user = documentSnapshot.getString(KEY_USER);
+                            String score = documentSnapshot.get(KEY_SCORE).toString();
+                            String date = documentSnapshot.getString(KEY_DATE);
+
+                            textViewG.setText(textViewG.getText() + " \n Level Medium : user : "+user+", score : "+score+", date : "+date);
+                        }
+                        else{
+                            Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+        db.collection("GoogleTrends_level_Medium").document("highscore_"+username).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()){
+                            String user = documentSnapshot.getString(KEY_USER);
+                            String score = documentSnapshot.get(KEY_SCORE).toString();
+                            String date = documentSnapshot.getString(KEY_DATE);
+
+                            textViewL.setText(textViewL.getText() + " \n Level Medium : user : "+user+", score : "+score+", date : "+date);
+                        }
+                        else{
+                            Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+    }
+    public void loadNoteGTH(){
+        db.collection("GoogleTrends_level_Hard").document("highscore_global").get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()){
+                            String user = documentSnapshot.getString(KEY_USER);
+                            String score = documentSnapshot.get(KEY_SCORE).toString();
+                            String date = documentSnapshot.getString(KEY_DATE);
+
+                            textViewG.setText(textViewG.getText() + " \n Level Hard : user : "+user+", score : "+score+", date : "+date);
+                        }
+                        else{
+                            Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Classement.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+        db.collection("GoogleTrends_level_Hard").document("highscore_"+username).get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
