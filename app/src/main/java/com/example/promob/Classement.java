@@ -868,6 +868,11 @@ public class Classement extends AppCompatActivity {
         Intent intent = new Intent(this, Copyright.class);
         startActivity(intent);
     }
+    public void openBandeSon(){
+        finish();
+        Intent intent = new Intent(this, BandeSon.class);
+        startActivity(intent);
+    }
     public void openActivityConnexion() {
         finish();
         Intent intent = new Intent(this, Connexion.class);
@@ -911,6 +916,10 @@ public class Classement extends AppCompatActivity {
             }
             case R.id.solomultiMenu:{
                 openSoloMulti();
+                break;
+            }
+            case R.id.bandesonMenu:{
+                openBandeSon();
                 break;
             }
         }

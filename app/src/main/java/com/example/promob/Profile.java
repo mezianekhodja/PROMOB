@@ -128,6 +128,11 @@ public class Profile extends AppCompatActivity {
         Intent intent = new Intent(this, Copyright.class);
         startActivity(intent);
     }
+    public void openBandeSon(){
+        finish();
+        Intent intent = new Intent(this, BandeSon.class);
+        startActivity(intent);
+    }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
@@ -153,6 +158,10 @@ public class Profile extends AppCompatActivity {
             }
             case R.id.copyrightMenu:{
                 openCopyright();
+                break;
+            }
+            case R.id.bandesonMenu:{
+                openBandeSon();
                 break;
             }
         }

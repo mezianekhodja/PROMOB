@@ -7,47 +7,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class Multi_Tournoi extends AppCompatActivity {
-    private Button defi1V1,tournoi;
+public class BandeSon extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_multi__tournoi);
-        tournoi =(Button)findViewById(R.id.btn_tournoi);
-        defi1V1 = (Button)findViewById(R.id.btn_multijoueur);
-
-        defi1V1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openDefi1V1();
-            }
-        });
-        tournoi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openTournoiRooms();
-            }
-        });
-
+        setContentView(R.layout.activity_bande_son);
         firebaseAuth = FirebaseAuth.getInstance();
-    }
-    public void openDefi1V1() {
-        Intent intent = new Intent(this, Multi.class);
-        startActivity(intent);
-        Multi_Tournoi.this.finish();
-    }
-    public void openTournoiRooms() {
-        Intent intent = new Intent(this, TournoiRooms.class);
-        startActivity(intent);
-        Multi_Tournoi.this.finish();
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -81,6 +52,11 @@ public class Multi_Tournoi extends AppCompatActivity {
         Intent intent = new Intent(this, Copyright.class);
         startActivity(intent);
     }
+    public void openBandeSon(){
+        finish();
+        Intent intent = new Intent(this, BandeSon.class);
+        startActivity(intent);
+    }
     public void openActivityConnexion() {
         finish();
         Intent intent = new Intent(this, Connexion.class);
@@ -90,16 +66,7 @@ public class Multi_Tournoi extends AppCompatActivity {
         firebaseAuth.signOut();
         openActivityConnexion();
     }
-    public void openBandeSon(){
-        finish();
-        Intent intent = new Intent(this, BandeSon.class);
-        startActivity(intent);
-    }
-    public void openSoloMulti(){
-        finish();
-        Intent intent = new Intent(this, Solo_Multi.class);
-        startActivity(intent);
-    }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
@@ -125,10 +92,6 @@ public class Multi_Tournoi extends AppCompatActivity {
             }
             case R.id.copyrightMenu:{
                 openCopyright();
-                break;
-            }
-            case R.id.solomultiMenu:{
-                openSoloMulti();
                 break;
             }
             case R.id.bandesonMenu:{
