@@ -31,42 +31,42 @@ public class BandeSon extends AppCompatActivity {
                 startMusique1();
             }
         });
-        run2 = findViewById(R.id.buttonRunMusique1);
+        run2 = findViewById(R.id.buttonRunMusique2);
         run2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startMusique2();
             }
         });
-        run3 = findViewById(R.id.buttonRunMusique1);
+        run3 = findViewById(R.id.buttonRunMusique3);
         run3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startMusique3();
             }
         });
-        run4 = findViewById(R.id.buttonRunMusique1);
+        run4 = findViewById(R.id.buttonRunMusique4);
         run4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startMusique4();
             }
         });
-        run5 = findViewById(R.id.buttonRunMusique1);
+        run5 = findViewById(R.id.buttonRunMusique5);
         run5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startMusique5();
             }
         });
-        run6 = findViewById(R.id.buttonRunMusique1);
+        run6 = findViewById(R.id.buttonRunMusique6);
         run6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startMusique6();
             }
         });
-        run7 = findViewById(R.id.buttonRunMusique1);
+        run7 = findViewById(R.id.buttonRunMusique7);
         run7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,12 +126,13 @@ public class BandeSon extends AppCompatActivity {
     }
     public void stopMusic(){
         play.stop();
+        play = null;
         Toast.makeText(this, "Musique arrêtée", Toast.LENGTH_SHORT).show();
     }
     public void startMusique1(){
         if(play == null){
             play = MediaPlayer.create(this, R.raw.musique1);
-            Toast.makeText(this, "Musique 1 lancée", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Musique lancée", Toast.LENGTH_SHORT).show();
         }
         play.start();
     }
@@ -140,7 +141,6 @@ public class BandeSon extends AppCompatActivity {
             play = MediaPlayer.create(this, R.raw.musique2);
             Toast.makeText(this, "Musique lancée", Toast.LENGTH_SHORT).show();
         }
-        Toast.makeText(this, "Problème", Toast.LENGTH_SHORT).show();
         play.start();
     }public void startMusique3(){
         if(play == null){
