@@ -24,13 +24,11 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_marginBottom="20dp"
         android:gravity="center"
         android:text="Copyright" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:layout_marginBottom="20dp"
             android:gravity="center"
             android:text="Projet universitaire d'application de jeux en Android" />
         <TextView
@@ -41,13 +39,61 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="Crédits musique :" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:textSize="7dp"
+            android:gravity="center"
+            android:text="Titre:  Naya, Auteur: HaTom, Source: https://www.youtube.com/channel/UC0JeACmSYU4Mt_Vozs4bFoQ,
+            Licence: https://creativecommons.org/licenses/by/3.0/deed.fr, Téléchargement (9MB): https://auboutdufil.com/?id=578" />
+       <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:textSize="7dp"
+            android:gravity="center"
+            android:text="Titre:  Airwaves, Auteur: Olivaw, Source: https://olivaw.bandcamp.com, Licence: https://creativecommons.org/licenses/by/3.0/deed.fr, Téléchargement (7MB): https://auboutdufil.com/?id=491" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:textSize="7dp"
+            android:gravity="center"
+            android:text="Titre:  Mercury City, Auteur: HMO, Source: https://soundcloud.com/h_mo, Licence: https://creativecommons.org/licenses/by/3.0/deed.fr, Téléchargement (5MB): https://auboutdufil.com/?id=569" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:textSize="7dp"
+            android:gravity="center"
+            android:text="Titre:  Chill Trap, Auteur: Aries Beat, Source: https://www.youtube.com/aries4rce, Licence: https://creativecommons.org/licenses/by/3.0/, Téléchargement (10MB): https://auboutdufil.com/?id=558" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:textSize="7dp"
+            android:gravity="center"
+            android:text="Titre:  Flame And Go, Auteur: CyberSDF, Source: https://soundcloud.com/cybersdf, Licence: https://creativecommons.org/licenses/by/3.0/deed.fr, Téléchargement (10MB): https://auboutdufil.com/?id=583" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:textSize="7dp"
+            android:gravity="center"
+            android:text="Titre:  Guazu, Auteur: Guazu, Source: https://shikashika.bandcamp.com/album/guaz, Licence: https://creativecommons.org/licenses/by-sa/3.0/deed.fr, Téléchargement (9MB): https://auboutdufil.com/?id=493" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:textSize="7dp"
+            android:gravity="center"
+            android:text="Titre:  Night, Auteur: Cloudkicker, Source: https://cloudkicker.bandcamp.com, Licence: https://creativecommons.org/licenses/by/3.0/, Téléchargement (4MB): https://auboutdufil.com/?id=547" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
             android:gravity="center"
             android:text="v 1.0" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:layout_marginBottom="20dp"
             android:gravity="center"
             android:text="By V.DOLLO et M.KHODJA" />
     </LinearLayout>

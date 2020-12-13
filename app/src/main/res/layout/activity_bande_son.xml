@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="8"
             android:gravity="center"
-            android:text="Musique - Artiste" />
+            android:text="Naya - HaTom" />
 
         <Button
             android:id="@+id/buttonRunMusique1"
@@ -70,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="8"
                 android:gravity="center"
-                android:text="Musique - Artiste" />
+                android:text="Airwaves - Olivaw" />
 
             <Button
                 android:id="@+id/buttonRunMusique2"
@@ -99,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="8"
                 android:gravity="center"
-                android:text="Musique - Artiste" />
+                android:text="Mercury City - HMO" />
 
             <Button
                 android:id="@+id/buttonRunMusique3"
@@ -128,7 +128,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="8"
                 android:gravity="center"
-                android:text="Musique - Artiste" />
+                android:text="Chill Trap - Aries Beats" />
 
             <Button
                 android:id="@+id/buttonRunMusique4"
@@ -157,7 +157,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="8"
                 android:gravity="center"
-                android:text="Musique - Artiste" />
+                android:text="Flame And Go - CyberSDF" />
 
             <Button
                 android:id="@+id/buttonRunMusique5"
@@ -186,7 +186,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="8"
                 android:gravity="center"
-                android:text="Musique - Artiste" />
+                android:text="Guazu - Guazu" />
 
             <Button
                 android:id="@+id/buttonRunMusique6"
@@ -215,7 +215,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="8"
                 android:gravity="center"
-                android:text="Musique - Artiste" />
+                android:text="Night - Cloudkicker" />
 
             <Button
                 android:id="@+id/buttonRunMusique7"
