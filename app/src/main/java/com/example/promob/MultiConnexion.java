@@ -103,6 +103,7 @@ public class MultiConnexion extends AppCompatActivity {
                  intent.putExtra("winner", "Guest");
              }
              startActivity(intent);
+             MultiConnexion.this.finish();
             }
         });
         btnstop.setOnClickListener(new View.OnClickListener() {
