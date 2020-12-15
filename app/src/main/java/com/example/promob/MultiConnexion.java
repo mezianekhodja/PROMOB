@@ -125,7 +125,12 @@ public class MultiConnexion extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String value = dataSnapshot.getValue(String.class);
-                numberPlayers=Integer.valueOf(value);
+                if (!value.isEmpty()){
+                    numberPlayers=Integer.valueOf(value);
+                }
+                else{
+                    numberPlayers=0;
+                }
                 if (numberPlayers==2 && role.equals("Host")){btndef.setEnabled(true);}
             }
             @Override
