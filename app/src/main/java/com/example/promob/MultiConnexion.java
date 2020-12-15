@@ -62,7 +62,8 @@ public class MultiConnexion extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                UserProfile userProfile = snapshot.getValue(UserProfile.class);
+                if (!(snapshot.getValue(UserProfile.class)==null)){
+                    UserProfile userProfile = snapshot.getValue(UserProfile.class);
                 playerName=userProfile.getUserName();
                 btnres.setEnabled(false);
                 btndef.setEnabled(false);
@@ -75,7 +76,7 @@ public class MultiConnexion extends AppCompatActivity {
                     btnstop.setEnabled(false);
                 }
             }
-
+            }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(MultiConnexion.this, error.getCode(),Toast.LENGTH_SHORT).show();
@@ -228,7 +229,9 @@ public class MultiConnexion extends AppCompatActivity {
         scoreHost1Ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                scoreHost1 = Integer.parseInt(snapshot.getValue(String.class));
+                if (!(snapshot.getValue(String.class) == null)) {
+                    scoreHost1 = Integer.parseInt(snapshot.getValue(String.class));
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -238,7 +241,9 @@ public class MultiConnexion extends AppCompatActivity {
         scoreHost2Ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                scoreHost2 = Integer.parseInt(snapshot.getValue(String.class));
+                if (!(snapshot.getValue(String.class) == null)) {
+                    scoreHost2 = Integer.parseInt(snapshot.getValue(String.class));
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -248,7 +253,9 @@ public class MultiConnexion extends AppCompatActivity {
         scoreHost3Ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                scoreHost3 = Integer.parseInt(snapshot.getValue(String.class));
+                if (!(snapshot.getValue(String.class) == null)) {
+                    scoreHost3 = Integer.parseInt(snapshot.getValue(String.class));
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -258,7 +265,9 @@ public class MultiConnexion extends AppCompatActivity {
         scoreGuest1Ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!(snapshot.getValue(String.class)==null)){
                 scoreGuest1 = Integer.parseInt(snapshot.getValue(String.class));
+            }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -268,7 +277,9 @@ public class MultiConnexion extends AppCompatActivity {
         scoreGuest2Ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                scoreGuest2 = Integer.parseInt(snapshot.getValue(String.class));
+                if (!(snapshot.getValue(String.class) == null)) {
+                    scoreGuest2 = Integer.parseInt(snapshot.getValue(String.class));
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -278,7 +289,9 @@ public class MultiConnexion extends AppCompatActivity {
         scoreGuest3Ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                scoreGuest3 = Integer.parseInt(snapshot.getValue(String.class));
+                if (!(snapshot.getValue(String.class) == null)) {
+                    scoreGuest3 = Integer.parseInt(snapshot.getValue(String.class));
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -292,15 +305,16 @@ public class MultiConnexion extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(role.equals("Host")){
+                    if (!(snapshot.getValue(String.class)==null)){
                     if (snapshot.getValue(String.class).contains("Guest:")){
                         Toast.makeText(MultiConnexion.this, snapshot.getValue(String.class).replace("Guest:",""), Toast.LENGTH_SHORT).show();
                         if (scoreGuest3>-1 && scoreHost3>-1){
                             btnres.setEnabled(true);                        }
                     }
-                }else {
+                else {
                     if (snapshot.getValue(String.class).contains("Host:")){
                         Toast.makeText(MultiConnexion.this, snapshot.getValue(String.class).replace("Host:",""), Toast.LENGTH_SHORT).show();
-                        if (snapshot.getValue(String.class).contains("Leave")){
+                          if (snapshot.getValue(String.class).contains("Leave")){
                             close();
                         }
                         else if (snapshot.getValue(String.class).contains("StartGame")){
@@ -377,6 +391,8 @@ public class MultiConnexion extends AppCompatActivity {
                             btnres.setEnabled(true);                        }
                     }
                 }
+                }
+                }
             }
 
             @Override
@@ -394,13 +410,14 @@ public class MultiConnexion extends AppCompatActivity {
                             if (scoreGuest3>-1 && scoreHost3>-1){
                                 btnres.setEnabled(true);                        }
                             }
-                            }else {
+                            else {
                         if (snapshot.getValue(String.class).contains("Host:")){
                             Toast.makeText(MultiConnexion.this, snapshot.getValue(String.class).replace("Host:",""), Toast.LENGTH_SHORT).show();
                             if (scoreGuest3>-1 && scoreHost3>-1){
                                 btnres.setEnabled(true);                        }
+                         }
+                        }
                     }
-                }
             }
             }
 
