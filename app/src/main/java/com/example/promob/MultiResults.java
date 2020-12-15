@@ -61,7 +61,7 @@ public class MultiResults extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MultiResults.this,Multi.class);
+                Intent intent = new Intent(MultiResults.this,Multi_Tournoi.class);
                 startActivity(intent);
                 MultiResults.this.finish();
             }
