@@ -90,6 +90,11 @@ public class Multi_Tournoi extends AppCompatActivity {
         firebaseAuth.signOut();
         openActivityConnexion();
     }
+    public void openBandeSon(){
+        finish();
+        Intent intent = new Intent(this, BandeSon.class);
+        startActivity(intent);
+    }
     public void openSoloMulti(){
         finish();
         Intent intent = new Intent(this, Solo_Multi.class);
@@ -124,6 +129,10 @@ public class Multi_Tournoi extends AppCompatActivity {
             }
             case R.id.solomultiMenu:{
                 openSoloMulti();
+                break;
+            }
+            case R.id.bandesonMenu:{
+                openBandeSon();
                 break;
             }
         }

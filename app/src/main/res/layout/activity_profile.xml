@@ -55,6 +55,7 @@
         <Button
             android:id="@+id/buttonUpdateProfile"
             android:layout_width="match_parent"
+            android:background="@drawable/custom_btn"
             android:layout_height="wrap_content"
             android:text="Update" />
 
@@ -62,6 +63,7 @@
             android:id="@+id/buttonchangemdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/custom_btn"
             android:text="Changer mon mdp" />
         <TextView
             android:layout_width="match_parent"

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -24,16 +25,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MultiConnexion extends AppCompatActivity {
-    private Button btngg,btnrev,btneheh,btnsalut,btndef,btnstop,btnres;
+    private Button btngg,btnrev,btneheh,btnsalut,btndef,btnstop,btnres,btnsend;
     private String playerName ="",roomName="",message="",role="";
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference,messageHostRef,messageGuestRef,scoreHost1Ref,
-            scoreGuest1Ref,scoreHost2Ref,scoreGuest2Ref,scoreHost3Ref,scoreGuest3Ref;
+            scoreGuest1Ref,scoreHost2Ref,scoreGuest2Ref,scoreHost3Ref,scoreGuest3Ref,nbplayers;
     private FirebaseAuth firebaseAuth;
     private static final String TAG = "MultiConnexion";
     private static final String KEY_t1 = "trophy1";
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private int scoreHost1=-1,scoreGuest1=-1,scoreHost2=-1,scoreGuest2=-1,scoreHost3=1,scoreGuest3=1;
+    private int scoreHost1=-1,scoreGuest1=-1,scoreHost2=-1,scoreGuest2=-1,scoreHost3=1,scoreGuest3=1,numberPlayers;
+    private EditText messageToSend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,8 @@ public class MultiConnexion extends AppCompatActivity {
         btndef=findViewById(R.id.buttonDefiMulti);
         btnstop=findViewById(R.id.buttonStopMulti);
         btnres=findViewById(R.id.buttonRESMulti);
+        btnsend=findViewById(R.id.buttonSENDMulti);
+        messageToSend=findViewById(R.id.editTextSendMulti);
         firebaseAuth = FirebaseAuth.getInstance();
 
         firebaseDatabase=FirebaseDatabase.getInstance();
@@ -61,6 +65,7 @@ public class MultiConnexion extends AppCompatActivity {
                 UserProfile userProfile = snapshot.getValue(UserProfile.class);
                 playerName=userProfile.getUserName();
                 btnres.setEnabled(false);
+                btndef.setEnabled(false);
                 if (roomName.equals(playerName)){
                     role="Host";
                 }else{
@@ -114,7 +119,19 @@ public class MultiConnexion extends AppCompatActivity {
                 loadGame();
             }
         });
-
+        nbplayers=firebaseDatabase.getReference("rooms/"+roomName+"/numberPlayers");
+        nbplayers.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String value = dataSnapshot.getValue(String.class);
+                numberPlayers=Integer.valueOf(value);
+                if (numberPlayers==2 && role.equals("Host")){btndef.setEnabled(true);}
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
         btngg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -148,6 +165,24 @@ public class MultiConnexion extends AppCompatActivity {
                 }
                 else {
                     messageGuestRef.setValue(message);
+                }
+            }
+        });
+        btnsend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String userMessage=messageToSend.getText().toString();
+                if (!userMessage.isEmpty()){
+                message = role+": "+userMessage;
+                if (role.equals("Host")){
+                    messageHostRef.setValue(message);
+                }
+                else {
+                    messageGuestRef.setValue(message);
+                }
+                }
+                else{
+                    Toast.makeText(MultiConnexion.this, "Message Vide", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -319,8 +354,17 @@ public class MultiConnexion extends AppCompatActivity {
                             else if (snapshot.getValue(String.class).contains("LogoQuizzMedium")){
                                 startLogoQuizz("Medium","1");
                             }
-                            else{
+                            else if (snapshot.getValue(String.class).contains("LogoQuizzEasy")){
                                 startLogoQuizz("Easy","1");
+                            }
+                            else if (snapshot.getValue(String.class).contains("GoogleTrendsHard")){
+                                startGoogleTrends("Hard","1");
+                            }
+                            else if (snapshot.getValue(String.class).contains("GoogleTrendsMedium")){
+                                startGoogleTrends("Medium","1");
+                            }
+                            else{
+                                startGoogleTrends("Easy","1");
                             }
                         }
                         else if (scoreGuest3>-1 && scoreHost3>-1){
@@ -370,7 +414,7 @@ public class MultiConnexion extends AppCompatActivity {
         //génération nb aleatoire
         int nombreAleatoire1 = (int)(Math.random() * 6);
         int nombreAleatoire2 = (int)(Math.random() * 6);
-        int nombreAleatoire3 = (int)(Math.random() * 6);
+        int nombreAleatoire3 = (int)(Math.random() * 9);
 
         switch (nombreAleatoire1){
             case 0: startHole(1,"3");
@@ -427,10 +471,18 @@ public class MultiConnexion extends AppCompatActivity {
                 break;
             case 4: startLogoQuizz("Medium","1");
                 aEnvoyer+="LogoQuizzMedium";
-
                 break;
-            default: startLogoQuizz("Easy","1");
+            case 5: startLogoQuizz("Easy","1");
                 aEnvoyer+="LogoQuizzEasy";
+                break;
+            case 6: startGoogleTrends("Hard","1");
+                aEnvoyer+="GoogleTrendsHard";
+                break;
+            case 7: startGoogleTrends("Medium","1");
+                aEnvoyer+="GoogleTrendsMedium";
+                break;
+            default: startGoogleTrends("Easy","1");
+                aEnvoyer+="GoogleTrendsEasy";
                 break;
         }
         messageHostRef.setValue(aEnvoyer);
@@ -438,6 +490,14 @@ public class MultiConnexion extends AppCompatActivity {
     }
     private void startLogoQuizz(String difficulte, String number){
         Intent intent = new Intent(MultiConnexion.this, LogoQuizz_Activity.class);
+        intent.putExtra("extraDifficulty", difficulte);
+        intent.putExtra("pathScoreMulti", "rooms/"+roomName+"/score"+role+number);
+        intent.putExtra("pathMessageMulti", "rooms/"+roomName+"/message"+role+number);
+        intent.putExtra("role", role);
+        startActivityForResult(intent, 1);
+    }
+    private void startGoogleTrends(String difficulte, String number){
+        Intent intent = new Intent(MultiConnexion.this, GoogleTrends_Activity.class);
         intent.putExtra("extraDifficulty", difficulte);
         intent.putExtra("pathScoreMulti", "rooms/"+roomName+"/score"+role+number);
         intent.putExtra("pathMessageMulti", "rooms/"+roomName+"/message"+role+number);

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,14 +29,15 @@ import java.util.List;
 
 public class Multi extends AppCompatActivity {
     private ListView listView;
-    private Button button;
+    private Button button,join,rmv;
     List<String> roomList;
-
+    private int numberPlayers;
     String playerName ="";
-    String roomName ="";
+    String roomName ="undefined";
     private FirebaseDatabase firebaseDatabase;
     private FirebaseAuth firebaseAuth;
-    private DatabaseReference databaseReference,roomRef,roomsRef;
+    private static final String TAG = "Multi";
+    private DatabaseReference databaseReference,roomRef,roomsRef,numbplayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +60,29 @@ public class Multi extends AppCompatActivity {
                 Toast.makeText(Multi.this, error.getCode(),Toast.LENGTH_SHORT).show();
             }
         });
+
+        join=findViewById(R.id.buttonJoinRoomMulti);
+
+        join.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (roomName.equals("undefined")){
+                    Toast.makeText(Multi.this, "Sélectionner un adversaire", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    if (numberPlayers==1){
+                        roomRef=firebaseDatabase.getReference("rooms/"+roomName+"/player2");
+                        addRoomEventListener();
+                        roomRef.setValue(playerName);
+                        numbplayer.setValue(String.valueOf(1+numberPlayers));
+                    }
+                    else{
+                        Toast.makeText(Multi.this, "Plus aucune place restante", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
         listView = findViewById(R.id.lvRooms);
         button= findViewById(R.id.buttonCreateRoom);
         roomList = new ArrayList<>();
@@ -65,19 +90,45 @@ public class Multi extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 roomName=playerName;
+                numbplayer=firebaseDatabase.getReference("rooms/"+roomName+"/numberPlayers");
                 roomRef=firebaseDatabase.getReference("rooms/"+roomName+"/player1");
                 addRoomEventListener();
                 roomRef.setValue(playerName);
+                numbplayer.setValue("1");
             }
         });
+        rmv =findViewById(R.id.buttonRemoveRoomMulti);
+        rmv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                roomRef=firebaseDatabase.getReference("rooms/"+playerName);
+                roomRef.setValue(null);
+                Toast.makeText(Multi.this, "Deleted room : "+playerName, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 roomName=roomList.get(position);
-                roomRef=firebaseDatabase.getReference("rooms/"+roomName+"/player2");
-                addRoomEventListener();
-                roomRef.setValue(playerName);
+                numberPlayers=0;
+                numbplayer=firebaseDatabase.getReference("rooms/"+roomName+"/numberPlayers");
+
+                numbplayer.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        String value = dataSnapshot.getValue(String.class);
+                        numberPlayers=Integer.valueOf(value);
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        Log.w(TAG, "Failed to read value.", error.toException());
+                    }
+                });
             }
+
         });
         addRoomsEventListener();
     }
@@ -162,6 +213,11 @@ public class Multi extends AppCompatActivity {
         Intent intent = new Intent(this, Solo_Multi.class);
         startActivity(intent);
     }
+    public void openBandeSon(){
+        finish();
+        Intent intent = new Intent(this, BandeSon.class);
+        startActivity(intent);
+    }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
@@ -191,6 +247,10 @@ public class Multi extends AppCompatActivity {
             }
             case R.id.solomultiMenu:{
                 openSoloMulti();
+                break;
+            }
+            case R.id.bandesonMenu:{
+                openBandeSon();
                 break;
             }
         }

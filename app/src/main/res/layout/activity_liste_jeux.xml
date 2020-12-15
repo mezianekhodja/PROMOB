@@ -40,6 +40,7 @@
         <Button
             android:id="@+id/button_logoquizz"
             android:layout_width="match_parent"
+            android:background="@drawable/custom_btn"
             android:layout_height="wrap_content"
             android:text="Logo Quizz"
             android:textStyle="bold" />
@@ -58,6 +59,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Pendu"
+            android:background="@drawable/custom_btn"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="Venez vous amuser à deviner les mots les plus recherchés sur le Net"
+            android:textColor="@color/noir"
+            android:textSize="10dp"
+            android:textStyle="italic" />
+
+        <Button
+            android:id="@+id/buttonGoogleTrends"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_btn"
+            android:text="GoogleTrends"
             android:textStyle="bold" />
 
         <TextView
@@ -66,13 +87,15 @@
             android:layout_marginTop="5dp"
             android:gravity="center"
             android:padding="2dp"
+            android:textColor="@color/noir"
             android:text="Régalez vous dans l'univers fruité de Candy Crush"
-            android:textSize="13dp" />
+            android:textSize="10dp" />
 
         <Button
             android:id="@+id/buttongamecandycrush"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/custom_btn"
             android:text="Candy Crush"
             android:textStyle="bold" />
 
@@ -89,7 +112,8 @@
             android:id="@+id/buttongame2048"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="2048"
+            android:text="Numbers"
+            android:background="@drawable/custom_btn"
             android:textStyle="bold" />
 
         <TextView
@@ -106,6 +130,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Labyrinthe"
+            android:background="@drawable/custom_btn"
             android:textStyle="bold" />
 
         <TextView
@@ -120,26 +145,9 @@
         <Button
             android:id="@+id/buttonhole"
             android:layout_width="match_parent"
+            android:background="@drawable/custom_btn"
             android:layout_height="wrap_content"
             android:text="Hole"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:padding="2dp"
-            android:text="Venez vous amuser à deviner les mots les plus recherchés "
-            android:textColor="@color/noir"
-            android:textSize="13dp"
-            android:textStyle="italic" />
-
-        <Button
-            android:id="@+id/buttonGoogleTrends"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="GoogleTrends"
             android:textStyle="bold" />
 
         <TextView

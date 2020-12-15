@@ -28,7 +28,7 @@ import java.util.List;
 public class TournoiRooms extends AppCompatActivity {
 
     private ListView listView;
-    private Button button,join;
+    private Button button,join,rmv;
     List<String> roomList;
     private int numberPlayers;
     String playerName ="";
@@ -99,6 +99,15 @@ public class TournoiRooms extends AppCompatActivity {
             }
         });
 
+        rmv =findViewById(R.id.buttonRemoveRoomTournoi);
+        rmv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                roomRef=firebaseDatabase.getReference("roomsTournoi/"+playerName);
+                roomRef.setValue(null);
+                Toast.makeText(TournoiRooms.this, "Deleted room : "+playerName, Toast.LENGTH_SHORT).show();
+            }
+        });
 
         roomList = new ArrayList<>();
         button.setOnClickListener(new View.OnClickListener() {
@@ -217,6 +226,11 @@ public class TournoiRooms extends AppCompatActivity {
         Intent intent = new Intent(this, Solo_Multi.class);
         startActivity(intent);
     }
+    public void openBandeSon(){
+        finish();
+        Intent intent = new Intent(this, BandeSon.class);
+        startActivity(intent);
+    }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
@@ -246,6 +260,10 @@ public class TournoiRooms extends AppCompatActivity {
             }
             case R.id.solomultiMenu:{
                 openSoloMulti();
+                break;
+            }
+            case R.id.bandesonMenu:{
+                openBandeSon();
                 break;
             }
         }

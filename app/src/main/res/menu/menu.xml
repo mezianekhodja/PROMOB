@@ -47,4 +47,10 @@
         app:showAsAction="never"
         android:title="Choix Solo/Multi">
     </item>
+    <item
+        android:id="@+id/bandesonMenu"
+        android:orderInCategory="800"
+        app:showAsAction="never"
+        android:title="Bande Son">
+    </item>
 </menu>

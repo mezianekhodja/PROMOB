@@ -18,48 +18,97 @@
             android:orientation="horizontal">
             <Button
                 android:id="@+id/buttonGGMulti"
+                android:background="@drawable/custom_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginRight="15dp"
                 android:text="GG" />
             <Button
                 android:id="@+id/buttonREVANCHEMulti"
                 android:layout_width="wrap_content"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/custom_btn"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Revanche?" />
             <Button
                 android:id="@+id/buttonEHEHMulti"
+                android:background="@drawable/custom_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
                 android:layout_gravity="center"
                 android:text="Eheh" />
             <Button
                 android:id="@+id/buttonSALUTMulti"
+                android:background="@drawable/custom_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Salut" />
 
         </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/editTextSendMulti"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Message" />
+
+        <Button
+            android:id="@+id/buttonSENDMulti"
+            android:background="@drawable/custom_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Send" />
+    </LinearLayout>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginBottom="100dp"
+            app:srcCompat="@drawable/logo"
+            android:layout_marginTop="100dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
         <Button
             android:id="@+id/buttonDefiMulti"
             android:layout_width="wrap_content"
+            android:background="@drawable/custom_btn"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:layout_gravity="center"
             android:text="DEFI" />
         <Button
             android:id="@+id/buttonStopMulti"
             android:layout_width="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/custom_btn"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="STOP" />
         <Button
             android:id="@+id/buttonRESMulti"
+            android:background="@drawable/custom_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:layout_gravity="center"
             android:text="Resultats" />
+    </LinearLayout>
+
         <TextView
             android:layout_width="match_parent"
             android:gravity="center"

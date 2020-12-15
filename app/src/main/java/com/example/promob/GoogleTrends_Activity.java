@@ -5,6 +5,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -15,18 +16,23 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class GoogleTrends_Activity extends AppCompatActivity {
     private static final long COUNTDOWN_IN_MILLIS = 15000;
@@ -39,6 +45,10 @@ public class GoogleTrends_Activity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
     String currentTime = Calendar.getInstance().getTime().toString();
+    private static final String TAG = "GoogleTrends_Activity";
+    private int highscore_global = 0, highscore_user = 0;
+    private static final String KEY_t4 = "trophy4";
+
 
     //textView
     private TextView textViewScore;
@@ -73,16 +83,15 @@ public class GoogleTrends_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_googletrends_activity);
-        valider = findViewById(R.id.valider);
-        valider = findViewById(R.id.valider);
-        result = findViewById(R.id.result);
-        textViewScore = findViewById(R.id.score);
-        textViewQuestionCount = findViewById(R.id.question);
-        textViewTimer = findViewById(R.id.timer);
-        textViewDifficulty = findViewById(R.id.difficulté);
-        rbGroup = findViewById(R.id.radio_groupe);
-        rb1 = findViewById(R.id.bouton1);
-        rb2 = findViewById(R.id.bouton2);
+        valider = findViewById(R.id.validergt);
+        result = findViewById(R.id.resultgt);
+        textViewScore = findViewById(R.id.scoregt);
+        textViewQuestionCount = findViewById(R.id.questiongt);
+        textViewTimer = findViewById(R.id.timergt);
+        textViewDifficulty = findViewById(R.id.difficultégt);
+        rbGroup = findViewById(R.id.radio_groupegt);
+        rb1 = findViewById(R.id.bouton1gt);
+        rb2 = findViewById(R.id.bouton2gt);
 
         textColorDefaultRb = rb1.getTextColors();
         textColorDefaultCb = textViewTimer.getTextColors();
@@ -113,7 +122,6 @@ public class GoogleTrends_Activity extends AppCompatActivity {
         questionList = dbHelper.getQuestion(difficulty);
         questionCountTotal = 5; //Seulement 5 questions
         Collections.shuffle(questionList);
-        rb1.setText("caca");
         showNextQuestion();
 
         valider.setOnClickListener(new View.OnClickListener() {
@@ -138,7 +146,8 @@ public class GoogleTrends_Activity extends AppCompatActivity {
         RadioButton rbSelected = findViewById(rbGroup.getCheckedRadioButtonId());
         int answerNb = rbGroup.indexOfChild(rbSelected) + 1;
         if (answerNb == Q.getNumeroReponse()) {
-            score++;
+            int seconds = (int) (timeLeftInMillis / 1000) % 60;
+            score+=seconds;
             textViewScore.setText("Score: " + score);
         }
         showSolution();
@@ -173,9 +182,10 @@ public class GoogleTrends_Activity extends AppCompatActivity {
 
         //GESTION SCORE BDD
         if (questionCounter == 2 && !username.equals("invite")) {
-            // loadNote();
+            loadNote();
         }
         if (questionCounter < questionCountTotal) {
+            Q = questionList.get((questionCounter));
             rb1.setText(Q.getOption1());
             rb2.setText(Q.getOption2());
 
@@ -231,7 +241,7 @@ public class GoogleTrends_Activity extends AppCompatActivity {
 
     private void finishQuizz() {
         if (!username.equals("invite")) {
-            // saveNote();
+            saveNote();
         }
         String multipath = getIntent().getStringExtra("pathScoreMulti");
         if (!multipath.equals("notMulti")) {
@@ -242,7 +252,114 @@ public class GoogleTrends_Activity extends AppCompatActivity {
         setResult(RESULT_OK, resultIntent);
         finish();
     }
+    //GESTION SCORE BDD
+    public void loadNote() {
+        Intent intent = getIntent();
+        String difficulty = intent.getStringExtra(LogoQuizz_Home.EXTRA_DIFFICULTY);
 
+        db.collection("GoogleTrends_level_" + difficulty).document("highscore_global").get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()) {
+                            String scoreglob = documentSnapshot.get(KEY_SCORE).toString();
+                            highscore_global = Integer.parseInt(scoreglob);
+                        } else {
+                            Toast.makeText(GoogleTrends_Activity.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(GoogleTrends_Activity.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+        db.collection("GoogleTrends_level_" + difficulty).document("highscore_" + username).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()) {
+                            String scoreus = documentSnapshot.get(KEY_SCORE).toString();
+                            highscore_user = Integer.parseInt(scoreus);
+                        } else {
+                            Toast.makeText(GoogleTrends_Activity.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(GoogleTrends_Activity.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+    }
+    public void saveNote() {
+        Map<String, Object> note = new HashMap<>();
+        note.put(KEY_USER, username);
+        note.put(KEY_SCORE, score);
+        note.put(KEY_DATE, currentTime);
+
+        Intent intent = getIntent();
+        String difficulty = intent.getStringExtra(LogoQuizz_Home.EXTRA_DIFFICULTY);
+        if (score > highscore_global) {
+            db.collection("GoogleTrends_level_" + difficulty).document("highscore_global").set(note)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(GoogleTrends_Activity.this, "Sucess", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(GoogleTrends_Activity.this, "Fail", Toast.LENGTH_SHORT).show();
+                            Log.d(TAG, e.toString());
+                        }
+                    });
+
+        }
+        if (score > highscore_user) {
+            db.collection("GoogleTrends_level_" + difficulty).document("highscore_" + username).set(note)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(GoogleTrends_Activity.this, "Sucess", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(GoogleTrends_Activity.this, "Fail", Toast.LENGTH_SHORT).show();
+                            Log.d(TAG, e.toString());
+                        }
+                    });
+        }
+        if (score > 59 && !username.equals("invite")) {
+            updateNote();
+        }
+    }
+    public void updateNote() {
+        Map<String, Object> note = new HashMap<>();
+        note.put(KEY_t4, "Einstein");
+
+        db.collection("Trophy").document(username).update(note)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(GoogleTrends_Activity.this, "Sucess", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(GoogleTrends_Activity.this, "Fail", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
+    }
 }
 
 

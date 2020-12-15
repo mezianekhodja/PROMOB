@@ -29,6 +29,7 @@
             android:layout_marginTop="80dp" />
         <Button
             android:id="@+id/btn_multijoueur"
+            android:background="@drawable/custom_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
@@ -43,6 +44,7 @@
             android:layout_marginTop="20dp" />
 
         <Button
+            android:background="@drawable/custom_btn"
             android:id="@+id/btn_tournoi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

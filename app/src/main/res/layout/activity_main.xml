@@ -43,6 +43,7 @@
             android:id="@+id/btn_P1_connexion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/custom_btn"
             android:text="Se connecter / Créer un compte" />
 
         <TextView
@@ -56,6 +57,7 @@
         <Button
             android:id="@+id/btn_P1_invite"
             android:layout_width="match_parent"
+            android:background="@drawable/custom_btn"
             android:layout_height="wrap_content"
             android:text="Jouer en tant qu'invité"/>
 

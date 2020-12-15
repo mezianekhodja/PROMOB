@@ -125,6 +125,11 @@ public class Solo_Multi extends AppCompatActivity  {
         Intent intent = new Intent(this, Solo_Multi.class);
         startActivity(intent);
     }
+    public void openBandeSon(){
+        finish();
+        Intent intent = new Intent(this, BandeSon.class);
+        startActivity(intent);
+    }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
@@ -154,6 +159,10 @@ public class Solo_Multi extends AppCompatActivity  {
             }
             case R.id.solomultiMenu:{
                 openSoloMulti();
+                break;
+            }
+            case R.id.bandesonMenu:{
+                openBandeSon();
                 break;
             }
         }

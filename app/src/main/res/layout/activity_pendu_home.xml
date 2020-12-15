@@ -28,6 +28,7 @@
         <Button
             android:id="@+id/button_logopendu_easy"
             android:layout_width="match_parent"
+            android:background="@drawable/custom_btn"
             android:layout_height="wrap_content"
             android:text="Easy"
             android:textStyle="bold"
@@ -36,6 +37,7 @@
         <Button
             android:id="@+id/button_logopendu_medium"
             android:layout_width="match_parent"
+            android:background="@drawable/custom_btn"
             android:layout_height="wrap_content"
             android:text="MEDIUM"
             android:textStyle="bold"/>
@@ -44,6 +46,7 @@
             android:id="@+id/button_logopendu_hard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/custom_btn"
             android:text="HARD" />
 
         <TextView

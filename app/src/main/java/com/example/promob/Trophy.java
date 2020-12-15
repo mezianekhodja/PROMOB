@@ -109,7 +109,7 @@ public class Trophy extends AppCompatActivity {
                                         tv3.setText(documentSnapshot.getString(KEY_t3));
                                     }
                                     if (!documentSnapshot.getString(KEY_t4).equals("false")) {
-                                        iv4.setImageResource(R.drawable.trophy_max);
+                                        iv4.setImageResource(R.drawable.trophy_google);
                                         tv4.setText(documentSnapshot.getString(KEY_t4));
                                     }
                                     if (!documentSnapshot.getString(KEY_t5).equals("false")) {
@@ -207,6 +207,11 @@ public class Trophy extends AppCompatActivity {
         Intent intent = new Intent(this, Solo_Multi.class);
         startActivity(intent);
     }
+    public void openBandeSon(){
+        finish();
+        Intent intent = new Intent(this, BandeSon.class);
+        startActivity(intent);
+    }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
@@ -236,6 +241,10 @@ public class Trophy extends AppCompatActivity {
             }
             case R.id.solomultiMenu:{
                 openSoloMulti();
+                break;
+            }
+            case R.id.bandesonMenu:{
+                openBandeSon();
                 break;
             }
         }

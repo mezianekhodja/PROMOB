@@ -118,9 +118,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/confirmer"
+            android:background="@drawable/custom_btn"
             android:layout_marginTop="10dp"
-            android:layout_gravity="center"
-            android:background="@color/backgroundBouton"/>
+            android:layout_gravity="center" />
     </LinearLayout>
 
 </RelativeLayout>
