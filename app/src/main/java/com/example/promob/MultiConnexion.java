@@ -304,12 +304,13 @@ public class MultiConnexion extends AppCompatActivity {
         messageHostRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(role.equals("Host")){
-                    if (!(snapshot.getValue(String.class)==null)){
+                if (!(snapshot.getValue(String.class)==null)){
+                    if(role.equals("Host")){
                     if (snapshot.getValue(String.class).contains("Guest:")){
                         Toast.makeText(MultiConnexion.this, snapshot.getValue(String.class).replace("Guest:",""), Toast.LENGTH_SHORT).show();
                         if (scoreGuest3>-1 && scoreHost3>-1){
                             btnres.setEnabled(true);                        }
+                    }
                     }
                 else {
                     if (snapshot.getValue(String.class).contains("Host:")){
@@ -392,7 +393,6 @@ public class MultiConnexion extends AppCompatActivity {
                     }
                 }
                 }
-                }
             }
 
             @Override
@@ -403,13 +403,13 @@ public class MultiConnexion extends AppCompatActivity {
         messageGuestRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(role.equals("Host")){
-                    if (!(snapshot.getValue(String.class)==null)){
+                if (!(snapshot.getValue(String.class)==null)){
+                    if(role.equals("Host")){
                          if (snapshot.getValue(String.class).contains("Guest:")){
                             Toast.makeText(MultiConnexion.this, snapshot.getValue(String.class).replace("Guest:",""), Toast.LENGTH_SHORT).show();
                             if (scoreGuest3>-1 && scoreHost3>-1){
                                 btnres.setEnabled(true);                        }
-                            }
+                         } }
                             else {
                         if (snapshot.getValue(String.class).contains("Host:")){
                             Toast.makeText(MultiConnexion.this, snapshot.getValue(String.class).replace("Host:",""), Toast.LENGTH_SHORT).show();
@@ -417,7 +417,6 @@ public class MultiConnexion extends AppCompatActivity {
                                 btnres.setEnabled(true);                        }
                          }
                         }
-                    }
             }
             }
 
