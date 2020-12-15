@@ -120,7 +120,9 @@ public class Multi extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         String value = dataSnapshot.getValue(String.class);
+                        if (!(value==null)){
                         numberPlayers=Integer.valueOf(value);
+                        }
                     }
                     @Override
                     public void onCancelled(DatabaseError error) {

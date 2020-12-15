@@ -125,7 +125,7 @@ public class MultiConnexion extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String value = dataSnapshot.getValue(String.class);
-                if (!value.isEmpty()){
+                if (!(value==null)){
                     numberPlayers=Integer.valueOf(value);
                 }
                 else{
@@ -388,18 +388,20 @@ public class MultiConnexion extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(role.equals("Host")){
-                    if (snapshot.getValue(String.class).contains("Guest:")){
-                        Toast.makeText(MultiConnexion.this, snapshot.getValue(String.class).replace("Guest:",""), Toast.LENGTH_SHORT).show();
-                        if (scoreGuest3>-1 && scoreHost3>-1){
-                            btnres.setEnabled(true);                        }
-                    }
-                }else {
-                    if (snapshot.getValue(String.class).contains("Host:")){
-                        Toast.makeText(MultiConnexion.this, snapshot.getValue(String.class).replace("Host:",""), Toast.LENGTH_SHORT).show();
-                        if (scoreGuest3>-1 && scoreHost3>-1){
-                            btnres.setEnabled(true);                        }
+                    if (!(snapshot.getValue(String.class)==null)){
+                         if (snapshot.getValue(String.class).contains("Guest:")){
+                            Toast.makeText(MultiConnexion.this, snapshot.getValue(String.class).replace("Guest:",""), Toast.LENGTH_SHORT).show();
+                            if (scoreGuest3>-1 && scoreHost3>-1){
+                                btnres.setEnabled(true);                        }
+                            }
+                            }else {
+                        if (snapshot.getValue(String.class).contains("Host:")){
+                            Toast.makeText(MultiConnexion.this, snapshot.getValue(String.class).replace("Host:",""), Toast.LENGTH_SHORT).show();
+                            if (scoreGuest3>-1 && scoreHost3>-1){
+                                btnres.setEnabled(true);                        }
                     }
                 }
+            }
             }
 
             @Override
