@@ -134,10 +134,20 @@ public class BandeSon extends AppCompatActivity {
             play = MediaPlayer.create(this, R.raw.musique1);
             Toast.makeText(this, "Musique lancée", Toast.LENGTH_SHORT).show();
         }
+        else {
+            play.stop();
+            play = MediaPlayer.create(this, R.raw.musique1);
+            Toast.makeText(this, "Musique lancée", Toast.LENGTH_SHORT).show();
+        }
         play.start();
     }
     public void startMusique2(){
         if(play == null){
+            play = MediaPlayer.create(this, R.raw.musique2);
+            Toast.makeText(this, "Musique lancée", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            play.stop();
             play = MediaPlayer.create(this, R.raw.musique2);
             Toast.makeText(this, "Musique lancée", Toast.LENGTH_SHORT).show();
         }
@@ -147,9 +157,19 @@ public class BandeSon extends AppCompatActivity {
             play = MediaPlayer.create(this, R.raw.musique3);
             Toast.makeText(this, "Musique lancée", Toast.LENGTH_SHORT).show();
         }
+        else {
+            play.stop();
+            play = MediaPlayer.create(this, R.raw.musique3);
+            Toast.makeText(this, "Musique lancée", Toast.LENGTH_SHORT).show();
+        }
         play.start();
     }public void startMusique4(){
         if(play == null){
+            play = MediaPlayer.create(this, R.raw.musique4);
+            Toast.makeText(this, "Musique lancée", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            play.stop();
             play = MediaPlayer.create(this, R.raw.musique4);
             Toast.makeText(this, "Musique lancée", Toast.LENGTH_SHORT).show();
         }
@@ -159,15 +179,30 @@ public class BandeSon extends AppCompatActivity {
             play = MediaPlayer.create(this, R.raw.musique5);
             Toast.makeText(this, "Musique lancée", Toast.LENGTH_SHORT).show();
         }
+        else {
+            play.stop();
+            play = MediaPlayer.create(this, R.raw.musique5);
+            Toast.makeText(this, "Musique lancée", Toast.LENGTH_SHORT).show();
+        }
         play.start();
     }public void startMusique6(){
         if(play == null){
             play = MediaPlayer.create(this, R.raw.musique6);
             Toast.makeText(this, "Musique lancée", Toast.LENGTH_SHORT).show();
         }
+        else {
+            play.stop();
+            play = MediaPlayer.create(this, R.raw.musique6);
+            Toast.makeText(this, "Musique lancée", Toast.LENGTH_SHORT).show();
+        }
         play.start();
     }public void startMusique7(){
         if(play == null){
+            play = MediaPlayer.create(this, R.raw.musique7);
+            Toast.makeText(this, "Musique lancée", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            play.stop();
             play = MediaPlayer.create(this, R.raw.musique7);
             Toast.makeText(this, "Musique lancée", Toast.LENGTH_SHORT).show();
         }
