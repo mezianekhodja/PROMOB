@@ -36,6 +36,8 @@ public class MultiConnexion extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private int scoreHost1=-1,scoreGuest1=-1,scoreHost2=-1,scoreGuest2=-1,scoreHost3=1,scoreGuest3=1,numberPlayers;
     private EditText messageToSend;
+    private ValueEventListener messageGuestRefVEL,messageHostRefVEL,scoreHost1RefVEL,
+            scoreGuest1RefVEL,scoreHost2RefVEL,scoreGuest2RefVEL,scoreHost3RefVEL,scoreGuest3RefVEL,nbplayersVEL,databaseReferenceVEL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,29 +61,30 @@ public class MultiConnexion extends AppCompatActivity {
         if (extras!=null){
             roomName=extras.getString("roomName");
         }
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReferenceVEL=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (!(snapshot.getValue(UserProfile.class)==null)){
                     UserProfile userProfile = snapshot.getValue(UserProfile.class);
-                playerName=userProfile.getUserName();
-                btnres.setEnabled(false);
-                btndef.setEnabled(false);
-                if (roomName.equals(playerName)){
-                    role="Host";
-                }else{
-                    role="Guest";
+                    playerName=userProfile.getUserName();
+                    btnres.setEnabled(false);
                     btndef.setEnabled(false);
-                    btnstop.setEnabled(false);
-                    btnstop.setEnabled(false);
+                    if (roomName.equals(playerName)){
+                        role="Host";
+                    }else{
+                        role="Guest";
+                        btndef.setEnabled(false);
+                        btnstop.setEnabled(false);
+                        btnstop.setEnabled(false);
+                    }
                 }
-            }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(MultiConnexion.this, error.getCode(),Toast.LENGTH_SHORT).show();
             }
-        });
+        };
+        databaseReference.addValueEventListener(databaseReferenceVEL);
         btnres.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View v) {
@@ -122,7 +125,7 @@ public class MultiConnexion extends AppCompatActivity {
             }
         });
         nbplayers=firebaseDatabase.getReference("rooms/"+roomName+"/numberPlayers");
-        nbplayers.addValueEventListener(new ValueEventListener() {
+        nbplayersVEL=new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String value = dataSnapshot.getValue(String.class);
@@ -138,7 +141,8 @@ public class MultiConnexion extends AppCompatActivity {
             public void onCancelled(DatabaseError error) {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
-        });
+        };
+        nbplayers.addValueEventListener(nbplayersVEL);
         btngg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -226,7 +230,7 @@ public class MultiConnexion extends AppCompatActivity {
         addScoreEventListener();
     }
     private void addScoreEventListener(){
-        scoreHost1Ref.addValueEventListener(new ValueEventListener() {
+        scoreHost1RefVEL = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (!(snapshot.getValue(String.class) == null)) {
@@ -237,8 +241,9 @@ public class MultiConnexion extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(MultiConnexion.this, "error", Toast.LENGTH_SHORT).show();
             }
-        });
-        scoreHost2Ref.addValueEventListener(new ValueEventListener() {
+        };
+        scoreHost1Ref.addValueEventListener(scoreHost1RefVEL);
+        scoreHost2RefVEL = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (!(snapshot.getValue(String.class) == null)) {
@@ -249,8 +254,9 @@ public class MultiConnexion extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(MultiConnexion.this, "error", Toast.LENGTH_SHORT).show();
             }
-        });
-        scoreHost3Ref.addValueEventListener(new ValueEventListener() {
+        };
+        scoreHost2Ref.addValueEventListener(scoreHost2RefVEL);
+        scoreHost3RefVEL =new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (!(snapshot.getValue(String.class) == null)) {
@@ -261,20 +267,22 @@ public class MultiConnexion extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(MultiConnexion.this, "error", Toast.LENGTH_SHORT).show();
             }
-        });
-        scoreGuest1Ref.addValueEventListener(new ValueEventListener() {
+        };
+        scoreHost3Ref.addValueEventListener(scoreHost3RefVEL);
+        scoreGuest1RefVEL=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (!(snapshot.getValue(String.class)==null)){
-                scoreGuest1 = Integer.parseInt(snapshot.getValue(String.class));
-            }
+                    scoreGuest1 = Integer.parseInt(snapshot.getValue(String.class));
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(MultiConnexion.this, "error", Toast.LENGTH_SHORT).show();
             }
-        });
-        scoreGuest2Ref.addValueEventListener(new ValueEventListener() {
+        };
+        scoreGuest1Ref.addValueEventListener(scoreGuest1RefVEL);
+        scoreGuest2RefVEL=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (!(snapshot.getValue(String.class) == null)) {
@@ -285,8 +293,9 @@ public class MultiConnexion extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(MultiConnexion.this, "error", Toast.LENGTH_SHORT).show();
             }
-        });
-        scoreGuest3Ref.addValueEventListener(new ValueEventListener() {
+        };
+        scoreGuest2Ref.addValueEventListener(scoreGuest2RefVEL);
+        scoreGuest3RefVEL=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (!(snapshot.getValue(String.class) == null)) {
@@ -297,101 +306,102 @@ public class MultiConnexion extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(MultiConnexion.this, "error", Toast.LENGTH_SHORT).show();
             }
-        });
+        };
+        scoreGuest3Ref.addValueEventListener(scoreGuest3RefVEL);
     }
 
     private void addRoomEventListener(){
-        messageHostRef.addValueEventListener(new ValueEventListener() {
+        messageHostRefVEL=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (!(snapshot.getValue(String.class)==null)){
                     if(role.equals("Host")){
-                    if (snapshot.getValue(String.class).contains("Guest:")){
-                        Toast.makeText(MultiConnexion.this, snapshot.getValue(String.class).replace("Guest:",""), Toast.LENGTH_SHORT).show();
-                        if (scoreGuest3>-1 && scoreHost3>-1){
-                            btnres.setEnabled(true);                        }
-                    }
-                    }
-                else {
-                    if (snapshot.getValue(String.class).contains("Host:")){
-                        Toast.makeText(MultiConnexion.this, snapshot.getValue(String.class).replace("Host:",""), Toast.LENGTH_SHORT).show();
-                          if (snapshot.getValue(String.class).contains("Leave")){
-                            close();
+                        if (snapshot.getValue(String.class).contains("Guest:")){
+                            Toast.makeText(MultiConnexion.this, snapshot.getValue(String.class).replace("Guest:",""), Toast.LENGTH_SHORT).show();
+                            if (scoreGuest3>-1 && scoreHost3>-1){
+                                btnres.setEnabled(true);                        }
                         }
-                        else if (snapshot.getValue(String.class).contains("StartGame")){
-                            updateNote();
-                            if (snapshot.getValue(String.class).contains("HoleEasy")){
-                                startHole(1,"3");
-                            }
-                            else if (snapshot.getValue(String.class).contains("HoleMedium")){
-                                startHole(2,"3");
-                            }
-                            else if (snapshot.getValue(String.class).contains("HoleHard")){
-                                startHole(3,"3");
-                            }
-                            else if (snapshot.getValue(String.class).contains("LabyrintheEasy")){
-                                startLabyrinthe(1,"3");
-                            }
-                            else if (snapshot.getValue(String.class).contains("LabyrintheMedium")){
-                                startLabyrinthe(2,"3");
-                            }
-                            else{
-                                startLabyrinthe(3,"3");
-                            }
-
-
-                            if (snapshot.getValue(String.class).contains("CandyCrushEasy")){
-                                startCandyCrush(1,"2");
-                            }
-                            else if (snapshot.getValue(String.class).contains("CandyCrushMedium")){
-                                startCandyCrush(2,"2");
-                            }
-                            else if (snapshot.getValue(String.class).contains("CandyCrushHard")){
-                                startCandyCrush(3,"2");
-                            }
-                            else if (snapshot.getValue(String.class).contains("NumbersEasy")){
-                                startNumbers(1,"2");
-                            }
-                            else if (snapshot.getValue(String.class).contains("NumbersMedium")){
-                                startNumbers(2,"2");
-                            }
-                            else{
-                                startNumbers(3,"2");
-                            }
-
-
-                            if (snapshot.getValue(String.class).contains("PenduEasy")){
-                                startPendu(1,"1");
-                            }
-                            else if (snapshot.getValue(String.class).contains("PenduMedium")){
-                                startPendu(2,"1");
-                            }
-                            else if (snapshot.getValue(String.class).contains("PenduHard")){
-                                startPendu(3,"1");
-                            }
-                            else if (snapshot.getValue(String.class).contains("LogoQuizzHard")){
-                                startLogoQuizz("Hard","1");
-                            }
-                            else if (snapshot.getValue(String.class).contains("LogoQuizzMedium")){
-                                startLogoQuizz("Medium","1");
-                            }
-                            else if (snapshot.getValue(String.class).contains("LogoQuizzEasy")){
-                                startLogoQuizz("Easy","1");
-                            }
-                            else if (snapshot.getValue(String.class).contains("GoogleTrendsHard")){
-                                startGoogleTrends("Hard","1");
-                            }
-                            else if (snapshot.getValue(String.class).contains("GoogleTrendsMedium")){
-                                startGoogleTrends("Medium","1");
-                            }
-                            else{
-                                startGoogleTrends("Easy","1");
-                            }
-                        }
-                        else if (scoreGuest3>-1 && scoreHost3>-1){
-                            btnres.setEnabled(true);                        }
                     }
-                }
+                    else {
+                        if (snapshot.getValue(String.class).contains("Host:")){
+                            Toast.makeText(MultiConnexion.this, snapshot.getValue(String.class).replace("Host:",""), Toast.LENGTH_SHORT).show();
+                            if (snapshot.getValue(String.class).contains("Leave")){
+                                close();
+                            }
+                            else if (snapshot.getValue(String.class).contains("StartGame")){
+                                updateNote();
+                                if (snapshot.getValue(String.class).contains("HoleEasy")){
+                                    startHole(1,"3");
+                                }
+                                else if (snapshot.getValue(String.class).contains("HoleMedium")){
+                                    startHole(2,"3");
+                                }
+                                else if (snapshot.getValue(String.class).contains("HoleHard")){
+                                    startHole(3,"3");
+                                }
+                                else if (snapshot.getValue(String.class).contains("LabyrintheEasy")){
+                                    startLabyrinthe(1,"3");
+                                }
+                                else if (snapshot.getValue(String.class).contains("LabyrintheMedium")){
+                                    startLabyrinthe(2,"3");
+                                }
+                                else{
+                                    startLabyrinthe(3,"3");
+                                }
+
+
+                                if (snapshot.getValue(String.class).contains("CandyCrushEasy")){
+                                    startCandyCrush(1,"2");
+                                }
+                                else if (snapshot.getValue(String.class).contains("CandyCrushMedium")){
+                                    startCandyCrush(2,"2");
+                                }
+                                else if (snapshot.getValue(String.class).contains("CandyCrushHard")){
+                                    startCandyCrush(3,"2");
+                                }
+                                else if (snapshot.getValue(String.class).contains("NumbersEasy")){
+                                    startNumbers(1,"2");
+                                }
+                                else if (snapshot.getValue(String.class).contains("NumbersMedium")){
+                                    startNumbers(2,"2");
+                                }
+                                else{
+                                    startNumbers(3,"2");
+                                }
+
+
+                                if (snapshot.getValue(String.class).contains("PenduEasy")){
+                                    startPendu(1,"1");
+                                }
+                                else if (snapshot.getValue(String.class).contains("PenduMedium")){
+                                    startPendu(2,"1");
+                                }
+                                else if (snapshot.getValue(String.class).contains("PenduHard")){
+                                    startPendu(3,"1");
+                                }
+                                else if (snapshot.getValue(String.class).contains("LogoQuizzHard")){
+                                    startLogoQuizz("Hard","1");
+                                }
+                                else if (snapshot.getValue(String.class).contains("LogoQuizzMedium")){
+                                    startLogoQuizz("Medium","1");
+                                }
+                                else if (snapshot.getValue(String.class).contains("LogoQuizzEasy")){
+                                    startLogoQuizz("Easy","1");
+                                }
+                                else if (snapshot.getValue(String.class).contains("GoogleTrendsHard")){
+                                    startGoogleTrends("Hard","1");
+                                }
+                                else if (snapshot.getValue(String.class).contains("GoogleTrendsMedium")){
+                                    startGoogleTrends("Medium","1");
+                                }
+                                else{
+                                    startGoogleTrends("Easy","1");
+                                }
+                            }
+                            else if (scoreGuest3>-1 && scoreHost3>-1){
+                                btnres.setEnabled(true);                        }
+                        }
+                    }
                 }
             }
 
@@ -399,37 +409,49 @@ public class MultiConnexion extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
                 messageHostRef.setValue(message);
             }
-        });
-        messageGuestRef.addValueEventListener(new ValueEventListener() {
+        };
+        messageHostRef.addValueEventListener(messageHostRefVEL);
+        messageGuestRefVEL = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (!(snapshot.getValue(String.class)==null)){
                     if(role.equals("Host")){
-                         if (snapshot.getValue(String.class).contains("Guest:")){
+                        if (snapshot.getValue(String.class).contains("Guest:")){
                             Toast.makeText(MultiConnexion.this, snapshot.getValue(String.class).replace("Guest:",""), Toast.LENGTH_SHORT).show();
                             if (scoreGuest3>-1 && scoreHost3>-1){
                                 btnres.setEnabled(true);                        }
-                         } }
-                            else {
+                        } }
+                    else {
                         if (snapshot.getValue(String.class).contains("Host:")){
                             Toast.makeText(MultiConnexion.this, snapshot.getValue(String.class).replace("Host:",""), Toast.LENGTH_SHORT).show();
                             if (scoreGuest3>-1 && scoreHost3>-1){
                                 btnres.setEnabled(true);                        }
-                         }
                         }
-            }
+                    }
+                }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 messageGuestRef.setValue(message);
             }
-        });
+        };
+        messageGuestRef.addValueEventListener(messageGuestRefVEL);
     }
     public void close(){
+        messageGuestRef.removeEventListener(messageGuestRefVEL);
+        messageHostRef.removeEventListener(messageHostRefVEL);
+        scoreGuest3Ref.removeEventListener(scoreGuest3RefVEL);
+        scoreGuest2Ref.removeEventListener(scoreGuest2RefVEL);
+        scoreGuest1Ref.removeEventListener(scoreGuest1RefVEL);
+        scoreHost3Ref.removeEventListener(scoreHost3RefVEL);
+        scoreHost2Ref.removeEventListener(scoreHost2RefVEL);
+        scoreHost1Ref.removeEventListener(scoreHost1RefVEL);
+        nbplayers.removeEventListener(nbplayersVEL);
+        databaseReference.removeEventListener(databaseReferenceVEL);
+        MultiConnexion.this.finish();
         Intent intent = new Intent(MultiConnexion.this,Multi.class);
         startActivity(intent);
-        MultiConnexion.this.finish();
     }
     public void loadGame(){
         updateNote();

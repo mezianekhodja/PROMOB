@@ -102,8 +102,11 @@ public class Multi extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 roomRef=firebaseDatabase.getReference("rooms/"+playerName);
+                finish();
                 roomRef.setValue(null);
                 Toast.makeText(Multi.this, "Deleted room : "+playerName, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Multi.this, Multi.class);
+                startActivity(intent);
             }
         });
 
